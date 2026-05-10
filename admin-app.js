@@ -4,7 +4,10 @@
    ═══════════════════════════════════════════════════════════ */
 
 (function(){
-  var API = 'https://workindex-production.up.railway.app/api/admin';
+  var API_BASE = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+    ? 'http://localhost:5000/api'
+    : 'https://workindex-production.up.railway.app/api';
+  var API = API_BASE + '/admin';
   var tok = localStorage.getItem('admTok') || '';
   var adm = null;
   try { adm = JSON.parse(localStorage.getItem('admData') || 'null'); } catch(e) {}
@@ -790,7 +793,7 @@ if (u.role === 'expert') {
 // ── Account info card ──
 p0 += '<div style="background:#18181d;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:0">';
 p0 += '<div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:10px">Account Info</div>';
-p0 += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #222230"><span style="font-size:12px;color:#606078">Joined</span><span style="font-size:13px;color:#f0f0f4">' + fmt(u.createdAt) + '</span></div>';
+p0 += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #222230"><span style="font-size:12px;color:#606078">Signup Time</span><span style="font-size:13px;color:#f0f0f4;text-align:right">' + (u.createdAt ? fmtT(u.createdAt) : '-') + '</span></div>';
 p0 += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #222230"><span style="font-size:12px;color:#606078">Last Login</span><span style="font-size:13px;color:#f0f0f4">' + lastLoginStr + '</span></div>';
 p0 += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #222230"><span style="font-size:12px;color:#606078">KYC</span><span style="font-size:13px;font-weight:600;color:' + kycColor + '">' + kycStatus.replace(/_/g,' ') + '</span></div>';
 p0 += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0"><span style="font-size:12px;color:#606078">Location</span><span style="font-size:13px;color:#f0f0f4;text-align:right;max-width:62%">' + esc(locStr) + '</span></div>';
@@ -1653,14 +1656,42 @@ if (t.isExpertRefund && t.relatedApproachId) {
     next();
   };
    
+function normalizePostAnswersForAdmin(answers) {
+    var normalized = Object.assign({}, answers || {});
+    if (normalized.fullAddress && !normalized.full_address) normalized.full_address = normalized.fullAddress;
+    if (normalized.clientLocation && !normalized.client_location) normalized.client_location = normalized.clientLocation;
+    if (normalized.serviceLocationType && !normalized.service_location_type) normalized.service_location_type = normalized.serviceLocationType;
+    delete normalized.fullAddress;
+    delete normalized.clientLocation;
+    delete normalized.serviceLocationType;
+    return normalized;
+  }
+
+  function formatPostLocationFromAnswers(answers, fallback) {
+    var normalized = normalizePostAnswersForAdmin(answers);
+    var locType = normalized.service_location_type || normalized.serviceLocationType;
+    var addr = (locType === 'my-location' || locType === 'professional-office')
+      ? (normalized.full_address || normalized.fullAddress)
+      : (normalized.client_location || normalized.clientLocation || normalized.full_address || normalized.fullAddress);
+    if (addr && (addr.area || addr.city || addr.state || addr.pincode)) {
+      return [addr.area, addr.city, addr.state, addr.pincode].filter(Boolean).join(', ');
+    }
+    return fallback || (locType === 'online' ? 'Online' : 'Location not provided');
+  }
+
 function openPostModal(pid) {
     _editPostId = pid;
     api('requests/' + pid).then(function(d) {
       var p = d.request || {};
+      var answers = normalizePostAnswersForAdmin(p.answers || {});
       g('postTitle').value = p.title || '';
       g('postDesc').value = p.description || '';
       g('postStatus').value = p.status || '';
       g('postCredits').value = p.credits || p.creditsRequired || 0;
+      if (g('postTimeline')) g('postTimeline').value = p.timeline || answers.urgency || '';
+      if (g('postBudget')) g('postBudget').value = p.budget || answers.budget || '';
+      if (g('postLocation')) g('postLocation').value = (p.location && p.location !== 'Online') ? p.location : formatPostLocationFromAnswers(answers, p.location || '');
+      if (g('postAnswers')) g('postAnswers').value = JSON.stringify(answers, null, 2);
       openModal('postModal');
     }).catch(function() { toast('Error loading post', 'e'); });
   }
@@ -1669,11 +1700,24 @@ function openPostModal(pid) {
     if (!_editPostId) return;
     var statusVal = g('postStatus').value;
     var creditsVal = parseInt(g('postCredits').value) || 0;
+    var answers = {};
+    if (g('postAnswers')) {
+      try {
+        answers = normalizePostAnswersForAdmin(JSON.parse(g('postAnswers').value || '{}'));
+      } catch (e) {
+        toast('Questionnaire answers must be valid JSON', 'e');
+        return;
+      }
+    }
     var payload = {
       title: g('postTitle').value,
       description: g('postDesc').value,
-      creditsRequired: creditsVal
+      creditsRequired: creditsVal,
+      answers: answers
     };
+    if (g('postTimeline')) payload.timeline = g('postTimeline').value;
+    if (g('postBudget')) payload.budget = g('postBudget').value;
+    if (g('postLocation')) payload.location = g('postLocation').value || formatPostLocationFromAnswers(answers, '');
     // Only send status if admin explicitly chose one - empty means keep current
     if (statusVal) payload.status = statusVal;
     var btn = g('savePostBtn');
@@ -3571,7 +3615,7 @@ window.loadVisitStats = function loadVisitStats() {
     var pagesEl     = g('visitPages');
     var devicesEl   = g('visitDevices');
 
-    fetch('https://workindex-production.up.railway.app/api/visits/stats', {
+    fetch(API_BASE + '/visits/stats', {
       headers: { 'Authorization': 'Bearer ' + tok, 'Content-Type': 'application/json' }
     })
     .then(function(r) { return r.json(); })
@@ -3684,15 +3728,15 @@ window.loadVisitStats = function loadVisitStats() {
     var sourcesEl = g('visitSources');
     if (sourcesEl) {
       var sources = s.sources || [];
-      var sourceIcons = { Direct: '🔗', Google: '🔍', Facebook: '👥', Instagram: '📸', 'Twitter/X': '🐦', LinkedIn: '💼', WhatsApp: '💬', Other: '🌐' };
-      var sourceColors = { Direct: '#a0a0b8', Google: '#4285f4', Facebook: '#1877f2', Instagram: '#e1306c', 'Twitter/X': '#1da1f2', LinkedIn: '#0077b5', WhatsApp: '#25d366', Other: '#606078' };
+      var sourceIcons = { Direct: 'Link', Google: 'Search', Facebook: 'FB', Instagram: 'IG', 'Twitter/X': 'X', LinkedIn: 'IN', WhatsApp: 'WA', YouTube: 'YT', Bing: 'Bing', Other: 'Web' };
+      var sourceColors = { Direct: '#a0a0b8', Google: '#4285f4', Facebook: '#1877f2', Instagram: '#e1306c', 'Twitter/X': '#1da1f2', LinkedIn: '#0077b5', WhatsApp: '#25d366', YouTube: '#ff0000', Bing: '#008373', Other: '#606078' };
       if (!sources.length) {
         sourcesEl.innerHTML = '<div style="font-size:13px;color:#606078;">No referrer data yet (add referrer to track call)</div>';
       } else {
         var maxSrc = sources[0].count || 1;
         sourcesEl.innerHTML = sources.map(function(src) {
           var pct = Math.round((src.count / maxSrc) * 100);
-          var icon = sourceIcons[src.source] || '🌐';
+          var icon = sourceIcons[src.source] || 'Web';
           var color = sourceColors[src.source] || '#a0a0b8';
           return '<div style="display:flex;align-items:center;gap:8px;">' +
             '<div style="font-size:12px;color:#a0a0b8;width:90px;flex-shrink:0;">' + icon + ' ' + (src.source || 'Direct') + '</div>' +
@@ -4334,6 +4378,7 @@ function buildEmailNotificationsUI(settings) {
         { key: 'expert_credits_purchased', label: 'Credits Purchased',              desc: 'Sent when expert buys credits' },
         { key: 'expert_credits_refunded',  label: 'Credits Refunded',               desc: 'Sent when admin refunds credits' },
         { key: 'expert_approach_sent',     label: 'Approach Submitted',             desc: 'Sent when expert submits an approach' },
+        { key: 'expert_new_post',          label: 'New Request Posted',             desc: 'Sent when a matching client request is posted' },
         { key: 'expert_restricted',        label: 'Account Restricted',             desc: 'Sent when expert account is restricted' },
         { key: 'expert_banned',            label: 'Account Banned',                 desc: 'Sent when expert account is banned' }
       ]
@@ -4485,6 +4530,7 @@ window.renderAdminsPage = function renderAdminsPage() {
       '<td style="font-size:12px;color:#606078">' + esc(a.email || '—') + '</td>' +
       '<td><span style="padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;background:' + rc + '20;color:' + rc + '">' + rl + '</span></td>' +
       '<td>' + statusBadge + '</td>' +
+      '<td style="font-size:12px;color:#606078">' + (a.createdAt ? fmtT(a.createdAt) : '-') + '</td>' +
       '<td style="font-size:12px;color:#606078">' + (a.lastLogin ? fmtT(a.lastLogin) : 'Never') + '</td>' +
       '<td style="font-size:12px;color:#606078">' + esc(a.createdBy || 'system') + '</td>' +
       '<td><div style="display:flex;gap:4px;flex-wrap:wrap">' + actions + '</div></td>' +
@@ -4498,7 +4544,7 @@ window.renderAdminsPage = function renderAdminsPage() {
         '<button class="btn bpri" onclick="openCreateAdminModal()" style="padding:8px 18px">+ Create Admin</button>' +
       '</div>' +
       '<div class="tw"><table><thead><tr>' +
-        '<th>Name</th><th>Admin ID</th><th>Email</th><th>Role</th><th>Status</th><th>Last Login</th><th>Created By</th><th>Actions</th>' +
+        '<th>Name</th><th>Admin ID</th><th>Email</th><th>Role</th><th>Status</th><th>Signed Up</th><th>Last Login</th><th>Created By</th><th>Actions</th>' +
       '</tr></thead><tbody id="adminsTbl">' + rows + '</tbody></table></div>' +
     '</div>';
 
@@ -4819,7 +4865,7 @@ var SEO_TEMPLATES = {
     faq5A: 'Yes. ITR filing is done entirely online through the income tax portal. Your CA\'s city does not matter — you share documents digitally and receive acknowledgement via email.',
     ctaH2: 'Ready to get your ITR filed?',
     ctaP: 'Post your requirement for free. Verified CAs will send you personalised quotes within 24 hours.',
-    footerLinks: '/itr-filing-india.html|ITR Filing India\n/itr-filing-karnataka.html|ITR Filing Karnataka\n/gst-services-india.html|GST Services\n/accounting-services-india.html|Accounting'
+    footerLinks: '/seo-pages/itr-filing-india.html|ITR Filing India\n/seo-pages/itr-filing-karnataka.html|ITR Filing Karnataka\n/seo-pages/gst-services-india.html|GST Services\n/seo-pages/accounting-services-india.html|Accounting'
   },
   gst: {
     service: 'GST Consulting',
@@ -4848,7 +4894,7 @@ var SEO_TEMPLATES = {
     faq5A: 'Yes. GST registration and filing are done entirely online through the GST portal. A consultant from any city can handle your compliance without physical visits.',
     ctaH2: 'Need a GST consultant?',
     ctaP: 'Post your requirement free. Verified GST experts will send you personalised quotes within 24 hours.',
-    footerLinks: '/gst-services-india.html|GST Services India\n/gst-services-karnataka.html|GST Services Karnataka\n/itr-filing-india.html|ITR Filing\n/accounting-services-india.html|Accounting'
+    footerLinks: '/seo-pages/gst-services-india.html|GST Services India\n/seo-pages/gst-services-karnataka.html|GST Services Karnataka\n/seo-pages/itr-filing-india.html|ITR Filing\n/seo-pages/accounting-services-india.html|Accounting'
   },
   accounting: {
     service: 'Accounting & Bookkeeping',
@@ -4877,7 +4923,7 @@ var SEO_TEMPLATES = {
     faq5A: 'Yes. All accountants on WorkIndex offer fully remote services. You share invoices, bank statements, and expense records digitally — they maintain your books and share reports monthly.',
     ctaH2: 'Find an Accountant for Your Business',
     ctaP: 'Post your requirement free. Verified accountants will send you personalised quotes within 24 hours.',
-    footerLinks: '/accounting-services-india.html|Accounting India\n/itr-filing-india.html|ITR Filing\n/gst-services-india.html|GST Services'
+    footerLinks: '/seo-pages/accounting-services-india.html|Accounting India\n/seo-pages/itr-filing-india.html|ITR Filing\n/seo-pages/gst-services-india.html|GST Services'
   }
 };
 
@@ -4996,7 +5042,7 @@ window.openSeoModal = function(prefill) {
       <div class="mfld"><label>CTA Paragraph</label><input type="text" id="seoCtaP" placeholder="Post your requirement free. Verified CAs will respond within 24 hours."></div>
 
       <div style="font-size:11px;font-weight:700;color:#FC8019;text-transform:uppercase;letter-spacing:.07em;margin:16px 0 12px">Footer Links (one per line: url|Label)</div>
-      <div class="mfld"><textarea id="seoFooter" rows="4" placeholder="/itr-filing-india.html|ITR Filing India&#10;/itr-filing-karnataka.html|ITR Filing Karnataka&#10;/gst-services-india.html|GST Services"></textarea></div>
+      <div class="mfld"><textarea id="seoFooter" rows="4" placeholder="/seo-pages/itr-filing-india.html|ITR Filing India&#10;/seo-pages/itr-filing-karnataka.html|ITR Filing Karnataka&#10;/seo-pages/gst-services-india.html|GST Services"></textarea></div>
 
     </div>
     <div class="mfoot" style="justify-content:space-between">

@@ -1,0 +1,683 @@
+<div id="landing" class="page active">
+  <div class="landing-nav">
+    <div class="logo">
+      <div class="logo-icon">W</div>
+      <span class="logo-text">WorkIndex</span>
+    </div>
+    <div style="display: flex; gap: 16px; align-items: center; position: relative;">
+      <!-- Explore Mega Menu Trigger -->
+      <div id="exploreMenuWrapper" style="position:relative;">
+        <button id="exploreMenuBtn" onclick="toggleExploreMenu()"
+          style="display:flex;align-items:center;gap:6px;background:none;border:none;font-size:14px;font-weight:600;color:var(--text);cursor:pointer;padding:6px 4px;font-family:inherit;transition:color 0.2s;">
+          Explore
+          <svg id="exploreChevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+
+        <!-- Mega dropdown panel -->
+        <div id="exploreMegaMenu"
+          style="display:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);
+                 background:var(--bg);border:1.5px solid var(--border);border-radius:16px;
+                 box-shadow:0 12px 40px rgba(0,0,0,0.14);z-index:9999;
+                 width:300px;padding:0;overflow:hidden;animation:fadeIn 0.15s ease;">
+
+          <!-- LEVEL 1: Main service categories -->
+          <div id="explore-level-1" style="padding:16px;">
+            <div style="font-size:10px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;padding-left:4px;">SERVICES</div>
+
+            <div class="explore-cat-item" onclick="exploreGoLevel2('compliance')"
+              style="display:flex;align-items:center;justify-content:space-between;padding:12px 10px;border-radius:10px;cursor:pointer;margin-bottom:4px;transition:all 0.15s;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:20px;">💼</span>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:var(--text);">Business & Compliance</div>
+                  <div style="font-size:11px;color:var(--text-muted);">Tax, GST, Audit</div>
+                </div>
+              </div>
+              <span style="color:var(--text-muted);font-size:16px;font-weight:700;">›</span>
+            </div>
+
+            <div class="explore-cat-item" onclick="exploreGoLevel2('accounting')"
+              style="display:flex;align-items:center;justify-content:space-between;padding:12px 10px;border-radius:10px;cursor:pointer;margin-bottom:4px;transition:all 0.15s;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:20px;">📊</span>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:var(--text);">Accounting & Finance</div>
+                  <div style="font-size:11px;color:var(--text-muted);">Bookkeeping, Payroll</div>
+                </div>
+              </div>
+              <span style="color:var(--text-muted);font-size:16px;font-weight:700;">›</span>
+            </div>
+
+            <div class="explore-cat-item" onclick="exploreGoLevel2('digital')"
+              style="display:flex;align-items:center;justify-content:space-between;padding:12px 10px;border-radius:10px;cursor:pointer;margin-bottom:4px;transition:all 0.15s;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:20px;">🌐</span>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:var(--text);">Digital & Tech</div>
+                  <div style="font-size:11px;color:var(--text-muted);">Web, Apps, Software</div>
+                </div>
+              </div>
+              <span style="color:var(--text-muted);font-size:16px;font-weight:700;">›</span>
+            </div>
+
+            <div class="explore-cat-item" onclick="exploreGoLevel2('creative')"
+              style="display:flex;align-items:center;justify-content:space-between;padding:12px 10px;border-radius:10px;cursor:pointer;margin-bottom:4px;transition:all 0.15s;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:20px;">📸</span>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:var(--text);">Creative & Media</div>
+                  <div style="font-size:11px;color:var(--text-muted);">Photography, Video</div>
+                </div>
+              </div>
+              <span style="color:var(--text-muted);font-size:16px;font-weight:700;">›</span>
+            </div>
+
+            <div style="border-top:1px solid var(--border);margin-top:10px;padding-top:10px;">
+              <div onclick="closeExploreMenu(); showPage('findProfessionals');"
+                style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;color:var(--primary);transition:all 0.15s;"
+                onmouseover="this.style.background='rgba(252,128,25,0.06)'" onmouseout="this.style.background='transparent'">
+                🔍 Browse all experts
+              </div>
+            </div>
+          </div>
+
+          <!-- LEVEL 2: Service subcategories (shown after clicking a category) -->
+          <div id="explore-level-2" style="display:none;padding:16px;">
+            <!-- Back button -->
+            <div onclick="exploreGoLevel1()" style="display:flex;align-items:center;gap:8px;padding:8px 4px;cursor:pointer;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:12px;">
+              <span style="font-size:16px;color:var(--text-muted);">←</span>
+              <span style="font-size:13px;font-weight:600;color:var(--text-muted);">Back to Explore</span>
+            </div>
+            <!-- Category title -->
+            <div id="explore-l2-title" style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px;"></div>
+            <!-- Subcategory list populated by JS -->
+            <div id="explore-l2-list"></div>
+          </div>
+
+          <!-- LEVEL 3: Leaf items (shown after clicking a subcategory) -->
+          <div id="explore-level-3" style="display:none;padding:16px;">
+            <!-- Back button -->
+            <div id="explore-l3-back" onclick="exploreGoLevel2Back()" style="display:flex;align-items:center;gap:8px;padding:8px 4px;cursor:pointer;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:12px;">
+              <span style="font-size:16px;color:var(--text-muted);">←</span>
+              <span id="explore-l3-back-label" style="font-size:13px;font-weight:600;color:var(--text-muted);">Back</span>
+            </div>
+            <!-- Subcategory title -->
+            <div id="explore-l3-title" style="font-size:14px;font-weight:800;color:var(--primary);margin-bottom:12px;"></div>
+            <!-- Leaf items populated by JS -->
+            <div id="explore-l3-list"></div>
+          </div>
+
+        </div>
+                
+      </div>
+      <!-- End Explore Mega Menu -->
+
+      <button class="btn-outline" onclick="showPage('auth')" style="padding: 8px 16px; font-size: 14px;">Login</button>
+      <button class="btn-primary" onclick="showPage('auth')" style="padding: 8px 16px; font-size: 14px;">Join</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-badge">
+      <div class="dot"></div>
+      <span>Spam free platform connect with real professionals</span>
+    </div>
+    
+    <h1>Find Verified <span class="highlight">Professionals</span> for Any Service</h1>
+    <p>Connect with expert CAs, GST consultants, photographers, developers and more. Get your work done with confidence.</p>
+    
+    <div class="hero-actions">
+      <button class="hero-btn hero-btn-primary" onclick="showPage('auth')">
+        <span>Find Professionals</span>
+        <span>→</span>
+      </button>
+      <button class="hero-btn hero-btn-secondary" onclick="showPage('howItWorks')">
+        <span>How It Works</span>
+      </button>
+    </div>
+
+    <div style="margin-top: 40px; max-width: 680px; margin-left: auto; margin-right: auto;">
+      <div style="display: flex; gap: 12px; background: #fff; padding: 8px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); position:relative;">
+        <div style="flex:1;position:relative;">
+          <input type="text" id="landingServiceInput" placeholder="What service do you need?" autocomplete="off"
+            onkeydown="if(event.key==='Enter') landingSearch()"
+            style="width:100%; box-sizing:border-box; padding: 12px; border: none; font-size: 15px; outline: none;">
+          <div id="landingServiceSuggestions" style="display:none;position:absolute;top:46px;left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,0.12);z-index:40;overflow:hidden;text-align:left;"></div>
+        </div>
+        <div style="width:190px;position:relative;">
+          <input type="text" id="landingLocationInput" placeholder="City or pincode" autocomplete="off"
+            onkeydown="if(event.key==='Enter') landingSearch()"
+            style="width:100%; box-sizing:border-box; padding: 12px; border: none; border-left: 1px solid var(--border); font-size: 15px; outline: none;">
+          <div id="landingLocationSuggestions" style="display:none;position:absolute;top:46px;left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,0.12);z-index:40;overflow:hidden;text-align:left;"></div>
+        </div>
+        <button class="btn-primary" onclick="landingSearch()" style="padding: 12px 24px;">Search</button>
+      </div>
+    </div>
+  </div>
+  
+<!-- ═══════════════════════════════════════════════════════
+       TRENDING SERVICES SECTION
+       ═══════════════════════════════════════════════════════ -->
+  <div class="trending-services-section">
+    <div class="ts-header">
+      <div class="ts-eyebrow">🔥 Trending on WorkIndex</div>
+      <h2 class="ts-title">What do you need help with?</h2>
+      <p class="ts-subtitle">Click a service to get started — takes less than 2 minutes</p>
+    </div>
+
+    <div class="ts-grid">
+
+      <div class="ts-card" onclick="startServiceFlow('itr')">
+        <div class="ts-card-img">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80&fit=crop" alt="ITR Filing">
+          <div class="ts-card-overlay"></div>
+          <div class="ts-badge">📄 Most Popular</div>
+        </div>
+        <div class="ts-card-body">
+          <div class="ts-card-icon">📄</div>
+          <h3 class="ts-card-title">ITR Filing</h3>
+          <p class="ts-card-desc">File your income tax return with a verified CA</p>
+          <div class="ts-card-meta">
+            <span class="ts-meta-chip">⚡ From ₹999</span>
+        
+          </div>
+          <button class="ts-cta-btn">Get Started →</button>
+        </div>
+      </div>
+
+      <div class="ts-card" onclick="startServiceFlow('gst')">
+        <div class="ts-card-img">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&fit=crop" alt="GST Services">
+          <div class="ts-card-overlay"></div>
+          <div class="ts-badge ts-badge-blue">🏢 Trending</div>
+        </div>
+        <div class="ts-card-body">
+          <div class="ts-card-icon">🏢</div>
+          <h3 class="ts-card-title">GST Services</h3>
+          <p class="ts-card-desc">Registration, filing & compliance by GST experts</p>
+          <div class="ts-card-meta">
+            <span class="ts-meta-chip">⚡ From ₹1999</span>
+            
+          </div>
+          <button class="ts-cta-btn">Get Started →</button>
+        </div>
+      </div>
+
+      <div class="ts-card" onclick="startServiceFlow('accounting')">
+        <div class="ts-card-img">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&fit=crop" alt="Accounting">
+          <div class="ts-card-overlay"></div>
+          <div class="ts-badge ts-badge-green">📊 High Demand</div>
+        </div>
+        <div class="ts-card-body">
+          <div class="ts-card-icon">📊</div>
+          <h3 class="ts-card-title">Accounting</h3>
+          <p class="ts-card-desc">Monthly bookkeeping & financial record management</p>
+          <div class="ts-card-meta">
+            <span class="ts-meta-chip">⚡ From ₹999/mo</span>
+            
+          </div>
+          <button class="ts-cta-btn">Get Started →</button>
+        </div>
+      </div>
+
+      <div class="ts-card" onclick="startServiceFlow('audit')">
+        <div class="ts-card-img">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80&fit=crop" alt="Audit">
+          <div class="ts-card-overlay"></div>
+          <div class="ts-badge ts-badge-purple">🔍 Compliance</div>
+        </div>
+        <div class="ts-card-body">
+          <div class="ts-card-icon">🔍</div>
+          <h3 class="ts-card-title">Audit Services</h3>
+          <p class="ts-card-desc">Statutory, internal & tax audits by certified auditors</p>
+          <div class="ts-card-meta">
+            <span class="ts-meta-chip">⚡ Custom quote</span>
+            
+          </div>
+          <button class="ts-cta-btn">Get Started →</button>
+        </div>
+      </div>
+
+      <div class="ts-card" onclick="startServiceFlow('photography')">
+        <div class="ts-card-img">
+          <img src="https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=600&q=80&fit=crop" alt="Photography">
+          <div class="ts-card-overlay"></div>
+          <div class="ts-badge">📸 Top Rated</div>
+        </div>
+        <div class="ts-card-body">
+          <div class="ts-card-icon">📸</div>
+          <h3 class="ts-card-title">Photography</h3>
+          <p class="ts-card-desc">Weddings, events, products & commercial shoots</p>
+          <div class="ts-card-meta">
+            <span class="ts-meta-chip">⚡ From ₹3,999</span>
+           
+          </div>
+          <button class="ts-cta-btn">Get Started →</button>
+        </div>
+      </div>
+
+      <div class="ts-card" onclick="startServiceFlow('development')">
+        <div class="ts-card-img">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80&fit=crop" alt="Development">
+          <div class="ts-card-overlay"></div>
+          <div class="ts-badge ts-badge-blue">💻 Fast Growing</div>
+        </div>
+        <div class="ts-card-body">
+          <div class="ts-card-icon">💻</div>
+          <h3 class="ts-card-title">Development</h3>
+          <p class="ts-card-desc">Apps, websites & custom software by vetted developers</p>
+          <div class="ts-card-meta">
+            <span class="ts-meta-chip">⚡ From ₹4,999</span>
+           
+          </div>
+          <button class="ts-cta-btn">Get Started →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  
+  <!-- END TRENDING SERVICES -->
+
+  <!-- ═══ FIND BY LOCATION SECTION ═══ -->
+  <div style="padding: 60px 20px 50px; background: var(--bg-gray);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+
+      <!-- Header -->
+      <div style="text-align: center; margin-bottom: 40px;">
+        <div style="display:inline-block; background:rgba(252,128,25,0.1); color:var(--primary); font-size:13px; font-weight:700; padding:6px 16px; border-radius:20px; margin-bottom:14px; letter-spacing:0.5px;">📍 Find Near You</div>
+        <h2 style="font-size:30px; font-weight:800; color:var(--text); margin:0 0 10px;">Find Professionals by City</h2>
+        <p style="font-size:15px; color:var(--text-muted); margin:0;">Verified CAs, developers and photographers across India</p>
+      </div>
+
+      <!-- Service tabs -->
+      <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:28px;" id="cityServiceTabs">
+        <button onclick="switchCityTab('itr')" id="cityTab_itr"
+          style="padding:8px 20px; border-radius:20px; border:1.5px solid var(--primary); background:var(--primary); color:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s;">
+          📄 ITR Filing
+        </button>
+        <button onclick="switchCityTab('gst')" id="cityTab_gst"
+          style="padding:8px 20px; border-radius:20px; border:1.5px solid var(--border); background:transparent; color:var(--text); font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s;">
+          🧾 GST Services
+        </button>
+        <button onclick="switchCityTab('accounting')" id="cityTab_accounting"
+          style="padding:8px 20px; border-radius:20px; border:1.5px solid var(--border); background:transparent; color:var(--text); font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s;">
+          📊 Accounting
+        </button>
+        <button onclick="switchCityTab('development')" id="cityTab_development"
+          style="padding:8px 20px; border-radius:20px; border:1.5px solid var(--border); background:transparent; color:var(--text); font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s;">
+          💻 Development
+        </button>
+      </div>
+
+      <!-- City grids — one per service tab -->
+      <div id="cityGrid_itr">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; margin-bottom:20px;">
+          <a href="/seo-pages/itr-filing-bangalore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Bangalore</div></a>
+          <a href="/seo-pages/itr-filing-koramangala.html" style="text-decoration:none;">
+            <div class="city-card">📍 Koramangala</div></a>
+          <a href="/seo-pages/itr-filing-indiranagar.html" style="text-decoration:none;">
+            <div class="city-card">📍 Indiranagar</div></a>
+          <a href="/seo-pages/itr-filing-hsr-layout.html" style="text-decoration:none;">
+            <div class="city-card">📍 HSR Layout</div></a>
+          <a href="/seo-pages/itr-filing-whitefield.html" style="text-decoration:none;">
+            <div class="city-card">📍 Whitefield</div></a>
+          <a href="/seo-pages/itr-filing-electronic-city.html" style="text-decoration:none;">
+            <div class="city-card">📍 Electronic City</div></a>
+          <a href="/seo-pages/itr-filing-bellandur.html" style="text-decoration:none;">
+            <div class="city-card">📍 Bellandur</div></a>
+          <a href="/seo-pages/itr-filing-mysore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Mysore</div></a>
+          <a href="/seo-pages/itr-filing-mangalore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Mangalore</div></a>
+          <a href="/seo-pages/itr-filing-hubli.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Hubli</div></a>
+          <a href="/seo-pages/itr-filing-karnataka.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🗺️ All Karnataka</div></a>
+          <a href="/seo-pages/itr-filing-india.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🇮🇳 All India</div></a>
+        </div>
+      </div>
+
+      <div id="cityGrid_gst" style="display:none;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; margin-bottom:20px;">
+          <a href="/seo-pages/gst-services-bangalore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Bangalore</div></a>
+          <a href="/seo-pages/gst-services-koramangala.html" style="text-decoration:none;">
+            <div class="city-card">📍 Koramangala</div></a>
+          <a href="/seo-pages/gst-services-indiranagar.html" style="text-decoration:none;">
+            <div class="city-card">📍 Indiranagar</div></a>
+          <a href="/seo-pages/gst-services-hsr-layout.html" style="text-decoration:none;">
+            <div class="city-card">📍 HSR Layout</div></a>
+          <a href="/seo-pages/gst-services-whitefield.html" style="text-decoration:none;">
+            <div class="city-card">📍 Whitefield</div></a>
+          <a href="/seo-pages/gst-services-electronic-city.html" style="text-decoration:none;">
+            <div class="city-card">📍 Electronic City</div></a>
+          <a href="/seo-pages/gst-services-bellandur.html" style="text-decoration:none;">
+            <div class="city-card">📍 Bellandur</div></a>
+          <a href="/seo-pages/gst-services-banashankari.html" style="text-decoration:none;">
+            <div class="city-card">📍 Banashankari</div></a>
+          <a href="/seo-pages/gst-services-mysore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Mysore</div></a>
+          <a href="/seo-pages/gst-services-mangalore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Mangalore</div></a>
+          <a href="/seo-pages/gst-services-karnataka.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🗺️ All Karnataka</div></a>
+          <a href="/seo-pages/gst-services-india.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🇮🇳 All India</div></a>
+        </div>
+      </div>
+
+      <div id="cityGrid_accounting" style="display:none;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; margin-bottom:20px;">
+          <a href="/seo-pages/accounting-services-bangalore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Bangalore</div></a>
+          <a href="/seo-pages/accounting-services-mysore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Mysore</div></a>
+          <a href="/seo-pages/accounting-services-mangalore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Mangalore</div></a>
+          <a href="/seo-pages/accounting-services-karnataka.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🗺️ All Karnataka</div></a>
+          <a href="/seo-pages/accounting-services-india.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🇮🇳 All India</div></a>
+        </div>
+      </div>
+
+      <div id="cityGrid_development" style="display:none;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; margin-bottom:20px;">
+          <a href="/seo-pages/web-developer-bangalore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Bangalore</div></a>
+          <a href="/seo-pages/web-developer-mysore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Mysore</div></a>
+          <a href="/seo-pages/web-developer-mangalore.html" style="text-decoration:none;">
+            <div class="city-card">🏙️ Mangalore</div></a>
+          <a href="/seo-pages/web-developer-karnataka.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🗺️ All Karnataka</div></a>
+          <a href="/seo-pages/web-developer-india.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🇮🇳 All India</div></a>
+        </div>
+      </div>
+
+      <!-- Bottom CTA -->
+      <div style="text-align:center; margin-top:10px;">
+        <p style="font-size:13px; color:var(--text-muted);">Don't see your city? <a onclick="showPage('auth')" style="color:var(--primary); font-weight:700; cursor:pointer; text-decoration:none;">Post a request</a> — we'll match you with professionals nearby.</p>
+      </div>
+
+    </div>
+  </div>
+  <!-- END FIND BY LOCATION SECTION -->
+
+  
+
+  
+  
+  <div class="features-section">
+    <h2 class="section-title">Why Choose WorkIndex?</h2>
+    <p class="section-subtitle">The easiest way to find and hire verified professionals</p>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Verified Professionals</h3>
+        <p>All experts are verified with credentials and ratings from real clients</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Quick Responses</h3>
+        <p>Get personalized quotes from multiple professionals within 24 hours</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure & Safe</h3>
+        <p>Your information is protected. Only share contact details when ready</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⭐</div>
+        <h3>Rated & Reviewed</h3>
+        <p>Read honest reviews from past clients to make informed decisions</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 60px 20px; background: var(--bg-gray);">
+    <h2 class="section-title">How It Works</h2>
+    <div style="max-width: 1000px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px;">
+      <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">1</div>
+        <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Post Your Need</h4>
+        <p style="font-size: 14px; color: var(--text-light);">Tell us what you need in 2 minutes</p>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">2</div>
+        <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Get Quotes</h4>
+        <p style="font-size: 14px; color: var(--text-light);">Experts send you personalized quotes</p>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">3</div>
+        <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Choose & Hire</h4>
+        <p style="font-size: 14px; color: var(--text-light);">Pick the best expert and get started</p>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">4</div>
+        <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Leave a Review</h4>
+        <p style="font-size: 14px; color: var(--text-light);">Rate your experience to help others</p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 40px;">
+      <button class="hero-btn hero-btn-primary" onclick="showPage('howItWorks')">Learn More</button>
+    </div>
+
+<!-- ═══ CUSTOMER REVIEWS SECTION ═══ -->
+
+
+<div style="padding: 60px 0 40px; overflow: hidden; background: #f5f5f5;">
+  <div style="text-align: center; margin-bottom: 36px; padding: 0 20px;">
+    <h2 style="font-size: 30px; font-weight: 800; color: var(--text); margin: 0 0 8px;">What our customers say</h2>
+    <p style="font-size: 15px; color: var(--text-muted); margin: 0;">Hear from professionals and clients who use WorkIndex</p>
+  </div>
+
+  <div style="overflow: hidden; position: relative;">
+    <div style="position:absolute;top:0;bottom:0;left:0;width:80px;background:linear-gradient(to right,#f5f5f5,transparent);z-index:2;pointer-events:none;"></div>
+    <div style="position:absolute;top:0;bottom:0;right:0;width:80px;background:linear-gradient(to left,#f5f5f5,transparent);z-index:2;pointer-events:none;"></div>
+
+    <div id="reviewTrack">
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#E6F1FB;color:#185FA5;">RK</div>
+          <div><p class="rv-name">Rajesh Kumar</p><p class="rv-loc">ITR Filing · Bengaluru</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★★</span></div>
+        <p class="rv-quote">"Filed my ITR through WorkIndex — <strong>super smooth process</strong> and quick support. Highly reliable platform."</p>
+        <span class="rv-chip">📄 ITR Filing</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#E1F5EE;color:#0F6E56;">AN</div>
+          <div><p class="rv-name">Ananya Naik</p><p class="rv-loc">GST Registration · Pune</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★</span><span style="color:#cccccc;">★</span></div>
+        <p class="rv-quote">"Got my GST registration done <strong>without any hassle</strong>. The expert handled everything end-to-end and kept me updated throughout."</p>
+        <span class="rv-chip">🏢 GST Services</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#FAEEDA;color:#854F0B;">PN</div>
+          <div><p class="rv-name">Priya Nair</p><p class="rv-loc">Accounting · Kochi</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★★</span></div>
+        <p class="rv-quote">"Very professional and transparent. They <strong>simplified my monthly bookkeeping</strong> and gave useful financial insights too."</p>
+        <span class="rv-chip">📊 Accounting</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#FBEAF0;color:#993556;">NV</div>
+          <div><p class="rv-name">Neha Verma</p><p class="rv-loc">Web Development · Delhi</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★★</span></div>
+        <p class="rv-quote">"Built my business website through WorkIndex. <strong>Quality and communication were excellent!</strong> They understood my requirements perfectly."</p>
+        <span class="rv-chip">💻 Development</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#EAF3DE;color:#3B6D11;">AP</div>
+          <div><p class="rv-name">Amit Patel</p><p class="rv-loc">GST Filing · Ahmedabad</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★</span><span style="color:#cccccc;">★</span></div>
+        <p class="rv-quote">"Quick and efficient GST filing service. <strong>Saved me a lot of time</strong> — definitely using it again."</p>
+        <span class="rv-chip">🏢 GST Services</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#EEEDFE;color:#534AB7;">SR</div>
+          <div><p class="rv-name">Sneha Reddy</p><p class="rv-loc">ITR Filing · Hyderabad</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★★</span></div>
+        <p class="rv-quote">"Great experience with ITR filing. The expert <strong>guided me properly</strong> and answered all my doubts. Completed on time, no confusion at all."</p>
+        <span class="rv-chip">📄 ITR Filing</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#FAECE7;color:#993C1D;">VS</div>
+          <div><p class="rv-name">Vikram Singh</p><p class="rv-loc">Accounting · Mumbai</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★</span><span style="color:#cccccc;">★</span></div>
+        <p class="rv-quote">"WorkIndex helped me find <strong>the right professional</strong> for my startup accounting. Trustworthy experts and smooth coordination."</p>
+        <span class="rv-chip">📊 Accounting</span>
+      </div>
+
+      <!-- DUPLICATE SET — needed for seamless loop -->
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#E6F1FB;color:#185FA5;">RK</div>
+          <div><p class="rv-name">Rajesh Kumar</p><p class="rv-loc">ITR Filing · Bengaluru</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★★</span></div>
+        <p class="rv-quote">"Filed my ITR through WorkIndex — <strong>super smooth process</strong> and quick support. Highly reliable platform."</p>
+        <span class="rv-chip">📄 ITR Filing</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#E1F5EE;color:#0F6E56;">AN</div>
+          <div><p class="rv-name">Ananya Naik</p><p class="rv-loc">GST Registration · Pune</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★</span><span style="color:#cccccc;">★</span></div>
+        <p class="rv-quote">"Got my GST registration done <strong>without any hassle</strong>. The expert handled everything end-to-end and kept me updated throughout."</p>
+        <span class="rv-chip">🏢 GST Services</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#FAEEDA;color:#854F0B;">PN</div>
+          <div><p class="rv-name">Priya Nair</p><p class="rv-loc">Accounting · Kochi</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★★</span></div>
+        <p class="rv-quote">"Very professional and transparent. They <strong>simplified my monthly bookkeeping</strong> and gave useful financial insights too."</p>
+        <span class="rv-chip">📊 Accounting</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#FBEAF0;color:#993556;">NV</div>
+          <div><p class="rv-name">Neha Verma</p><p class="rv-loc">Web Development · Delhi</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★★</span></div>
+        <p class="rv-quote">"Built my business website through WorkIndex. <strong>Quality and communication were excellent!</strong> They understood my requirements perfectly."</p>
+        <span class="rv-chip">💻 Development</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#EAF3DE;color:#3B6D11;">AP</div>
+          <div><p class="rv-name">Amit Patel</p><p class="rv-loc">GST Filing · Ahmedabad</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★</span><span style="color:#cccccc;">★</span></div>
+        <p class="rv-quote">"Quick and efficient GST filing service. <strong>Saved me a lot of time</strong> — definitely using it again."</p>
+        <span class="rv-chip">🏢 GST Services</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#EEEDFE;color:#534AB7;">SR</div>
+          <div><p class="rv-name">Sneha Reddy</p><p class="rv-loc">ITR Filing · Hyderabad</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★★</span></div>
+        <p class="rv-quote">"Great experience with ITR filing. The expert <strong>guided me properly</strong> and answered all my doubts. Completed on time, no confusion at all."</p>
+        <span class="rv-chip">📄 ITR Filing</span>
+      </div>
+
+      <div class="rv-card">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="rv-avatar" style="background:#FAECE7;color:#993C1D;">VS</div>
+          <div><p class="rv-name">Vikram Singh</p><p class="rv-loc">Accounting · Mumbai</p></div>
+        </div>
+        <div style="font-size:18px;letter-spacing:2px;"><span style="color:#FC8019;">★★★★</span><span style="color:#cccccc;">★</span></div>
+        <p class="rv-quote">"WorkIndex helped me find <strong>the right professional</strong> for my startup accounting. Trustworthy experts and smooth coordination."</p>
+        <span class="rv-chip">📊 Accounting</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- END CUSTOMER REVIEWS SECTION -->
+  </div>
+
+  <section style="background:var(--bg-gray);border-top:1px solid var(--border);padding:38px 20px;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:12px;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Instagram</div>
+        <h2 style="font-size:24px;line-height:1.2;color:var(--text);margin:0 0 6px;">Follow WorkIndex</h2>
+        <p style="font-size:14px;color:var(--text-muted);margin:0;">Updates, service tips, and platform announcements from the official WorkIndex page.</p>
+      </div>
+      <a href="https://www.instagram.com/work__index/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#FC8019;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 18px;border-radius:8px;">
+        <span style="font-size:18px;">&#128247;</span>
+        @work__index
+      </a>
+    </div>
+  </section>
+
+  <footer style="background: var(--bg); border-top: 1px solid var(--border); padding: 60px 20px 40px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+      <div>
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 20px;">For Customers</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a class="nav-link" onclick="showPage('findProfessionals')" style="cursor: pointer;">Find Professionals by Location</a>
+          <a class="nav-link" onclick="showPage('howItWorks')" style="cursor: pointer;">How it works</a>
+          <a class="nav-link" onclick="showPage('auth')" style="cursor: pointer;">Login</a>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 20px;">For Professionals</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a class="nav-link" onclick="showHowItWorks('expert'); showPage('howItWorks')" style="cursor: pointer;">How it works</a>
+          <a class="nav-link" onclick="showPage('pricing')" style="cursor: pointer;">Pricing</a>
+          <a class="nav-link" onclick="showPage('auth')" style="cursor: pointer;">Join as a Professional</a>
+          <a class="nav-link" href="/cdn-cgi/l/email-protection#9ae9efeaeaf5e8eedaedf5e8f1f3f4feffe2b4f9f5f7" style="cursor: pointer;">Help centre</a>
+        </div>
+      </div>
+    </div>
+       
+    <div style="max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid var(--border); text-align: center;">
+  <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-bottom:14px;">
+    <a href="/contact.html" style="font-size:14px; color:var(--text-muted); text-decoration:none; font-weight:600;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">📬 Contact Us</a>
+    <a href="/terms.html" style="font-size:14px; color:var(--text-muted); text-decoration:none; font-weight:600;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">📋 Terms & Conditions</a>
+    <a href="/refund-policy.html" style="font-size:14px; color:var(--text-muted); text-decoration:none; font-weight:600;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">💰 Refund Policy</a>
+  </div>
+  <p style="font-size: 14px; color: var(--text-muted);">© 2026 WorkIndex. All rights reserved.</p>
+</div>
+  </footer>
+</div>
+
+
+<!-- FIND PROFESSIONALS PAGE -->

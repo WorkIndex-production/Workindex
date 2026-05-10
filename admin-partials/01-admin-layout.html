@@ -1,0 +1,94 @@
+<div id="appWrap" style="display:none">
+
+  <!-- MOBILE TOP BAR (hidden on desktop via CSS) -->
+  <div id="mobileTopBar">
+    <div style="display:flex;align-items:center;gap:9px">
+      <div class="sbav" id="msbAv">A</div>
+      <div><strong id="msbNm">Admin</strong><small id="msbId">-</small></div>
+    </div>
+    <button id="mLogoutBtn">Logout</button>
+  </div>
+
+  <!-- MOBILE BOTTOM NAV (hidden on desktop via CSS) -->
+  <div id="mobileNav">
+    <button class="mni on" data-s="dashboard"><span>&#128202;</span><span>Home</span></button>
+    <button class="mni" data-s="heatmap"><span>&#127760;</span><span>Map</span></button>
+    <button class="mni" data-s="experts"><span>&#128188;</span><span>Experts</span></button>
+    <button class="mni" data-s="clients"><span>&#128101;</span><span>Clients</span></button>
+    <button class="mni" data-s="chats"><span>&#128172;</span><span>Chats</span></button>
+    <button class="mni" data-s="credits"><span>&#128142;</span><span>Credits</span></button>
+    <button class="mni" data-s="tickets"><span>&#127915;</span><span>Tickets</span></button>
+    <button class="mni" data-s="refunds"><span>&#128176;</span><span>Refunds</span></button>
+    <button class="mni" data-s="actions"><span>&#9889;</span><span>Actions</span></button>
+    <button class="mni" data-s="posts"><span>&#128221;</span><span>Posts</span></button>
+    <button class="mni" data-s="reviews"><span>&#11088;</span><span>Reviews</span></button>
+    <button class="mni" data-s="registrations"><span>&#9989;</span><span>Reg</span></button>
+        <button class="mni" data-s="kyc"><span>&#128737;</span><span>KYC</span></button>
+    <button class="mni" data-s="reports"><span>📋</span><span>Reports</span></button>
+    <button class="mni" data-s="suspReq"><span>🚩</span><span>Suspended</span></button>
+    <button class="mni" data-s="communication"><span>&#128140;</span><span>Comms</span></button>
+    <button class="mni" data-s="invoices"><span>&#128196;</span><span>Invoice</span></button>
+    <button class="mni" data-s="emailNotifications"><span>📧</span><span>Emails</span></button>
+        <button class="mni" data-s="audit"><span>📜</span><span>Audit</span></button>
+        <button class="mni" data-s="admins"><span>👥</span><span>Admins</span></button>
+    <button class="mni" data-s="settings"><span>&#9881;</span><span>Settings</span></button>
+  </div>
+
+  <div class="sb">
+    <div class="sblogo"><div class="lico">W</div><div><strong>WorkIndex</strong><span>ADMIN</span></div></div>
+    <nav>
+      <div class="ng"><div class="ngl">Admin Team</div>
+        <div class="ni" data-s="admins"><span>👥</span><span>Manage Admins</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Overview</div><div class="ni on" data-s="dashboard"><span>&#128202;</span><span>Dashboard</span></div>
+        <div class="ni" data-s="heatmap"><span>&#127760;</span><span>Geo Heatmap</span></div></div>
+      <div class="ng"><div class="ngl">People</div>
+        <div class="ni" data-s="experts"><span>&#128188;</span><span>Experts</span></div>
+        <div class="ni" data-s="clients"><span>&#128101;</span><span>Clients</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Activity</div>
+        <div class="ni" data-s="approaches"><span>&#127919;</span><span>Approaches</span></div>
+        <div class="ni" data-s="chats"><span>&#128172;</span><span>Chats</span></div>
+        <div class="ni" data-s="credits"><span>&#128142;</span><span>Credits</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Support</div>
+        <div class="ni" data-s="tickets"><span>&#127915;</span><span>Tickets</span><span class="nbadge" id="tkbadge" style="display:none">0</span></div>
+        <div class="ni" data-s="refunds"><span>&#128176;</span><span>Refunds</span><span class="nbadge" id="rbadge" style="display:none">0</span></div>
+        <div class="ni" data-s="actions"><span>&#9889;</span><span>Actions</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Platform</div>
+        <div class="ni" data-s="posts"><span>&#128221;</span><span>Posts</span></div>
+        <div class="ni" data-s="reviews"><span>&#11088;</span><span>Reviews</span></div>
+                <div class="ni" data-s="registrations"><span>&#9989;</span><span>Registrations</span></div>
+        <div class="ni" data-s="kyc"><span>&#128737;</span><span>KYC Review</span><span class="nbadge" id="kycbadge" style="display:none">0</span></div>
+        <div class="ni" data-s="payments"><span>&#128184;</span><span>Payments</span></div>
+        <div class="ni" data-s="reports"><span>📋</span><span>Reports</span></div>
+        <div class="ni" data-s="suspReq"><span>🚩</span><span>Suspended</span></div>
+        <div class="ni" data-s="revenue"><span>&#128200;</span><span>Revenue</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Tools</div>
+        <div class="ni" data-s="communication"><span>&#128140;</span><span>Communication</span></div>
+        <div class="ni" data-s="invoices"><span>&#128196;</span><span>Invoices</span></div>
+        <div class="ni" data-s="emailNotifications"><span>📧</span><span>Email Notifications</span></div>
+                <div class="ni" data-s="audit"><span>📜</span><span>Audit Log</span></div>
+        <div class="ni" data-s="seo"><span>🌐</span><span>SEO Pages</span></div>
+        <div class="ni" data-s="serviceCategories"><span>⚙️</span><span>Service Categories</span></div>
+        <div class="ni" data-s="settings"><span>&#9881;</span><span>Settings</span></div>
+      </div>
+    </nav>
+    <div class="sbbot">
+      <div class="sbadmin"><div class="sbav" id="sbAv">A</div><div class="sbai"><strong id="sbNm">Admin</strong><small id="sbId">-</small></div></div>
+      <button class="outbtn" id="logoutBtn">Logout</button>
+    </div>
+  </div>
+  <div class="main">
+    <div class="tbar">
+      <div><h2 id="ptitle">Dashboard</h2><p id="psub">Platform overview</p></div>
+      <div class="dfrow">
+        <div class="dfbox"><label>FROM</label><input type="date" id="dfF"></div>
+        <div class="dfbox"><label>TO</label><input type="date" id="dfT"></div>
+        <button class="abtn" id="applyDF">Apply</button>
+        <button class="abtn cbtn" id="clearDF">Clear</button>
+      </div>
+    </div>
+    <div class="cnt">

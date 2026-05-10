@@ -1,0 +1,152 @@
+<!-- CREDIT ADJUST MODAL -->
+<div class="modal-bg" id="creditModal">
+  <div class="modal" style="max-width:760px">
+    <div class="modal-h"><h3>Adjust Credits</h3><button class="modal-x" data-close="creditModal">&#215;</button></div>
+    <div class="modal-b">
+      <div id="creditModalInfo" style="margin-bottom:14px;padding:12px;background:#18181d;border-radius:8px;font-size:13px"></div>
+      <div class="mfld"><label>Action</label>
+        <select id="creditAction">
+          <option value="add">Add Credits</option>
+          <option value="deduct">Deduct Credits</option>
+          <option value="set">Set to Exact Amount</option>
+        </select>
+      </div>
+      <div class="mfld"><label>Amount</label><input type="number" id="creditAmount" placeholder="0" min="0"></div>
+      <div class="mfld"><label>Reason</label><textarea id="creditReason" rows="2" placeholder="Reason for adjustment..."></textarea></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="creditModal">Cancel</button>
+      <button class="btn bpri" id="creditSubmit">Apply</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESET PASSWORD MODAL -->
+<div class="modal-bg" id="pwModal">
+  <div class="modal">
+    <div class="modal-h"><h3>Reset Password</h3><button class="modal-x" data-close="pwModal">&#215;</button></div>
+    <div class="modal-b">
+      <div id="pwModalInfo" style="margin-bottom:14px;font-size:13px;color:#a0a0b8"></div>
+      <div class="mfld"><label>New Password</label><input type="password" id="newPw" placeholder="Min 8 characters"></div>
+      <div class="mfld"><label>Confirm Password</label><input type="password" id="newPw2" placeholder="Repeat password"></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="pwModal">Cancel</button>
+      <button class="btn bpri" id="pwSubmit">Reset Password</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT POST MODAL -->
+<div class="modal-bg" id="postModal">
+  <div class="modal">
+    <div class="modal-h"><h3>Edit Post</h3><button class="modal-x" data-close="postModal">&#215;</button></div>
+    <div class="modal-b">
+      <div class="mfld"><label>Title</label><input type="text" id="postTitle"></div>
+      <div class="mfld"><label>Description</label><textarea id="postDesc" rows="4"></textarea></div>
+      <div class="mfld"><label>Status</label>
+        <select id="postStatus"><option value="">-- Keep current status --</option><option value="pending">Pending</option><option value="active">Active</option><option value="completed">Completed</option><option value="closed">Closed</option><option value="cancelled">Cancelled</option></select>
+      </div>
+      <div class="mfld"><label>Credits Required</label><input type="number" id="postCredits"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="mfld"><label>Timeline</label><input type="text" id="postTimeline" placeholder="e.g. flexible, week"></div>
+        <div class="mfld"><label>Budget</label><input type="text" id="postBudget" placeholder="Client budget"></div>
+      </div>
+      <div class="mfld"><label>Location</label><input type="text" id="postLocation" placeholder="Request location shown to experts"></div>
+      <div class="mfld">
+        <label>Questionnaire Answers</label>
+        <textarea id="postAnswers" rows="12" spellcheck="false" style="font-family:Consolas,monospace;font-size:12px;line-height:1.5"></textarea>
+        <small style="display:block;margin-top:6px;color:#606078">Edit the saved questionnaire JSON. Keep valid JSON format.</small>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="postModal">Cancel</button>
+      <button class="btn brdn" id="deletePostBtn">Delete Post</button>
+      <button class="btn bpri" id="savePostBtn">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- TICKET DETAIL MODAL -->
+<div class="modal-bg" id="ticketModal">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-h"><h3 id="tkModalTitle">Ticket Details</h3><button class="modal-x" data-close="ticketModal">&#215;</button></div>
+    <div class="modal-b" id="tkModalBody"></div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="ticketModal">Close</button>
+      <button class="btn bgrn" id="tkApproveBtn" style="display:none">Approve Refund</button>
+      <button class="btn brdn" id="tkRejectBtn" style="display:none">Reject</button>
+      <button class="btn bpri" id="tkResolveBtn" style="display:none">Mark Resolved</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- TICKET CREATE MODAL (admin creates on behalf of user) -->
+<div class="modal-bg" id="tkCreateModal">
+  <div class="modal" style="max-width:580px">
+    <div class="modal-h"><h3>&#127915; Create Ticket</h3><button class="modal-x" data-close="tkCreateModal">&#215;</button></div>
+    <div class="modal-b">
+      <div id="tkCreateFor" style="padding:10px 12px;background:#18181d;border-radius:8px;margin-bottom:14px;font-size:13px"></div>
+      <!-- Step 1: Category -->
+      <div id="tkStep1">
+        <div style="font-size:12px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Select Category &amp; Issue</div>
+        <div class="tk-cat-list" id="tkCatList"></div>
+      </div>
+      <!-- Step 2: Details -->
+      <div id="tkStep2" style="display:none">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+          <button class="btn bgho" onclick="tkGoBack()" style="padding:5px 10px">&#8592; Back</button>
+          <div id="tkSelectedCat" style="font-size:13px;font-weight:600;color:#FC8019"></div>
+        </div>
+        <div class="mfld"><label>Priority</label>
+          <select id="tkPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+            <option value="urgent">🚨 Urgent</option>
+          </select>
+        </div>
+        <div class="mfld"><label>Description</label>
+          <textarea id="tkDescription" rows="4" placeholder="Describe the issue in detail..."></textarea>
+        </div>
+        <div class="mfld"><label>Admin Note (internal)</label>
+          <textarea id="tkAdminNote" rows="2" placeholder="Internal note for admin team..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="tkCreateModal">Cancel</button>
+      <button class="btn bpri" id="tkCreateSubmit" style="display:none" onclick="submitCreateTicket()">&#127915; Create Ticket</button>
+    </div>
+  </div>
+</div>
+
+<!-- DM MODAL -->
+<div class="modal-bg" id="dmModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-h"><h3>&#128172; Direct Message</h3><button class="modal-x" data-close="dmModal">&#215;</button></div>
+    <div class="modal-b">
+      <div id="dmModalInfo" style="margin-bottom:14px;padding:12px;background:#18181d;border-radius:8px;font-size:13px"></div>
+      <div class="mfld"><label>Message</label><textarea id="dmText" rows="5" placeholder="Type your message to this user — will appear in their chat inbox..."></textarea></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="dmModal">Cancel</button>
+      <button class="btn bpri" id="dmSubmit">&#9992; Send Message</button>
+    </div>
+  </div>
+</div>
+
+<!-- KYC VIEWER MODAL -->
+<div class="modal-bg" id="kycModal">
+  <div class="modal" style="max-width:700px">
+    <div class="modal-h"><h3 id="kycModalTitle">&#128196; KYC Documents</h3><button class="modal-x" data-close="kycModal">&#215;</button></div>
+    <div class="modal-b" id="kycModalBody"></div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="kycModal">Close</button>
+      <button class="btn bgrn" id="kycApproveBtn">&#9989; Approve Expert</button>
+      <button class="btn brdn" id="kycRejectBtn">&#10060; Reject</button>
+    </div>
+  </div>
+</div>

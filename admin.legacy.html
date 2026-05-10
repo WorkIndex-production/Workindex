@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkIndex Admin</title>
+<link rel="stylesheet" href="admin.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<div id="toast"></div>
+
+</head>
+<body>
+
+<div id="loginWrap">
+  <div class="lbox">
+    <div class="lbrand">
+      <div class="lico">W</div>
+      <div><h2>WorkIndex</h2><small>ADMIN CONSOLE</small></div>
+    </div>
+    <h1>Welcome back</h1>
+    <p>Secure access to admin dashboard</p>
+    <div class="fld"><label>Admin ID</label><input type="text" id="liId" placeholder="Enter your Admin ID" autocomplete="off"></div>
+    <div class="fld"><label>Password</label><input type="password" id="liPw" placeholder="Password"></div>
+    <button class="lbtn" id="loginBtn">Sign In</button>
+    <div class="lerr" id="lerr"></div>
+  </div>
+</div>
+
+<div id="appWrap" style="display:none">
+
+  <!-- MOBILE TOP BAR (hidden on desktop via CSS) -->
+  <div id="mobileTopBar">
+    <div style="display:flex;align-items:center;gap:9px">
+      <div class="sbav" id="msbAv">A</div>
+      <div><strong id="msbNm">Admin</strong><small id="msbId">-</small></div>
+    </div>
+    <button id="mLogoutBtn">Logout</button>
+  </div>
+
+  <!-- MOBILE BOTTOM NAV (hidden on desktop via CSS) -->
+  <div id="mobileNav">
+    <button class="mni on" data-s="dashboard"><span>&#128202;</span><span>Home</span></button>
+    <button class="mni" data-s="heatmap"><span>&#127760;</span><span>Map</span></button>
+    <button class="mni" data-s="experts"><span>&#128188;</span><span>Experts</span></button>
+    <button class="mni" data-s="clients"><span>&#128101;</span><span>Clients</span></button>
+    <button class="mni" data-s="chats"><span>&#128172;</span><span>Chats</span></button>
+    <button class="mni" data-s="credits"><span>&#128142;</span><span>Credits</span></button>
+    <button class="mni" data-s="tickets"><span>&#127915;</span><span>Tickets</span></button>
+    <button class="mni" data-s="refunds"><span>&#128176;</span><span>Refunds</span></button>
+    <button class="mni" data-s="actions"><span>&#9889;</span><span>Actions</span></button>
+    <button class="mni" data-s="posts"><span>&#128221;</span><span>Posts</span></button>
+    <button class="mni" data-s="reviews"><span>&#11088;</span><span>Reviews</span></button>
+    <button class="mni" data-s="registrations"><span>&#9989;</span><span>Reg</span></button>
+        <button class="mni" data-s="kyc"><span>&#128737;</span><span>KYC</span></button>
+    <button class="mni" data-s="reports"><span>📋</span><span>Reports</span></button>
+    <button class="mni" data-s="suspReq"><span>🚩</span><span>Suspended</span></button>
+    <button class="mni" data-s="communication"><span>&#128140;</span><span>Comms</span></button>
+    <button class="mni" data-s="invoices"><span>&#128196;</span><span>Invoice</span></button>
+    <button class="mni" data-s="emailNotifications"><span>📧</span><span>Emails</span></button>
+        <button class="mni" data-s="audit"><span>📜</span><span>Audit</span></button>
+        <button class="mni" data-s="admins"><span>👥</span><span>Admins</span></button>
+    <button class="mni" data-s="settings"><span>&#9881;</span><span>Settings</span></button>
+  </div>
+
+  <div class="sb">
+    <div class="sblogo"><div class="lico">W</div><div><strong>WorkIndex</strong><span>ADMIN</span></div></div>
+    <nav>
+      <div class="ng"><div class="ngl">Admin Team</div>
+        <div class="ni" data-s="admins"><span>👥</span><span>Manage Admins</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Overview</div><div class="ni on" data-s="dashboard"><span>&#128202;</span><span>Dashboard</span></div>
+        <div class="ni" data-s="heatmap"><span>&#127760;</span><span>Geo Heatmap</span></div></div>
+      <div class="ng"><div class="ngl">People</div>
+        <div class="ni" data-s="experts"><span>&#128188;</span><span>Experts</span></div>
+        <div class="ni" data-s="clients"><span>&#128101;</span><span>Clients</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Activity</div>
+        <div class="ni" data-s="approaches"><span>&#127919;</span><span>Approaches</span></div>
+        <div class="ni" data-s="chats"><span>&#128172;</span><span>Chats</span></div>
+        <div class="ni" data-s="credits"><span>&#128142;</span><span>Credits</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Support</div>
+        <div class="ni" data-s="tickets"><span>&#127915;</span><span>Tickets</span><span class="nbadge" id="tkbadge" style="display:none">0</span></div>
+        <div class="ni" data-s="refunds"><span>&#128176;</span><span>Refunds</span><span class="nbadge" id="rbadge" style="display:none">0</span></div>
+        <div class="ni" data-s="actions"><span>&#9889;</span><span>Actions</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Platform</div>
+        <div class="ni" data-s="posts"><span>&#128221;</span><span>Posts</span></div>
+        <div class="ni" data-s="reviews"><span>&#11088;</span><span>Reviews</span></div>
+                <div class="ni" data-s="registrations"><span>&#9989;</span><span>Registrations</span></div>
+        <div class="ni" data-s="kyc"><span>&#128737;</span><span>KYC Review</span><span class="nbadge" id="kycbadge" style="display:none">0</span></div>
+        <div class="ni" data-s="payments"><span>&#128184;</span><span>Payments</span></div>
+        <div class="ni" data-s="reports"><span>📋</span><span>Reports</span></div>
+        <div class="ni" data-s="suspReq"><span>🚩</span><span>Suspended</span></div>
+        <div class="ni" data-s="revenue"><span>&#128200;</span><span>Revenue</span></div>
+      </div>
+      <div class="ng"><div class="ngl">Tools</div>
+        <div class="ni" data-s="communication"><span>&#128140;</span><span>Communication</span></div>
+        <div class="ni" data-s="invoices"><span>&#128196;</span><span>Invoices</span></div>
+        <div class="ni" data-s="emailNotifications"><span>📧</span><span>Email Notifications</span></div>
+                <div class="ni" data-s="audit"><span>📜</span><span>Audit Log</span></div>
+        <div class="ni" data-s="seo"><span>🌐</span><span>SEO Pages</span></div>
+        <div class="ni" data-s="serviceCategories"><span>⚙️</span><span>Service Categories</span></div>
+        <div class="ni" data-s="settings"><span>&#9881;</span><span>Settings</span></div>
+      </div>
+    </nav>
+    <div class="sbbot">
+      <div class="sbadmin"><div class="sbav" id="sbAv">A</div><div class="sbai"><strong id="sbNm">Admin</strong><small id="sbId">-</small></div></div>
+      <button class="outbtn" id="logoutBtn">Logout</button>
+    </div>
+  </div>
+  <div class="main">
+    <div class="tbar">
+      <div><h2 id="ptitle">Dashboard</h2><p id="psub">Platform overview</p></div>
+      <div class="dfrow">
+        <div class="dfbox"><label>FROM</label><input type="date" id="dfF"></div>
+        <div class="dfbox"><label>TO</label><input type="date" id="dfT"></div>
+        <button class="abtn" id="applyDF">Apply</button>
+        <button class="abtn cbtn" id="clearDF">Clear</button>
+      </div>
+    </div>
+    <div class="cnt">
+      <div class="sec on" id="sec-dashboard">
+        <div class="sgrid" id="sgrid"></div>
+        <div class="card"><div class="ch"><h3>Recent Signups</h3></div>
+          <div class="tw"><table><thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Credits</th><th>Joined</th></tr></thead><tbody id="recentTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-heatmap">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+          <div class="card">
+            <div class="ch">
+              <h3>&#127760; Geographic Distribution</h3>
+              <div class="fbar">
+                <select id="hmRole"><option value="expert">Experts</option><option value="client">Clients</option><option value="all">All Users</option></select>
+                <button class="abtn" id="hmRefresh" style="padding:6px 12px">Refresh</button>
+              </div>
+            </div>
+            <div style="padding:16px">
+              <div class="hm-drill" id="hmCrumbs"><span class="hm-crumb" data-level="country">India</span></div>
+              <div id="hmMapArea" style="min-height:200px;display:flex;align-items:center;justify-content:center">
+                <div style="color:#606078;font-size:13px">Loading map...</div>
+              </div>
+              <div class="hm-legend" id="hmLegend"></div>
+              <div id="hmTip" class="hm-tip"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3 id="hmBarTitle">Top States</h3></div>
+            <div style="padding:16px" id="hmBars"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec" id="sec-experts">
+        <div class="card"><div class="ch"><h3>All Experts</h3><div class="fbar"><input type="text" id="eSrch" placeholder="Search..."></div></div>
+          <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Credits</th><th>Rating</th><th>Score</th><th>Status</th><th>Joined</th><th></th></tr></thead><tbody id="eTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-clients">
+        <div class="card"><div class="ch"><h3>All Clients</h3><div class="fbar"><input type="text" id="cSrch" placeholder="Search..."></div></div>
+          <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Status</th><th>Joined</th><th></th></tr></thead><tbody id="cTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-approaches">
+        <div class="card"><div class="ch"><h3>Approaches</h3><div class="fbar">
+          <select id="apSt"><option value="all">All Status</option><option value="pending">Pending</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select>
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Expert</th><th>Client</th><th>Request</th><th>Quote</th><th>Message</th><th>Credits</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody id="apTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-chats">
+        <div class="card"><div class="ch"><h3>All Conversations</h3></div>
+          <div class="tw"><table><thead><tr><th>Expert</th><th>Client</th><th>Request</th><th>Last Message</th><th>Date</th><th></th></tr></thead><tbody id="chTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-credits">
+        <div class="card"><div class="ch"><h3>Credit Transactions</h3><div class="fbar">
+          <select id="crType"><option value="all">All Types</option><option value="purchase">Purchases</option><option value="spent">Spent</option><option value="refund">Refunds</option><option value="bonus">Bonus</option></select>
+          <input type="text" id="crSrch" placeholder="Expert name..." style="width:160px">
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Expert</th><th>Type</th><th>Amount</th><th>Balance</th><th>Description</th><th>Date</th></tr></thead><tbody id="crTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-refunds"><div id="rfList"></div></div>
+      <div class="sec" id="sec-tickets">
+        <div class="card"><div class="ch"><h3>Support Tickets</h3><div class="fbar">
+          <select id="tkSt"><option value="all">All</option><option value="open">Open</option><option value="pending_review">Pending Review</option><option value="resolved">Resolved</option></select>
+          <input type="text" id="tkSrch" placeholder="Search user..." style="width:160px">
+        </div></div>
+          <div class="tw"><table><thead><tr><th style="width:30px"></th><th>User</th><th>Type</th><th>Subject</th><th>Priority</th><th>Status</th><th>Credits Req</th><th>Date</th><th></th></tr></thead><tbody id="tkTbl"></tbody></table></div>        </div>
+      </div>
+      <div class="sec" id="sec-posts">
+        <div class="card"><div class="ch"><h3>User Posts / Requests</h3><div class="fbar">
+          <input type="text" id="poSrch" placeholder="Search posts..." style="width:185px">
+          <select id="poSt"><option value="all">All Status</option><option value="open">Open</option><option value="closed">Closed</option><option value="flagged">Flagged</option></select>
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Title</th><th>Client</th><th>Service</th><th>Budget</th><th>Status</th><th>Credits</th><th>Date</th><th></th></tr></thead><tbody id="poTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-reviews">
+        <div class="card"><div class="ch"><h3>Ratings &amp; Reviews</h3><div class="fbar">
+          <input type="text" id="rvSrch" placeholder="Search expert..." style="width:160px">
+          <select id="rvMin"><option value="0">All Ratings</option><option value="1">1+ Stars</option><option value="1" selected>All</option><option value="3">Below 3 Stars</option></select>
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Expert</th><th>Client</th><th>Rating</th><th>Review</th><th>Date</th><th></th></tr></thead><tbody id="rvTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-registrations">
+        <div class="card"><div class="ch"><h3>Expert Registrations</h3><div class="fbar">
+          <select id="rgSt"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select>
+        </div></div>
+                    <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Specialization</th><th>KYC Docs</th><th>KYC Status</th><th>Reg Status</th><th>Applied</th><th></th></tr></thead><tbody id="rgTbl"></tbody></table></div>
+        </div>
+      </div>
+           <div class="sec" id="sec-kyc">
+        <div class="card"><div class="ch"><h3>&#128737; KYC Verification Queue</h3><div class="fbar">
+          <select id="kycSt"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Doc Type</th><th>Submitted</th><th>KYC Status</th><th>Reg Status</th><th>Actions</th></tr></thead><tbody id="kycTbl"></tbody></table></div>
+        </div>
+      </div> 
+      <div class="sec" id="sec-payments">
+        <div class="card">
+          <div class="ch"><h3>Payments</h3></div>
+          <div id="pyFilterBar" style="padding:0 0 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <select id="pyStatusFilter" style="padding:7px 12px;background:#18181d;border:1px solid #2a2a38;border-radius:8px;color:#f0f0f4;font-size:13px;">
+              <option value="all">All Payments</option>
+              <option value="success">✅ Successful</option>
+              <option value="failed">❌ Failed</option>
+              <option value="pending">⏳ Pending</option>
+              <option value="refunded">💸 Refunded</option>
+            </select>
+            <span id="pyCount" style="font-size:13px;color:#606078;"></span>
+          </div>
+          <div class="tw"><table><thead><tr>
+            <th>Expert</th><th>Amount (₹)</th><th>Credits</th><th>Status</th><th>Method</th><th>Instrument</th><th>Razorpay IDs / Reason</th><th>Time</th><th></th>
+          </tr></thead><tbody id="pyTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-communication">
+        <!-- ANNOUNCEMENT CARD -->
+        <div class="ann-card" style="margin-bottom:16px">
+          <h4>&#128226; Send Announcement (Bell Notification)</h4>
+          <div class="mfld"><label style="color:#a0a0b8">Recipients</label>
+            <select id="annTarget" style="width:100%;padding:9px 12px;background:#18181d;border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#f0f0f4;font-size:13px;outline:none;font-family:inherit">
+              <option value="all">All Users</option>
+              <option value="experts">All Experts</option>
+              <option value="clients">All Clients</option>
+            </select>
+          </div>
+          <div class="mfld"><label style="color:#a0a0b8">Title</label><input type="text" id="annTitle" placeholder="Announcement title..." style="width:100%;padding:9px 12px;background:#18181d;border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#f0f0f4;font-size:13px;outline:none;font-family:inherit"></div>
+          <div class="mfld"><label style="color:#a0a0b8">Message</label><textarea id="annMsg" rows="3" placeholder="Announcement body — appears as bell notification in user's app..." style="width:100%;padding:9px 12px;background:#18181d;border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#f0f0f4;font-size:13px;outline:none;font-family:inherit;resize:vertical"></textarea></div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="abtn" id="sendAnnBtn">&#128276; Send Announcement</button>
+            <div id="annStatus" style="font-size:13px;color:#22c55e"></div>
+          </div>
+        </div>
+        <!-- BULK EMAIL CARD -->
+        <div class="card" style="margin-bottom:16px"><div class="ch"><h3>&#128140; Bulk Email</h3></div>
+          <div style="padding:20px">
+            <div class="mfld"><label>Recipients</label>
+              <select id="commTarget" style="margin-bottom:8px">
+                <option value="all">All Users</option>
+                <option value="experts">All Experts</option>
+                <option value="clients">All Clients</option>
+                <option value="custom">Custom (paste emails)</option>
+              </select>
+              <div id="commCustomBox" style="display:none"><textarea id="commEmails" rows="3" placeholder="Paste emails comma separated..."></textarea></div>
+            </div>
+            <div class="mfld"><label>Subject</label><input type="text" id="commSubj" placeholder="Email subject"></div>
+            <div class="mfld"><label>Message</label><textarea id="commMsg" rows="5" placeholder="Write your message..."></textarea></div>
+            <div style="display:flex;gap:8px">
+              <button class="abtn" id="previewCommBtn">Preview</button>
+              <button class="abtn" id="sendCommBtn">Send Email</button>
+            </div>
+            <div id="commStatus" style="margin-top:12px;font-size:13px;color:#22c55e"></div>
+          </div>
+        </div>
+        <div class="card"><div class="ch"><h3>History</h3></div>
+          <div class="tw"><table><thead><tr><th style="width:30px"></th><th>Type</th><th>Subject / Title</th><th>Target</th><th>Sent To</th><th>Date</th><th>Actions</th></tr></thead><tbody id="commHist"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-invoices">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="card"><div class="ch"><h3>Generate Invoice</h3></div>
+            <div style="padding:16px">
+              <div class="mfld">
+                <label>Expert / User</label>
+                <select id="invUserSel" style="width:100%;padding:10px 13px;background:#18181d;border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#f0f0f4;font-size:13px;outline:none;font-family:inherit">
+                  <option value="">-- Select Expert --</option>
+                </select>
+              </div>
+              <div class="mfld">
+                <label>Transaction / Purchase</label>
+                <select id="invTxSel" disabled style="width:100%;padding:10px 13px;background:#18181d;border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#606078;font-size:13px;outline:none;font-family:inherit">
+                  <option value="">-- Select Expert first --</option>
+                </select>
+              </div>
+              <div class="mfld"><label>Service Description</label><input type="text" id="invDesc" placeholder="Auto-filled from transaction or enter manually"></div>
+              <div class="mfld"><label>Amount (INR) — before tax</label><input type="number" id="invAmt" placeholder="0"></div>
+              <div class="mfld"><label>Tax Rate (%)</label>
+                <select id="invTaxRate" style="width:100%;padding:10px 13px;background:#18181d;border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#f0f0f4;font-size:13px;outline:none;font-family:inherit">
+                  <option value="0">0% — No Tax / Exempt</option>
+                  <option value="5">5% GST</option>
+                  <option value="12">12% GST</option>
+                  <option value="18" selected>18% GST (Standard)</option>
+                  <option value="28">28% GST</option>
+                  <option value="custom">Custom %</option>
+                </select>
+              </div>
+              <div class="mfld" id="invCustomTaxBox" style="display:none"><label>Custom Tax %</label><input type="number" id="invCustomTax" placeholder="e.g. 10" min="0" max="100"></div>
+              <div class="mfld"><label>Invoice Date</label><input type="date" id="invDate"></div>
+              <div class="mfld"><label>Due Date</label><input type="date" id="invDue"></div>
+              <div class="mfld"><label>Notes</label><textarea id="invNotes" rows="2" placeholder="Additional notes..."></textarea></div>
+              <button class="abtn" id="genInvBtn" style="width:100%">&#128196; Generate &amp; Print Invoice</button>
+            </div>
+          </div>
+          <div class="card"><div class="ch"><h3>Invoice Preview</h3></div>
+            <div id="invPreview" style="padding:16px"><div class="empty"><h3>Select expert to preview</h3></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec" id="sec-settings">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+          <!-- Admin Info -->
+          <div class="card">
+            <div class="ch"><h3>&#128100; Admin Account</h3></div>
+            <div style="padding:16px">
+              <div id="settAdminInfo" style="padding:12px;background:#18181d;border-radius:8px;margin-bottom:14px;font-size:13px;color:#a0a0b8">Loading...</div>
+              <div class="mfld"><label>Change Password</label><input type="password" id="settOldPw" placeholder="Current password"></div>
+              <div class="mfld"><label>New Password</label><input type="password" id="settNewPw" placeholder="New password (8+ chars)"></div>
+              <div class="mfld"><label>Confirm New Password</label><input type="password" id="settNewPw2" placeholder="Repeat new password"></div>
+              <button class="abtn" id="settSavePwBtn" style="width:100%">Update Password</button>
+            </div>
+          </div>
+          <!-- Platform Stats Snapshot -->
+          <div class="card">
+            <div class="ch"><h3>&#128202; Platform Snapshot</h3><button class="abtn cbtn" id="settRefreshStats" style="padding:5px 10px;font-size:11px">Refresh</button></div>
+            <div style="padding:16px" id="settStats"><div class="spin"></div></div>
+          </div>
+          <!-- Danger Zone -->
+          <div class="card" style="border-color:rgba(239,68,68,.2)">
+            <div class="ch"><h3 style="color:#ef4444">&#9888; Danger Zone</h3></div>
+            <div style="padding:16px">
+              <div style="font-size:13px;color:#a0a0b8;margin-bottom:14px">Irreversible actions. Use with caution.</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <button class="btn brdn" style="justify-content:flex-start;width:100%;padding:10px 14px" onclick="dangerAction('clearLogs')">&#128465; Clear Communication Logs (older than 90 days)</button>
+                <button class="btn brdn" style="justify-content:flex-start;width:100%;padding:10px 14px" onclick="dangerAction('clearFailedPayments')">&#128465; Clear Failed Payment Logs</button>
+              </div>
+              <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(239,68,68,.15);">
+                <div style="font-size:12px;color:#606078;margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Delete by Category</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                  <select id="deleteCategorySelect" style="flex:1;min-width:180px;padding:10px 12px;background:#18181d;border:1px solid #2a2a38;border-radius:8px;color:#f0f0f4;font-size:13px;">
+                    <option value="">-- Select category --</option>
+                    <option value="approaches">Approaches</option>
+                    <option value="posts">Posts / Requests</option>
+                    <option value="experts">Experts (users)</option>
+                    <option value="clients">Clients (users)</option>
+                    <option value="ratings">Ratings & Reviews</option>
+                    <option value="chats">Chats</option>
+                    <option value="tickets">Support Tickets</option>
+                    <option value="notifications">Notifications</option>
+                    <option value="credits">Credit Transactions</option>
+                    <option value="payments">Payments / Transactions</option>
+                  </select>
+                  <button onclick="deleteCategoryData()" style="padding:10px 18px;background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3);border-radius:8px;cursor:pointer;font-weight:700;font-size:13px;white-space:nowrap;">🗑 Delete Selected</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Website Visits Card -->
+          <div class="card">
+            <div class="ch">
+              <h3>🌐 Website Visits</h3>
+              <button class="abtn cbtn" onclick="loadVisitStats()" style="padding:5px 10px;font-size:11px">Refresh</button>
+            </div>
+            <div style="padding:16px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+                <div style="background:#18181d;border-radius:10px;padding:14px 16px;">
+                  <div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">All Time</div>
+                  <div style="font-size:24px;font-weight:800;color:#FC8019;" id="visitTotal">—</div>
+                </div>
+                <div style="background:#18181d;border-radius:10px;padding:14px 16px;">
+                  <div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Today</div>
+                  <div style="font-size:24px;font-weight:800;color:#22c55e;" id="visitToday">—</div>
+                </div>
+                <div style="background:#18181d;border-radius:10px;padding:14px 16px;">
+                  <div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Last 7 Days</div>
+                  <div style="font-size:24px;font-weight:800;color:#3b82f6;" id="visitWeek">—</div>
+                </div>
+                <div style="background:#18181d;border-radius:10px;padding:14px 16px;">
+                  <div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Last 30 Days</div>
+                  <div style="font-size:24px;font-weight:800;color:#a855f7;" id="visitMonth">—</div>
+                </div>
+              </div>
+              <!-- Device breakdown -->
+              <div style="font-size:11px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">📱 Device Type</div>
+              <div id="visitDevices" style="display:flex;gap:10px;margin-bottom:20px;">
+                <div style="flex:1;background:#18181d;border-radius:10px;padding:12px;text-align:center;">
+                  <div style="font-size:22px;margin-bottom:4px;">📱</div>
+                  <div style="font-size:18px;font-weight:800;color:#3b82f6;" id="visitMobile">—</div>
+                  <div style="font-size:11px;color:#606078;margin-top:2px;">Mobile</div>
+                </div>
+                <div style="flex:1;background:#18181d;border-radius:10px;padding:12px;text-align:center;">
+                  <div style="font-size:22px;margin-bottom:4px;">🖥️</div>
+                  <div style="font-size:18px;font-weight:800;color:#22c55e;" id="visitDesktop">—</div>
+                  <div style="font-size:11px;color:#606078;margin-top:2px;">Desktop</div>
+                </div>
+              </div>
+
+              <!-- Top pages -->
+              <div style="font-size:11px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🔗 Top Pages</div>
+              <div id="visitPages" style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px;max-height:160px;overflow-y:auto;">
+                <div style="font-size:13px;color:#606078;">Loading...</div>
+              </div>
+
+              <!-- By state -->
+              <div style="font-size:11px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">📍 Visits by State</div>
+              <div id="visitStates" style="display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;">
+                <div style="font-size:13px;color:#606078;">Loading...</div>
+              </div>
+
+              <!-- See More toggle -->
+              <div style="margin-top:16px;text-align:center;">
+                <button id="visitSeeMoreBtn" onclick="toggleVisitDetails()" style="padding:7px 20px;border:1px solid rgba(252,128,25,0.4);border-radius:8px;background:rgba(252,128,25,0.08);color:#FC8019;font-size:13px;font-weight:600;cursor:pointer;">
+                  📊 See More Analytics ▾
+                </button>
+              </div>
+
+              <!-- Extended analytics (hidden by default) -->
+              <div id="visitExtended" style="display:none;margin-top:16px;border-top:1px solid #1e1e2e;padding-top:16px;">
+
+                <!-- Unique vs Returning -->
+                <div style="font-size:11px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">👤 Unique vs Returning</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px;">
+                  <div style="background:#18181d;border-radius:10px;padding:12px;text-align:center;">
+                    <div style="font-size:18px;font-weight:800;color:#FC8019;" id="visitUnique">—</div>
+                    <div style="font-size:11px;color:#606078;margin-top:2px;">Unique IPs</div>
+                  </div>
+                  <div style="background:#18181d;border-radius:10px;padding:12px;text-align:center;">
+                    <div style="font-size:18px;font-weight:800;color:#22c55e;" id="visitNew">—</div>
+                    <div style="font-size:11px;color:#606078;margin-top:2px;">New Visitors</div>
+                  </div>
+                  <div style="background:#18181d;border-radius:10px;padding:12px;text-align:center;">
+                    <div style="font-size:18px;font-weight:800;color:#a855f7;" id="visitReturning">—</div>
+                    <div style="font-size:11px;color:#606078;margin-top:2px;">Returning</div>
+                  </div>
+                </div>
+
+                <!-- Browser breakdown -->
+                <div style="font-size:11px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🌐 Browser Type</div>
+                <div id="visitBrowsers" style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px;">
+                  <div style="font-size:13px;color:#606078;">Loading...</div>
+                </div>
+
+                <!-- Traffic source / referrer -->
+                <div style="font-size:11px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🔗 Traffic Source</div>
+                <div id="visitSources" style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px;">
+                  <div style="font-size:13px;color:#606078;">Loading...</div>
+                </div>
+
+                <!-- Country breakdown -->
+                <div style="font-size:11px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🌍 Country Breakdown</div>
+                <div id="visitCountries" style="display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;margin-bottom:20px;">
+                  <div style="font-size:13px;color:#606078;">Loading...</div>
+                </div>
+
+                <!-- Hourly activity -->
+                <div style="font-size:11px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🕐 Most Active Hours (IST)</div>
+                <div id="visitHourly" style="display:flex;flex-direction:column;gap:4px;">
+                  <div style="font-size:13px;color:#606078;">Loading...</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          
+          <!-- Download Reports -->
+          <div class="card">
+            <div class="ch"><h3>&#128229; Download Reports</h3></div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:10px">
+              <button id="dlExperts" data-label="&#128229; Experts" class="btn bgho" style="justify-content:flex-start;gap:12px;padding:12px 14px;text-align:left">
+                <span>&#128188;</span><span><strong>Experts</strong><br><small style="color:#606078;font-weight:400">Name, Email, Phone, Credits, Rating, Status, Joined</small></span>
+              </button>
+              <button id="dlClients" data-label="&#128229; Clients" class="btn bgho" style="justify-content:flex-start;gap:12px;padding:12px 14px;text-align:left">
+                <span>&#128101;</span><span><strong>Clients</strong><br><small style="color:#606078;font-weight:400">Name, Email, Phone, Credits, Rating, Status, Joined</small></span>
+              </button>
+              <button id="dlApproaches" data-label="&#128229; Approaches" class="btn bgho" style="justify-content:flex-start;gap:12px;padding:12px 14px;text-align:left">
+                <span>&#127919;</span><span><strong>Approaches</strong><br><small style="color:#606078;font-weight:400">Expert, Client, Request, Quote, Credits, Status, Date</small></span>
+              </button>
+              <button id="dlPosts" data-label="&#128229; Posts" class="btn bgho" style="justify-content:flex-start;gap:12px;padding:12px 14px;text-align:left">
+                <span>&#128221;</span><span><strong>Posts / Requests</strong><br><small style="color:#606078;font-weight:400">Title, Client, Service, Budget, Status, Credits, Date</small></span>
+              </button>
+              <button id="dlCredits" data-label="&#128229; Credits" class="btn bgho" style="justify-content:flex-start;gap:12px;padding:12px 14px;text-align:left">
+                <span>&#128142;</span><span><strong>Credit Transactions</strong><br><small style="color:#606078;font-weight:400">Expert, Type, Amount, Balance, Description, Date</small></span>
+              </button>
+            </div>
+          </div>
+        <!-- API Info -->
+          <div class="card">
+            <div class="ch"><h3>&#128279; Integration Info</h3></div>
+            <div style="padding:16px">
+              <div class="mfld"><label>Backend API URL</label><input type="text" id="settApiUrl" readonly onclick="this.select()"></div>
+              <div class="mfld"><label>Admin Version</label><input type="text" value="WorkIndex Admin v3.1" readonly></div>
+              <div style="font-size:12px;color:#606078;margin-top:8px">Files: admin.html · admin.css · admin-app.js · routes/admin.js</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sec" id="sec-reports">
+        <div class="card"><div class="ch"><h3>📋 Reports</h3></div>
+          <div class="tw"><table><thead><tr>
+            <th>Reporter</th><th>Reported User</th><th>User Status</th><th>Category</th><th>Message</th><th>Date</th><th>Request</th><th>Actions</th>
+          </tr></thead><tbody id="reportsTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-suspReq">
+        <div class="card"><div class="ch"><h3>🚩 Suspended Requests</h3></div>
+          <div class="tw"><table><thead><tr>
+            <th>Title</th><th>Client</th><th>Service</th><th>Reports</th><th>Suspended</th><th>Actions</th>
+          </tr></thead><tbody id="suspReqTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-admins"></div>
+<div class="sec" id="sec-emailNotifications"></div>
+      <div class="sec" id="sec-seo"></div> 
+      <div class="sec" id="sec-serviceCategories"></div>
+      <div class="sec" id="sec-revenue">
+        <div id="revSummary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px;"></div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="ch" style="flex-wrap:wrap;gap:10px;">
+            <h3>Revenue Over Time</h3>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <select id="revPeriod" style="padding:7px 12px;background:#18181d;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#f0f0f4;font-size:13px;">
+                <option value="day">Daily</option>
+                <option value="week">Weekly</option>
+                <option value="month" selected>Monthly</option>
+              </select>
+              <select id="revChartType" style="padding:7px 12px;background:#18181d;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#f0f0f4;font-size:13px;">
+                <option value="bar">Bar Chart</option>
+                <option value="line">Line Chart</option>
+              </select>
+              <button class="abtn" onclick="loadRevenue()">Refresh</button>
+            </div>
+          </div>
+          <div style="padding:16px 0 0;">
+            <div id="revChartWrap" style="position:relative;height:260px;width:100%;overflow:hidden;">
+              <canvas id="revChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch" style="flex-wrap:wrap;gap:10px;">
+            <h3>By Service Category</h3>
+            <select id="revSvcPeriod" style="padding:7px 12px;background:#18181d;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#f0f0f4;font-size:13px;">
+              <option value="all" selected>All Time</option>
+              <option value="month">This Month</option>
+              <option value="week">This Week</option>
+              <option value="day">Today</option>
+            </select>
+            <select id="revSvcChartType" style="padding:7px 12px;background:#18181d;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#f0f0f4;font-size:13px;">
+              <option value="bar">Bar Chart</option>
+              <option value="pie">Pie Chart</option>
+            </select>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px 0 0;align-items:start;">
+            <div id="revSvcChartWrap" style="position:relative;height:260px;">
+              <canvas id="revSvcChart"></canvas>
+            </div>
+            <div id="revSvcTable"></div>
+          </div>
+        </div>
+      </div>
+ <div class="sec" id="sec-audit">
+        <div class="card" style="margin-bottom:16px">
+          <div class="ch" style="flex-wrap:wrap;gap:10px;">
+            <h3>📜 Audit Log <span id="auditTotal" style="font-size:12px;color:#606078;margin-left:6px;font-weight:400"></span></h3>
+            <button class="btn bgho" onclick="exportAuditCSV()" style="font-size:12px;padding:6px 12px">⬇ Export CSV</button>
+          </div>
+          <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:8px">
+            <select id="auditAction" onchange="loadAudit()" style="padding:7px 10px;background:#18181d;border:1px solid #2a2a38;border-radius:6px;color:#a0a0b8;font-size:13px">
+              <option value="all">All Actions</option>
+              <option value="login">login</option>
+              <option value="signup">signup</option>
+<option value="profile_updated">profile_updated</option>
+              <option value="request_created">request_created</option>
+              <option value="approach_submitted">approach_submitted</option>
+              <option value="approach_accepted">approach_accepted</option>
+              <option value="approach_rejected">approach_rejected</option>
+              <option value="service_completed">service_completed</option>
+              <option value="ticket_followup">ticket_followup</option>
+              <option value="ticket_canned_response">ticket_canned_response</option>
+              <option value="admin_credit_adjusted">admin_credit_adjusted</option>
+<option value="admin_password_reset">admin_password_reset</option>
+<option value="admin_user_action">admin_user_action</option>
+<option value="admin_post_edited">admin_post_edited</option>
+<option value="admin_post_deleted">admin_post_deleted</option>
+<option value="admin_review_deleted">admin_review_deleted</option>
+<option value="admin_approach_deleted">admin_approach_deleted</option>
+              <option value="admin_invite_deleted">admin_invite_deleted</option>
+              <option value="credit_purchase">credit_purchase</option>
+              <option value="ticket_refund_approved">ticket_refund_approved</option>
+<option value="ticket_refund_rejected">ticket_refund_rejected</option>
+<option value="ticket_resolved">ticket_resolved</option>
+<option value="suspended_request_restored">suspended_request_restored</option>
+<option value="suspended_request_deleted">suspended_request_deleted</option>
+              <option value="request_cancelled">request_cancelled</option>
+              <option value="request_edited">request_edited</option>
+            </select>
+            <select id="auditRole" onchange="loadAudit()" style="padding:7px 10px;background:#18181d;border:1px solid #2a2a38;border-radius:6px;color:#a0a0b8;font-size:13px">
+              <option value="all">All Roles</option>
+              <option value="expert">Expert</option>
+              <option value="client">Client</option>
+              <option value="admin">Admin</option>
+            </select>
+            <input id="auditSearch" oninput="loadAudit()" placeholder="Search name / action..." style="padding:7px 10px;background:#18181d;border:1px solid #2a2a38;border-radius:6px;color:#f0f0f4;font-size:13px;min-width:180px;outline:none">
+            <input id="auditFrom" type="date" onchange="loadAudit()" style="padding:7px 10px;background:#18181d;border:1px solid #2a2a38;border-radius:6px;color:#a0a0b8;font-size:13px">
+            <input id="auditTo" type="date" onchange="loadAudit()" style="padding:7px 10px;background:#18181d;border:1px solid #2a2a38;border-radius:6px;color:#a0a0b8;font-size:13px">
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead>
+              <tr style="background:#18181d;color:#606078;font-size:11px;text-transform:uppercase">
+                <th style="padding:10px 12px;text-align:left">Actor</th>
+                <th style="padding:10px 12px;text-align:left">Action</th>
+                <th style="padding:10px 12px;text-align:left">Target Type</th>
+                <th style="padding:10px 12px;text-align:left">Target</th>
+                <th style="padding:10px 12px;text-align:left">Time</th>
+                <th style="padding:10px 12px;text-align:left">Details</th>
+              </tr>
+            </thead>
+            <tbody id="auditTbody">
+              <tr><td colspan="6" style="text-align:center;padding:30px;color:#606078">Navigate to Audit Log to load events</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="sec" id="sec-actions">
+        <div class="card"><div class="ch"><h3>User Actions</h3><div class="fbar">
+          <input type="text" id="acSrch" placeholder="Search any user..." style="width:200px">
+          <select id="acRole"><option value="all">All</option><option value="expert">Experts</option><option value="client">Clients</option></select>
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Status</th><th>Warns</th><th>Actions</th></tr></thead><tbody id="acTbl"></tbody></table></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ov" id="ov1"></div>
+<div class="dr" id="dr1">
+  <div class="drh"><h3 id="drT">Profile</h3><button class="drx" id="drClose">&#215;</button></div>
+  <div class="drtabs" id="drTabs"></div>
+  <div class="drb" id="drB"></div>
+</div>
+<div class="ov" id="ov2"></div>
+<div class="dr" id="dr2">
+  <div class="drh"><h3 id="chDrT">Chat</h3><button class="drx" id="chDrClose">&#215;</button></div>
+  <div class="drb"><div id="chDrMeta" style="margin-bottom:12px"></div><div class="chatbox" id="chDrMsgs"></div></div>
+</div>
+
+
+
+<!-- CREDIT ADJUST MODAL -->
+<div class="modal-bg" id="creditModal">
+  <div class="modal">
+    <div class="modal-h"><h3>Adjust Credits</h3><button class="modal-x" data-close="creditModal">&#215;</button></div>
+    <div class="modal-b">
+      <div id="creditModalInfo" style="margin-bottom:14px;padding:12px;background:#18181d;border-radius:8px;font-size:13px"></div>
+      <div class="mfld"><label>Action</label>
+        <select id="creditAction">
+          <option value="add">Add Credits</option>
+          <option value="deduct">Deduct Credits</option>
+          <option value="set">Set to Exact Amount</option>
+        </select>
+      </div>
+      <div class="mfld"><label>Amount</label><input type="number" id="creditAmount" placeholder="0" min="0"></div>
+      <div class="mfld"><label>Reason</label><textarea id="creditReason" rows="2" placeholder="Reason for adjustment..."></textarea></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="creditModal">Cancel</button>
+      <button class="btn bpri" id="creditSubmit">Apply</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESET PASSWORD MODAL -->
+<div class="modal-bg" id="pwModal">
+  <div class="modal">
+    <div class="modal-h"><h3>Reset Password</h3><button class="modal-x" data-close="pwModal">&#215;</button></div>
+    <div class="modal-b">
+      <div id="pwModalInfo" style="margin-bottom:14px;font-size:13px;color:#a0a0b8"></div>
+      <div class="mfld"><label>New Password</label><input type="password" id="newPw" placeholder="Min 8 characters"></div>
+      <div class="mfld"><label>Confirm Password</label><input type="password" id="newPw2" placeholder="Repeat password"></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="pwModal">Cancel</button>
+      <button class="btn bpri" id="pwSubmit">Reset Password</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT POST MODAL -->
+<div class="modal-bg" id="postModal">
+  <div class="modal">
+    <div class="modal-h"><h3>Edit Post</h3><button class="modal-x" data-close="postModal">&#215;</button></div>
+    <div class="modal-b">
+      <div class="mfld"><label>Title</label><input type="text" id="postTitle"></div>
+      <div class="mfld"><label>Description</label><textarea id="postDesc" rows="4"></textarea></div>
+      <div class="mfld"><label>Status</label>
+        <select id="postStatus"><option value="">-- Keep current status --</option><option value="open">Open</option><option value="pending">Pending</option><option value="closed">Closed</option><option value="flagged">Flagged</option></select>
+      </div>
+      <div class="mfld"><label>Credits Required</label><input type="number" id="postCredits"></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="postModal">Cancel</button>
+      <button class="btn brdn" id="deletePostBtn">Delete Post</button>
+      <button class="btn bpri" id="savePostBtn">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- TICKET DETAIL MODAL -->
+<div class="modal-bg" id="ticketModal">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-h"><h3 id="tkModalTitle">Ticket Details</h3><button class="modal-x" data-close="ticketModal">&#215;</button></div>
+    <div class="modal-b" id="tkModalBody"></div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="ticketModal">Close</button>
+      <button class="btn bgrn" id="tkApproveBtn" style="display:none">Approve Refund</button>
+      <button class="btn brdn" id="tkRejectBtn" style="display:none">Reject</button>
+      <button class="btn bpri" id="tkResolveBtn" style="display:none">Mark Resolved</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- TICKET CREATE MODAL (admin creates on behalf of user) -->
+<div class="modal-bg" id="tkCreateModal">
+  <div class="modal" style="max-width:580px">
+    <div class="modal-h"><h3>&#127915; Create Ticket</h3><button class="modal-x" data-close="tkCreateModal">&#215;</button></div>
+    <div class="modal-b">
+      <div id="tkCreateFor" style="padding:10px 12px;background:#18181d;border-radius:8px;margin-bottom:14px;font-size:13px"></div>
+      <!-- Step 1: Category -->
+      <div id="tkStep1">
+        <div style="font-size:12px;font-weight:700;color:#606078;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Select Category &amp; Issue</div>
+        <div class="tk-cat-list" id="tkCatList"></div>
+      </div>
+      <!-- Step 2: Details -->
+      <div id="tkStep2" style="display:none">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+          <button class="btn bgho" onclick="tkGoBack()" style="padding:5px 10px">&#8592; Back</button>
+          <div id="tkSelectedCat" style="font-size:13px;font-weight:600;color:#FC8019"></div>
+        </div>
+        <div class="mfld"><label>Priority</label>
+          <select id="tkPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+            <option value="urgent">🚨 Urgent</option>
+          </select>
+        </div>
+        <div class="mfld"><label>Description</label>
+          <textarea id="tkDescription" rows="4" placeholder="Describe the issue in detail..."></textarea>
+        </div>
+        <div class="mfld"><label>Admin Note (internal)</label>
+          <textarea id="tkAdminNote" rows="2" placeholder="Internal note for admin team..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="tkCreateModal">Cancel</button>
+      <button class="btn bpri" id="tkCreateSubmit" style="display:none" onclick="submitCreateTicket()">&#127915; Create Ticket</button>
+    </div>
+  </div>
+</div>
+
+<!-- DM MODAL -->
+<div class="modal-bg" id="dmModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-h"><h3>&#128172; Direct Message</h3><button class="modal-x" data-close="dmModal">&#215;</button></div>
+    <div class="modal-b">
+      <div id="dmModalInfo" style="margin-bottom:14px;padding:12px;background:#18181d;border-radius:8px;font-size:13px"></div>
+      <div class="mfld"><label>Message</label><textarea id="dmText" rows="5" placeholder="Type your message to this user — will appear in their chat inbox..."></textarea></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="dmModal">Cancel</button>
+      <button class="btn bpri" id="dmSubmit">&#9992; Send Message</button>
+    </div>
+  </div>
+</div>
+
+<!-- KYC VIEWER MODAL -->
+<div class="modal-bg" id="kycModal">
+  <div class="modal" style="max-width:700px">
+    <div class="modal-h"><h3 id="kycModalTitle">&#128196; KYC Documents</h3><button class="modal-x" data-close="kycModal">&#215;</button></div>
+    <div class="modal-b" id="kycModalBody"></div>
+    <div class="mfoot">
+      <button class="btn bgho" data-close="kycModal">Close</button>
+      <button class="btn bgrn" id="kycApproveBtn">&#9989; Approve Expert</button>
+      <button class="btn brdn" id="kycRejectBtn">&#10060; Reject</button>
+    </div>
+  </div>
+</div>
+
+<script src="admin-app.js"></script>
+</body>
+</html>

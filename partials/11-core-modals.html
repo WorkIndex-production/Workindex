@@ -1,0 +1,99 @@
+<div id="ratingModal" class="modal-overlay" onclick="closeRatingModal(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3 class="modal-title">Rate Expert</h3>
+      <p class="modal-subtitle" id="ratingExpertName"></p>
+    </div>
+    <div class="modal-body">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">How was your experience?</div>
+        <div class="rating-stars" style="justify-content: center;">
+          <span class="star large" data-rating="1" onclick="selectRating(1)">★</span>
+          <span class="star large" data-rating="2" onclick="selectRating(2)">★</span>
+          <span class="star large" data-rating="3" onclick="selectRating(3)">★</span>
+          <span class="star large" data-rating="4" onclick="selectRating(4)">★</span>
+          <span class="star large" data-rating="5" onclick="selectRating(5)">★</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Write your review</label>
+        <textarea id="reviewText" rows="4" placeholder="Share details of your experience..."></textarea>
+      </div>
+      <div class="field">
+        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+          <input type="checkbox" id="wouldRecommend" checked style="width: 20px; height: 20px;">
+          <span>I would recommend this expert</span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline" onclick="closeRatingModal()" style="flex: 1;">Cancel</button>
+      <button class="btn-primary" onclick="submitRating()" style="flex: 1;">Submit Review</button>
+    </div>
+  </div>
+</div>
+
+<!-- Credit Purchase Modal -->
+<div id="creditModal" class="modal-overlay" onclick="closeCreditModal(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3 class="modal-title">Purchase Credits</h3>
+      <p class="modal-subtitle">Choose a package that suits you</p>
+    </div>
+    <div class="modal-body">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <label style="cursor: pointer; display: flex; align-items: center; padding: 16px; border: 2px solid var(--border); border-radius: 12px;">
+          <input type="radio" name="creditPack" value="15" data-price="100" data-pack-id="starter" style="margin-right: 12px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 700;">15 Credits - ₹100</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Starter Pack</div>
+          </div>
+        </label>
+
+        <label style="cursor: pointer; display: flex; align-items: center; padding: 16px; border: 2px solid var(--border); border-radius: 12px;">
+          <input type="radio" name="creditPack" value="40" data-price="250" data-pack-id="basic" style="margin-right: 12px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 700;">40 Credits - ₹250</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Basic Pack</div>
+          </div>
+        </label>
+
+        <label style="cursor: pointer; display: flex; align-items: center; padding: 16px; border: 2px solid var(--primary); border-radius: 12px; background: rgba(252, 128, 25, 0.05); position: relative;">
+          <div style="position: absolute; top: -10px; right: 10px; background: var(--primary); color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 700;">⭐ POPULAR</div>
+          <input type="radio" name="creditPack" value="180" data-price="1000" data-pack-id="popular" checked style="margin-right: 12px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 700;">180 Credits - ₹1,000</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Popular Pack</div>
+          </div>
+        </label>
+
+        <label style="cursor: pointer; display: flex; align-items: center; padding: 16px; border: 2px solid var(--border); border-radius: 12px;">
+          <input type="radio" name="creditPack" value="500" data-price="2500" data-pack-id="pro" style="margin-right: 12px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 700;">500 Credits - ₹2,500</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Pro Pack</div>
+          </div>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline" onclick="closeCreditModal()" style="flex: 1;">Cancel</button>
+      <button class="btn-primary" onclick="proceedToPayment()" style="flex: 1;">Proceed to Payment</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- External JavaScript -->
+
+<!-- Questionnaire System -->
+
+
+
+
+<!-- Helper Functions -->
+
+
+     <!-- MY TICKETS PAGE -->

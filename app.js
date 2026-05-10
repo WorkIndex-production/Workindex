@@ -4,7 +4,9 @@
    ═══════════════════════════════════════════════════════════ */
 
 // ─── CONFIGURATION ─── 
-const API_URL = 'https://workindex-production.up.railway.app/api';
+const API_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+  ? 'http://localhost:5000/api'
+  : 'https://workindex-production.up.railway.app/api';
 
 // ─── STATE MANAGEMENT ─── 
 const state = {
@@ -243,6 +245,9 @@ async function login(email, password, role) {  // ← accept role as parameter
       state.user = data.user;
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
+      if (data.user?.role === 'expert' && data.user?._id) {
+        sessionStorage.removeItem('expertProfilePromptSkipped_' + data.user._id);
+      }
       
       enterDashboard();
     } else {
@@ -307,6 +312,7 @@ function enterDashboard() {
     }
   }).catch(err => console.error('[/me failed]', err)).finally(() => {
     setTimeout(() => showWarningPopupIfNeeded(), 600);
+    setTimeout(() => showExpertProfileCompletionPromptIfNeeded(), 1000);
   });
    
   // Show service filter modal for new experts
@@ -1758,7 +1764,7 @@ async function proceedToPayment() {
       currency: data.currency,
       name: 'WorkIndex',
       description: `${data.prefill.credits} Credits`,
-      image: '/logo.png',        // your logo path — update if different
+      image: '/favicon.png',
       order_id: data.orderId,
       // Step 3: After user pays, Razorpay calls this handler
       handler: async function (response) {
@@ -2684,7 +2690,45 @@ function formatKey(key) {
 }
 
 // ─── APPROACH CLIENT ───
+function getCurrentExpertProfileStrength() {
+  if (!state.user || state.user.role !== 'expert' || typeof calculateProfileStrength !== 'function') return 100;
+  const result = calculateProfileStrength(state.user, state.user.profile || {});
+  return result && typeof result.total === 'number' ? result.total : 0;
+}
+
+function showProfileStrengthRequiredModal(score) {
+  const existing = document.getElementById('expertProfilePromptModal');
+  if (existing) existing.remove();
+  const modal = document.createElement('div');
+  modal.id = 'expertProfilePromptModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px;';
+  modal.innerHTML =
+    '<div style="width:min(440px,100%);background:var(--bg);border:1px solid var(--border);border-radius:8px;box-shadow:0 18px 48px rgba(0,0,0,.25);padding:22px;">' +
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;">' +
+        '<div>' +
+          '<div style="font-size:12px;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Profile score ' + score + '%</div>' +
+          '<h3 style="margin:0;font-size:21px;line-height:1.25;color:var(--text);">Complete at least 50% profile to approach clients</h3>' +
+        '</div>' +
+        '<button type="button" onclick="dismissExpertProfilePrompt()" style="border:0;background:transparent;color:var(--text-muted);font-size:24px;line-height:1;cursor:pointer;">&times;</button>' +
+      '</div>' +
+      '<p style="margin:0 0 16px;color:var(--text-muted);font-size:14px;line-height:1.6;">Clients trust approaches more when the expert profile has enough detail. Add your bio, specialization, location, and professional proof before sending quotes.</p>' +
+      '<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;">' +
+        '<button type="button" class="btn btn-secondary" onclick="dismissExpertProfilePrompt()">Close</button>' +
+        '<button type="button" class="btn btn-primary" onclick="goToExpertProfileFromPrompt()">Go to Profile</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(modal);
+}
+
+function ensureExpertCanApproach() {
+  const score = getCurrentExpertProfileStrength();
+  if (score >= 50) return true;
+  showProfileStrengthRequiredModal(score);
+  return false;
+}
+
 function approachClient(requestId) {
+  if (!ensureExpertCanApproach()) return;
   const modal = document.getElementById('approachModal');
   modal.dataset.requestId = requestId;
   document.getElementById('approachMessage').value = '';
@@ -3990,6 +4034,41 @@ async function requestDocumentAccess(documentId, clientId, requestId) {
 }
 
 // ─── LOAD SETTINGS ─── 
+function wireNotificationToggle(toggleId, prefKey, enabledText, disabledText) {
+  const toggle = document.getElementById(toggleId);
+  if (!toggle || !state.user) return;
+  const notifPrefs = state.user.preferences && state.user.preferences.notifications;
+  const prefValue = notifPrefs && notifPrefs[prefKey];
+  toggle.checked = prefValue !== false;
+  toggle.onchange = async function() {
+    const enabled = this.checked;
+    try {
+      const res = await fetch(`${API_URL}/users/preferences`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${state.token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ notifications: { [prefKey]: enabled } })
+      });
+      const data = await res.json();
+      if (data.success) {
+        if (!state.user.preferences) state.user.preferences = {};
+        if (!state.user.preferences.notifications) state.user.preferences.notifications = {};
+        state.user.preferences.notifications[prefKey] = enabled;
+        localStorage.setItem('user', JSON.stringify(state.user));
+        showToast(enabled ? enabledText : disabledText, 'success');
+      } else {
+        showToast('Failed to save preference', 'error');
+        this.checked = !enabled;
+      }
+    } catch(err) {
+      showToast('Network error', 'error');
+      this.checked = !enabled;
+    }
+  };
+}
+
 function loadSettings() {
   const darkModeToggle = document.getElementById('darkModeToggle');
   if (darkModeToggle) {
@@ -3997,7 +4076,7 @@ function loadSettings() {
   }
 // Load email notification preference
   const emailToggle = document.getElementById('emailNotif');
-  if (emailToggle && state.user) {
+  if (false && emailToggle && state.user) {
     // Check from state.user.preferences first
     const emailPref = state.user.preferences &&
                       state.user.preferences.notifications &&
@@ -4293,6 +4372,64 @@ function getStrengthLabel(pct) {
   if (pct >= 50) return { label: 'Good',   color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' };
   if (pct >= 30) return { label: 'Fair',   color: '#f97316', bg: 'rgba(249,115,22,0.12)' };
   return                { label: 'Starter', color: '#ef4444', bg: 'rgba(239,68,68,0.12)' };
+}
+
+function showExpertProfileCompletionPromptIfNeeded() {
+  if (!state.user || state.user.role !== 'expert') return;
+  if (document.getElementById('expertProfilePromptModal')) return;
+  if (sessionStorage.getItem('expertProfilePromptSkipped_' + state.user._id) === 'true') return;
+  if (typeof calculateProfileStrength !== 'function') return;
+
+  const profile = state.user.profile || {};
+  const result = calculateProfileStrength(state.user, profile);
+  if (!result || result.total >= 50) return;
+
+  const missing = [];
+  Object.keys(result.scores || {}).forEach(key => {
+    (result.scores[key].items || []).forEach(item => {
+      if (!item.done && missing.length < 3) missing.push(item.label);
+    });
+  });
+
+  const modal = document.createElement('div');
+  modal.id = 'expertProfilePromptModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px;';
+  modal.innerHTML =
+    '<div style="width:min(440px,100%);background:var(--bg);border:1px solid var(--border);border-radius:8px;box-shadow:0 18px 48px rgba(0,0,0,.25);padding:22px;">' +
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;">' +
+        '<div>' +
+          '<div style="font-size:12px;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Profile score ' + result.total + '%</div>' +
+          '<h3 style="margin:0;font-size:21px;line-height:1.25;color:var(--text);">Complete at least 50% profile to approach clients</h3>' +
+        '</div>' +
+        '<button type="button" onclick="dismissExpertProfilePrompt()" style="border:0;background:transparent;color:var(--text-muted);font-size:24px;line-height:1;cursor:pointer;">&times;</button>' +
+      '</div>' +
+      '<p style="margin:0 0 14px;color:var(--text-muted);font-size:14px;line-height:1.6;">Clients trust approaches more when the expert profile has enough detail. Add a few trust details before sending quotes.</p>' +
+      (missing.length ? '<div style="background:var(--bg-gray);border-radius:8px;padding:12px 14px;margin-bottom:16px;"><div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px;">Suggested next steps</div>' + missing.map(item => '<div style="font-size:13px;color:var(--text-muted);padding:3px 0;">- ' + item + '</div>').join('') + '</div>' : '') +
+      '<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;">' +
+        '<button type="button" class="btn btn-secondary" onclick="dismissExpertProfilePrompt()">Skip</button>' +
+        '<button type="button" class="btn btn-primary" onclick="goToExpertProfileFromPrompt()">Go to Profile</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(modal);
+}
+
+function dismissExpertProfilePrompt() {
+  if (state.user && state.user._id) {
+    sessionStorage.setItem('expertProfilePromptSkipped_' + state.user._id, 'true');
+  }
+  wireNotificationToggle('emailNotif', 'email', 'Email notifications enabled', 'Email notifications disabled');
+  wireNotificationToggle('smsNotif', 'sms', 'SMS notifications enabled', 'SMS notifications disabled');
+  wireNotificationToggle('newPostNotif', 'newPosts', 'New request emails enabled', 'New request emails disabled');
+  const newPostRow = document.getElementById('newPostNotifRow');
+  if (newPostRow) newPostRow.style.display = state.user && state.user.role === 'expert' ? 'flex' : 'none';
+  const modal = document.getElementById('expertProfilePromptModal');
+  if (modal) modal.remove();
+}
+
+function goToExpertProfileFromPrompt() {
+  dismissExpertProfilePrompt();
+  showPage('expertDash');
+  switchTab('profile');
 }
 
 function renderStrengthMeter(user, profile) {
@@ -5551,6 +5688,7 @@ const SEARCH_SUGGESTIONS = {
 };
 
 let searchTimeout = null;
+let landingLocationTimeout = null;
 
 function handleExpertSearch(value) {
   clearTimeout(searchTimeout);
@@ -5633,12 +5771,116 @@ function hideSearchSuggestions() {
   if (el) el.style.display = 'none';
 }
 // ─── LANDING SEARCH ───
+function escapeLandingSuggestion(value) {
+  return String(value || '').replace(/&/g, '&amp;').replace(/'/g, '&#39;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function landingSuggestionRow(item, handlerName) {
+  return '<div onmousedown="' + handlerName + '(\'' + escapeLandingSuggestion(item.value) + '\',\'' + escapeLandingSuggestion(item.type) + '\',\'' + escapeLandingSuggestion(item.label) + '\')" ' +
+    'style="padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);">' +
+      '<span style="font-size:16px;">' + (item.icon || '') + '</span>' +
+      '<div><div style="font-size:14px;font-weight:700;color:var(--text);">' + item.label + '</div>' +
+      '<div style="font-size:11px;color:var(--text-muted);">' + item.typeLabel + '</div></div>' +
+    '</div>';
+}
+
+function getLandingServiceList() {
+  if (typeof WI_SERVICES !== 'undefined' && Array.isArray(WI_SERVICES.list)) return WI_SERVICES.list;
+  if (typeof SEARCH_SUGGESTIONS !== 'undefined' && Array.isArray(SEARCH_SUGGESTIONS.services)) return SEARCH_SUGGESTIONS.services;
+  return [];
+}
+
+function showLandingServiceSuggestions(value) {
+  const el = document.getElementById('landingServiceSuggestions');
+  if (!el) return;
+  const input = document.getElementById('landingServiceInput');
+  if (input) delete input.dataset.service;
+  const lower = String(value || '').trim().toLowerCase();
+  const items = getLandingServiceList()
+    .filter(s => !lower || s.label.toLowerCase().includes(lower) || String(s.value).includes(lower))
+    .slice(0, 6)
+    .map(s => ({ label: s.label, value: s.value, type: 'service', typeLabel: 'Service', icon: '-' }));
+  if (!items.length) { el.style.display = 'none'; return; }
+  el.innerHTML = items.map(item => landingSuggestionRow(item, 'selectLandingServiceSuggestion')).join('');
+  el.style.display = 'block';
+}
+
+function selectLandingServiceSuggestion(value, type, label) {
+  const input = document.getElementById('landingServiceInput');
+  if (input) {
+    input.value = label || value;
+    input.dataset.service = value;
+  }
+  const el = document.getElementById('landingServiceSuggestions');
+  if (el) el.style.display = 'none';
+}
+
+function handleLandingLocationInput(value) {
+  clearTimeout(landingLocationTimeout);
+  landingLocationTimeout = setTimeout(() => loadLandingLocationSuggestions(value || ''), 180);
+}
+
+async function loadLandingLocationSuggestions(value) {
+  const el = document.getElementById('landingLocationSuggestions');
+  if (!el) return;
+  try {
+    const q = encodeURIComponent(String(value || '').trim());
+    const res = await fetch(API_URL + '/users/location-suggestions?q=' + q);
+    const data = await res.json();
+    const items = (data.suggestions || []).slice(0, 6).map(s => ({
+      label: s.label,
+      value: s.value,
+      type: s.type,
+      typeLabel: s.type === 'pincode' ? 'Pincode' : 'City',
+      icon: s.type === 'pincode' ? '#' : '-'
+    }));
+    if (!items.length) { el.style.display = 'none'; return; }
+    el.innerHTML = items.map(item => landingSuggestionRow(item, 'selectLandingLocationSuggestion')).join('');
+    el.style.display = 'block';
+  } catch (err) {
+    el.style.display = 'none';
+  }
+}
+
+function selectLandingLocationSuggestion(value, type, label) {
+  const input = document.getElementById('landingLocationInput');
+  if (input) input.value = value || label;
+  const el = document.getElementById('landingLocationSuggestions');
+  if (el) el.style.display = 'none';
+}
+
+function initLandingSearchSuggestions() {
+  const serviceInput = document.getElementById('landingServiceInput');
+  const locationInput = document.getElementById('landingLocationInput');
+
+  if (serviceInput && !serviceInput.dataset.suggestionsBound) {
+    serviceInput.dataset.suggestionsBound = '1';
+    serviceInput.addEventListener('focus', () => showLandingServiceSuggestions(serviceInput.value));
+    serviceInput.addEventListener('input', () => showLandingServiceSuggestions(serviceInput.value));
+  }
+
+  if (locationInput && !locationInput.dataset.suggestionsBound) {
+    locationInput.dataset.suggestionsBound = '1';
+    locationInput.addEventListener('focus', () => handleLandingLocationInput(locationInput.value));
+    locationInput.addEventListener('input', () => handleLandingLocationInput(locationInput.value));
+  }
+}
+
+window.showLandingServiceSuggestions = showLandingServiceSuggestions;
+window.selectLandingServiceSuggestion = selectLandingServiceSuggestion;
+window.handleLandingLocationInput = handleLandingLocationInput;
+window.selectLandingLocationSuggestion = selectLandingLocationSuggestion;
+document.addEventListener('DOMContentLoaded', initLandingSearchSuggestions);
+window.addEventListener('workindex:ready', initLandingSearchSuggestions);
+setTimeout(initLandingSearchSuggestions, 0);
+
 function landingSearch() {
-  const service = document.getElementById('landingServiceInput')?.value.trim().toLowerCase();
+  const serviceInput = document.getElementById('landingServiceInput');
+  const service = serviceInput?.value.trim().toLowerCase();
   const location = document.getElementById('landingLocationInput')?.value.trim();
 
   const serviceMap = WI_SERVICES.searchAliases;
-  const mappedService = serviceMap[service] || null;
+  const mappedService = serviceInput?.dataset.service || serviceMap[service] || null;
 
   // Store so findProfessionals page can pick it up
   state.pendingSearch = { service: mappedService, location: location || null };

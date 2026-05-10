@@ -1,0 +1,171 @@
+<div id="auth" class="page">
+  <div style="display: flex; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border);">
+    <button onclick="showPage('landing')" style="background: none; border: none; color: var(--text); font-size: 24px; cursor: pointer; padding: 0; margin-right: 12px;">←</button>
+    <h2 style="font-size: 18px; font-weight: 700; color: var(--text);">Back to Home</h2>
+  </div>
+
+  <div style="padding: 20px;">
+    <h1 class="section-title">Welcome to WorkIndex</h1>
+    <p class="section-subtitle">Sign in or create an account</p>
+
+    <div class="auth-card" style="max-width: 400px; margin: 40px auto;">
+      <div class="auth-toggle">
+        <button id="loginBtn" class="active" onclick="switchAuthMode('login')">Login</button>
+        <button id="signupBtn" onclick="switchAuthMode('signup')">Sign Up</button>
+      </div>
+
+      <!-- ── LOGIN FORM ── -->
+      <div id="loginForm">
+        <div class="field">
+          <label>Login as</label>
+         <div id="googleLoginBtn" style="width:100%; margin-bottom:16px; min-height:44px;"></div>
+<div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+  <div style="flex:1; height:1px; background:var(--border);"></div>
+  <span style="font-size:12px; color:var(--text-muted); font-weight:500; white-space:nowrap;">or continue with email</span>
+  <div style="flex:1; height:1px; background:var(--border);"></div>
+</div>
+          <div class="role-pick">
+            <div class="role-card active" id="loginRoleClient" onclick="selectLoginRole('client')">
+              <div class="r-icon">👤</div>
+              <div class="r-label">Customer</div>
+            </div>
+            <div class="role-card" id="loginRoleExpert" onclick="selectLoginRole('expert')">
+              <div class="r-icon">⭐</div>
+              <div class="r-label">Professional</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="off">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="new-password"
+            onkeypress="if(event.key==='Enter') handleLogin()">
+        </div>
+
+        <button class="btn-primary" style="width: 100%; margin-bottom: 14px;" onclick="handleLogin()">
+          Login
+        </button>
+
+        <div style="text-align: center;">
+          <button onclick="openForgotPassword()"
+            style="background: none; border: none; color: var(--primary); font-size: 14px; font-weight: 600; cursor: pointer; padding: 4px;">
+            Forgot Password?
+          </button>
+        </div>
+      </div>
+
+      <!-- ── SIGNUP FORM ── -->
+      <div id="signupForm" style="display: none;">
+
+        <!-- Step 1: Details -->
+        <div id="signupStep1">
+          <div id="googleSignupBtn" style="width:100%; margin-bottom:16px; min-height:44px;"></div>
+<div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+  <div style="flex:1; height:1px; background:var(--border);"></div>
+  <span style="font-size:12px; color:var(--text-muted); font-weight:500; white-space:nowrap;">or sign up with email</span>
+  <div style="flex:1; height:1px; background:var(--border);"></div>
+</div>
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" id="signupName" placeholder="John Doe" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="signupEmail" placeholder="your@email.com" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" id="signupPhone" placeholder="9876543210" maxlength="10" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="signupPassword" placeholder="Min 6 characters" autocomplete="new-password">
+          </div>
+          <div class="field">
+            <label>I am a</label>
+            <div class="role-pick">
+              <div class="role-card" id="roleClient" onclick="selectRole('client')">
+                <div class="r-icon">👤</div>
+                <div class="r-label">Client</div>
+              </div>
+              <div class="role-card active" id="roleExpert" onclick="selectRole('expert')">
+                <div class="r-icon">⭐</div>
+                <div class="r-label">Expert</div>
+              </div>
+            </div>
+          </div>
+          
+<div style="margin-bottom: 16px;">
+  <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+    <input type="checkbox" id="termsCheckbox"
+      style="width: 18px; height: 18px; margin-top: 1px; accent-color: var(--primary); flex-shrink: 0; cursor: pointer;"
+      onchange="document.getElementById('signupSubmitBtn').disabled = !this.checked; document.getElementById('signupSubmitBtn').style.opacity = this.checked ? '1' : '0.5';">
+    <span>
+      I have read and agree to the
+      <button type="button" onclick="openTermsModal(selectedRole)"
+        style="background: none; border: none; color: var(--primary); font-size: 13px; font-weight: 700; cursor: pointer; padding: 0; text-decoration: underline;">
+        Terms &amp; Conditions
+      </button>
+    </span>
+  </label>
+</div>
+
+<button id="signupSubmitBtn" class="btn-primary" style="width: 100%; opacity: 0.5;" onclick="handleSignup()" disabled>
+  Send OTP
+</button>
+        </div>
+
+        <!-- Step 2: OTP -->
+        <div id="signupStep2" style="display: none;">
+          <div style="text-align: center; margin-bottom: 28px;">
+            <div style="font-size: 48px; margin-bottom: 12px;">📧</div>
+            <h3 style="font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px;">
+              Check your email
+            </h3>
+            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+              We sent a 6-digit code to<br>
+              <strong id="otpEmailDisplay" style="color: var(--text);"></strong>
+            </p>
+          </div>
+
+          <div class="field">
+            <label>Enter verification code</label>
+            <input type="text" id="signupOTP"
+              placeholder="_ _ _ _ _ _"
+              maxlength="6"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              style="font-size: 28px; letter-spacing: 10px; text-align: center; font-weight: 700; padding: 16px;"
+              onkeypress="if(event.key==='Enter') handleOTPVerify()">
+          </div>
+
+          <button id="verifyOtpBtn" class="btn-primary" style="width: 100%; margin-bottom: 16px;"
+  onclick="handleOTPVerify()">
+            Verify &amp; Create Account
+          </button>
+
+          <div style="text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+            Didn't receive it?&nbsp;
+            <button id="signupResendBtn"
+              style="background: none; border: none; color: var(--primary); font-size: 13px; font-weight: 600; cursor: pointer;">
+              Resend code
+            </button>
+            <span id="signupResendTimer" style="color: var(--text-muted);"></span>
+          </div>
+
+          <button onclick="showSignupStep(1)"
+            style="width: 100%; padding: 10px; background: none; border: 1.5px solid var(--border); border-radius: 10px; color: var(--text); font-size: 14px; cursor: pointer;">
+            ← Change details
+          </button>
+        </div>
+
+      </div><!-- /signupForm -->
+    </div>
+  </div>
+</div>
+<!-- END PART A -->
+<!-- REQUEST CONFIRMATION PAGE -->

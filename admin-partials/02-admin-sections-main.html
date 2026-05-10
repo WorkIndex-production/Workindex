@@ -1,0 +1,117 @@
+<div class="sec on" id="sec-dashboard">
+        <div class="sgrid" id="sgrid"></div>
+        <div class="card"><div class="ch"><h3>Recent Signups</h3></div>
+          <div class="tw"><table><thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Credits</th><th>Joined</th></tr></thead><tbody id="recentTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-heatmap">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+          <div class="card">
+            <div class="ch">
+              <h3>&#127760; Geographic Distribution</h3>
+              <div class="fbar">
+                <select id="hmRole"><option value="expert">Experts</option><option value="client">Clients</option><option value="all">All Users</option></select>
+                <button class="abtn" id="hmRefresh" style="padding:6px 12px">Refresh</button>
+              </div>
+            </div>
+            <div style="padding:16px">
+              <div class="hm-drill" id="hmCrumbs"><span class="hm-crumb" data-level="country">India</span></div>
+              <div id="hmMapArea" style="min-height:200px;display:flex;align-items:center;justify-content:center">
+                <div style="color:#606078;font-size:13px">Loading map...</div>
+              </div>
+              <div class="hm-legend" id="hmLegend"></div>
+              <div id="hmTip" class="hm-tip"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3 id="hmBarTitle">Top States</h3></div>
+            <div style="padding:16px" id="hmBars"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec" id="sec-experts">
+        <div class="card"><div class="ch"><h3>All Experts</h3><div class="fbar"><input type="text" id="eSrch" placeholder="Search..."></div></div>
+          <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Credits</th><th>Rating</th><th>Score</th><th>Status</th><th>Joined</th><th></th></tr></thead><tbody id="eTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-clients">
+        <div class="card"><div class="ch"><h3>All Clients</h3><div class="fbar"><input type="text" id="cSrch" placeholder="Search..."></div></div>
+          <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Status</th><th>Joined</th><th></th></tr></thead><tbody id="cTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-approaches">
+        <div class="card"><div class="ch"><h3>Approaches</h3><div class="fbar">
+          <select id="apSt"><option value="all">All Status</option><option value="pending">Pending</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select>
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Expert</th><th>Client</th><th>Request</th><th>Quote</th><th>Message</th><th>Credits</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody id="apTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-chats">
+        <div class="card"><div class="ch"><h3>All Conversations</h3></div>
+          <div class="tw"><table><thead><tr><th>Expert</th><th>Client</th><th>Request</th><th>Last Message</th><th>Date</th><th></th></tr></thead><tbody id="chTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-credits">
+        <div class="card"><div class="ch"><h3>Credit Transactions</h3><div class="fbar">
+          <select id="crType"><option value="all">All Types</option><option value="purchase">Purchases</option><option value="spent">Spent</option><option value="refund">Refunds</option><option value="bonus">Bonus</option></select>
+          <input type="text" id="crSrch" placeholder="Expert name..." style="width:160px">
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Expert</th><th>Type</th><th>Amount</th><th>Balance</th><th>Description</th><th>Date</th></tr></thead><tbody id="crTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-refunds"><div id="rfList"></div></div>
+      <div class="sec" id="sec-tickets">
+        <div class="card"><div class="ch"><h3>Support Tickets</h3><div class="fbar">
+          <select id="tkSt"><option value="all">All</option><option value="open">Open</option><option value="pending_review">Pending Review</option><option value="resolved">Resolved</option></select>
+          <input type="text" id="tkSrch" placeholder="Search user..." style="width:160px">
+        </div></div>
+          <div class="tw"><table><thead><tr><th style="width:30px"></th><th>User</th><th>Type</th><th>Subject</th><th>Priority</th><th>Status</th><th>Credits Req</th><th>Date</th><th></th></tr></thead><tbody id="tkTbl"></tbody></table></div>        </div>
+      </div>
+      <div class="sec" id="sec-posts">
+        <div class="card"><div class="ch"><h3>User Posts / Requests</h3><div class="fbar">
+          <input type="text" id="poSrch" placeholder="Search posts..." style="width:185px">
+          <select id="poSt"><option value="all">All Status</option><option value="pending">Pending</option><option value="active">Active</option><option value="completed">Completed</option><option value="closed">Closed</option><option value="cancelled">Cancelled</option></select>
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Title</th><th>Client</th><th>Service</th><th>Budget</th><th>Status</th><th>Credits</th><th>Date</th><th></th></tr></thead><tbody id="poTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-reviews">
+        <div class="card"><div class="ch"><h3>Ratings &amp; Reviews</h3><div class="fbar">
+          <input type="text" id="rvSrch" placeholder="Search expert..." style="width:160px">
+          <select id="rvMin"><option value="0">All Ratings</option><option value="1">1+ Stars</option><option value="1" selected>All</option><option value="3">Below 3 Stars</option></select>
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Expert</th><th>Client</th><th>Rating</th><th>Review</th><th>Date</th><th></th></tr></thead><tbody id="rvTbl"></tbody></table></div>
+        </div>
+      </div>
+      <div class="sec" id="sec-registrations">
+        <div class="card"><div class="ch"><h3>Expert Registrations</h3><div class="fbar">
+          <select id="rgSt"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select>
+        </div></div>
+                    <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Specialization</th><th>KYC Docs</th><th>KYC Status</th><th>Reg Status</th><th>Applied</th><th></th></tr></thead><tbody id="rgTbl"></tbody></table></div>
+        </div>
+      </div>
+           <div class="sec" id="sec-kyc">
+        <div class="card"><div class="ch"><h3>&#128737; KYC Verification Queue</h3><div class="fbar">
+          <select id="kycSt"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
+        </div></div>
+          <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Doc Type</th><th>Submitted</th><th>KYC Status</th><th>Reg Status</th><th>Actions</th></tr></thead><tbody id="kycTbl"></tbody></table></div>
+        </div>
+      </div> 
+      <div class="sec" id="sec-payments">
+        <div class="card">
+          <div class="ch"><h3>Payments</h3></div>
+          <div id="pyFilterBar" style="padding:0 0 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <select id="pyStatusFilter" style="padding:7px 12px;background:#18181d;border:1px solid #2a2a38;border-radius:8px;color:#f0f0f4;font-size:13px;">
+              <option value="all">All Payments</option>
+              <option value="success">✅ Successful</option>
+              <option value="failed">❌ Failed</option>
+              <option value="pending">⏳ Pending</option>
+              <option value="refunded">💸 Refunded</option>
+            </select>
+            <span id="pyCount" style="font-size:13px;color:#606078;"></span>
+          </div>
+          <div class="tw"><table><thead><tr>
+            <th>Expert</th><th>Amount (₹)</th><th>Credits</th><th>Status</th><th>Method</th><th>Instrument</th><th>Razorpay IDs / Reason</th><th>Time</th><th></th>
+          </tr></thead><tbody id="pyTbl"></tbody></table></div>
+        </div>
+      </div>

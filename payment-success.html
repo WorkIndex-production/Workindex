@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Status – WorkIndex</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+    .icon { font-size: 64px; margin-bottom: 20px; }
+    h1 { font-size: 24px; font-weight: 800; color: #3D4152; margin-bottom: 10px; }
+    p  { font-size: 15px; color: #686B78; line-height: 1.6; margin-bottom: 24px; }
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #FC8019;
+      color: #fff;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #e67417; }
+    .status-checking { color: #f59e0b; }
+    .status-success  { color: #22c55e; }
+    .status-failed   { color: #ef4444; }
+  </style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="icon">⏳</div>
+  <h1>Verifying Payment...</h1>
+  <p class="status-checking">Please wait while we confirm your payment with Instamojo.</p>
+</div>
+
+<script>
+  const API_URL = 'http://localhost:5000/api';
+
+  async function checkPaymentStatus() {
+    const params = new URLSearchParams(window.location.search);
+    const requestId = params.get('payment_request_id');
+    const paymentId = params.get('payment_id');
+    const status    = params.get('payment_status');
+
+    const card = document.getElementById('card');
+
+    // Instamojo redirects with payment_status=Credit on success
+    if (status === 'Credit' && requestId) {
+      // Poll backend for up to 10 seconds waiting for webhook
+      let attempts = 0;
+      const interval = setInterval(async () => {
+        attempts++;
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/payment/status/${requestId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const data = await res.json();
+
+          if (data.success && data.status === 'success') {
+            clearInterval(interval);
+            // Update credits in localStorage
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            user.credits = data.newBalance;
+            localStorage.setItem('user', JSON.stringify(user));
+
+            card.innerHTML = `
+              <div class="icon">✅</div>
+              <h1 style="color:#22c55e;">Payment Successful!</h1>
+              <p>${data.credits} credits have been added to your account.<br>New balance: <strong>${data.newBalance} credits</strong></p>
+              <a href="/" class="btn">Go to Dashboard →</a>`;
+          } else if (attempts >= 5) {
+            clearInterval(interval);
+            card.innerHTML = `
+              <div class="icon">⏳</div>
+              <h1>Payment Processing</h1>
+              <p>Your payment was received. Credits will be added within a few minutes.<br><br>If not added in 10 minutes, please raise a support ticket.</p>
+              <a href="/" class="btn">Go to Dashboard →</a>`;
+          }
+        } catch (err) {
+          if (attempts >= 5) clearInterval(interval);
+        }
+      }, 2000);
+
+    } else {
+      // Payment failed or cancelled
+      card.innerHTML = `
+        <div class="icon">❌</div>
+        <h1 style="color:#ef4444;">Payment Failed</h1>
+        <p>Your payment was not completed. No credits were deducted.<br><br>Please try again or contact support if the issue persists.</p>
+        <a href="/" class="btn">Try Again →</a>`;
+    }
+  }
+
+  checkPaymentStatus();
+</script>
+</body>
+</html>
