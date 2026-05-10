@@ -4430,7 +4430,7 @@ function _isStepAnswered(stepId, answers) {
   if (!sessionId) {
     sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     sessionStorage.setItem('wi_session', sessionId);
-    fetch('http://localhost:5000/api/visits/track', {
+    fetch('https://workindex-production.up.railway.app/api/visits/track', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ page: window.location.pathname, sessionId: sessionId })
