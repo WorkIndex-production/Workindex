@@ -5,9 +5,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 // ─── CONFIGURATION ─── 
-const API_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
-  ? 'https://workindex-production.up.railway.app/api'
-  : 'https://workindex-production.up.railway.app/api';
+const API_URL = 'https://workindex-production.up.railway.app/api';
 
 // ─── STATE MANAGEMENT ─── 
 const state = {
@@ -21,14 +19,40 @@ const state = {
   ratings: [],
   experts: [],
   approachedRequests: [],
+  directInviteExpert: null,
   myApproaches: []  // ← NEW: Store expert's approaches
 };
 // ─── INACTIVITY LOGOUT (30 minutes) ───
 const INACTIVITY_TIMEOUT = 30 * 60 * 1000;
+const INACTIVITY_LAST_ACTIVE_KEY = 'wiLastActiveAt';
 let inactivityTimer = null;
+let inactivityWatcherStarted = false;
+
+function clearStoredSession() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  localStorage.removeItem(INACTIVITY_LAST_ACTIVE_KEY);
+  state.token = null;
+  state.user = null;
+}
+
+function clearLoginInputs() {
+  if (typeof clearAuthForms === 'function') clearAuthForms();
+  ['loginEmail', 'loginPassword'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+}
+
+function storedSessionIsExpired() {
+  if (!state.token || !state.user) return false;
+  const lastActive = Number(localStorage.getItem(INACTIVITY_LAST_ACTIVE_KEY) || '0');
+  return lastActive > 0 && Date.now() - lastActive >= INACTIVITY_TIMEOUT;
+}
 
 function resetInactivityTimer() {
   if (!state.token || !state.user) return;
+  localStorage.setItem(INACTIVITY_LAST_ACTIVE_KEY, String(Date.now()));
   clearTimeout(inactivityTimer);
   inactivityTimer = setTimeout(() => {
     handleSessionExpired();
@@ -36,10 +60,17 @@ function resetInactivityTimer() {
 }
 
 function startInactivityWatcher() {
+  if (storedSessionIsExpired()) {
+    handleSessionExpired();
+    return;
+  }
   const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'click'];
-  events.forEach(event => {
-    window.addEventListener(event, resetInactivityTimer, { passive: true });
-  });
+  if (!inactivityWatcherStarted) {
+    events.forEach(event => {
+      window.addEventListener(event, resetInactivityTimer, { passive: true });
+    });
+    inactivityWatcherStarted = true;
+  }
   resetInactivityTimer();
 }
 
@@ -55,13 +86,12 @@ function handleSessionExpired() {
   notificationInterval = null;
   chatPollingInterval = null;
   currentChatId = null;
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
-  state.token = null;
-  state.user  = null;
+  clearStoredSession();
+  clearLoginInputs();
   showToast('Session expired due to inactivity. Please log in again.', 'error');
   setTimeout(() => {
-    showPage('landing');
+    showPage('auth');
+    if (typeof switchAuthMode === 'function') switchAuthMode('login');
   }, 1500);
 }
 
@@ -88,6 +118,13 @@ function toggleDarkMode() {
 
 // ─── NAVIGATION ─── 
 function showPage(pageId, pushState = true) {
+  if (pageId === 'auth' && !state.token) {
+    clearLoginInputs();
+  }
+  if (pageId === 'expertDash' && expertNeedsMandatoryQuestionnaire(state.user)) {
+    startQuestionnaire('expert');
+    return;
+  }
   if (pageId === 'questionnaire') {
     document.getElementById('questionnaire').classList.add('active');
     state.currentPage = pageId;
@@ -209,6 +246,7 @@ function switchTab(tabName) {
     else if (tabName === 'access') loadAccessRequests();
     else if (tabName === 'ratings') loadMyRatings();
     else if (tabName === 'approaches' && isExpert) loadMyApproaches();
+    else if (tabName === 'expertInvites' && isExpert) loadExpertInvites();
     else if (tabName === 'profile' && isExpert) renderExpertProfile();
     else if (tabName === 'chat') showChatList();
     
@@ -231,6 +269,12 @@ function showHowItWorks(type) {
   if (te) te.classList.toggle('active', !isClient);
 }
 // ─── AUTHENTICATION ─── 
+function expertNeedsMandatoryQuestionnaire(user) {
+  if (!user || user.role !== 'expert' || user.questionnaireCompleted) return false;
+  const profile = user.profile || {};
+  return Object.keys(profile).length < 3;
+}
+
 async function login(email, password, role) {  // ← accept role as parameter
   try {
     const res = await fetch(`${API_URL}/auth/login`, {
@@ -246,6 +290,8 @@ async function login(email, password, role) {  // ← accept role as parameter
       state.user = data.user;
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem(INACTIVITY_LAST_ACTIVE_KEY, String(Date.now()));
+      clearLoginInputs();
       if (data.user?.role === 'expert' && data.user?._id) {
         sessionStorage.removeItem('expertProfilePromptSkipped_' + data.user._id);
       }
@@ -275,10 +321,12 @@ async function register(formData) {
   state.user = data.user;
   localStorage.setItem('token', data.token);
   localStorage.setItem('user', JSON.stringify(state.user));
+  localStorage.setItem(INACTIVITY_LAST_ACTIVE_KEY, String(Date.now()));
+  clearLoginInputs();
   
   showToast('Registration successful!', 'success');
 if (state.user.role === 'expert') {
-  showExpertWelcomeModal();
+  startQuestionnaire('expert');
 } else if (!state._guestQuestionnaire) {
   startQuestionnaire(state.user.role);
 } else {
@@ -295,8 +343,18 @@ if (state.user.role === 'expert') {
 }
 
 function enterDashboard() {
+  if (expertNeedsMandatoryQuestionnaire(state.user)) {
+    startQuestionnaire('expert');
+    return;
+  }
   const dashPage = state.user.role === 'client' ? 'clientDash' : 'expertDash';
   showPage(dashPage);
+  if (state.user.role === 'client') {
+    setTimeout(() => {
+      if (typeof checkPendingRatingGate === 'function') checkPendingRatingGate();
+      if (typeof checkStaleRequestConfirmations === 'function') checkStaleRequestConfirmations();
+    }, 700);
+  }
   loadNotifications();
   // Clear any existing interval before creating a new one
   if (notificationInterval) clearInterval(notificationInterval);
@@ -318,14 +376,16 @@ function enterDashboard() {
    
   // Show service filter modal for new experts
   if (state.user.role === 'expert') {
+    if (state.forceExpertProfileTab) return;
     const hasFilter = state.user?.profile?.browseServiceFilter?.length > 0;
+    const offered = state.user?.profile?.servicesOffered || state.user?.profile?.expert_services || [];
     const isNewUser = !localStorage.getItem('hasSeenServiceFilter_' + state.user._id);
-    if (isNewUser || !hasFilter) {
+    if ((isNewUser || !hasFilter) && !offered.length) {
       localStorage.setItem('hasSeenServiceFilter_' + state.user._id, 'true');
       setTimeout(() => showServiceFilterModal(), 800);
     } else {
       // Returning expert — restore their saved filter silently
-      state.browseServiceFilter = state.user.profile.browseServiceFilter;
+      state.browseServiceFilter = hasFilter ? state.user.profile.browseServiceFilter : offered;
     }
   }
 }
@@ -391,11 +451,8 @@ function logout() {
   currentChatId = null;
   if (browseAbortController) browseAbortController.abort();
   if (expertsAbortController) expertsAbortController.abort();
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
-  state.token = null;
-  state.user = null;
-  clearAuthForms();
+  clearStoredSession();
+  clearLoginInputs();
   showPage('landing');
   showToast('Logged out successfully', 'success');
 }

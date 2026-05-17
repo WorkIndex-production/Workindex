@@ -51,6 +51,13 @@ async function handleGoogleCredential(response, context) {
  
   // For signup, use the currently selected role
   const role = context === 'signup' ? (selectedRole || 'client') : undefined;
+  const inviteCode = context === 'signup'
+    ? ((document.getElementById('signupInviteCode')?.value || '').trim().toUpperCase())
+    : undefined;
+  if (context === 'signup' && role === 'expert' && inviteCode && typeof verifyInviteCodeInput === 'function') {
+    const inviteOk = await verifyInviteCodeInput();
+    if (!inviteOk) return;
+  }
  
   try {
     showToast('Connecting with Google...', 'info');
@@ -58,7 +65,7 @@ async function handleGoogleCredential(response, context) {
     const res = await fetch(`${API_URL}/auth/google-init`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ credential, role }),
+      body:    JSON.stringify({ credential, role, inviteCode }),
     });
  
     const data = await res.json();
@@ -77,13 +84,7 @@ async function handleGoogleCredential(response, context) {
  
       showToast('Welcome back!', 'success');
  
-      if (data.user.role === 'expert') {
-        showPage('expertDash');
-        if (typeof loadExpertData === 'function') loadExpertData();
-      } else {
-        showPage('clientDash');
-        if (typeof loadClientData === 'function') loadClientData();
-      }
+      enterDashboard();
  
     } else if (data.action === 'verify_otp') {
       // ── New user — show OTP screen ───────────────────────────────────

@@ -177,7 +177,7 @@ function showExpertWelcomeModal() {
             </div>
           </div>`).join('')}
       </div>
-      <button onclick="document.getElementById('expertWelcomeModal').remove(); showPage('expertDash'); loadExpertData();"
+      <button onclick="document.getElementById('expertWelcomeModal').remove(); if (!(state.user && state.user.questionnaireCompleted)) startQuestionnaire('expert'); else { showPage('expertDash'); loadExpertData(); }"
         style="width:100%;padding:15px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;">
         Let's Get Started →
       </button>
@@ -331,7 +331,9 @@ function clearAuthForms() {
   // All auth field IDs
   ['loginEmail', 'loginPassword',
    'signupName', 'signupEmail', 'signupPhone', 'signupPassword', 'signupOTP',
-   'fpEmail', 'fpOTP', 'fpNewPassword', 'fpConfirmPassword'
+   'fpEmail', 'fpOTP', 'fpNewPassword', 'fpConfirmPassword',
+   'guestSignupName', 'guestSignupEmail', 'guestSignupPhone', 'guestSignupPassword',
+   'signupInviteCode'
   ].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';

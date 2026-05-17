@@ -4,9 +4,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 (function(){
-  var API_BASE = ['localhost', '127.0.0.1'].includes(window.location.hostname)
-    ? 'https://workindex-production.up.railway.app/api'
-    : 'https://workindex-production.up.railway.app/api';
+  var API_BASE = 'https://workindex-production.up.railway.app/api';
   var API = API_BASE + '/admin';
   var tok = localStorage.getItem('admTok') || '';
   var adm = null;
@@ -95,20 +93,53 @@
   // ─── ADMIN INACTIVITY LOGOUT (30 minutes) ───
   var _adminInactivityTimer = null;
   var ADMIN_INACTIVITY_TIMEOUT = 30 * 60 * 1000;
+  var ADMIN_LAST_ACTIVE_KEY = 'wiAdminLastActiveAt';
+  var _adminWatcherStarted = false;
+
+  function clearAdminLoginFields() {
+    ['liId', 'liPw'].forEach(function(id) {
+      var el = g(id);
+      if (el) el.value = '';
+    });
+    if (g('lerr')) g('lerr').textContent = '';
+  }
+
+  function clearAdminSession() {
+    localStorage.removeItem('admTok');
+    localStorage.removeItem('admData');
+    localStorage.removeItem(ADMIN_LAST_ACTIVE_KEY);
+    tok = '';
+    adm = null;
+  }
+
+  function adminSessionExpired() {
+    if (!tok) return false;
+    var lastActive = Number(localStorage.getItem(ADMIN_LAST_ACTIVE_KEY) || '0');
+    return lastActive > 0 && Date.now() - lastActive >= ADMIN_INACTIVITY_TIMEOUT;
+  }
 
   function resetAdminTimer() {
     if (!tok) return;
+    localStorage.setItem(ADMIN_LAST_ACTIVE_KEY, String(Date.now()));
     clearTimeout(_adminInactivityTimer);
     _adminInactivityTimer = setTimeout(function() {
-      doLogout();
+      doLogout(true);
       alert('Session expired due to inactivity. Please log in again.');
     }, ADMIN_INACTIVITY_TIMEOUT);
   }
 
   function startAdminInactivity() {
-    ['mousemove','mousedown','keydown','touchstart','scroll','click'].forEach(function(ev) {
-      window.addEventListener(ev, resetAdminTimer, { passive: true });
-    });
+    if (adminSessionExpired()) {
+      doLogout(true);
+      alert('Session expired due to inactivity. Please log in again.');
+      return;
+    }
+    if (!_adminWatcherStarted) {
+      ['mousemove','mousedown','keydown','touchstart','scroll','click'].forEach(function(ev) {
+        window.addEventListener(ev, resetAdminTimer, { passive: true });
+      });
+      _adminWatcherStarted = true;
+    }
     resetAdminTimer();
   }
 
@@ -126,6 +157,7 @@
 
   /* ═══ INIT ═══════════════════════════════════════════════════════════════ */
   function init() {
+    if (adminSessionExpired()) { clearAdminSession(); }
     if (tok && adm) { showApp(); }
     g('loginBtn').onclick = doLogin;
     g('liPw').onkeydown = function(e) { if (e.key === 'Enter') doLogin(); };
@@ -379,6 +411,8 @@
           tok = r.token; adm = r.admin;
           localStorage.setItem('admTok', tok);
           localStorage.setItem('admData', JSON.stringify(adm));
+          localStorage.setItem(ADMIN_LAST_ACTIVE_KEY, String(Date.now()));
+          clearAdminLoginFields();
           showApp();
         } else { g('lerr').textContent = r.message || 'Invalid credentials'; }
       })
@@ -422,12 +456,16 @@
     loadDashboard();
   }
 
-  function doLogout() {
+  function doLogout(expired) {
     stopAdminInactivity();
-    localStorage.removeItem('admTok'); localStorage.removeItem('admData');
-    tok = ''; adm = null;
+    clearAdminSession();
+    clearAdminLoginFields();
     g('appWrap').style.display = 'none';
     g('loginWrap').style.display = 'flex';
+    if (expired && g('lerr')) {
+      g('lerr').style.color = '#ef4444';
+      g('lerr').textContent = 'Session expired. Please log in again.';
+    }
   }
 
   /* ═══ API ════════════════════════════════════════════════════════════════ */
@@ -459,6 +497,7 @@
       dashboard: loadDashboard,
       heatmap: loadHeatmap,
       experts: function() { loadUsers('expert'); },
+      boosts: loadBoosts,
       clients: function() { loadUsers('client'); },
       approaches: loadApproaches,
       chats: loadChats,
@@ -487,6 +526,8 @@ emailNotifications: loadEmailNotifications,
 
   var PT = { admins:'Manage Admins', dashboard:'Dashboard', revenue:'Revenue Dashboard', audit:'Audit Log', heatmap:'Geographic Heatmap', experts:'Experts', clients:'Clients', approaches:'Approaches', chats:'Chats', credits:'Credits', refunds:'Refunds', actions:'Actions', tickets:'Tickets', posts:'Posts', reviews:'Reviews', registrations:'Registrations', kyc:'KYC Review', payments:'Payments', communication:'Communication', invoices:'Invoices', settings:'Settings', suspReq:'Suspended Requests', reports:'Reports', seo: 'SEO Pages', serviceCategories: 'Service Categories', emailNotifications: 'Email Notifications' };
   var PS = { admins:'Create and manage admin accounts with role-based permissions', dashboard:'Platform overview', revenue:'Credits, earnings & service breakdown', audit:'Full filterable activity log', heatmap:'Expert & client locations across India', experts:'All registered experts', clients:'All registered clients', approaches:'Expert approach activity', chats:'All conversations', credits:'Credit ledger', refunds:'Pending refund requests', actions:'Ban, warn and flag users', tickets:'All support tickets', posts:'User posted requests', reviews:'Ratings & reviews', registrations:'Expert approval queue', kyc:'Identity verification queue', payments:'Failed payment tracking', communication:'Bulk email & notifications', invoices:'Generate invoices', settings:'Admin configuration & platform management', suspReq:'Posts flagged by 3+ experts pending admin review', reports:'All user reports and admin actions' , seo: 'Create and manage SEO landing pages — auto-published to Netlify', serviceCategories: 'Manage service categories and questionnaire — auto-published to Vercel', emailNotifications: 'Email logs and notification settings'};  function goTo(s) {
+    PT.boosts = 'Score-Based Boosts';
+    PS.boosts = 'Control public ranking with automatic score plus admin boost';
     qa('.sec').forEach(function(e) { e.classList.remove('on'); });
     qa('.ni').forEach(function(e) { e.classList.remove('on'); });
     qa('.mni').forEach(function(e) { e.classList.remove('on'); });
@@ -508,7 +549,7 @@ emailNotifications: loadEmailNotifications,
   }
 
   function bdg(s) {
-    var m = { pending:'byw', accepted:'bgr', rejected:'brd', active:'bbl', completed:'bgr', cancelled:'brd', resolved:'btl', pending_review:'byw', client:'bbl', expert:'bo', banned:'brd', open:'bbl', flagged:'brd', approved:'bgr' };
+    var m = { pending:'byw', accepted:'bgr', rejected:'brd', active:'bbl', completed:'bgr', cancelled:'brd', purged:'bgy', resolved:'btl', pending_review:'byw', client:'bbl', expert:'bo', banned:'brd', open:'bbl', flagged:'brd', approved:'bgr' };
     return '<span class="badge ' + (m[s] || 'bgy') + '">' + esc(s) + '</span>';
   }
   function ust(u) {

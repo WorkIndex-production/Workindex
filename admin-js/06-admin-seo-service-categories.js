@@ -127,6 +127,7 @@ function buildEmailNotificationsUI(settings) {
         { key: 'client_post_created',      label: 'Request Posted',                 desc: 'Sent when client posts a new request' },
         { key: 'client_expert_approached', label: 'Expert Approached',              desc: 'Sent when an expert submits a proposal' },
         { key: 'client_post_suspended',    label: 'Post Suspended',                 desc: 'Sent when client\'s post is suspended (3 reports)' },
+        { key: 'client_post_stale_reminder', label: 'Stale Request Reminder',       desc: 'Sent after an open request is 7 days old and needs customer confirmation' },
         { key: 'client_restricted',        label: 'Account Restricted',             desc: 'Sent when client account is restricted' },
         { key: 'client_banned',            label: 'Account Banned',                 desc: 'Sent when client account is banned' }
       ]
@@ -139,6 +140,7 @@ function buildEmailNotificationsUI(settings) {
         { key: 'expert_credits_refunded',  label: 'Credits Refunded',               desc: 'Sent when admin refunds credits' },
         { key: 'expert_approach_sent',     label: 'Approach Submitted',             desc: 'Sent when expert submits an approach' },
         { key: 'expert_new_post',          label: 'New Request Posted',             desc: 'Sent when a matching client request is posted' },
+        { key: 'expert_invite_received',   label: 'Expert Invite Received',         desc: 'Sent when a customer sends a direct invite from Explore' },
         { key: 'expert_restricted',        label: 'Account Restricted',             desc: 'Sent when expert account is restricted' },
         { key: 'expert_banned',            label: 'Account Banned',                 desc: 'Sent when expert account is banned' }
       ]

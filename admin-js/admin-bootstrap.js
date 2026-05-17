@@ -6,13 +6,14 @@ const ADMIN_PARTIALS = [
   '/admin-partials/04-admin-actions-drawers.html',
   '/admin-partials/05-admin-modals.html'
 ];
+const ADMIN_ASSET_VERSION = '20260517-inactivity-session-1';
 
 async function loadAdminPartials() {
   const root = document.getElementById('admin-root');
   if (!root) throw new Error('Missing admin-root container');
 
   const html = await Promise.all(ADMIN_PARTIALS.map(async path => {
-    const res = await fetch(path);
+    const res = await fetch(path + '?v=' + ADMIN_ASSET_VERSION);
     if (!res.ok) throw new Error(`Failed to load ${path}`);
     return res.text();
   }));
@@ -20,7 +21,7 @@ async function loadAdminPartials() {
   root.innerHTML = html.join('\n');
 
   const script = document.createElement('script');
-  script.src = '/admin-js/admin-app-loader.js';
+  script.src = '/admin-js/admin-app-loader.js?v=' + ADMIN_ASSET_VERSION;
   script.defer = true;
   document.body.appendChild(script);
 }

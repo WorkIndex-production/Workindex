@@ -287,7 +287,7 @@
       <div class="sec" id="sec-seo"></div> 
       <div class="sec" id="sec-serviceCategories"></div>
       <div class="sec" id="sec-revenue">
-        <div id="revSummary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px;"></div>
+        <div id="revSummary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px;"></div>
         <div class="card" style="margin-bottom:16px;">
           <div class="ch" style="flex-wrap:wrap;gap:10px;">
             <h3>Revenue Over Time</h3>
@@ -310,7 +310,21 @@
             </div>
           </div>
         </div>
-        <div class="card">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:16px;">
+          <div class="card">
+            <div class="ch"><h3>Credit Mix</h3></div>
+            <div style="position:relative;height:240px;padding-top:12px;"><canvas id="revMixChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3>Payment Status</h3></div>
+            <div style="position:relative;height:240px;padding-top:12px;"><canvas id="revPaymentChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3>Marketplace Funnel</h3></div>
+            <div style="position:relative;height:240px;padding-top:12px;"><canvas id="revFunnelChart"></canvas></div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:16px;">
           <div class="ch" style="flex-wrap:wrap;gap:10px;">
             <h3>By Service Category</h3>
             <select id="revSvcPeriod" style="padding:7px 12px;background:#18181d;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#f0f0f4;font-size:13px;">
@@ -321,6 +335,7 @@
             </select>
             <select id="revSvcChartType" style="padding:7px 12px;background:#18181d;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#f0f0f4;font-size:13px;">
               <option value="bar">Bar Chart</option>
+              <option value="doughnut">Doughnut</option>
               <option value="pie">Pie Chart</option>
             </select>
           </div>
@@ -329,6 +344,16 @@
               <canvas id="revSvcChart"></canvas>
             </div>
             <div id="revSvcTable"></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:16px;">
+          <div class="card">
+            <div class="ch"><h3>Recent Credit Transactions</h3></div>
+            <div id="revRecentTx" style="padding-top:12px;"></div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3>Top Credit Spenders</h3></div>
+            <div id="revTopExperts" style="padding-top:12px;"></div>
           </div>
         </div>
       </div>
@@ -349,6 +374,10 @@
               <option value="approach_accepted">approach_accepted</option>
               <option value="approach_rejected">approach_rejected</option>
               <option value="service_completed">service_completed</option>
+              <option value="rating_completed">rating_completed</option>
+              <option value="post_purge_mail_sent">post_purge_mail_sent</option>
+              <option value="post_renewed">post_renewed</option>
+              <option value="post_purged">post_purged</option>
               <option value="ticket_followup">ticket_followup</option>
               <option value="ticket_canned_response">ticket_canned_response</option>
               <option value="admin_credit_adjusted">admin_credit_adjusted</option>

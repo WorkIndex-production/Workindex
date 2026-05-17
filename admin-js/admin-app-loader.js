@@ -1,4 +1,5 @@
 (function loadAdminAppChunks(){
+  var version = '20260517-inactivity-session-1';
   var chunks = [
     '/admin-js/01-admin-core-auth.js',
     '/admin-js/02-admin-dashboard-users.js',
@@ -9,7 +10,7 @@
   ];
 
   Promise.all(chunks.map(function(path) {
-    return fetch(path).then(function(res) {
+    return fetch(path + '?v=' + version).then(function(res) {
       if (!res.ok) throw new Error('Failed to load ' + path);
       return res.text();
     });

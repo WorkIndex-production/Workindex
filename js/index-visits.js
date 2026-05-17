@@ -1,8 +1,6 @@
 // Split from index.html inline script 4.
 (function() {
-  const visitsApiBase = ['localhost', '127.0.0.1'].includes(window.location.hostname)
-    ? 'https://workindex-production.up.railway.app/api'
-    : 'https://workindex-production.up.railway.app/api';
+  const visitsApiBase = 'https://workindex-production.up.railway.app/api';
   let sessionId = sessionStorage.getItem('wi_session');
   if (!sessionId) {
     sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);

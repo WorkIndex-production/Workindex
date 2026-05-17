@@ -31,6 +31,7 @@ async function loadMyApproaches() {
     const interests = (notifData.notifications || []).filter(
       n => n.type === 'customer_interest'
     );
+    state._approachInterests = interests;
 
     renderMyApproaches(interests);
   } catch (error) {
@@ -38,28 +39,105 @@ async function loadMyApproaches() {
   }
 }
 // ─── RENDER EXPERT'S APPROACHES ───
-function renderMyApproaches(interests = []) {
+function expertInviteDetailsHTML(d) {
+  const serviceLabel = (WI_SERVICES.labels && WI_SERVICES.labels[d.service]) || d.service || 'Service';
+  const budgetNumber = Number(String(d.budget || '').replace(/[^\d.]/g, '')) || 0;
+  const budget = budgetNumber ? `Rs. ${budgetNumber.toLocaleString('en-IN')}` : 'Not specified';
+  const answerRows = Object.entries(d.answers || {})
+    .filter(([key]) => !['description', 'budget', 'service'].includes(key))
+    .slice(0, 8)
+    .map(([key, value]) => {
+      const label = String(key).replace(/_/g, ' ').replace(/([A-Z])/g, ' $1').trim();
+      const text = Array.isArray(value) ? value.join(', ') : (typeof value === 'object' ? Object.values(value).filter(Boolean).join(', ') : value);
+      if (!text) return '';
+      return `<div style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);">
+        <div style="font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:800;margin-bottom:3px;">${label}</div>
+        <div style="font-size:13px;color:var(--text);font-weight:600;">${text}</div>
+      </div>`;
+    }).join('');
+  return `
+    <div style="padding:12px;background:var(--bg-gray);border-radius:10px;margin-bottom:12px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:10px;">
+        <div><div style="font-size:11px;color:var(--text-muted);font-weight:800;">SERVICE</div><div style="font-size:14px;font-weight:800;color:var(--text);">${serviceLabel}</div></div>
+        <div><div style="font-size:11px;color:var(--text-muted);font-weight:800;">BUDGET</div><div style="font-size:14px;font-weight:800;color:var(--text);">${budget}</div></div>
+        <div><div style="font-size:11px;color:var(--text-muted);font-weight:800;">TIMELINE</div><div style="font-size:14px;font-weight:800;color:var(--text);">${d.timeline || 'Flexible'}</div></div>
+        <div><div style="font-size:11px;color:var(--text-muted);font-weight:800;">LOCATION</div><div style="font-size:14px;font-weight:800;color:var(--text);">${d.location || 'Online / Remote'}</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:6px;">${d.title || 'Expert Invite'}</div>
+      <div style="font-size:13px;color:var(--text-light);line-height:1.5;margin-bottom:${answerRows ? '10px' : '0'};">${d.description || 'Request details shared by customer.'}</div>
+      ${answerRows ? `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;">${answerRows}</div>` : ''}
+    </div>`;
+}
+
+function openExpertInviteDetails(notifId) {
+  const invite = (state._approachInterests || []).find(n => String(n._id) === String(notifId));
+  const d = (invite && invite.data) || {};
+  const modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1003;padding:20px;';
+  modal.onclick = e => { if (e.target === modal) modal.remove(); };
+  modal.innerHTML = `
+    <div style="background:var(--bg);border-radius:16px;max-width:920px;width:100%;max-height:86vh;overflow-y:auto;padding:22px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div>
+          <h3 style="font-size:20px;font-weight:900;color:var(--text);margin-bottom:4px;">Expert Invite Details</h3>
+          <p style="font-size:13px;color:var(--text-muted);margin:0;">Questionnaire details shared by the customer before contact unlock.</p>
+        </div>
+        <button onclick="this.closest('[style*=fixed]').remove()" style="border:none;background:transparent;font-size:24px;color:var(--text-muted);cursor:pointer;">x</button>
+      </div>
+      ${expertInviteDetailsHTML(d)}
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+function renderMyApproaches(interests) {
+  if (!interests) interests = state._approachInterests || [];
   const container = document.getElementById('approachesList');
   if (!container) return;
+  const selectedStatus = document.getElementById('expertApproachStatusFilter')?.value || 'all';
+  const interestStatus = (data) => {
+    if (data.cancelled || data.status === 'cancelled') return 'rejected';
+    if (data.unlocked) return 'completed';
+    return 'pending';
+  };
+  const visibleInterests = (interests || []).filter((n) => {
+    const d = n.data || {};
+    return selectedStatus === 'all' || interestStatus(d) === selectedStatus;
+  });
+  interests = visibleInterests;
 
   // ── Customer Interested Section ──
   let interestHTML = '';
-  if (interests.length > 0) {
+  if (visibleInterests.length > 0) {
     interestHTML = `
       <div style="margin-bottom:20px;">
         <h3 style="font-size:16px; font-weight:700; color:var(--text); margin-bottom:12px;">
           🎯 Customer Interest (${interests.length})
         </h3>
-        ${interests.map(n => {
+        ${visibleInterests.map(n => {
           const d = n.data || {};
           const unlocked = d.unlocked;
+          const cancelled = d.cancelled || d.status === 'cancelled';
+          const unlockCost = Number(d.credits || 15);
           return `
-            <div style="background:var(--bg); border:2px solid ${unlocked ? '#22c55e' : 'var(--primary)'}; border-radius:14px; padding:16px; margin-bottom:12px;">
+            <div style="background:var(--bg); border:2px solid ${cancelled ? '#ef4444' : (unlocked ? '#22c55e' : 'var(--primary)')}; border-radius:14px; padding:16px; margin-bottom:12px;">
               <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
                 <span style="font-size:14px; font-weight:700; color:var(--text);">🎯 Client wants to hire you</span>
                 <span style="font-size:11px; padding:3px 8px; border-radius:20px; background:${unlocked ? 'rgba(34,197,94,0.1)' : 'rgba(252,128,25,0.1)'}; color:${unlocked ? '#22c55e' : 'var(--primary)'}; font-weight:700;">
-                  ${unlocked ? 'Unlocked' : '15 credits'}
+                  ${cancelled ? 'Cancelled' : (unlocked ? 'Completed' : 'Pending')}
                 </span>
+              </div>
+
+              <div style="padding:12px;background:var(--bg-gray);border-radius:10px;margin-bottom:12px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+                  <div style="min-width:0;">
+                    <div style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px;">${d.title || 'Expert Invite'}</div>
+                    <div style="font-size:13px;color:var(--text-muted);line-height:1.5;">${d.description || 'Customer shared questionnaire details for this invite.'}</div>
+                  </div>
+                  <button onclick="openExpertInviteDetails('${n._id}')"
+                    style="padding:10px 14px;border:1.5px solid var(--primary);border-radius:10px;background:var(--bg);color:var(--primary);font-size:13px;font-weight:800;cursor:pointer;">
+                    View Details
+                  </button>
+                </div>
               </div>
 
               <div style="padding:12px; background:var(--bg-gray); border-radius:10px; margin-bottom:12px;">
@@ -91,7 +169,11 @@ function renderMyApproaches(interests = []) {
                 ${formatDate(n.createdAt)}
               </div>
 
-              ${unlocked ? `
+              ${cancelled ? `
+                <div style="width:100%; padding:11px; border-radius:10px; background:rgba(239,68,68,0.08); color:#dc2626; font-size:13px; font-weight:700; text-align:center;">
+                  Customer cancelled this invite
+                </div>
+              ` : unlocked ? `
                 <div style="display:flex; gap:8px; margin-bottom:8px;">
                   <a href="tel:${d.fullPhone}" style="flex:1; padding:10px; background:#22c55e; color:#fff; border:none; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; text-align:center; text-decoration:none;">
                     📞 Call
@@ -112,8 +194,8 @@ function renderMyApproaches(interests = []) {
                 </div>
               ` : `
                 <button onclick="unlockInterest('${n._id}')"
-                  style="width:100%; padding:12px; background:var(--primary); color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer;">
-                  🔓 Unlock for 15 Credits
+                  style="width:100%; padding:12px; background:var(--primary); color:#fff; border:none; border-radius:10px; font-size:0; font-weight:700; cursor:pointer;">
+                  <span style="font-size:14px;">Unlock for ${unlockCost} Credits</span>
                 </button>
               `}
             </div>
@@ -142,13 +224,13 @@ function renderMyApproaches(interests = []) {
     rejected: 'badge-danger'
   };
 
-  const allApproaches = state.myApproaches || [];
+  const allApproaches = (state.myApproaches || []).filter(app => selectedStatus === 'all' || app.status === selectedStatus);
   const pagedApproaches = paginate(allApproaches, 'expertApproaches');
 
   container.innerHTML = interestHTML + `
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
       <h3 style="font-size:18px;font-weight:800;color:var(--text);letter-spacing:-0.3px;">My Approaches</h3>
-      <span style="font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:var(--bg-gray);color:var(--text-muted);">${allApproaches.length} total</span>
+      <span style="font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:var(--bg-gray);color:var(--text-muted);">${allApproaches.length} shown</span>
     </div>
   ` + pagedApproaches.map(app => {
     const req = app.request;
@@ -225,6 +307,79 @@ function renderMyApproaches(interests = []) {
       </div>`;
   }).join('') + paginationControlsHTML(allApproaches, 'expertApproaches');
 }
+async function loadExpertInvites() {
+  const container = document.getElementById('expertInvitesContent');
+  if (!container) return;
+  container.innerHTML = '<div style="padding:18px;color:var(--text-muted);">Loading invite history...</div>';
+  try {
+    const res = await fetch(`${API_URL}/users/invite-summary`, {
+      headers: { 'Authorization': `Bearer ${state.token}` }
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Failed');
+    const inviteUrl = `${window.location.origin}/?invite=${encodeURIComponent(data.inviteCode || '')}`;
+    const inviteMessage = `Join WorkIndex as an expert using my invite code ${data.inviteCode || ''}: ${inviteUrl}. Complete expert signup and send your first customer approach. Once you do, I receive 10 WorkIndex credits.`;
+    const inviteGridCols = 'minmax(150px,1fr) minmax(260px,2fr) minmax(180px,1.1fr) minmax(90px,.55fr) minmax(110px,.65fr)';
+    const inviteCell = 'padding:12px 14px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);font-size:14px;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
+    const inviteHead = inviteCell + 'font-size:13px;font-weight:800;background:var(--bg-gray);';
+    const rows = (data.invites || []).map(inv => {
+      const invited = inv.invitedUser || {};
+      const statusMap = {
+        invited: 'Invited',
+        signed_up: 'Signed up',
+        approach_pending: 'Signed up - approach pending',
+        completed: 'Completed'
+      };
+      return `
+        <div style="display:grid;grid-template-columns:${inviteGridCols};min-width:790px;">
+          <div style="${inviteCell}">${invited.name || '-'}</div>
+          <div style="${inviteCell}">${invited.email || inv.invitedEmail || '-'}</div>
+          <div style="${inviteCell}">${statusMap[inv.status] || inv.status}</div>
+          <div style="${inviteCell}text-align:right;">${inv.creditsAwarded || 0}</div>
+          <div style="${inviteCell}border-right:0;">${formatDate(inv.createdAt)}</div>
+        </div>`;
+    }).join('');
+    container.innerHTML = `
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:18px;">
+        <div style="font-size:13px;color:var(--text-muted);font-weight:700;margin-bottom:6px;">Your invite code</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <input readonly value="${data.inviteCode || ''}" style="padding:12px;border:1px solid var(--border);border-radius:8px;font-size:18px;font-weight:800;letter-spacing:1px;max-width:220px;background:var(--bg-gray);color:var(--text);">
+          <button onclick="copyExpertInviteLink('${inviteUrl.replace(/'/g, "\\'")}')" class="btn-primary" style="padding:12px 16px;">Copy Link</button>
+          <button onclick="shareExpertInvite('${inviteUrl.replace(/'/g, "\\'")}', '${(data.inviteCode || '').replace(/'/g, "\\'")}')" class="btn-secondary" style="padding:12px 16px;">Share WorkIndex Link</button>
+        </div>
+        <textarea readonly style="width:100%;min-height:82px;margin-top:12px;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg-gray);color:var(--text);font-size:13px;line-height:1.5;box-sizing:border-box;">${inviteMessage}</textarea>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:10px;">Rule: the invited expert must sign up with your code or link and send at least one customer approach. After that, 10 credits are added to your account.</p>
+      </div>
+      <div style="overflow:auto;border:1px solid var(--border);border-radius:12px;">
+        <div style="display:grid;grid-template-columns:${inviteGridCols};min-width:790px;">
+          <div style="${inviteHead}">Name</div>
+          <div style="${inviteHead}">Email</div>
+          <div style="${inviteHead}">Status</div>
+          <div style="${inviteHead}text-align:right;">Credits</div>
+          <div style="${inviteHead}border-right:0;">Date</div>
+        </div>
+        ${rows || '<div style="padding:18px;text-align:center;color:var(--text-muted);">No invites yet</div>'}
+      </div>`;
+  } catch (err) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">🎁</div><h3 class="empty-title">Could not load invites</h3><p class="empty-text">Please try again.</p></div>';
+  }
+}
+
+function copyExpertInviteLink(inviteUrl) {
+  navigator.clipboard.writeText(inviteUrl);
+  showToast('Invite link copied', 'success');
+}
+
+function shareExpertInvite(inviteUrl, inviteCode) {
+  const message = `Join WorkIndex as an expert using my invite code ${inviteCode}: ${inviteUrl}. Complete expert signup and send your first customer approach. Once you do, I receive 10 WorkIndex credits.`;
+  if (navigator.share) {
+    navigator.share({ title: 'WorkIndex Expert Invite', text: message, url: inviteUrl }).catch(() => {});
+    return;
+  }
+  navigator.clipboard.writeText(message);
+  showToast('Invite message copied', 'success');
+}
+
 // ─── SHOW APPROACH DETAIL WITH CONTACT INFO ───
 async function showMyApproachDetail(approachId) {
   try {
@@ -594,6 +749,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Route on initial load ──
   const initialPath = window.location.pathname;
 
+  if (storedSessionIsExpired()) {
+    handleSessionExpired();
+    return;
+  }
+
   if (state.token && state.user) {
   const authedRoutes = ['/settings', '/my-tickets', '/dashboard'];
   if (authedRoutes.includes(initialPath)) {
@@ -867,6 +1027,7 @@ function dismissExpertProfilePrompt() {
 
 function goToExpertProfileFromPrompt() {
   dismissExpertProfilePrompt();
+  state.forceExpertProfileTab = true;
   showPage('expertDash');
   switchTab('profile');
 }
@@ -1073,6 +1234,20 @@ if (locDetails && typeof locDetails === 'object') {
 
       <!-- ── PROFILE STRENGTH ── -->
       ${renderStrengthMeter(user, profile)}
+
+      <div class="settings-section" style="margin-bottom:20px;">
+        <h3 class="settings-section-title" style="margin:0 0 12px;">Profile Traffic</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;">
+          <div style="padding:16px;border:1px solid var(--border);border-radius:12px;background:var(--bg-gray);">
+            <div style="font-size:28px;font-weight:800;color:var(--primary);">${user.profileViews || 0}</div>
+            <div style="font-size:13px;color:var(--text-muted);font-weight:700;">Profile views</div>
+          </div>
+          <div style="padding:16px;border:1px solid var(--border);border-radius:12px;background:var(--bg-gray);">
+            <div style="font-size:28px;font-weight:800;color:var(--text);">${user.totalApproaches || 0}</div>
+            <div style="font-size:13px;color:var(--text-muted);font-weight:700;">Approaches sent</div>
+          </div>
+        </div>
+      </div>
 
       <!-- ── KYC VERIFICATION ── -->
       <div class="settings-section" style="margin-bottom:20px;">
@@ -1380,7 +1555,7 @@ const hasContact = phonePattern.test(bioText)
     const data = await res.json();
 
     if (data.success) {
-      state.user.profile = updatedProfile;
+      state.user.profile = (data.user && data.user.profile) || updatedProfile;
       localStorage.setItem('user', JSON.stringify(state.user));
       _editMode = false;
       showToast('Profile updated successfully!', 'success');
@@ -1479,7 +1654,7 @@ if (/[^a-zA-Z\s\.\-']/.test(nameVal)) {
       });
 
       state.user.name = nameVal;
-      state.user.profile = updatedProfile;
+      state.user.profile = (data.user && data.user.profile) || updatedProfile;
       localStorage.setItem('user', JSON.stringify(state.user));
       _basicEditMode = false;
       showToast('Basic info updated!', 'success');

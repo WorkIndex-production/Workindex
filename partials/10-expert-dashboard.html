@@ -75,6 +75,10 @@
       <span>👤</span>
       <span>Profile</span>
     </div>
+    <div class="dash-tab" data-tab="expertInvites" onclick="switchTab('expertInvites')">
+      <span>🎁</span>
+      <span>Invite</span>
+    </div>
   </div>
 
   <!-- Browse Tab -->
@@ -88,6 +92,16 @@
   <!-- Approaches Tab -->
   <div id="approachesTab" class="tab-content" style="display: none; padding: 20px;">
     <h2 style="margin-bottom: 20px;">My Approaches</h2>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
+      <label style="font-size:13px;color:var(--text-muted);font-weight:700;">Status</label>
+      <select id="expertApproachStatusFilter" onchange="renderMyApproaches()" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);">
+        <option value="all">All</option>
+        <option value="pending">Pending</option>
+        <option value="accepted">Accepted</option>
+        <option value="completed">Completed</option>
+        <option value="rejected">Rejected</option>
+      </select>
+    </div>
     <div id="approachesList"></div>
   </div>
 
@@ -157,6 +171,11 @@
       <h3 class="empty-title">No reviews yet</h3>
       <p class="empty-text">Complete projects to receive ratings from clients</p>
     </div>
+  </div>
+
+  <div id="expertInvitesTab" class="tab-content" style="display: none; padding:20px;">
+    <h2 style="margin-bottom:20px;">Invite</h2>
+    <div id="expertInvitesContent"></div>
   </div>
 
   <!-- Expert Profile Tab -->

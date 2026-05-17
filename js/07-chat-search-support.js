@@ -104,6 +104,10 @@ async function loadMessages(chatId) {
     });
     const data = await res.json();
     if (!data.success) return;
+    fetch(`${API_URL}/chats/${chatId}/read`, {
+      method: 'PUT',
+      headers: { 'Authorization': `Bearer ${state.token}` }
+    }).catch(() => {});
 
     // Update header with other person's name
     const chatsRes = await fetch(`${API_URL}/chats`, {
@@ -129,18 +133,21 @@ async function loadMessages(chatId) {
 
     const myId = state.user?._id || state.user?.id;
     container.innerHTML = data.messages.map(msg => {
-      const senderId = msg.sender?._id || msg.sender;
-      const isMe = senderId === myId;
+      const senderId = String(msg.sender?._id || msg.sender || '');
+      const isMe = senderId === String(myId || '');
       const time = new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const seen = isMe && (msg.readAt || msg.seenAt || msg.isRead) ? 'Seen' : (isMe ? 'Sent' : '');
       return `
-        <div style="display:flex;justify-content:${isMe ? 'flex-end' : 'flex-start'};">
-          <div style="max-width:70%;padding:10px 14px;
-            border-radius:${isMe ? '18px 18px 4px 18px' : '18px 18px 18px 4px'};
-            background:${isMe ? 'var(--primary)' : '#f1f1f1'};
+        <div style="display:flex;justify-content:${isMe ? 'flex-end' : 'flex-start'};align-items:flex-end;gap:8px;">
+          <div style="max-width:72%;padding:10px 14px;
+            border-radius:${isMe ? '18px 18px 5px 18px' : '18px 18px 18px 5px'};
+            background:${isMe ? 'linear-gradient(135deg,#FC8019,#f97316)' : 'var(--bg-gray)'};
+            border:${isMe ? 'none' : '1px solid var(--border)'};
             color:${isMe ? 'white' : 'var(--text)'};
+            box-shadow:${isMe ? '0 6px 18px rgba(252,128,25,0.22)' : '0 3px 10px rgba(0,0,0,0.04)'};
             font-size:14px;line-height:1.4;">
             ${msg.text}
-            <div style="font-size:10px;opacity:0.7;margin-top:4px;text-align:right;">${time}</div>
+            <div style="font-size:10px;opacity:0.75;margin-top:5px;text-align:right;">${time}${seen ? ' · ' + seen : ''}</div>
           </div>
         </div>`;
     }).join('');
@@ -494,8 +501,13 @@ function showLandingServiceSuggestions(value) {
   const input = document.getElementById('landingServiceInput');
   if (input) delete input.dataset.service;
   const lower = String(value || '').trim().toLowerCase();
+  if (lower.length < 2) {
+    el.style.display = 'none';
+    el.innerHTML = '';
+    return;
+  }
   const items = getLandingServiceList()
-    .filter(s => !lower || s.label.toLowerCase().includes(lower) || String(s.value).includes(lower))
+    .filter(s => s.label.toLowerCase().includes(lower) || String(s.value).toLowerCase().includes(lower))
     .slice(0, 6)
     .map(s => ({ label: s.label, value: s.value, type: 'service', typeLabel: 'Service', icon: '-' }));
   if (!items.length) { el.style.display = 'none'; return; }
@@ -522,7 +534,13 @@ async function loadLandingLocationSuggestions(value) {
   const el = document.getElementById('landingLocationSuggestions');
   if (!el) return;
   try {
-    const q = encodeURIComponent(String(value || '').trim());
+    const raw = String(value || '').trim();
+    if (raw.length < 2) {
+      el.style.display = 'none';
+      el.innerHTML = '';
+      return;
+    }
+    const q = encodeURIComponent(raw);
     const res = await fetch(API_URL + '/users/location-suggestions?q=' + q);
     const data = await res.json();
     const items = (data.suggestions || []).slice(0, 6).map(s => ({
@@ -553,13 +571,17 @@ function initLandingSearchSuggestions() {
 
   if (serviceInput && !serviceInput.dataset.suggestionsBound) {
     serviceInput.dataset.suggestionsBound = '1';
-    serviceInput.addEventListener('focus', () => showLandingServiceSuggestions(serviceInput.value));
+    serviceInput.addEventListener('focus', () => {
+      if (serviceInput.value.trim().length >= 2) showLandingServiceSuggestions(serviceInput.value);
+    });
     serviceInput.addEventListener('input', () => showLandingServiceSuggestions(serviceInput.value));
   }
 
   if (locationInput && !locationInput.dataset.suggestionsBound) {
     locationInput.dataset.suggestionsBound = '1';
-    locationInput.addEventListener('focus', () => handleLandingLocationInput(locationInput.value));
+    locationInput.addEventListener('focus', () => {
+      if (locationInput.value.trim().length >= 2) handleLandingLocationInput(locationInput.value);
+    });
     locationInput.addEventListener('input', () => handleLandingLocationInput(locationInput.value));
   }
 }
@@ -1154,11 +1176,16 @@ async function loadClientInvites() {
     }
 
     container.innerHTML = data.invites.map(inv => {
-      const status = inv.unlocked ? 'accepted' : 'pending';
-      const statusColor = inv.unlocked ? '#22c55e' : '#f59e0b';
-      const statusBg = inv.unlocked ? 'rgba(34,197,94,0.1)' : 'rgba(245,158,11,0.1)';
+      const d = inv.data || {};
+      const isCancelled = inv.cancelled || d.cancelled || inv.status === 'cancelled';
+      const status = isCancelled ? 'cancelled' : (inv.unlocked ? 'accepted' : 'pending');
+      const statusColor = status === 'cancelled' ? '#ef4444' : (inv.unlocked ? '#22c55e' : '#f59e0b');
+      const statusBg = status === 'cancelled' ? 'rgba(239,68,68,0.1)' : (inv.unlocked ? 'rgba(34,197,94,0.1)' : 'rgba(245,158,11,0.1)');
       const statusLabel = inv.unlocked ? '✅ Accepted' : '⏳ Pending';
       const expert = inv.expert || {};
+      const budgetNumber = Number(String(d.budget || '').replace(/[^\d.]/g, '')) || 0;
+      const budget = budgetNumber ? `Rs. ${budgetNumber.toLocaleString('en-IN')}` : 'Not specified';
+      const editableData = JSON.stringify({ title: d.title || '', description: d.description || '', budget: d.budget || '', timeline: d.timeline || '', location: d.location || '' }).replace(/"/g, '&quot;');
 
       return `
         <div style="background:var(--bg); border:1.5px solid var(--border); border-radius:14px; padding:16px; margin-bottom:12px;">
@@ -1170,15 +1197,32 @@ async function loadClientInvites() {
               <div style="font-size:15px; font-weight:700; color:var(--text);">${expert.name || 'Expert'}</div>
               <div style="font-size:12px; color:var(--text-muted);">${expert.specialization || ''}</div>
             </div>
-            <span style="padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; background:${statusBg}; color:${statusColor};">${statusLabel}</span>
+            <span style="padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; background:${statusBg}; color:${statusColor};">${status === 'cancelled' ? 'Cancelled' : (inv.unlocked ? 'Accepted' : 'Pending')}</span>
+          </div>
+          <div style="padding:12px;background:var(--bg-gray);border-radius:10px;margin-bottom:10px;">
+            <div style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px;">${d.title || 'Expert Invite'}</div>
+            <div style="font-size:12px;color:var(--text-muted);line-height:1.5;margin-bottom:8px;">${d.description || 'Request details shared with expert.'}</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--text);">
+              <span style="padding:4px 8px;border:1px solid var(--border);border-radius:8px;">${(WI_SERVICES.labels && WI_SERVICES.labels[d.service]) || d.service || 'Service'}</span>
+              <span style="padding:4px 8px;border:1px solid var(--border);border-radius:8px;">${budget}</span>
+              <span style="padding:4px 8px;border:1px solid var(--border);border-radius:8px;">${d.location || 'Online / Remote'}</span>
+            </div>
           </div>
           <div style="font-size:12px; color:var(--text-muted); padding-top:8px; border-top:1px solid var(--border);">
             📅 Sent ${formatDate(inv.createdAt)}
             <span style="margin-left:12px; color:${statusColor};">
-              ${inv.unlocked ? 'Expert has viewed your contact details' : 'Waiting for expert to respond'}
+              ${isCancelled ? 'Invite cancelled by you' : (inv.unlocked ? 'Expert has viewed your contact details' : 'Waiting for expert to respond')}
             </span>
           </div>
-          ${inv.unlocked && !inv.completed ? `
+          ${!inv.completed && !isCancelled ? `
+  <div style="display:flex;gap:8px;margin-top:10px;">
+    <button onclick="openEditExpertInvite('${inv._id}', ${editableData})"
+      style="flex:1;padding:10px;border:1.5px solid var(--border);border-radius:10px;background:transparent;color:var(--text);font-size:13px;font-weight:700;cursor:pointer;">Edit</button>
+    <button onclick="cancelExpertInvite('${inv._id}')"
+      style="flex:1;padding:10px;border:1.5px solid #ef4444;border-radius:10px;background:transparent;color:#dc2626;font-size:13px;font-weight:700;cursor:pointer;">Cancel</button>
+  </div>
+` : ''}
+          ${inv.unlocked && !inv.completed && !isCancelled ? `
   <button onclick="confirmInviteComplete('${inv._id}', '${inv.expert?._id || ''}', '${(inv.expert?.name || 'Expert').replace(/'/g, '')}')"
     style="width:100%; margin-top:10px; padding:10px; border:1.5px solid #4CAF50; border-radius:10px; background:transparent; color:#4CAF50; font-size:13px; font-weight:600; cursor:pointer;">
     ✓ Service Received?
@@ -1196,6 +1240,75 @@ async function loadClientInvites() {
   }
 }
 // ─── LOAD EXPLORE PAGE ───
+function openEditExpertInvite(inviteId, data) {
+  data = data || {};
+  const modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:1003;padding:20px;';
+  modal.onclick = e => { if (e.target === modal) modal.remove(); };
+  const budgetOptions = [];
+  for (let amount = 1000; amount <= 100000; amount += 500) budgetOptions.push(amount);
+  modal.innerHTML = `
+    <div style="background:var(--bg);border-radius:16px;max-width:520px;width:100%;padding:22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h3 style="font-size:18px;font-weight:800;color:var(--text);">Edit Expert Invite</h3>
+        <button onclick="this.closest('[style*=fixed]').remove()" style="border:none;background:transparent;font-size:22px;cursor:pointer;color:var(--text-muted);">x</button>
+      </div>
+      <label style="display:block;font-size:12px;font-weight:800;color:var(--text-muted);margin-bottom:6px;">Title</label>
+      <input id="editInviteTitle" value="${(data.title || '').replace(/"/g, '&quot;')}" style="width:100%;padding:11px;border:1.5px solid var(--border);border-radius:10px;margin-bottom:12px;">
+      <label style="display:block;font-size:12px;font-weight:800;color:var(--text-muted);margin-bottom:6px;">Description</label>
+      <textarea id="editInviteDescription" rows="4" style="width:100%;padding:11px;border:1.5px solid var(--border);border-radius:10px;margin-bottom:12px;">${data.description || ''}</textarea>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div><label style="display:block;font-size:12px;font-weight:800;color:var(--text-muted);margin-bottom:6px;">Budget</label><select id="editInviteBudget" style="width:100%;padding:11px;border:1.5px solid var(--border);border-radius:10px;">${budgetOptions.map(amount => `<option value="${amount}" ${String(data.budget) === String(amount) ? 'selected' : ''}>Rs. ${amount.toLocaleString('en-IN')}</option>`).join('')}</select></div>
+        <div><label style="display:block;font-size:12px;font-weight:800;color:var(--text-muted);margin-bottom:6px;">Timeline</label><select id="editInviteTimeline" style="width:100%;padding:11px;border:1.5px solid var(--border);border-radius:10px;">${['immediate','2-3days','week','month','flexible'].map(v => `<option value="${v}" ${data.timeline === v ? 'selected' : ''}>${v}</option>`).join('')}</select></div>
+      </div>
+      <label style="display:block;font-size:12px;font-weight:800;color:var(--text-muted);margin:12px 0 6px;">Location</label>
+      <input id="editInviteLocation" value="${(data.location || '').replace(/"/g, '&quot;')}" style="width:100%;padding:11px;border:1.5px solid var(--border);border-radius:10px;margin-bottom:16px;">
+      <button onclick="saveExpertInviteEdit('${inviteId}', this)" style="width:100%;padding:13px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;">Save Changes</button>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+async function saveExpertInviteEdit(inviteId, btn) {
+  btn.disabled = true;
+  try {
+    const res = await fetch(`${API_URL}/users/expert-invites/${inviteId}`, {
+      method: 'PUT',
+      headers: { 'Authorization': `Bearer ${state.token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: document.getElementById('editInviteTitle').value,
+        description: document.getElementById('editInviteDescription').value,
+        budget: document.getElementById('editInviteBudget').value,
+        timeline: document.getElementById('editInviteTimeline').value,
+        location: document.getElementById('editInviteLocation').value
+      })
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Failed');
+    document.querySelectorAll('[style*="position:fixed"]').forEach(m => m.remove());
+    showToast('Invite updated', 'success');
+    loadClientInvites();
+  } catch (err) {
+    showToast(err.message || 'Could not update invite', 'error');
+    btn.disabled = false;
+  }
+}
+
+async function cancelExpertInvite(inviteId) {
+  if (!confirm('Cancel this expert invite?')) return;
+  try {
+    const res = await fetch(`${API_URL}/users/expert-invites/${inviteId}/cancel`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${state.token}` }
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Failed');
+    showToast('Invite cancelled', 'success');
+    loadClientInvites();
+  } catch (err) {
+    showToast(err.message || 'Could not cancel invite', 'error');
+  }
+}
+
 async function loadClientExplorePage() {
   const grid = document.getElementById('clientExploreGrid');
   const empty = document.getElementById('clientExploreEmpty');
@@ -1412,6 +1525,11 @@ function renderClientExploreGrid(experts) {
    
 // ─── HIRE EXPERT ───
 async function hireExpert(expertId, expertName) {
+  if (isUserRestricted()) { showRestrictedToast(); return; }
+  state.directInviteExpert = { id: expertId, name: expertName };
+  showToast(`Tell ${expertName} what you need first`, 'info');
+  startQuestionnaire('client');
+  return;
   if (isUserRestricted()) { showRestrictedToast(); return; } // ← ADD THIS
   
   const modal = document.createElement('div');

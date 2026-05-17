@@ -671,6 +671,37 @@ body.dark-mode {
   gap: 8px;
 }
 
+.rating-bar-row {
+  display: grid;
+  grid-template-columns: 22px 1fr 28px;
+  gap: 10px;
+  align-items: center;
+}
+
+.rating-bar-label {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.rating-bar {
+  height: 10px;
+  background: var(--bg-gray);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rating-bar-fill {
+  height: 100%;
+  background: #fbbc04;
+  border-radius: 999px;
+}
+
+.rating-bar-count {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
 .review-card {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -1551,6 +1582,36 @@ body.dark-mode .q-modal-footer {
   align-items: center !important;
   justify-content: center !important;
   transition: border-color 0.15s, background 0.15s !important;
+}
+
+.questionnaire-option.service-picker-option {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 112px !important;
+}
+
+.questionnaire-option.service-picker-option > div {
+  display: block !important;
+  width: auto !important;
+  text-align: center !important;
+}
+
+.questionnaire-option.service-picker-option > div:last-child,
+.questionnaire-option.service-picker-option .service-picker-label {
+  position: static !important;
+  margin: 0 !important;
+  flex: initial !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--text) !important;
+  display: block !important;
+  text-align: center !important;
 }
 
 /* ── Multi-select checkboxes ── */

@@ -146,6 +146,26 @@ function renderClientRequests() {
   }
 
   // ── Filter bar (always render, even if empty) ──
+  var exploreBoard = document.getElementById('clientExploreBoard');
+  var shouldShowExploreBoard = allRequests.length > 0 && localStorage.getItem('hideExploreBoard_' + (state.user?._id || '')) !== 'true';
+  if (shouldShowExploreBoard && !exploreBoard) {
+    var board = document.createElement('div');
+    board.id = 'clientExploreBoard';
+    board.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px;padding:16px 18px;border:1.5px solid rgba(252,128,25,0.22);border-radius:14px;background:linear-gradient(135deg,rgba(252,128,25,0.08),rgba(34,197,94,0.06));';
+    board.innerHTML =
+      '<div style="min-width:0;">' +
+        '<div style="font-size:16px;font-weight:900;color:var(--text);margin-bottom:4px;">Need a faster response?</div>' +
+        '<div style="font-size:13px;color:var(--text-muted);line-height:1.5;">Explore verified experts, review their profiles, and send a direct expert invite with your request details.</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:8px;flex-shrink:0;">' +
+        '<button onclick="switchTab(\'explore\')" style="padding:10px 14px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;">Explore Experts</button>' +
+        '<button onclick="localStorage.setItem(\'hideExploreBoard_' + (state.user?._id || '') + '\',\'true\');document.getElementById(\'clientExploreBoard\')?.remove();" style="width:38px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text-muted);font-size:16px;font-weight:800;cursor:pointer;">x</button>' +
+      '</div>';
+    container.parentNode.insertBefore(board, container);
+  } else if (!shouldShowExploreBoard && exploreBoard) {
+    exploreBoard.remove();
+  }
+
   var currentFilter = (state.requestFilter || 'all');
   var filterDefs = [
     { key: 'all',       label: 'All',       icon: '📋' },
@@ -352,7 +372,12 @@ async function loadExpertData() {
     console.error('Load expert data error:', error);
   }
   
-  switchTab('browse');
+  if (state.forceExpertProfileTab) {
+    switchTab('profile');
+    state.forceExpertProfileTab = false;
+  } else if (!state.currentTab || state.currentTab === 'browse') {
+    switchTab('browse');
+  }
 }
 
 async function refreshExpertDashboardStats() {
@@ -395,21 +420,61 @@ async function refreshExpertDashboardStats() {
 }
 // ─── BROWSE FILTER CHIPS RENDERER ───
 function renderBrowseFilterChips() {
-  const services = [
-    { value: 'all', label: 'All' },
-    ...WI_SERVICES.list.map(s => ({ value: s.value, label: s.icon + ' ' + s.label }))
-  ];
+  const services = WI_SERVICES.list.map(s => ({ value: s.value, label: s.icon + ' ' + s.label }));
   const activeFilter = state.browseServiceFilter || [];
-  return services.map(s => {
-    const isActive = s.value === 'all' ? activeFilter.length === 0 : activeFilter.includes(s.value);
-    return `<button class="browse-filter-chip" data-service="${s.value}" onclick="setBrowseFilter('${s.value}')"
-      style="padding:7px 16px;border:1.5px solid ${isActive ? 'var(--primary)' : 'var(--border)'};border-radius:20px;
-             background:${isActive ? 'var(--primary)' : 'transparent'};color:${isActive ? '#fff' : 'var(--text)'};
-             font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.2s;">
-      ${s.label}
-    </button>`;
-  }).join('');
+  const selectedText = activeFilter.length ? `${activeFilter.length} selected` : 'All services';
+  return `
+    <div style="position:relative;display:inline-block;">
+      <button id="browseServiceFilterButton" onclick="toggleBrowseServiceMenu(event)"
+        style="padding:9px 14px;border:1.5px solid ${activeFilter.length ? 'var(--primary)' : 'var(--border)'};border-radius:10px;background:var(--bg);color:${activeFilter.length ? 'var(--primary)' : 'var(--text)'};font-size:13px;font-weight:700;cursor:pointer;min-width:180px;text-align:left;">
+        Service: ${selectedText} <span style="float:right;">▾</span>
+      </button>
+      <div id="browseServiceMenu" onclick="event.stopPropagation()" style="display:none;position:fixed;z-index:9999;width:300px;max-height:360px;overflow:auto;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;box-shadow:0 18px 48px rgba(15,23,42,0.24);padding:8px;">
+        <div style="display:flex;gap:8px;padding:6px 6px 10px;border-bottom:1px solid var(--border);margin-bottom:6px;">
+          <button onclick="setBrowseFilter('all')" style="flex:1;padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--bg-gray);font-size:12px;font-weight:700;cursor:pointer;color:var(--text);">All</button>
+          <button onclick="state.browseServiceFilter=[];applyBrowseFilters();" style="flex:1;padding:7px;border:1px solid var(--border);border-radius:8px;background:transparent;font-size:12px;font-weight:700;cursor:pointer;color:var(--text-muted);">Clear</button>
+        </div>
+        ${services.map(s => `
+          <label style="display:flex;align-items:center;gap:10px;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='transparent'">
+            <input type="checkbox" ${activeFilter.includes(s.value) ? 'checked' : ''} onchange="setBrowseFilter('${s.value}')" style="width:16px;height:16px;">
+            <span>${s.label}</span>
+          </label>
+        `).join('')}
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      ${(activeFilter.length ? activeFilter : ['all']).map(v => {
+        const item = v === 'all' ? { label: 'All' } : services.find(s => s.value === v);
+        return `<span style="padding:7px 11px;border-radius:20px;background:rgba(252,128,25,0.1);color:var(--primary);font-size:12px;font-weight:700;">${item?.label || v}</span>`;
+      }).join('')}
+    </div>`;
 }
+
+function toggleBrowseServiceMenu(event) {
+  if (event) event.stopPropagation();
+  const menu = document.getElementById('browseServiceMenu');
+  const button = document.getElementById('browseServiceFilterButton');
+  if (!menu || !button) return;
+  if (menu.style.display === 'block') {
+    menu.style.display = 'none';
+    return;
+  }
+  const rect = button.getBoundingClientRect();
+  const width = 300;
+  const left = Math.min(Math.max(12, rect.left), window.innerWidth - width - 12);
+  const top = Math.min(rect.bottom + 8, window.innerHeight - 372);
+  menu.style.left = `${left}px`;
+  menu.style.top = `${Math.max(12, top)}px`;
+  menu.style.display = 'block';
+}
+
+document.addEventListener('click', function closeBrowseServiceMenu(event) {
+  const menu = document.getElementById('browseServiceMenu');
+  const button = document.getElementById('browseServiceFilterButton');
+  if (!menu || menu.style.display !== 'block') return;
+  if (menu.contains(event.target) || (button && button.contains(event.target))) return;
+  menu.style.display = 'none';
+});
 
 async function applyBrowseFilters() {
   PAGINATION.expertBrowse.page = 1;
@@ -537,6 +602,11 @@ function renderAvailableRequests() {
 
   // Filtering/sorting/search now done server-side
    let allRequests = state.availableRequests || [];
+
+const svcFilter = state.browseServiceFilter || [];
+if (svcFilter.length > 0) {
+  allRequests = allRequests.filter(r => svcFilter.includes(String(r.service || '').toLowerCase()));
+}
 
 // Client-side response count filter
 const rFilter = state.browseResponse || '';
@@ -806,9 +876,29 @@ async function showExpertRequestDetail(requestId) {
         <div style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px;">Service</div>
         <div style="font-size: 16px; font-weight: 600; color: var(--primary);">${req.service}</div>
       </div>
+
+      <div style="margin-bottom: 20px;">
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px;">Request Summary</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;">
+          ${[
+            ['Title', req.title],
+            ['Description', req.description],
+            ['Budget', req.budget ? '₹' + Number(req.budget).toLocaleString('en-IN') : 'Not shared'],
+            ['Timeline', req.timeline || answers.urgency || 'Flexible'],
+            ['Location', req.location || 'Online'],
+            ['Credits to unlock', (req.credits || 20) + ' credits'],
+            ['Responses', (req.currentApproaches || 0) + '/' + (req.maxApproaches || 5)]
+          ].map(([label, value]) => `
+            <div style="padding:12px;background:var(--bg-gray);border:1px solid var(--border);border-radius:10px;">
+              <div style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:5px;">${label}</div>
+              <div style="font-size:14px;color:var(--text);line-height:1.45;white-space:pre-wrap;">${value || 'Not shared'}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
       
       <div style="margin-bottom: 20px;">
-        <h3 style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px;">Client Requirements</h3>
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px;">Client Requirements (${Object.keys(answers).length})</h3>
         ${detailsHTML}
       </div>
       
@@ -1043,28 +1133,17 @@ let _chCurrentTab = 'purchase';
 
 function switchCreditsTab(tab) {
   _chCurrentTab = tab;
-  const purchaseTab = document.getElementById('chPurchaseTab');
-  const spentTab    = document.getElementById('chSpentTab');
-  const purchaseBtn = document.getElementById('chTabPurchase');
-  const spentBtn    = document.getElementById('chTabSpent');
-
-  if (tab === 'purchase') {
-    purchaseTab.style.display = 'block';
-    spentTab.style.display    = 'none';
-    purchaseBtn.style.background = 'var(--primary)';
-    purchaseBtn.style.color      = '#fff';
-    spentBtn.style.background    = 'transparent';
-    spentBtn.style.color         = 'var(--text-muted)';
-    loadCreditsHistory('purchase');
-  } else {
-    purchaseTab.style.display = 'none';
-    spentTab.style.display    = 'block';
-    spentBtn.style.background = 'var(--primary)';
-    spentBtn.style.color      = '#fff';
-    purchaseBtn.style.background = 'transparent';
-    purchaseBtn.style.color      = 'var(--text-muted)';
-    loadCreditsHistory('spent');
-  }
+  ['purchase', 'spent', 'ledger'].forEach(name => {
+    const pane = document.getElementById(name === 'purchase' ? 'chPurchaseTab' : name === 'spent' ? 'chSpentTab' : 'chLedgerTab');
+    const btn = document.getElementById(name === 'purchase' ? 'chTabPurchase' : name === 'spent' ? 'chTabSpent' : 'chTabLedger');
+    if (pane) pane.style.display = tab === name ? 'block' : 'none';
+    if (btn) {
+      btn.style.background = tab === name ? 'var(--primary)' : 'transparent';
+      btn.style.color = tab === name ? '#fff' : 'var(--text-muted)';
+    }
+  });
+  if (tab === 'ledger') loadCreditsLedger();
+  else loadCreditsHistory(tab);
 }
 
 async function loadCreditsHistory(type) {
@@ -1175,6 +1254,42 @@ function renderSpentHistory(transactions, container) {
 }
 
 // ─── UPDATE EXPERT PROFILE ───
+async function loadCreditsLedger() {
+  const container = document.getElementById('chLedgerList');
+  if (!container) return;
+  container.innerHTML = '<div style="text-align:center;padding:40px;"><div class="spinner"></div></div>';
+  try {
+    const res = await fetch(`${API_URL}/credits/ledger`, { headers: { 'Authorization': `Bearer ${state.token}` } });
+    const data = await res.json();
+    if (!data.success || !data.ledger.length) {
+      container.innerHTML = '<div style="text-align:center;padding:48px 20px;color:var(--text-muted);">No ledger entries yet</div>';
+      return;
+    }
+    const num = (v) => Number(v || 0).toLocaleString('en-IN');
+    container.innerHTML = `
+      <div style="overflow-x:auto;border:1.5px solid var(--border);border-radius:14px;background:var(--bg);">
+        <table style="width:100%;border-collapse:collapse;min-width:760px;font-size:13px;">
+          <thead><tr style="background:var(--bg-gray);color:var(--text-muted);text-transform:uppercase;font-size:11px;letter-spacing:.04em;">
+            <th style="padding:12px;text-align:left;">Date</th><th style="padding:12px;text-align:right;">Opening</th><th style="padding:12px;text-align:right;">Purchase</th><th style="padding:12px;text-align:right;">Spent</th><th style="padding:12px;text-align:right;">Refund</th><th style="padding:12px;text-align:right;">Bonus</th><th style="padding:12px;text-align:right;">Invite Bonus</th><th style="padding:12px;text-align:right;">Closing</th>
+          </tr></thead>
+          <tbody>${data.ledger.map(row => `
+            <tr style="border-top:1px solid var(--border);">
+              <td style="padding:12px;font-weight:700;color:var(--text);">${new Date(row.date).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })}</td>
+              <td style="padding:12px;text-align:right;color:var(--text);">${num(row.opening)}</td>
+              <td style="padding:12px;text-align:right;color:#16a34a;">${num(row.purchase)}</td>
+              <td style="padding:12px;text-align:right;color:#dc2626;">${num(row.spent)}</td>
+              <td style="padding:12px;text-align:right;color:#16a34a;">${num(row.refund)}</td>
+              <td style="padding:12px;text-align:right;color:#2563eb;">${num(row.bonus)}</td>
+              <td style="padding:12px;text-align:right;color:#7c3aed;">${num(row.inviteBonus)}</td>
+              <td style="padding:12px;text-align:right;font-weight:800;color:var(--primary);">${num(row.closing)}</td>
+            </tr>`).join('')}</tbody>
+        </table>
+      </div>`;
+  } catch (err) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load ledger</div>';
+  }
+}
+
 function updateExpertProfile() {
   const user = state.user;
   if (!user) return;
@@ -1292,6 +1407,8 @@ function openEditRequestModal(requestId) {
     { value: 'month',     label: 'Within a month' },
     { value: 'flexible',  label: 'Flexible / Just exploring' }
   ];
+  const budgetOpts = [];
+  for (let v = 1000; v <= 100000; v += 500) budgetOpts.push(v);
 
   const modal = document.createElement('div');
   modal.id = 'editRequestModal';
@@ -1326,8 +1443,10 @@ function openEditRequestModal(requestId) {
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
           <div>
             <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:6px;">Budget (₹)</label>
-            <input id="editReqBudget" type="number" value="${req.budget || ''}"
+            <select id="editReqBudget"
               style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;background:var(--bg);color:var(--text);box-sizing:border-box;">
+              ${budgetOpts.map(v => `<option value="${v}" ${Number(req.budget || 0) === v ? 'selected' : ''}>₹${v.toLocaleString('en-IN')}</option>`).join('')}
+            </select>
           </div>
           <div>
             <label style="font-size:13px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:6px;">Urgency</label>
@@ -1364,6 +1483,7 @@ async function saveEditedRequest(requestId) {
 
   if (!title)       { showToast('Title cannot be empty', 'error'); return; }
   if (!description) { showToast('Description cannot be empty', 'error'); return; }
+  if (!budget || Number(budget) < 1000) { showToast('Minimum request budget is ₹1,000', 'error'); return; }
 
   const btn = document.querySelector('#editRequestModal button[onclick*="saveEditedRequest"]');
   if (btn) { btn.disabled = true; btn.textContent = 'Saving...'; }

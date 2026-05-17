@@ -758,7 +758,23 @@ window.deleteCategoryData = function() {
 // 3. Add the full loadEmailNotifications function below
 // ═══════════════════════════════════════════════════════════
 /* ═══ REVENUE DASHBOARD ══════════════════════════════════ */
-  var _revChart = null, _revSvcChart = null;
+  var _revChart = null, _revSvcChart = null, _revMixChart = null, _revPaymentChart = null, _revFunnelChart = null;
+
+  function revMoney(n) {
+    return 'Rs. ' + (Number(n || 0)).toLocaleString('en-IN');
+  }
+
+  function revNum(n) {
+    return (Number(n || 0)).toLocaleString('en-IN');
+  }
+
+  function revDestroy(chart) {
+    if (chart) chart.destroy();
+  }
+
+  function revTable(rows, emptyText) {
+    return rows && rows.length ? rows.join('') : '<tr><td colspan="8" style="padding:14px;color:#888da0;">' + emptyText + '</td></tr>';
+  }
 
   window.loadRevenue = function loadRevenue() {
     var period = (g('revPeriod') || {}).value || 'month';
@@ -778,10 +794,21 @@ window.deleteCategoryData = function() {
         { label: 'Bonus Credits',      value: (s.bonus||0).toLocaleString(),                       color: '#f59e0b' },
         { label: 'Total Purchases',    value: (s.txCount||0).toLocaleString(),                     color: '#06b6d4' }
       ];
+      cards = [
+        { label: 'Amount Received', value: revMoney(s.amountReceived), sub: revNum(s.purchaseCount) + ' successful purchases', color: '#22c55e' },
+        { label: 'Average Order Value', value: revMoney(s.avgOrderValue), sub: revNum(s.paidExperts) + ' paid experts', color: '#06b6d4' },
+        { label: 'Credits Purchased', value: revNum(s.purchased), sub: 'Net credits: ' + revNum(s.netCredits), color: '#3b82f6' },
+        { label: 'Credits Spent', value: revNum(s.spent), sub: revNum(s.totalApproaches) + ' approaches', color: '#FC8019' },
+        { label: 'Refunds / Bonus', value: revNum(s.refunded) + ' / ' + revNum(s.bonus), sub: 'Invite bonus: ' + revNum(s.inviteBonus), color: '#a855f7' },
+        { label: 'Open / Completed Posts', value: revNum(s.openRequests) + ' / ' + revNum(s.completedRequests), sub: 'Purged: ' + revNum(s.purgedRequests), color: '#f59e0b' },
+        { label: 'Refund Rate', value: revNum(s.refundRate) + '%', sub: revNum(s.refundCount) + ' refund transactions', color: '#ef4444' },
+        { label: 'Total Transactions', value: revNum(s.txCount), sub: 'All credit ledger rows', color: '#84cc16' }
+      ];
       g('revSummary').innerHTML = cards.map(function(c) {
         return '<div style="background:#18181d;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;">' +
           '<div style="font-size:12px;color:#a0a0b8;margin-bottom:6px;">' + c.label + '</div>' +
           '<div style="font-size:22px;font-weight:700;color:' + c.color + '">' + c.value + '</div>' +
+          '<div style="font-size:11px;color:#777b8d;margin-top:6px;">' + (c.sub || '') + '</div>' +
           '</div>';
       }).join('');
 
@@ -820,6 +847,49 @@ window.deleteCategoryData = function() {
       });
 
       // ── Service breakdown ──
+      var palette = ['#FC8019','#3b82f6','#22c55e','#f59e0b','#a855f7','#06b6d4','#ef4444','#84cc16'];
+      var mixCtx = g('revMixChart');
+      if (mixCtx) {
+        revDestroy(_revMixChart);
+        var mix = d.creditMix || [];
+        _revMixChart = new Chart(mixCtx, {
+          type: 'doughnut',
+          data: { labels: mix.map(function(r){ return r.label; }), datasets: [{ data: mix.map(function(r){ return r.value || 0; }), backgroundColor: palette }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#a0a0b8' } } } }
+        });
+      }
+
+      var payCtx = g('revPaymentChart');
+      if (payCtx) {
+        revDestroy(_revPaymentChart);
+        var pay = d.paymentStatus || [];
+        _revPaymentChart = new Chart(payCtx, {
+          type: 'pie',
+          data: { labels: pay.map(function(r){ return (r._id || 'unknown').toUpperCase(); }), datasets: [{ data: pay.map(function(r){ return r.amount || r.count || 0; }), backgroundColor: palette }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#a0a0b8' } } } }
+        });
+      }
+
+      var funnelCtx = g('revFunnelChart');
+      if (funnelCtx) {
+        revDestroy(_revFunnelChart);
+        var funnel = d.funnel || [];
+        _revFunnelChart = new Chart(funnelCtx, {
+          type: 'bar',
+          data: { labels: funnel.map(function(r){ return r.label; }), datasets: [{ label: 'Count', data: funnel.map(function(r){ return r.value || 0; }), backgroundColor: palette }] },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { ticks: { color: '#a0a0b8' }, grid: { color: 'rgba(255,255,255,.05)' } },
+              y: { ticks: { color: '#a0a0b8' }, grid: { color: 'rgba(255,255,255,.05)' } }
+            }
+          }
+        });
+      }
+
       var bs = d.byService || [];
       var svcLabels = bs.map(function(r) { return (r._id||'Other').toUpperCase(); });
       var svcData   = bs.map(function(r) { return r.totalCredits || 0; });
@@ -837,8 +907,8 @@ window.deleteCategoryData = function() {
           },
           options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: svcType==='pie', labels: { color: '#a0a0b8' } } },
-            scales: svcType === 'pie' ? {} : {
+            plugins: { legend: { display: svcType==='pie' || svcType==='doughnut', labels: { color: '#a0a0b8' } } },
+            scales: (svcType === 'pie' || svcType === 'doughnut') ? {} : {
               x: { ticks: { color: '#a0a0b8' }, grid: { color: 'rgba(255,255,255,.05)' } },
               y: { ticks: { color: '#a0a0b8' }, grid: { color: 'rgba(255,255,255,.05)' } }
             }
@@ -853,6 +923,9 @@ window.deleteCategoryData = function() {
           '<th style="text-align:left;padding:8px 6px;color:#a0a0b8;border-bottom:1px solid rgba(255,255,255,.07);">Service</th>' +
           '<th style="text-align:right;padding:8px 6px;color:#a0a0b8;border-bottom:1px solid rgba(255,255,255,.07);">Experts</th>' +
           '<th style="text-align:right;padding:8px 6px;color:#a0a0b8;border-bottom:1px solid rgba(255,255,255,.07);">Requests</th>' +
+          '<th style="text-align:right;padding:8px 6px;color:#a0a0b8;border-bottom:1px solid rgba(255,255,255,.07);">Approaches</th>' +
+          '<th style="text-align:right;padding:8px 6px;color:#a0a0b8;border-bottom:1px solid rgba(255,255,255,.07);">Credits</th>' +
+          '<th style="text-align:right;padding:8px 6px;color:#a0a0b8;border-bottom:1px solid rgba(255,255,255,.07);">Conv.</th>' +
           '<th style="text-align:right;padding:8px 6px;color:#a0a0b8;border-bottom:1px solid rgba(255,255,255,.07);">Share</th>' +
         '</tr></thead><tbody>' +
         bs.map(function(r,i) {
@@ -864,6 +937,9 @@ window.deleteCategoryData = function() {
             '</td>' +
             '<td style="padding:8px 6px;text-align:right;color:#22c55e;font-weight:600;">' + (r.expertCount||0) + '</td>' +
             '<td style="padding:8px 6px;text-align:right;color:#a0a0b8;">' + (r.count||0) + '</td>' +
+            '<td style="padding:8px 6px;text-align:right;color:#a0a0b8;">' + (r.approachCount||0) + '</td>' +
+            '<td style="padding:8px 6px;text-align:right;color:#a0a0b8;">' + (r.approachCredits||r.totalCredits||0) + '</td>' +
+            '<td style="padding:8px 6px;text-align:right;color:#f0f0f4;font-weight:600;">' + (r.conversionRate||0) + '%</td>' +
             '<td style="padding:8px 6px;text-align:right;">' +
               '<div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;">' +
                 '<div style="width:60px;height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">' +
@@ -875,6 +951,37 @@ window.deleteCategoryData = function() {
           '</tr>';
         }).join('') +
         '</tbody></table>';
+
+      var txRows = (d.recentTransactions || []).map(function(tx) {
+        var user = tx.user || {};
+        var service = tx.relatedRequest && tx.relatedRequest.service ? tx.relatedRequest.service.toUpperCase() : '-';
+        var color = tx.type === 'purchase' ? '#22c55e' : tx.type === 'spent' ? '#FC8019' : tx.type === 'refund' ? '#a855f7' : '#f59e0b';
+        return '<tr>' +
+          '<td style="padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.06);color:#f0f0f4;">' + (user.name || user.email || 'Unknown') + '<div style="font-size:11px;color:#777b8d;">' + (user.email || '') + '</div></td>' +
+          '<td style="padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.06);color:' + color + ';font-weight:700;">' + (tx.type || '-').toUpperCase() + '</td>' +
+          '<td style="padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-align:right;color:#f0f0f4;">' + revNum(tx.amount) + '</td>' +
+          '<td style="padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.06);color:#a0a0b8;">' + service + '</td>' +
+          '<td style="padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-align:right;color:#a0a0b8;">' + (tx.createdAt ? new Date(tx.createdAt).toLocaleDateString('en-IN') : '-') + '</td>' +
+        '</tr>';
+      });
+      if (g('revRecentTx')) {
+        g('revRecentTx').innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:13px;">' +
+          '<thead><tr><th style="text-align:left;padding:8px;color:#777b8d;">User</th><th style="text-align:left;padding:8px;color:#777b8d;">Type</th><th style="text-align:right;padding:8px;color:#777b8d;">Credits</th><th style="text-align:left;padding:8px;color:#777b8d;">Service</th><th style="text-align:right;padding:8px;color:#777b8d;">Date</th></tr></thead>' +
+          '<tbody>' + revTable(txRows, 'No credit transactions yet') + '</tbody></table>';
+      }
+
+      var spenderRows = (d.topExpertsBySpend || []).map(function(expert, idx) {
+        return '<tr>' +
+          '<td style="padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.06);color:#f0f0f4;font-weight:700;">#' + (idx + 1) + ' ' + (expert.name || 'Expert') + '<div style="font-size:11px;color:#777b8d;font-weight:400;">' + (expert.email || '') + '</div></td>' +
+          '<td style="padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-align:right;color:#FC8019;font-weight:700;">' + revNum(expert.spent) + '</td>' +
+          '<td style="padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-align:right;color:#a0a0b8;">' + revNum(expert.unlocks) + '</td>' +
+        '</tr>';
+      });
+      if (g('revTopExperts')) {
+        g('revTopExperts').innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:13px;">' +
+          '<thead><tr><th style="text-align:left;padding:8px;color:#777b8d;">Expert</th><th style="text-align:right;padding:8px;color:#777b8d;">Spent</th><th style="text-align:right;padding:8px;color:#777b8d;">Unlocks</th></tr></thead>' +
+          '<tbody>' + revTable(spenderRows, 'No expert spending yet') + '</tbody></table>';
+      }
 
     }).catch(function(e) { console.error('Revenue err:', e); });
   }

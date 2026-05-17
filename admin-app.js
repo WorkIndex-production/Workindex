@@ -95,20 +95,53 @@
   // ─── ADMIN INACTIVITY LOGOUT (30 minutes) ───
   var _adminInactivityTimer = null;
   var ADMIN_INACTIVITY_TIMEOUT = 30 * 60 * 1000;
+  var ADMIN_LAST_ACTIVE_KEY = 'wiAdminLastActiveAt';
+  var _adminWatcherStarted = false;
+
+  function clearAdminLoginFields() {
+    ['liId', 'liPw'].forEach(function(id) {
+      var el = g(id);
+      if (el) el.value = '';
+    });
+    if (g('lerr')) g('lerr').textContent = '';
+  }
+
+  function clearAdminSession() {
+    localStorage.removeItem('admTok');
+    localStorage.removeItem('admData');
+    localStorage.removeItem(ADMIN_LAST_ACTIVE_KEY);
+    tok = '';
+    adm = null;
+  }
+
+  function adminSessionExpired() {
+    if (!tok) return false;
+    var lastActive = Number(localStorage.getItem(ADMIN_LAST_ACTIVE_KEY) || '0');
+    return lastActive > 0 && Date.now() - lastActive >= ADMIN_INACTIVITY_TIMEOUT;
+  }
 
   function resetAdminTimer() {
     if (!tok) return;
+    localStorage.setItem(ADMIN_LAST_ACTIVE_KEY, String(Date.now()));
     clearTimeout(_adminInactivityTimer);
     _adminInactivityTimer = setTimeout(function() {
-      doLogout();
+      doLogout(true);
       alert('Session expired due to inactivity. Please log in again.');
     }, ADMIN_INACTIVITY_TIMEOUT);
   }
 
   function startAdminInactivity() {
-    ['mousemove','mousedown','keydown','touchstart','scroll','click'].forEach(function(ev) {
-      window.addEventListener(ev, resetAdminTimer, { passive: true });
-    });
+    if (adminSessionExpired()) {
+      doLogout(true);
+      alert('Session expired due to inactivity. Please log in again.');
+      return;
+    }
+    if (!_adminWatcherStarted) {
+      ['mousemove','mousedown','keydown','touchstart','scroll','click'].forEach(function(ev) {
+        window.addEventListener(ev, resetAdminTimer, { passive: true });
+      });
+      _adminWatcherStarted = true;
+    }
     resetAdminTimer();
   }
 
@@ -126,6 +159,7 @@
 
   /* ═══ INIT ═══════════════════════════════════════════════════════════════ */
   function init() {
+    if (adminSessionExpired()) { clearAdminSession(); }
     if (tok && adm) { showApp(); }
     g('loginBtn').onclick = doLogin;
     g('liPw').onkeydown = function(e) { if (e.key === 'Enter') doLogin(); };
@@ -379,6 +413,8 @@
           tok = r.token; adm = r.admin;
           localStorage.setItem('admTok', tok);
           localStorage.setItem('admData', JSON.stringify(adm));
+          localStorage.setItem(ADMIN_LAST_ACTIVE_KEY, String(Date.now()));
+          clearAdminLoginFields();
           showApp();
         } else { g('lerr').textContent = r.message || 'Invalid credentials'; }
       })
@@ -422,12 +458,16 @@
     loadDashboard();
   }
 
-  function doLogout() {
+  function doLogout(expired) {
     stopAdminInactivity();
-    localStorage.removeItem('admTok'); localStorage.removeItem('admData');
-    tok = ''; adm = null;
+    clearAdminSession();
+    clearAdminLoginFields();
     g('appWrap').style.display = 'none';
     g('loginWrap').style.display = 'flex';
+    if (expired && g('lerr')) {
+      g('lerr').style.color = '#ef4444';
+      g('lerr').textContent = 'Session expired. Please log in again.';
+    }
   }
 
   /* ═══ API ════════════════════════════════════════════════════════════════ */

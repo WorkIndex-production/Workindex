@@ -34,6 +34,11 @@
           <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Credits</th><th>Rating</th><th>Score</th><th>Status</th><th>Joined</th><th></th></tr></thead><tbody id="eTbl"></tbody></table></div>
         </div>
       </div>
+      <div class="sec" id="sec-boosts">
+        <div class="card"><div class="ch"><h3>Expert Ranking Boosts</h3><div class="fbar"><button class="abtn" id="boostRefresh">Refresh</button></div></div>
+          <div class="tw"><table><thead><tr><th>Rank</th><th>Expert</th><th>Rating</th><th>Approaches</th><th>Profile</th><th>Admin Boost</th><th>Combined Score</th><th>Profile Views</th><th>Action</th></tr></thead><tbody id="boostTbl"></tbody></table></div>
+        </div>
+      </div>
       <div class="sec" id="sec-clients">
         <div class="card"><div class="ch"><h3>All Clients</h3><div class="fbar"><input type="text" id="cSrch" placeholder="Search..."></div></div>
           <div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Status</th><th>Joined</th><th></th></tr></thead><tbody id="cTbl"></tbody></table></div>
@@ -70,7 +75,7 @@
       <div class="sec" id="sec-posts">
         <div class="card"><div class="ch"><h3>User Posts / Requests</h3><div class="fbar">
           <input type="text" id="poSrch" placeholder="Search posts..." style="width:185px">
-          <select id="poSt"><option value="all">All Status</option><option value="pending">Pending</option><option value="active">Active</option><option value="completed">Completed</option><option value="closed">Closed</option><option value="cancelled">Cancelled</option></select>
+          <select id="poSt"><option value="all">All Status</option><option value="pending">Pending</option><option value="active">Active</option><option value="completed">Completed</option><option value="closed">Closed</option><option value="cancelled">Cancelled</option><option value="purged">Purged</option></select>
         </div></div>
           <div class="tw"><table><thead><tr><th>Title</th><th>Client</th><th>Service</th><th>Budget</th><th>Status</th><th>Credits</th><th>Date</th><th></th></tr></thead><tbody id="poTbl"></tbody></table></div>
         </div>

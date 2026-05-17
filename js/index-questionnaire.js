@@ -248,11 +248,12 @@ function renderQuestion() {
     WI_SERVICES.list.forEach(svc => {
       const isSelected = qState.answers['service'] === svc.value;
       html += `
-        <div data-question-key="service" data-option-value="${svc.value}" class="questionnaire-option"
-          style="padding: 20px 16px; border: 2px solid ${isSelected ? 'var(--primary)' : 'var(--border)'}; border-radius: 12px; cursor: pointer; background: ${isSelected ? 'rgba(252,128,25,0.06)' : 'var(--bg)'}; text-align: center; transition: all 0.2s;">
-          <div style="font-size: 36px; margin-bottom: 8px;">${svc.icon}</div>
-          <div style="font-size: 14px; font-weight: 700; color: var(--text);">${svc.label}</div>
-        </div>`;
+        <button type="button" data-question-key="service" data-option-value="${svc.value}" class="service-picker-option"
+          style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:112px;padding:20px 16px;border:2px solid ${isSelected ? 'var(--primary)' : 'var(--border)'};border-radius:12px;cursor:pointer;background:${isSelected ? 'rgba(252,128,25,0.06)' : 'var(--bg)'};text-align:center;transition:all 0.2s;width:100%;font-family:inherit;">
+          <span style="font-size:36px;line-height:1;">${svc.icon}</span>
+          <span style="display:block;font-size:15px;font-weight:800;color:var(--text);line-height:1.25;white-space:normal;">${svc.label}</span>
+          <span style="display:${isSelected ? 'inline-flex' : 'none'};font-size:12px;font-weight:800;color:var(--primary);">Selected</span>
+        </button>`;
     });
     html += '</div>';
   }
@@ -493,6 +494,13 @@ function attachQuestionnaireListeners() {
       selectSingleOption(key, value);
     });
   });
+  document.querySelectorAll('.service-picker-option').forEach(option => {
+    option.addEventListener('click', function() {
+      const key = this.getAttribute('data-question-key');
+      const value = this.getAttribute('data-option-value');
+      selectSingleOption(key, value);
+    });
+  });
   
   // Multi select options
   document.querySelectorAll('.questionnaire-multi-option').forEach(option => {
@@ -510,6 +518,7 @@ function selectSingleOption(key, value) {
   // If service selected, rebuild sequence
   if (key === 'service') {
     qState.sequence = buildQuestionSequence();
+    qState.step = Math.min(qState.step + 1, qState.sequence.length - 1);
   }
   // If location type selected, rebuild to add/remove address
   else if (key === 'service_location_type') {
@@ -940,9 +949,14 @@ function getBudgetGuide(answers) {
 // ─── GUIDE CARD BUILDER ──────────────────────────────────────────────────────
 function guide(title, range, note, tips) {
   var tipsHtml = tips.map(function(t) {
+    var chars = Array.from(String(t || '').trim());
+    var first = chars[0] || '•';
+    var isEmoji = first.charCodeAt(0) > 127;
+    var icon = isEmoji ? first : '★';
+    var text = isEmoji ? chars.slice(1).join('').trim() : chars.join('').trim();
     return '<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;">' +
-           '<span style="flex-shrink:0;margin-top:1px;">' + t.charAt(0) + '</span>' +
-           '<span style="font-size:13px;color:var(--text);line-height:1.5;">' + t.slice(1) + '</span></div>';
+           '<span style="flex-shrink:0;margin-top:1px;color:var(--primary);">' + icon + '</span>' +
+           '<span style="font-size:13px;color:var(--text);line-height:1.5;">' + text + '</span></div>';
   }).join('');
   return '<div id="budgetGuideBox" style="margin-top:16px;border-radius:14px;overflow:hidden;border:1.5px solid rgba(252,128,25,0.3);">' +
     '<div style="background:rgba(252,128,25,0.1);padding:14px 16px;border-bottom:1px solid rgba(252,128,25,0.15);">' +
@@ -972,6 +986,24 @@ function normalizeClientRequestAnswers(answers) {
   delete normalized.clientLocation;
   delete normalized.serviceLocationType;
   return normalized;
+}
+
+function normalizeExpertProfileAnswers(answers) {
+  const profile = { ...(answers || {}) };
+  if (profile.expert_services && !profile.servicesOffered) profile.servicesOffered = profile.expert_services;
+  if (profile.expert_specialization && !profile.specialization) profile.specialization = profile.expert_specialization;
+  if (profile.expert_experience && !profile.experience) profile.experience = profile.expert_experience;
+  if (profile.expert_location && !profile.serviceLocationType) profile.serviceLocationType = profile.expert_location;
+  if (profile.expert_business_type && !profile.businessType) profile.businessType = profile.expert_business_type;
+  if (profile.expert_team_size && !profile.teamSize) profile.teamSize = profile.expert_team_size;
+  if (profile.expert_bio && !profile.bio) profile.bio = profile.expert_bio;
+  const loc = profile.expert_location_details;
+  if (loc && typeof loc === 'object') {
+    if (!profile.city) profile.city = loc.city || '';
+    if (!profile.state) profile.state = loc.state || '';
+    if (!profile.pincode) profile.pincode = loc.pincode || '';
+  }
+  return profile;
 }
 
 function getClientRequestAddress(answers) {
@@ -1204,18 +1236,21 @@ async function submitQuestionnaire() {
           'Authorization': `Bearer ${state.token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ profile: qState.answers })
+        body: JSON.stringify({ profile: normalizeExpertProfileAnswers(qState.answers) })
       });
       
       const data = await res.json();
       if (data.success) {
-        state.user = { ...state.user, profile: qState.answers };
+        const expertProfile = normalizeExpertProfileAnswers(qState.answers);
+        state.user = { ...state.user, ...(data.user || {}), profile: expertProfile, questionnaireCompleted: true };
         localStorage.setItem('user', JSON.stringify(state.user));
         showToast('Profile completed successfully!', 'success');
-document.getElementById('questionnaire').classList.remove('active');
-showPage('expertDash');
-loadExpertData();
-                setTimeout(() => showExpertWelcomeModal(), 800);
+        document.getElementById('questionnaire')?.classList.remove('active');
+        showPage('expertDash');
+        loadExpertData();
+        setTimeout(function() {
+          if (typeof showExpertWelcomeModal === 'function') showExpertWelcomeModal();
+        }, 500);
       } else {
         showToast(data.message || 'Failed to update profile', 'error');
       }
@@ -1228,6 +1263,11 @@ loadExpertData();
     // Create client request
     try {
       const requestAnswers = normalizeClientRequestAnswers(qState.answers);
+      const requestBudget = Number(requestAnswers.budget || 0);
+      if (requestBudget < 1000) {
+        showToast('Minimum request budget is ₹1,000', 'error');
+        return;
+      }
       // Save location to client profile too
       const locationData = {};
       if (requestAnswers.full_address) locationData.fullAddress = requestAnswers.full_address;
@@ -1254,6 +1294,41 @@ loadExpertData();
       
       const title = serviceLabels[service] || 'Professional Service Request';
       const description = requestAnswers.description || 'Request details in questionnaire';
+
+      if (state.directInviteExpert && state.directInviteExpert.id) {
+        const inviteRes = await fetch(`${API_URL}/users/expert-invites`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${state.token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            expertId: state.directInviteExpert.id,
+            service,
+            title,
+            description,
+            answers: requestAnswers,
+            timeline: requestAnswers.urgency || 'flexible',
+            budget: requestBudget,
+            location: formatClientRequestLocation(requestAnswers)
+          })
+        });
+        const inviteData = await inviteRes.json();
+        if (inviteData.success) {
+          const expertName = state.directInviteExpert.name || 'expert';
+          state.directInviteExpert = null;
+          showToast(`Expert invite sent to ${expertName}`, 'success');
+          document.getElementById('questionnaire')?.classList.remove('active');
+          showPage('clientDash');
+          setTimeout(function() {
+            switchTab('explore');
+            filterClientExplore('invites');
+          }, 250);
+          return;
+        }
+        showToast(inviteData.message || 'Failed to send expert invite', 'error');
+        return;
+      }
       
       const res = await fetch(`${API_URL}/requests`, {
         method: 'POST',
@@ -1267,7 +1342,7 @@ loadExpertData();
           description,
           answers: requestAnswers,
           timeline: requestAnswers.urgency || 'flexible',
-          budget: requestAnswers.budget || 5000,
+          budget: requestBudget,
           location: formatClientRequestLocation(requestAnswers)
         })
       });

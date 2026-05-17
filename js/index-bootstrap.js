@@ -47,7 +47,7 @@
     '/js/08-pagination-onboarding.js'
   ];
 
-  const assetVersion = '20260509-profile-search-audit-5';
+  const assetVersion = '20260517-inactivity-session-1';
   for (const src of scripts) {
     await new Promise((resolve) => {
       const script = document.createElement('script');

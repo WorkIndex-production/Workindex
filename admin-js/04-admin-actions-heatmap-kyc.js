@@ -145,9 +145,9 @@
     _hmState = null;
     g('hmCrumbs').innerHTML = '<span class="hm-crumb" data-level="country">India</span>';
 
-    // Load users for heatmap - try up to 500 at a time
+    // Load a larger user slice for production heatmap coverage.
     var hmRole = role === 'all' ? '' : role;
-    var hmQs = '?limit=500' + (hmRole ? '&role=' + hmRole : '') + (dF ? '&from=' + dF : '') + (dT ? '&to=' + dT : '');
+    var hmQs = '?limit=5000' + (hmRole ? '&role=' + hmRole : '') + (dF ? '&from=' + dF : '') + (dT ? '&to=' + dT : '');
     fetch(API + '/users' + hmQs, { headers: { Authorization: 'Bearer ' + tok } })
       .then(function(r) { return r.json(); })
       .then(function(d) {
@@ -211,6 +211,18 @@
   if (city && !state) {
     var cityStateMap = {
       'Bengaluru': 'Karnataka', 'Bangalore': 'Karnataka',
+      'Hubballi': 'Karnataka', 'Hubli': 'Karnataka', 'Dharwad': 'Karnataka',
+      'Shivamogga': 'Karnataka', 'Shimoga': 'Karnataka',
+      'Davanagere': 'Karnataka', 'Davangere': 'Karnataka',
+      'Mangaluru': 'Karnataka', 'Mangalore': 'Karnataka',
+      'Udupi': 'Karnataka', 'Belagavi': 'Karnataka', 'Belgaum': 'Karnataka',
+      'Ballari': 'Karnataka', 'Bellary': 'Karnataka',
+      'Tumakuru': 'Karnataka', 'Tumkur': 'Karnataka',
+      'Hassan': 'Karnataka', 'Mandya': 'Karnataka', 'Kolar': 'Karnataka',
+      'Kalaburagi': 'Karnataka', 'Gulbarga': 'Karnataka',
+      'Vijayapura': 'Karnataka', 'Bijapur': 'Karnataka',
+      'Raichur': 'Karnataka', 'Bidar': 'Karnataka',
+      'Chitradurga': 'Karnataka', 'Chikkamagaluru': 'Karnataka', 'Chikmagalur': 'Karnataka',
       'Mumbai': 'Maharashtra', 'Pune': 'Maharashtra',
       'Nagpur': 'Maharashtra', 'Nashik': 'Maharashtra',
       'Delhi': 'Delhi', 'New Delhi': 'Delhi',
@@ -269,6 +281,18 @@
     'Lucknow':[26.847,80.947],'Chandigarh':[30.733,76.779],'Kochi':[9.931,76.267],
     'Bhopal':[23.260,77.413],'Nagpur':[21.145,79.082],'Coimbatore':[11.016,76.956],
     'Mysuru':[12.296,76.644],'Mysore':[12.296,76.644],'Indore':[22.719,75.857],
+    'Hubballi':[15.364,75.124],'Hubli':[15.364,75.124],'Dharwad':[15.458,75.008],
+    'Shivamogga':[13.929,75.568],'Shimoga':[13.929,75.568],
+    'Davanagere':[14.464,75.922],'Davangere':[14.464,75.922],
+    'Mangaluru':[12.914,74.856],'Mangalore':[12.914,74.856],
+    'Udupi':[13.341,74.742],'Belagavi':[15.849,74.498],'Belgaum':[15.849,74.498],
+    'Ballari':[15.139,76.921],'Bellary':[15.139,76.921],
+    'Tumakuru':[13.340,77.102],'Tumkur':[13.340,77.102],
+    'Hassan':[13.006,76.099],'Mandya':[12.524,76.895],'Kolar':[13.136,78.129],
+    'Kalaburagi':[17.329,76.834],'Gulbarga':[17.329,76.834],
+    'Vijayapura':[16.830,75.710],'Bijapur':[16.830,75.710],
+    'Raichur':[16.207,77.346],'Bidar':[17.914,77.530],
+    'Chitradurga':[14.230,76.398],'Chikkamagaluru':[13.316,75.772],'Chikmagalur':[13.316,75.772],
     'Patna':[25.594,85.137],'Vadodara':[22.307,73.181],'Visakhapatnam':[17.686,83.218],
     'Gurgaon':[28.459,77.026],'Gurugram':[28.459,77.026],'Noida':[28.535,77.391],
     'Agra':[27.176,78.008],'Varanasi':[25.320,82.974],'Thane':[19.218,72.978],

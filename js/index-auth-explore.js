@@ -35,6 +35,38 @@ function selectRole(role) {
   selectedRole = role;
   document.getElementById('roleClient').classList.toggle('active', role === 'client');
   document.getElementById('roleExpert').classList.toggle('active', role === 'expert');
+  const inviteField = document.getElementById('inviteCodeField');
+  if (inviteField) inviteField.style.display = role === 'expert' ? 'block' : 'none';
+}
+
+async function verifyInviteCodeInput() {
+  const input = document.getElementById('signupInviteCode');
+  const hint = document.getElementById('inviteCodeHint');
+  const code = (input?.value || '').trim().toUpperCase();
+  if (!hint) return true;
+  if (!code) { hint.textContent = ''; return true; }
+  hint.textContent = 'Checking invite code...';
+  try {
+    const res = await fetch(`${API_URL}/users/validate-invite`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ inviteCode: code })
+    });
+    if (!res.ok) {
+      hint.textContent = 'Invite code will be verified during signup';
+      hint.style.color = 'var(--text-muted)';
+      return true;
+    }
+    const data = await res.json();
+    const valid = !!(data.success && data.valid);
+    hint.textContent = valid ? 'Invite code verified' : (data.message || 'Invite code not found');
+    hint.style.color = valid ? '#16a34a' : '#ef4444';
+    return valid;
+  } catch (err) {
+    hint.textContent = 'Invite code will be verified during signup';
+    hint.style.color = 'var(--text-muted)';
+    return true;
+  }
 }
 
 // ─── SIGNUP STEPS ────────────────────────────────────────
@@ -49,6 +81,7 @@ async function handleSignup() {
   const email    = document.getElementById('signupEmail').value.trim();
   const phone    = document.getElementById('signupPhone').value.trim();
   const password = document.getElementById('signupPassword').value;
+  const inviteCode = (document.getElementById('signupInviteCode')?.value || '').trim().toUpperCase();
   if (!name || !email || !phone || !password) {
     showToast('Please fill all fields', 'error'); return;
   }
@@ -81,6 +114,10 @@ if (/[^a-zA-Z\s\.\-']/.test(name)) {
   if (password.length < 6) {
     showToast('Password must be at least 6 characters', 'error'); return;
   }
+  if (selectedRole === 'expert' && inviteCode) {
+    const inviteOk = await verifyInviteCodeInput();
+    if (!inviteOk) return;
+  }
   const btn = document.getElementById('signupSubmitBtn');
   btn.disabled    = true;
   btn.textContent = 'Sending OTP...';
@@ -88,7 +125,7 @@ if (/[^a-zA-Z\s\.\-']/.test(name)) {
     const res  = await fetch(`${API_URL}/auth/send-otp`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ name, email, phone, password, role: selectedRole })
+      body:    JSON.stringify({ name, email, phone, password, role: selectedRole, inviteCode })
     });
     const data = await res.json();
     if (data.success) {
@@ -150,7 +187,7 @@ async function handleVerifySignupOTP() {
         showPage('questionnaire');
         renderQuestion();
       } else if (data.user.role === 'expert') {
-        showExpertWelcomeModal();
+        startQuestionnaire('expert');
       } else if (!state._guestQuestionnaire) {
   startQuestionnaire(data.user.role);
 } else {
@@ -422,6 +459,10 @@ function showNewRequestForm() {
 }
 
 function exitQuestionnaire() {
+  if (expertNeedsMandatoryQuestionnaire(state.user)) {
+    showToast('Please complete the expert questionnaire before entering your dashboard.', 'error');
+    return;
+  }
   if (!confirm('Exit questionnaire? Progress will be lost.')) return;
   state._guestQuestionnaire = false;
   document.getElementById('questionnaire').classList.remove('active');

@@ -82,6 +82,65 @@
   }
 
   /* ═══ USER DRAWER ════════════════════════════════════════════════════════ */
+  function scoreForRanking(u) {
+    var profileScore = calculateAdminProfileStrength(u).score;
+    var ratingScore = Math.min(((Number(u.rating) || 0) / 5) * 30, 30);
+    var approachScore = Math.min((Number(u.totalApproaches) || 0) * 2, 20);
+    var adminBoost = Math.max(0, Math.min(Number(u.adminBoost || u.rankingBoost || 0), 50));
+    return Math.round(profileScore * 0.5 + ratingScore + approachScore + adminBoost);
+  }
+
+  function compareExpertRanking(a, b) {
+    var ar = Number(a.adminRank || 0);
+    var br = Number(b.adminRank || 0);
+    if (ar > 0 && br > 0 && ar !== br) return ar - br;
+    if (ar > 0 && !br) return -1;
+    if (!ar && br > 0) return 1;
+    return scoreForRanking(b) - scoreForRanking(a);
+  }
+
+  function loadBoosts() {
+    var refreshBtn = g('boostRefresh');
+    if (refreshBtn) refreshBtn.onclick = loadBoosts;
+    setT('boostTbl', spin());
+    api('expert-boosts').then(function(d) {
+      if (!d.success) { setT('boostTbl', ''); return; }
+      var experts = (d.experts || d.users || []).slice().sort(compareExpertRanking);
+      setT('boostTbl', experts.map(function(u) {
+        var profile = calculateAdminProfileStrength(u).score;
+        var boost = Number(u.adminBoost || u.rankingBoost || 0);
+        var rank = u.adminRank === null || u.adminRank === undefined ? '' : Number(u.adminRank || 0);
+        var combined = scoreForRanking(u);
+        return '<tr>' +
+          '<td><input type="number" min="1" id="rank_' + esc(u._id) + '" value="' + (rank || '') + '" placeholder="Auto" style="width:70px;padding:7px 8px;background:#18181d;border:1px solid #2a2a38;border-radius:6px;color:#f0f0f4"></td>' +
+          '<td>' + uLnk(u._id, u.name) + '<br><small style="color:#606078">' + esc(u.email || '') + '</small></td>' +
+          '<td style="color:#f59e0b">' + (u.rating ? Number(u.rating).toFixed(1) : '-') + '</td>' +
+          '<td>' + (u.totalApproaches || 0) + '</td>' +
+          '<td>' + profile + '</td>' +
+          '<td><input type="number" min="0" max="50" id="boost_' + esc(u._id) + '" value="' + boost + '" style="width:76px;padding:7px 8px;background:#18181d;border:1px solid #2a2a38;border-radius:6px;color:#f0f0f4"></td>' +
+          '<td><span class="badge ' + (combined >= 80 ? 'bgr' : combined >= 50 ? 'byw' : 'brd') + '">' + combined + '</span></td>' +
+          '<td>' + (u.profileViews || u.profileViewCount || 0) + '</td>' +
+          '<td><button class="btn bpri" style="font-size:12px;padding:6px 12px" onclick="saveExpertBoost(\'' + esc(u._id) + '\')">Save</button></td>' +
+        '</tr>';
+      }).join(''));
+    }).catch(function() { setT('boostTbl', ''); });
+  }
+
+  window.saveExpertBoost = function(uid) {
+    var input = g('boost_' + uid);
+    var rankInput = g('rank_' + uid);
+    var adminBoost = Math.max(0, Math.min(Number(input && input.value) || 0, 50));
+    var rawRank = rankInput ? String(rankInput.value || '').trim() : '';
+    var adminRank = rawRank ? Math.max(1, Number(rawRank) || 0) : null;
+    api('experts/' + uid + '/boost', 'PUT', { adminBoost: adminBoost, adminRank: adminRank }).then(function(d) {
+      if (d.success) { toast('Boost saved'); loadBoosts(); return; }
+      return api('users/' + uid, 'PUT', { adminBoost: adminBoost, adminRank: adminRank }).then(function(d2) {
+        if (d2.success) { toast('Boost saved'); loadBoosts(); }
+        else toast(d2.message || d.message || 'Failed to save boost', 'e');
+      });
+    }).catch(function() { toast('Failed to save boost', 'e'); });
+  };
+
   function openDr(uid) {
     if (!uid) return;
     g('ov1').classList.add('on'); g('dr1').classList.add('on');
@@ -107,12 +166,12 @@ function calculateAdminProfileStrength(u) {
   var experience     = pr.experience     || pr.expert_experience     || u.yearsOfExperience || '';
    var businessType   = pr.businessType   || pr.expert_business_type  || '';
   var teamSize       = pr.teamSize       || pr.expert_team_size       || '';
-  var gstNumber      = pr.gstNumber      || '';
-  var licenseNumber  = pr.licenseNumber  || '';
-  var certNum        = pr.certificationNumber || '';
-  var education      = pr.education      || '';
-  var portfolio      = pr.portfolio      || '';
-  var profAddress    = pr.professionalAddress || '';
+  var gstNumber      = pr.gstNumber      || pr.expert_gst_number || pr.gst_number || '';
+  var licenseNumber  = pr.licenseNumber  || pr.expert_license_number || pr.license_number || pr.professionalLicense || '';
+  var certNum        = pr.certificationNumber || pr.expert_certification_number || pr.certification_number || '';
+  var education      = pr.education      || pr.expert_education || '';
+  var portfolio      = pr.portfolio      || pr.expert_portfolio || '';
+  var profAddress    = pr.professionalAddress || pr.expert_professional_address || pr.professional_address || pr.address || '';
 
   var items = [
     { label: 'Profile photo',        done: !!u.profilePhoto,                     pts: 10 },
@@ -262,7 +321,11 @@ if (u.role === 'expert') {
    var businessType = pr.businessType || pr.expert_business_type || '';
 var teamSize = pr.teamSize || pr.expert_team_size || '';
   var website = u.websiteUrl||pr.websiteUrl||pr.website;
-  if (spec||comp||exp||avail||website) {
+  var gstNumber = pr.gstNumber || pr.expert_gst_number || pr.gst_number || '';
+  var licenseNumber = pr.licenseNumber || pr.expert_license_number || pr.license_number || pr.professionalLicense || '';
+  var certNum = pr.certificationNumber || pr.expert_certification_number || pr.certification_number || '';
+  var profAddress = pr.professionalAddress || pr.expert_professional_address || pr.professional_address || pr.address || '';
+  if (spec||comp||exp||avail||website||businessType||teamSize||gstNumber||licenseNumber||certNum||profAddress) {
     p0 += '<div style="background:#18181d;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:0">';
     p0 += '<div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:10px">Professional</div>';
     var proRows = [];
@@ -272,6 +335,10 @@ var teamSize = pr.teamSize || pr.expert_team_size || '';
     if (avail)   proRows.push(['Availability', esc(avail), '#22c55e']);
     if (businessType) proRows.push(['Business Type',  esc(businessType),'#f0f0f4']);
     if (teamSize)     proRows.push(['Team Size',       esc(teamSize),    '#f0f0f4']);
+    if (gstNumber)    proRows.push(['GST Number',      esc(gstNumber),   '#f0f0f4']);
+    if (licenseNumber) proRows.push(['Professional License', esc(licenseNumber), '#f0f0f4']);
+    if (certNum)      proRows.push(['Certification No.', esc(certNum), '#f0f0f4']);
+    if (profAddress)  proRows.push(['Professional Address', esc(profAddress), '#f0f0f4']);
      proRows.forEach(function(row, i) {
       p0 += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;' + (i<proRows.length-1||website?'border-bottom:1px solid #222230':'') + '"><span style="font-size:12px;color:#606078">' + row[0] + '</span><span style="font-size:13px;color:' + row[2] + ';font-weight:600">' + row[1] + '</span></div>';
     });
@@ -290,7 +357,7 @@ var teamSize = pr.teamSize || pr.expert_team_size || '';
   }
 
   // Bio
-  var bio = u.bio||pr.bio||pr.about;
+  var bio = u.bio||pr.bio||pr.expert_bio||pr.about;
   if (bio) {
     p0 += '<div style="background:#18181d;border-radius:10px;padding:14px 16px">';
     p0 += '<div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:10px">Bio</div>';
@@ -299,7 +366,7 @@ var teamSize = pr.teamSize || pr.expert_team_size || '';
   }
 
   // Why Choose Me
-  var why = u.whyChooseMe||pr.whyChooseMe;
+  var why = u.whyChooseMe||pr.whyChooseMe||pr.why_choose_me;
   if (why) {
     p0 += '<div style="background:#18181d;border-radius:10px;padding:14px 16px">';
     p0 += '<div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:10px">Why Choose Me</div>';
@@ -308,7 +375,7 @@ var teamSize = pr.teamSize || pr.expert_team_size || '';
   }
 
   // Education
-  var edu = u.education||pr.education;
+  var edu = u.education||pr.education||pr.expert_education;
   if (edu) {
     p0 += '<div style="background:#18181d;border-radius:10px;padding:14px 16px">';
     p0 += '<div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:10px">Education</div>';
@@ -317,7 +384,7 @@ var teamSize = pr.teamSize || pr.expert_team_size || '';
   }
 
   // Portfolio — stored as plain string in profile
-  var portfolioRaw = u.portfolio||pr.portfolio||'';
+  var portfolioRaw = u.portfolio||pr.portfolio||pr.expert_portfolio||'';
   var portfolioText = Array.isArray(portfolioRaw) ? portfolioRaw.map(function(l){ return typeof l==='string'?l:(l.url||l.title||''); }).join('\n') : portfolioRaw;
   if (portfolioText && portfolioText.trim()) {
     p0 += '<div style="background:#18181d;border-radius:10px;padding:14px 16px">';

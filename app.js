@@ -24,10 +24,35 @@ const state = {
 };
 // ─── INACTIVITY LOGOUT (30 minutes) ───
 const INACTIVITY_TIMEOUT = 30 * 60 * 1000;
+const INACTIVITY_LAST_ACTIVE_KEY = 'wiLastActiveAt';
 let inactivityTimer = null;
+let inactivityWatcherStarted = false;
+
+function clearStoredSession() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  localStorage.removeItem(INACTIVITY_LAST_ACTIVE_KEY);
+  state.token = null;
+  state.user = null;
+}
+
+function clearLoginInputs() {
+  if (typeof clearAuthForms === 'function') clearAuthForms();
+  ['loginEmail', 'loginPassword'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+}
+
+function storedSessionIsExpired() {
+  if (!state.token || !state.user) return false;
+  const lastActive = Number(localStorage.getItem(INACTIVITY_LAST_ACTIVE_KEY) || '0');
+  return lastActive > 0 && Date.now() - lastActive >= INACTIVITY_TIMEOUT;
+}
 
 function resetInactivityTimer() {
   if (!state.token || !state.user) return;
+  localStorage.setItem(INACTIVITY_LAST_ACTIVE_KEY, String(Date.now()));
   clearTimeout(inactivityTimer);
   inactivityTimer = setTimeout(() => {
     handleSessionExpired();
@@ -35,10 +60,17 @@ function resetInactivityTimer() {
 }
 
 function startInactivityWatcher() {
+  if (storedSessionIsExpired()) {
+    handleSessionExpired();
+    return;
+  }
   const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'click'];
-  events.forEach(event => {
-    window.addEventListener(event, resetInactivityTimer, { passive: true });
-  });
+  if (!inactivityWatcherStarted) {
+    events.forEach(event => {
+      window.addEventListener(event, resetInactivityTimer, { passive: true });
+    });
+    inactivityWatcherStarted = true;
+  }
   resetInactivityTimer();
 }
 
@@ -54,13 +86,12 @@ function handleSessionExpired() {
   notificationInterval = null;
   chatPollingInterval = null;
   currentChatId = null;
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
-  state.token = null;
-  state.user  = null;
+  clearStoredSession();
+  clearLoginInputs();
   showToast('Session expired due to inactivity. Please log in again.', 'error');
   setTimeout(() => {
-    showPage('landing');
+    showPage('auth');
+    if (typeof switchAuthMode === 'function') switchAuthMode('login');
   }, 1500);
 }
 
@@ -87,6 +118,9 @@ function toggleDarkMode() {
 
 // ─── NAVIGATION ─── 
 function showPage(pageId, pushState = true) {
+  if (pageId === 'auth' && !state.token) {
+    clearLoginInputs();
+  }
   if (pageId === 'questionnaire') {
     document.getElementById('questionnaire').classList.add('active');
     state.currentPage = pageId;
@@ -245,6 +279,8 @@ async function login(email, password, role) {  // ← accept role as parameter
       state.user = data.user;
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem(INACTIVITY_LAST_ACTIVE_KEY, String(Date.now()));
+      clearLoginInputs();
       if (data.user?.role === 'expert' && data.user?._id) {
         sessionStorage.removeItem('expertProfilePromptSkipped_' + data.user._id);
       }
@@ -274,6 +310,8 @@ async function register(formData) {
   state.user = data.user;
   localStorage.setItem('token', data.token);
   localStorage.setItem('user', JSON.stringify(state.user));
+  localStorage.setItem(INACTIVITY_LAST_ACTIVE_KEY, String(Date.now()));
+  clearLoginInputs();
   
   showToast('Registration successful!', 'success');
 if (state.user.role === 'expert') {
@@ -390,11 +428,8 @@ function logout() {
   currentChatId = null;
   if (browseAbortController) browseAbortController.abort();
   if (expertsAbortController) expertsAbortController.abort();
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
-  state.token = null;
-  state.user = null;
-  clearAuthForms();
+  clearStoredSession();
+  clearLoginInputs();
   showPage('landing');
   showToast('Logged out successfully', 'success');
 }
@@ -4155,6 +4190,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Route on initial load ──
   const initialPath = window.location.pathname;
 
+  if (storedSessionIsExpired()) {
+    handleSessionExpired();
+    return;
+  }
+
   if (state.token && state.user) {
   const authedRoutes = ['/settings', '/my-tickets', '/dashboard'];
   if (authedRoutes.includes(initialPath)) {
@@ -5796,8 +5836,13 @@ function showLandingServiceSuggestions(value) {
   const input = document.getElementById('landingServiceInput');
   if (input) delete input.dataset.service;
   const lower = String(value || '').trim().toLowerCase();
+  if (lower.length < 2) {
+    el.style.display = 'none';
+    el.innerHTML = '';
+    return;
+  }
   const items = getLandingServiceList()
-    .filter(s => !lower || s.label.toLowerCase().includes(lower) || String(s.value).includes(lower))
+    .filter(s => s.label.toLowerCase().includes(lower) || String(s.value).toLowerCase().includes(lower))
     .slice(0, 6)
     .map(s => ({ label: s.label, value: s.value, type: 'service', typeLabel: 'Service', icon: '-' }));
   if (!items.length) { el.style.display = 'none'; return; }
@@ -5824,7 +5869,13 @@ async function loadLandingLocationSuggestions(value) {
   const el = document.getElementById('landingLocationSuggestions');
   if (!el) return;
   try {
-    const q = encodeURIComponent(String(value || '').trim());
+    const raw = String(value || '').trim();
+    if (raw.length < 2) {
+      el.style.display = 'none';
+      el.innerHTML = '';
+      return;
+    }
+    const q = encodeURIComponent(raw);
     const res = await fetch(API_URL + '/users/location-suggestions?q=' + q);
     const data = await res.json();
     const items = (data.suggestions || []).slice(0, 6).map(s => ({
@@ -5855,13 +5906,17 @@ function initLandingSearchSuggestions() {
 
   if (serviceInput && !serviceInput.dataset.suggestionsBound) {
     serviceInput.dataset.suggestionsBound = '1';
-    serviceInput.addEventListener('focus', () => showLandingServiceSuggestions(serviceInput.value));
+    serviceInput.addEventListener('focus', () => {
+      if (serviceInput.value.trim().length >= 2) showLandingServiceSuggestions(serviceInput.value);
+    });
     serviceInput.addEventListener('input', () => showLandingServiceSuggestions(serviceInput.value));
   }
 
   if (locationInput && !locationInput.dataset.suggestionsBound) {
     locationInput.dataset.suggestionsBound = '1';
-    locationInput.addEventListener('focus', () => handleLandingLocationInput(locationInput.value));
+    locationInput.addEventListener('focus', () => {
+      if (locationInput.value.trim().length >= 2) handleLandingLocationInput(locationInput.value);
+    });
     locationInput.addEventListener('input', () => handleLandingLocationInput(locationInput.value));
   }
 }
@@ -7415,7 +7470,9 @@ function clearAuthForms() {
   // All auth field IDs
   ['loginEmail', 'loginPassword',
    'signupName', 'signupEmail', 'signupPhone', 'signupPassword', 'signupOTP',
-   'fpEmail', 'fpOTP', 'fpNewPassword', 'fpConfirmPassword'
+   'fpEmail', 'fpOTP', 'fpNewPassword', 'fpConfirmPassword',
+   'guestSignupName', 'guestSignupEmail', 'guestSignupPhone', 'guestSignupPassword',
+   'signupInviteCode'
   ].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';

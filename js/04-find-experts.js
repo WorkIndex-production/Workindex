@@ -26,7 +26,7 @@ Object.entries(filters).forEach(([k, v]) => {
     loading.style.display = 'none';
     
     if (data.success && data.experts.length > 0) {
-      state.experts = data.experts;
+      state.experts = sortExpertsByCombinedScore(data.experts);
       renderExperts();
     } else {
       empty.style.display = 'block';
@@ -37,6 +37,44 @@ Object.entries(filters).forEach(([k, v]) => {
     loading.style.display = 'none';
     empty.style.display = 'block';
   }
+}
+function expertProfileCompletenessScore(expert) {
+  const profile = expert.profile || {};
+  const fields = [
+    expert.profilePhoto,
+    profile.bio || expert.bio,
+    profile.specialization || expert.specialization,
+    profile.city || expert.location?.city,
+    profile.pincode || expert.location?.pincode,
+    profile.experience || expert.yearsOfExperience,
+    profile.servicesOffered || expert.servicesOffered,
+    profile.education,
+    profile.portfolio,
+    expert.kyc?.status === 'approved'
+  ];
+  const done = fields.filter(value => Array.isArray(value) ? value.length > 0 : !!value).length;
+  return Math.round((done / fields.length) * 100);
+}
+
+function expertCombinedRankingScore(expert) {
+  const profileScore = Number(expert.profileScore ?? expert.profileCompleteness ?? expertProfileCompletenessScore(expert)) || 0;
+  const ratingScore = Math.min(((Number(expert.rating) || 0) / 5) * 30, 30);
+  const approachScore = Math.min((Number(expert.totalApproaches) || 0) * 2, 20);
+  const adminBoost = Math.max(0, Math.min(Number(expert.adminBoost || expert.rankingBoost || 0), 50));
+  return Math.round(profileScore * 0.5 + ratingScore + approachScore + adminBoost);
+}
+
+function sortExpertsByCombinedScore(experts) {
+  return (experts || []).slice().sort((a, b) => {
+    const aRank = Number(a.adminRank || 0);
+    const bRank = Number(b.adminRank || 0);
+    if (aRank > 0 && bRank > 0 && aRank !== bRank) return aRank - bRank;
+    if (aRank > 0 && !bRank) return -1;
+    if (!aRank && bRank > 0) return 1;
+    const aScore = Number(a.combinedScore ?? a.rankingScore ?? expertCombinedRankingScore(a));
+    const bScore = Number(b.combinedScore ?? b.rankingScore ?? expertCombinedRankingScore(b));
+    return bScore - aScore;
+  });
 }
 function renderExperts() {
   const grid = document.getElementById('expertGrid');
@@ -397,6 +435,7 @@ async function viewExpertProfile(expertId, loggedIn = false) {
     showToast('Failed to load profile', 'error');
   }
 }
+
 // ─── PROFILE PHOTO UPLOAD ─── 
 async function uploadProfilePhoto(event) {
   const file = event.target.files[0];

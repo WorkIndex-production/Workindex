@@ -18,9 +18,116 @@ function openRatingModal(expertId, expertName, approachId, requestId) {
   document.getElementById('wouldRecommend').checked = true;
 }
 
+async function checkPendingRatingGate() {
+  if (!state.user || state.user.role !== 'client' || !state.token) return;
+  try {
+    const res = await fetch(`${API_URL}/ratings/pending/next`, {
+      headers: { 'Authorization': `Bearer ${state.token}` }
+    });
+    const data = await res.json();
+    if (data.success && data.pendingRating) {
+      showMandatoryRatingGate(data.pendingRating);
+    }
+  } catch (error) {
+    console.error('Pending rating gate error:', error);
+  }
+}
+
+function showMandatoryRatingGate(pending) {
+  state.ratingRequired = true;
+  state.pendingMandatoryRating = pending;
+  const old = document.getElementById('mandatoryRatingGate');
+  if (old) old.remove();
+  const modal = document.createElement('div');
+  modal.id = 'mandatoryRatingGate';
+  modal.className = 'modal-overlay open';
+  modal.innerHTML = `
+    <div class="modal-sheet" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">Rate Your Completed Request</h3>
+        <p class="modal-subtitle">${pending.requestTitle || 'Your last completed request'} is waiting for a review.</p>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.6;margin:0;">
+          Please rate ${pending.expertName || 'the expert'} before continuing to the dashboard.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" style="width:100%;" onclick="startMandatoryRating()">Rate Now</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+function startMandatoryRating() {
+  const pending = state.pendingMandatoryRating;
+  const gate = document.getElementById('mandatoryRatingGate');
+  if (gate) gate.remove();
+  if (!pending) return;
+  openRatingModal(pending.expertId, pending.expertName, pending.approachId, pending.requestId);
+}
+
+async function checkStaleRequestConfirmations() {
+  if (!state.user || state.user.role !== 'client' || !state.token) return;
+  try {
+    const res = await fetch(`${API_URL}/requests/stale-confirmations`, {
+      headers: { 'Authorization': `Bearer ${state.token}` }
+    });
+    const data = await res.json();
+    const request = data.success && data.requests && data.requests[0];
+    if (request) showStaleRequestConfirmation(request);
+  } catch (error) {
+    console.error('Stale request confirmation error:', error);
+  }
+}
+
+function showStaleRequestConfirmation(request) {
+  if (document.getElementById('staleRequestGate')) return;
+  const modal = document.createElement('div');
+  modal.id = 'staleRequestGate';
+  modal.className = 'modal-overlay open';
+  modal.innerHTML = `
+    <div class="modal-sheet" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">Still Need This Service?</h3>
+        <p class="modal-subtitle">${request.title || 'Your request'} has been open for a week.</p>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.6;margin:0;">
+          Confirm if you still want experts to see and approach this request. We will extend it for another 7 days.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" style="width:100%;" onclick="renewStaleRequest('${request._id}')">Yes, Keep It Active</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+async function renewStaleRequest(requestId) {
+  try {
+    const res = await fetch(`${API_URL}/requests/${requestId}/renew`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${state.token}`, 'Content-Type': 'application/json' }
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Unable to renew request');
+    const modal = document.getElementById('staleRequestGate');
+    if (modal) modal.remove();
+    showToast('Request extended for another 7 days', 'success');
+    if (typeof loadClientData === 'function') loadClientData();
+  } catch (error) {
+    console.error('Renew stale request error:', error);
+    showToast(error.message || 'Unable to renew request', 'error');
+  }
+}
 
 function closeRatingModal(event) {
   if (event && event.target !== event.currentTarget) return;
+  if (state.ratingRequired) {
+    showToast('Please submit the pending rating to continue', 'warning');
+    return;
+  }
   document.getElementById('ratingModal').classList.remove('open');
 }
 
@@ -92,6 +199,8 @@ async function submitRating() {
     
     if (data.success) {
       showToast('Review submitted successfully!', 'success');
+      state.ratingRequired = false;
+      state.pendingMandatoryRating = null;
       closeRatingModal();
       loadClientData(); // Refresh data
     } else {
@@ -125,6 +234,7 @@ async function loadMyRatings() {
 function renderMyRatings(data) {
   const container = document.getElementById('reviewsList');
   const emptyState = document.getElementById('reviewsEmpty');
+  ensureReviewSummaryLayout();
   
   // Update summary - FIXED to calculate from actual ratings
   if (data.total > 0 && data.ratings && data.ratings.length > 0) {
@@ -206,6 +316,23 @@ function renderMyRatings(data) {
       </div>
     </div>
   `).join('');
+}
+
+function ensureReviewSummaryLayout() {
+  const section = document.querySelector('#ratingsTab > .settings-section');
+  if (!section || section.dataset.googleStyle === '1') return;
+  section.dataset.googleStyle = '1';
+  section.innerHTML = `
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:28px;align-items:center;max-width:720px;">
+      <div id="ratingBars" class="rating-bars"></div>
+      <div style="text-align:center;border-left:1px solid var(--border);padding-left:24px;">
+        <div style="font-size:56px;font-weight:500;line-height:1;color:var(--text);" id="avgRating">0.0</div>
+        <div class="rating-stars" style="pointer-events:none;display:flex;justify-content:center;margin-top:10px;margin-bottom:6px;">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <div style="font-size:14px;color:var(--text-muted);" id="reviewCount">0 reviews</div>
+      </div>
+    </div>`;
 }
 
 function renderStars(rating) {
