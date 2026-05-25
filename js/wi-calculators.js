@@ -75,6 +75,24 @@
     return 0;
   }
 
+  function residentIndividual(taxpayer, resident) {
+    return taxpayer === 'individual' && resident === 'resident';
+  }
+
+  function rebate87A(regime, taxpayer, resident, normalIncome, slabTaxValue) {
+    if (!residentIndividual(taxpayer, resident)) return { rebate: 0, marginalRelief: 0 };
+    if (regime === 'old') {
+      return { rebate: normalIncome <= 500000 ? Math.min(12500, slabTaxValue) : 0, marginalRelief: 0 };
+    }
+    if (normalIncome <= 1200000) {
+      return { rebate: Math.min(60000, slabTaxValue), marginalRelief: 0 };
+    }
+    const excessOverRebateLimit = normalIncome - 1200000;
+    const taxAllowedAfterMarginalRelief = Math.max(0, excessOverRebateLimit);
+    const marginalRelief = Math.max(0, slabTaxValue - taxAllowedAfterMarginalRelief);
+    return { rebate: 0, marginalRelief };
+  }
+
   function calcIncome(values) {
     const regime = values.regime;
     const resident = values.resident;
@@ -88,17 +106,15 @@
     const ltcgTaxable = Math.max(0, values.ltcg112a - 125000);
     const specialTax = values.stcg111a * 0.20 + ltcgTaxable * 0.125 + values.ltcgOther * 0.125 + values.vda * 0.30;
     const totalIncome = normalIncome + values.stcg111a + values.ltcg112a + values.ltcgOther + values.vda;
-    let rebate = 0;
-    if (taxpayer === 'individual' && resident === 'resident') {
-      if (regime === 'new' && normalIncome <= 1200000) rebate = Math.min(60000, slabTaxValue);
-      if (regime === 'old' && normalIncome <= 500000) rebate = Math.min(12500, slabTaxValue);
-    }
-    const taxAfterRebate = Math.max(0, slabTaxValue - rebate) + specialTax;
+    const relief = rebate87A(regime, taxpayer, resident, normalIncome, slabTaxValue);
+    const rebate = relief.rebate;
+    const marginalRelief = relief.marginalRelief;
+    const taxAfterRebate = Math.max(0, slabTaxValue - rebate - marginalRelief) + specialTax;
     const surcharge = taxAfterRebate * surchargeRate(totalIncome);
     const cess = (taxAfterRebate + surcharge) * 0.04;
     const liability = Math.round(taxAfterRebate + surcharge + cess);
     const credits = values.tds + values.advanceTax + values.tcs;
-    return { normalIncome, standardDeduction, deductions, slabTaxValue, ltcgTaxable, specialTax, rebate, taxAfterRebate, surcharge, cess, liability, credits, payable: liability - credits };
+    return { normalIncome, standardDeduction, deductions, slabTaxValue, ltcgTaxable, specialTax, rebate, marginalRelief, taxAfterRebate, surcharge, cess, liability, credits, payable: liability - credits };
   }
 
   function resultRows(rows) {
@@ -166,6 +182,7 @@
       ['Normal taxable income', money(selected.normalIncome)],
       ['Income tax before rebate', money(selected.slabTaxValue + selected.specialTax)],
       ['Rebate under section 87A', money(selected.rebate)],
+      ['Marginal relief', money(selected.marginalRelief)],
       ['Income tax after rebate', money(selected.taxAfterRebate)],
       ['Surcharge', money(selected.surcharge)],
       ['Health and education cess', money(selected.cess)],
@@ -245,6 +262,8 @@
 
     if (document.getElementById('wi-calc-income')) {
       document.getElementById('wi-calc-income').addEventListener('click', renderIncomeResult);
+      document.querySelectorAll('.wi-calc-shell input,.wi-calc-shell select').forEach((control) => control.addEventListener('input', renderIncomeResult));
+      document.querySelectorAll('.wi-calc-shell select').forEach((control) => control.addEventListener('change', renderIncomeResult));
       renderIncomeResult();
       if (config.kind === 'advance') {
         const originalRender = renderIncomeResult;
@@ -269,6 +288,8 @@
         };
         button.removeEventListener('click', renderIncomeResult);
         button.addEventListener('click', renderAdvance);
+        document.querySelectorAll('.wi-calc-shell input,.wi-calc-shell select').forEach((control) => control.addEventListener('input', renderAdvance));
+        document.querySelectorAll('.wi-calc-shell select').forEach((control) => control.addEventListener('change', renderAdvance));
         renderAdvance();
       }
     }

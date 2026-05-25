@@ -59,11 +59,30 @@ function newRegimeSlabCase() {
   return Math.round(slabTax(1599000, slabs) * 1.04);
 }
 
+function newRegimeSalaryCase(grossSalary) {
+  const standardDeduction = 75000;
+  const taxableIncome = Math.max(0, grossSalary - standardDeduction);
+  const slabs = [[400000, 0], [800000, 0.05], [1200000, 0.10], [1600000, 0.15], [2000000, 0.20], [2400000, 0.25], [Infinity, 0.30]];
+  const slabTaxValue = slabTax(taxableIncome, slabs);
+  let taxAfterRebate = slabTaxValue;
+  if (taxableIncome <= 1200000) {
+    taxAfterRebate = Math.max(0, slabTaxValue - Math.min(60000, slabTaxValue));
+  } else {
+    taxAfterRebate = Math.min(slabTaxValue, Math.max(0, taxableIncome - 1200000));
+  }
+  return {
+    standardDeduction,
+    taxableIncome,
+    slabTaxValue: Math.round(slabTaxValue),
+    total: Math.round(taxAfterRebate * 1.04)
+  };
+}
+
 if (!fs.existsSync(calculatorEngine)) {
   fail('Missing shared calculator engine: js/wi-calculators.js');
 } else {
   const engine = read(calculatorEngine);
-  ['2026-05-25', 'Section 87A', '400000', '2400000', '75000', '125000'].forEach((needle) => {
+  ['2026-05-25', 'Section 87A', 'Marginal relief', '400000', '2400000', '75000', '125000'].forEach((needle) => {
     if (!engine.includes(needle)) fail(`Calculator engine is missing required rule marker: ${needle}`);
   });
 }
@@ -87,6 +106,16 @@ if (oldCase.incomeTax !== 292200 || oldCase.rebate87A !== 0 || oldCase.cess !== 
 const newCaseTotal = newRegimeSlabCase();
 if (newCaseTotal !== 124644) {
   fail(`New regime slab calculation failed for taxable income 15,99,000: got ${newCaseTotal}`);
+}
+
+const salary125 = newRegimeSalaryCase(1250000);
+if (salary125.standardDeduction !== 75000 || salary125.taxableIncome !== 1175000 || salary125.slabTaxValue !== 57500 || salary125.total !== 0) {
+  fail(`New regime salary case failed for gross salary 12,50,000: ${JSON.stringify(salary125)}`);
+}
+
+const salary1275 = newRegimeSalaryCase(1275000);
+if (salary1275.taxableIncome !== 1200000 || salary1275.total !== 0) {
+  fail(`New regime salary case failed for gross salary 12,75,000: ${JSON.stringify(salary1275)}`);
 }
 
 if (failures.length) {
