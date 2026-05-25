@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
@@ -383,14 +383,14 @@ const pages = [
   ],defaultFaqs,['defective-return-notice-help','itr-processing-failed-help','revised-return-filing-help','itr-notice-help'],'tax'),
 
   p('gst-2-rate-calculator','Calculator','GST Calculator 2026 - New Rates (5%, 18%, 40%) | WorkIndex','Calculate GST under GST 2.0 rate buckets. Inclusive/exclusive amount, old vs new rate and category review guidance.','GST Calculator 2026','New rate buckets and category checks','A calculator helps with arithmetic, but HSN classification still decides which GST rate applies.',[
-    { title:'Calculator widget concept', body:'Inputs: amount, inclusive/exclusive mode, goods/services category and rate bucket. Output: GST amount, net amount, gross amount and old-versus-new comparison where category mapping is known.' },
-    { title:'Updated rate table concept', table:{headers:['Bucket','Use case'],rows:[['5%','Essentials and notified lower-rate goods/services.'],['18%','Standard goods/services and many professional/service categories.'],['40%','Notified luxury/sin categories.'],['Exempt/Nil','Specific exempt goods/services only.']] } },
+    { title:'Working calculator', body:'Inputs: amount, inclusive/exclusive mode, goods/services category and rate bucket. Output: GST amount, net amount, gross amount and old-versus-new comparison where category mapping is known.' },
+    { title:'Rate comparison note', table:{headers:['Bucket','Use case'],rows:[['5%','Essentials and notified lower-rate goods/services.'],['18%','Standard goods/services and many professional/service categories.'],['40%','Notified luxury/sin categories.'],['Exempt/Nil','Specific exempt goods/services only.']] } },
     { title:'When to consult an expert', items:['Mixed supply.','Composite supply.','Food/beverage classification.','Construction or works contract.','Insurance and exempt supply ITC impact.','Old-rate correction after GST 2.0.'] },
     { title:'Common mistakes', items:['Using old 12%/28% rate without checking notification.','Assuming all services changed.','Ignoring HSN notes.','Charging correct rate but wrong place of supply.'] }
   ],defaultFaqs,['gst-2-rate-changes-guide','gst-calculator','gst-hsn-code-finder','gst-filing-services'],'gst'),
 
   p('income-tax-calculator-ay-2026-27','Calculator','Income Tax Calculator AY 2026-27 | WorkIndex','Calculate income tax for AY 2026-27 under old and new tax regime. Salary, business, capital gains, deductions and surcharge review.','Income Tax Calculator AY 2026-27','Old versus new regime for FY 2025-26','Tax calculators are a starting point. Real optimisation depends on income heads, deductions, TDS/TCS credits and special-rate income.',[
-    { title:'Calculator widget concept', body:'Inputs: salary, business income, capital gains, other income, deductions, HRA, home loan, TDS/TCS and regime selection. Output: taxable income, tax under both regimes, effective tax rate and rough recommendation.' },
+    { title:'Working calculator', body:'Inputs: salary, business income, capital gains, other income, deductions, HRA, home loan, TDS/TCS and regime selection. Output: taxable income, tax under both regimes, effective tax rate and rough recommendation.' },
     { title:'AY 2026-27 slab note', body:'For AY 2026-27, use the notified rates and standard deduction applicable to FY 2025-26. Current official tax-rate pages should be checked before final filing because Finance Act changes can alter slabs or rebates.' },
     { title:'When a CA can optimise beyond calculator', items:['Capital gains with exemptions.','Salary plus business income.','NRI/foreign income.','F&O or crypto.','Old/new regime edge cases.','TCS/LRS credit and refund planning.'] },
     { title:'Documents needed', items:['Form 16.','AIS and Form 26AS.','Capital gains statements.','Deduction proofs.','Bank interest.','Business P&L and balance sheet.'] }
@@ -484,3 +484,4 @@ for (const page of pages) {
 fs.writeFileSync(sitemapPath, sitemap);
 
 console.log(JSON.stringify({ created, count: created.length }, null, 2));
+

@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
@@ -365,7 +365,7 @@ const pages = [
   ],defaultFaqs,['import-export-code-registration','gst-lut-filing-services','documents-required-for-gst-registration','for-import-export-businesses'],'company'),
 
   p('gst-interest-calculator','Calculator','GST Interest Calculator | WorkIndex','Calculate GST interest on late tax payment, ITC reversal interest and Section 50 interest for GSTR-3B delays.','GST Interest Calculator','Late payment, ITC reversal and Section 50 interest','GST interest is usually calculated day-wise on unpaid tax or wrongly availed/utilised ITC, depending on the issue.',[
-    { title:'Calculator widget concept', body:'Inputs: unpaid tax amount, due date, payment date, interest type. Output: days of delay, interest at 18% or 24% as applicable, principal plus interest.' },
+    { title:'Working calculator', body:'Inputs: unpaid tax amount, due date, payment date, interest type. Output: days of delay, interest at 18% or 24% as applicable, principal plus interest.' },
     { title:'Formula used', table:{headers:['Case','Indicative rate','Formula'],rows:[['Late tax payment','18% p.a.','Tax x days x 18% / 365'],['Wrongly availed/utilised ITC','24% p.a. in specified cases','Amount x days x 24% / 365']] } },
     { title:'When interest applies', items:['Late GSTR-3B payment.','Short payment discovered later.','ITC reversed late.','Audit or annual return reconciliation.'] },
     { title:'How to pay', body:'Interest may be paid through GST cash ledger or DRC-03 depending on context and portal workflow.' }
@@ -453,3 +453,4 @@ for (const page of pages) {
 fs.writeFileSync(sitemapPath, sitemap);
 
 console.log(JSON.stringify({ created, count: created.length }, null, 2));
+

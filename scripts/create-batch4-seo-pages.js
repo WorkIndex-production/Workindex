@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
@@ -150,7 +150,7 @@ const pages = [
 
   p('gst-hsn-code-finder','Tool guide','GST HSN Code Finder | WorkIndex','Find the correct HSN code for your product or SAC code for your service. GST rate applicability, mandatory HSN reporting thresholds and common errors explained.','GST HSN Code Finder','Get the right code before your next invoice','Wrong HSN or SAC codes can create GSTR-1 errors, rate mismatch, annual-return differences and customer ITC disputes.',[
     { title:'Wrong HSN code leads to GST return errors', body:'HSN codes classify goods and SAC codes classify services. Invoice-level codes feed into GSTR-1 and customer ITC records, so wrong classification creates downstream reconciliation issues.' },
-    { title:'Search widget concept', body:'Search by product or service description. A production implementation can return HSN/SAC, GST rate, chapter description, notes and conditions. Until then, use this page to know what details to provide an expert.' },
+    { title:'HSN/SAC classification note', body:'Search by product or service description. Use official HSN/SAC schedules and current CBIC notifications before finalising a code or rate. Share exact product/service descriptions with an expert when classification is unclear.' },
     { title:'Common HSN/SAC mistakes by industry', items:['Restaurants using codes/rates without separating alcohol or non-GST supplies.','Clothing rate errors around value thresholds.','Software services confusing IT consulting, software development and licensing SACs.','Construction contracts not using correct works-contract SAC series.','Textile and import products needing deeper chapter classification.'] },
     { title:'What to tell a GST expert', items:['Exact product or service description.','Industry and use case.','Goods versus services.','Import/export context.','Current invoice format and rate used.'] }
   ],[{q:'Is HSN mandatory on all invoices?',a:'Applicability and digit level depend on turnover and supply type. Check current GST rules.'},{q:'Can wrong HSN attract penalty?',a:'Wrong classification can create tax short payment, notices, customer ITC issues and penalties.'},{q:'How do I find HSN for a new product?',a:'Share product composition, use, catalog and import classification where available.'},{q:'Can WorkIndex experts review invoice format?',a:'Yes. Upload sample invoice and product list.'}],['gst-e-invoicing-applicability','gst-filing-services','gst-for-small-business','gst-registration-help'],'gst'),
@@ -217,7 +217,7 @@ const pages = [
   ],[{q:'Which Node framework is best?',a:'Express is flexible, NestJS is structured, Fastify is performance-focused.'},{q:'Can Node handle production scale?',a:'Yes, with good architecture, database design, caching, queues and monitoring.'},{q:'What should I check before hiring?',a:'Review APIs built, auth design, schema design, logging and deployment experience.'}],['web-developer-india','react-developer-india','web-developer-bangalore','ecommerce-website-development'],'tech'),
 
   p('web-developer-hyderabad','City service','Web Developer in Hyderabad | WorkIndex','Find verified web developers in Hyderabad for websites, React apps, ecommerce, WordPress and custom web development. Compare profiles and quotes.','Web Developer in Hyderabad','Websites, React apps and ecommerce builds','Hyderabad has a deep full-stack talent pool across HITEC City, Gachibowli and Madhapur, serving startups, pharma, real estate, clinics and D2C businesses.',[
-    { title:'Hyderabad web development context', body:'Hyderabad’s IT ecosystem gives strong access to React, Node.js, Python and cloud developers. Demand includes internal tools, pharma portals, property listing sites, ecommerce stores and hospital booking systems.' },
+    { title:'Hyderabad web development context', body:'Hyderabadâ€™s IT ecosystem gives strong access to React, Node.js, Python and cloud developers. Demand includes internal tools, pharma portals, property listing sites, ecommerce stores and hospital booking systems.' },
     { title:'Common project types', items:['Business websites for pharma and manufacturing companies.','Ecommerce stores for retailers going online.','SaaS product development for IT startups.','Real estate listing portals.','Hospital and clinic booking systems.'] },
     { title:'What to mention when posting', items:['Project type and city/locality.','Whether design is ready.','Tech preference.','Payment gateway, CRM or booking integration.','Timeline and support expectations.'] }
   ],defaultFaqs,['web-developer-india','web-developer-bangalore','ecommerce-website-development','react-developer-india'],'tech'),
@@ -228,7 +228,7 @@ const pages = [
     { title:'What to mention when posting', items:['Business sector.','Languages needed.','Catalog/ecommerce requirements.','Existing hosting/domain details.','Maintenance expectation.'] }
   ],defaultFaqs,['web-developer-india','web-developer-bangalore','ecommerce-website-development','shopify-development-services'],'tech'),
 
-  p('web-developer-pune','City service','Web Developer in Pune | WorkIndex','Find verified web developers in Pune for websites, React apps, ecommerce and custom web development in Hinjewadi, Baner, Kharadi and across Pune.','Web Developer in Pune','Full-stack talent for startups and SMEs','Pune’s tech community across Hinjewadi, Baner and Kharadi supports SaaS builds, LMS platforms, ecommerce, dashboards and custom business apps.',[
+  p('web-developer-pune','City service','Web Developer in Pune | WorkIndex','Find verified web developers in Pune for websites, React apps, ecommerce and custom web development in Hinjewadi, Baner, Kharadi and across Pune.','Web Developer in Pune','Full-stack talent for startups and SMEs','Puneâ€™s tech community across Hinjewadi, Baner and Kharadi supports SaaS builds, LMS platforms, ecommerce, dashboards and custom business apps.',[
     { title:'Pune web development context', body:'Pune has deep full-stack talent across IT product companies, startups, education institutions, D2C brands and automotive/engineering businesses.' },
     { title:'Common project types', items:['Startup MVPs and SaaS products.','Education/LMS platforms.','Shopify or WooCommerce stores.','Internal dashboards.','Business websites for engineering and service firms.'] },
     { title:'What to mention when posting', items:['Project stage.','Frontend/backend preference.','Design readiness.','Integrations and hosting.','Budget and delivery milestone.'] }
@@ -313,3 +313,4 @@ for (const page of pages) {
 fs.writeFileSync(sitemapPath, sitemap);
 
 console.log(JSON.stringify({ created, count: created.length }, null, 2));
+
