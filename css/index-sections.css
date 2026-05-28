@@ -1,11 +1,13 @@
 /* ═══ TRENDING SERVICES ═══ */
 .trending-services-section {
-  padding: 60px 20px 40px;
+  padding: 60px 0 48px;
   background: #fff;
+  overflow: hidden;
 }
 .ts-header {
   text-align: center;
   margin-bottom: 36px;
+  padding: 0 20px;
 }
 .ts-eyebrow {
   display: inline-block;
@@ -30,11 +32,20 @@
   margin: 0;
 }
 .ts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: nowrap;
   gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: max-content;
+  padding: 0 20px;
+  animation: tsFloatLeft 32s linear infinite;
+  will-change: transform;
+}
+.ts-grid:hover {
+  animation-play-state: paused;
+}
+@keyframes tsFloatLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% + 100vw)); }
 }
 .ts-card {
   border-radius: 16px;
@@ -43,6 +54,10 @@
   background: var(--bg);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  width: 320px;
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
 }
 .ts-card:hover {
   transform: translateY(-4px);
@@ -54,10 +69,24 @@
   overflow: hidden;
 }
 .ts-card-img img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  animation: tsImageFade 12s infinite;
   transition: transform 0.3s;
+}
+.ts-card-img img:nth-of-type(2) {
+  animation-delay: 4s;
+}
+.ts-card-img img:nth-of-type(3) {
+  animation-delay: 8s;
+}
+@keyframes tsImageFade {
+  0%, 28% { opacity: 1; }
+  35%, 100% { opacity: 0; }
 }
 .ts-card:hover .ts-card-img img {
   transform: scale(1.04);
@@ -84,6 +113,9 @@
 .ts-badge-purple{ background: #8b5cf6; }
 .ts-card-body {
   padding: 18px 18px 20px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 .ts-card-icon {
   font-size: 28px;
@@ -100,12 +132,10 @@
   color: var(--text-muted);
   margin: 0 0 12px;
   line-height: 1.5;
+  min-height: 40px;
 }
 .ts-card-meta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
+  display: none;
 }
 .ts-meta-chip {
   font-size: 11px;
@@ -118,6 +148,7 @@
 .ts-cta-btn {
   width: 100%;
   padding: 11px;
+  margin-top: auto;
   background: var(--primary);
   color: #fff;
   border: none;
@@ -128,6 +159,17 @@
   transition: background 0.2s;
 }
 .ts-cta-btn:hover { background: #e87010; }
+
+@media (max-width: 640px) {
+  .ts-grid {
+    gap: 14px;
+    animation-duration: 24s;
+  }
+  .ts-card {
+    width: 270px;
+    flex-basis: 270px;
+  }
+}
 
 /* ═══ REQUEST CONFIRMATION PAGE ═══ */
 .req-confirm-wrap {

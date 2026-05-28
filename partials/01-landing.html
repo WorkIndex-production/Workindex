@@ -120,7 +120,7 @@
   <div class="hero">
     <div class="hero-badge">
       <div class="dot"></div>
-      <span>Spam free platform connect with real professionals</span>
+      <span>Spam free platform<br>connect with real professionals</span>
     </div>
     
     <h1>Find Verified <span class="highlight">Professionals</span> for Any Service</h1>
@@ -136,21 +136,21 @@
       </button>
     </div>
 
-    <div style="margin-top: 40px; max-width: 680px; margin-left: auto; margin-right: auto;">
-      <div style="display: flex; gap: 12px; background: #fff; padding: 8px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); position:relative;">
-        <div style="flex:1;position:relative;">
+    <div class="landing-search-wrap">
+      <div class="landing-search-box">
+        <div class="landing-search-field landing-service-field">
           <input type="text" id="landingServiceInput" placeholder="What service do you need?" autocomplete="off"
             onkeydown="if(event.key==='Enter') landingSearch()"
-            style="width:100%; box-sizing:border-box; padding: 12px; border: none; font-size: 15px; outline: none;">
+            class="landing-search-input">
           <div id="landingServiceSuggestions" style="display:none;position:absolute;top:46px;left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,0.12);z-index:40;overflow:hidden;text-align:left;"></div>
         </div>
-        <div style="width:190px;position:relative;">
+        <div class="landing-search-field landing-location-field">
           <input type="text" id="landingLocationInput" placeholder="City or pincode" autocomplete="off"
             onkeydown="if(event.key==='Enter') landingSearch()"
-            style="width:100%; box-sizing:border-box; padding: 12px; border: none; border-left: 1px solid var(--border); font-size: 15px; outline: none;">
+            class="landing-search-input">
           <div id="landingLocationSuggestions" style="display:none;position:absolute;top:46px;left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,0.12);z-index:40;overflow:hidden;text-align:left;"></div>
         </div>
-        <button class="btn-primary" onclick="landingSearch()" style="padding: 12px 24px;">Search</button>
+        <button class="btn-primary landing-search-submit" onclick="landingSearch()">Search</button>
       </div>
     </div>
   </div>
@@ -170,6 +170,8 @@
       <div class="ts-card" onclick="startServiceFlow('itr')">
         <div class="ts-card-img">
           <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80&fit=crop" alt="ITR Filing">
+          <img src="https://images.unsplash.com/photo-1554224154-22dec7ec8818?w=600&q=80&fit=crop" alt="ITR Filing">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&fit=crop" alt="ITR Filing">
           <div class="ts-card-overlay"></div>
           <div class="ts-badge">📄 Most Popular</div>
         </div>
@@ -188,6 +190,8 @@
       <div class="ts-card" onclick="startServiceFlow('gst')">
         <div class="ts-card-img">
           <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&fit=crop" alt="GST Services">
+          <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80&fit=crop" alt="GST Services">
+          <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&q=80&fit=crop" alt="GST Services">
           <div class="ts-card-overlay"></div>
           <div class="ts-badge ts-badge-blue">🏢 Trending</div>
         </div>
@@ -206,6 +210,8 @@
       <div class="ts-card" onclick="startServiceFlow('accounting')">
         <div class="ts-card-img">
           <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&fit=crop" alt="Accounting">
+          <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?w=600&q=80&fit=crop" alt="Accounting">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80&fit=crop" alt="Accounting">
           <div class="ts-card-overlay"></div>
           <div class="ts-badge ts-badge-green">📊 High Demand</div>
         </div>
@@ -224,6 +230,8 @@
       <div class="ts-card" onclick="startServiceFlow('audit')">
         <div class="ts-card-img">
           <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80&fit=crop" alt="Audit">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&fit=crop" alt="Audit">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&fit=crop" alt="Audit">
           <div class="ts-card-overlay"></div>
           <div class="ts-badge ts-badge-purple">🔍 Compliance</div>
         </div>
@@ -242,6 +250,8 @@
       <div class="ts-card" onclick="startServiceFlow('photography')">
         <div class="ts-card-img">
           <img src="https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=600&q=80&fit=crop" alt="Photography">
+          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&q=80&fit=crop" alt="Photography">
+          <img src="https://images.unsplash.com/photo-1520390138845-fd2d229dd553?w=600&q=80&fit=crop" alt="Photography">
           <div class="ts-card-overlay"></div>
           <div class="ts-badge">📸 Top Rated</div>
         </div>
@@ -260,6 +270,8 @@
       <div class="ts-card" onclick="startServiceFlow('development')">
         <div class="ts-card-img">
           <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80&fit=crop" alt="Development">
+          <img src="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=600&q=80&fit=crop" alt="Development">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80&fit=crop" alt="Development">
           <div class="ts-card-overlay"></div>
           <div class="ts-badge ts-badge-blue">💻 Fast Growing</div>
         </div>
@@ -281,134 +293,185 @@
   
   <!-- END TRENDING SERVICES -->
 
-  <!-- ═══ FIND BY LOCATION SECTION ═══ -->
+  <!-- FIND BY LOCATION SECTION -->
   <div style="padding: 60px 20px 50px; background: var(--bg-gray);">
     <div style="max-width: 1200px; margin: 0 auto;">
 
-      <!-- Header -->
       <div style="text-align: center; margin-bottom: 40px;">
-        <div style="display:inline-block; background:rgba(252,128,25,0.1); color:var(--primary); font-size:13px; font-weight:700; padding:6px 16px; border-radius:20px; margin-bottom:14px; letter-spacing:0.5px;">📍 Find Near You</div>
+        <div style="display:inline-block; background:rgba(252,128,25,0.1); color:var(--primary); font-size:13px; font-weight:700; padding:6px 16px; border-radius:20px; margin-bottom:14px; letter-spacing:0.5px;">Find Near You</div>
         <h2 style="font-size:30px; font-weight:800; color:var(--text); margin:0 0 10px;">Find Professionals by City</h2>
-        <p style="font-size:15px; color:var(--text-muted); margin:0;">Verified CAs, developers and photographers across India</p>
+        <p style="font-size:15px; color:var(--text-muted); margin:0;">Choose a service and browse WorkIndex city pages for verified experts.</p>
       </div>
 
-      <!-- Service tabs -->
       <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:28px;" id="cityServiceTabs">
         <button onclick="switchCityTab('itr')" id="cityTab_itr"
           style="padding:8px 20px; border-radius:20px; border:1.5px solid var(--primary); background:var(--primary); color:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s;">
-          📄 ITR Filing
+          ITR Filing
         </button>
         <button onclick="switchCityTab('gst')" id="cityTab_gst"
           style="padding:8px 20px; border-radius:20px; border:1.5px solid var(--border); background:transparent; color:var(--text); font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s;">
-          🧾 GST Services
+          GST Services
         </button>
         <button onclick="switchCityTab('accounting')" id="cityTab_accounting"
           style="padding:8px 20px; border-radius:20px; border:1.5px solid var(--border); background:transparent; color:var(--text); font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s;">
-          📊 Accounting
+          Accounting
         </button>
-        <button onclick="switchCityTab('development')" id="cityTab_development"
+        <button onclick="switchCityTab('audit')" id="cityTab_audit"
           style="padding:8px 20px; border-radius:20px; border:1.5px solid var(--border); background:transparent; color:var(--text); font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s;">
-          💻 Development
+          Audit
         </button>
       </div>
 
-      <!-- City grids — one per service tab -->
       <div id="cityGrid_itr">
         <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; margin-bottom:20px;">
           <a href="/seo-pages/itr-filing-bangalore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Bangalore</div></a>
-          <a href="/seo-pages/itr-filing-koramangala.html" style="text-decoration:none;">
-            <div class="city-card">📍 Koramangala</div></a>
-          <a href="/seo-pages/itr-filing-indiranagar.html" style="text-decoration:none;">
-            <div class="city-card">📍 Indiranagar</div></a>
-          <a href="/seo-pages/itr-filing-hsr-layout.html" style="text-decoration:none;">
-            <div class="city-card">📍 HSR Layout</div></a>
-          <a href="/seo-pages/itr-filing-whitefield.html" style="text-decoration:none;">
-            <div class="city-card">📍 Whitefield</div></a>
-          <a href="/seo-pages/itr-filing-electronic-city.html" style="text-decoration:none;">
-            <div class="city-card">📍 Electronic City</div></a>
-          <a href="/seo-pages/itr-filing-bellandur.html" style="text-decoration:none;">
-            <div class="city-card">📍 Bellandur</div></a>
+            <div class="city-card">Bengaluru</div></a>
           <a href="/seo-pages/itr-filing-mysore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Mysore</div></a>
+            <div class="city-card">Mysuru</div></a>
           <a href="/seo-pages/itr-filing-mangalore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Mangalore</div></a>
+            <div class="city-card">Mangaluru</div></a>
           <a href="/seo-pages/itr-filing-hubli.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Hubli</div></a>
-          <a href="/seo-pages/itr-filing-karnataka.html" style="text-decoration:none;">
-            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🗺️ All Karnataka</div></a>
-          <a href="/seo-pages/itr-filing-india.html" style="text-decoration:none;">
-            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🇮🇳 All India</div></a>
+            <div class="city-card">Hubballi</div></a>
+          <a href="/seo-pages/itr-filing-dharwad.html" style="text-decoration:none;">
+            <div class="city-card">Dharwad</div></a>
+          <a href="/seo-pages/itr-filing-davanagere.html" style="text-decoration:none;">
+            <div class="city-card">Davanagere</div></a>
+          <a href="/seo-pages/itr-filing-shivamogga.html" style="text-decoration:none;">
+            <div class="city-card">Shivamogga</div></a>
+          <a href="/seo-pages/itr-filing-belagavi.html" style="text-decoration:none;">
+            <div class="city-card">Belagavi</div></a>
+          <a href="/seo-pages/itr-filing-ballari.html" style="text-decoration:none;">
+            <div class="city-card">Ballari</div></a>
+          <a href="/seo-pages/itr-filing-tumkur.html" style="text-decoration:none;">
+            <div class="city-card">Tumakuru</div></a>
+          <a href="/seo-pages/itr-filing-udupi.html" style="text-decoration:none;">
+            <div class="city-card">Udupi</div></a>
+          <a href="/seo-pages/itr-filing-hassan.html" style="text-decoration:none;">
+            <div class="city-card">Hassan</div></a>
+          <a href="/seo-pages/itr-filing-mandya.html" style="text-decoration:none;">
+            <div class="city-card">Mandya</div></a>
+          <a href="/seo-pages/itr-filing-kolar.html" style="text-decoration:none;">
+            <div class="city-card">Kolar</div></a>
+          <a href="/seo-pages/itr-filing-chitradurga.html" style="text-decoration:none;">
+            <div class="city-card">Chitradurga</div></a>
+          <a href="/seo-pages/itr-filing-all-cities.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">Find all cities</div></a>
         </div>
       </div>
 
       <div id="cityGrid_gst" style="display:none;">
         <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; margin-bottom:20px;">
           <a href="/seo-pages/gst-services-bangalore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Bangalore</div></a>
-          <a href="/seo-pages/gst-services-koramangala.html" style="text-decoration:none;">
-            <div class="city-card">📍 Koramangala</div></a>
-          <a href="/seo-pages/gst-services-indiranagar.html" style="text-decoration:none;">
-            <div class="city-card">📍 Indiranagar</div></a>
-          <a href="/seo-pages/gst-services-hsr-layout.html" style="text-decoration:none;">
-            <div class="city-card">📍 HSR Layout</div></a>
-          <a href="/seo-pages/gst-services-whitefield.html" style="text-decoration:none;">
-            <div class="city-card">📍 Whitefield</div></a>
-          <a href="/seo-pages/gst-services-electronic-city.html" style="text-decoration:none;">
-            <div class="city-card">📍 Electronic City</div></a>
-          <a href="/seo-pages/gst-services-bellandur.html" style="text-decoration:none;">
-            <div class="city-card">📍 Bellandur</div></a>
-          <a href="/seo-pages/gst-services-banashankari.html" style="text-decoration:none;">
-            <div class="city-card">📍 Banashankari</div></a>
+            <div class="city-card">Bengaluru</div></a>
           <a href="/seo-pages/gst-services-mysore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Mysore</div></a>
+            <div class="city-card">Mysuru</div></a>
           <a href="/seo-pages/gst-services-mangalore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Mangalore</div></a>
-          <a href="/seo-pages/gst-services-karnataka.html" style="text-decoration:none;">
-            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🗺️ All Karnataka</div></a>
-          <a href="/seo-pages/gst-services-india.html" style="text-decoration:none;">
-            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🇮🇳 All India</div></a>
+            <div class="city-card">Mangaluru</div></a>
+          <a href="/seo-pages/gst-services-hubli.html" style="text-decoration:none;">
+            <div class="city-card">Hubballi</div></a>
+          <a href="/seo-pages/gst-services-dharwad.html" style="text-decoration:none;">
+            <div class="city-card">Dharwad</div></a>
+          <a href="/seo-pages/gst-services-davanagere.html" style="text-decoration:none;">
+            <div class="city-card">Davanagere</div></a>
+          <a href="/seo-pages/gst-services-shivamogga.html" style="text-decoration:none;">
+            <div class="city-card">Shivamogga</div></a>
+          <a href="/seo-pages/gst-services-belagavi.html" style="text-decoration:none;">
+            <div class="city-card">Belagavi</div></a>
+          <a href="/seo-pages/gst-services-ballari.html" style="text-decoration:none;">
+            <div class="city-card">Ballari</div></a>
+          <a href="/seo-pages/gst-services-tumkur.html" style="text-decoration:none;">
+            <div class="city-card">Tumakuru</div></a>
+          <a href="/seo-pages/gst-services-udupi.html" style="text-decoration:none;">
+            <div class="city-card">Udupi</div></a>
+          <a href="/seo-pages/gst-services-hassan.html" style="text-decoration:none;">
+            <div class="city-card">Hassan</div></a>
+          <a href="/seo-pages/gst-services-mandya.html" style="text-decoration:none;">
+            <div class="city-card">Mandya</div></a>
+          <a href="/seo-pages/gst-services-kolar.html" style="text-decoration:none;">
+            <div class="city-card">Kolar</div></a>
+          <a href="/seo-pages/gst-services-chitradurga.html" style="text-decoration:none;">
+            <div class="city-card">Chitradurga</div></a>
+          <a href="/seo-pages/gst-services-all-cities.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">Find all cities</div></a>
         </div>
       </div>
 
       <div id="cityGrid_accounting" style="display:none;">
         <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; margin-bottom:20px;">
           <a href="/seo-pages/accounting-services-bangalore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Bangalore</div></a>
+            <div class="city-card">Bengaluru</div></a>
           <a href="/seo-pages/accounting-services-mysore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Mysore</div></a>
+            <div class="city-card">Mysuru</div></a>
           <a href="/seo-pages/accounting-services-mangalore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Mangalore</div></a>
-          <a href="/seo-pages/accounting-services-karnataka.html" style="text-decoration:none;">
-            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🗺️ All Karnataka</div></a>
-          <a href="/seo-pages/accounting-services-india.html" style="text-decoration:none;">
-            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🇮🇳 All India</div></a>
+            <div class="city-card">Mangaluru</div></a>
+          <a href="/seo-pages/accounting-services-hubli.html" style="text-decoration:none;">
+            <div class="city-card">Hubballi</div></a>
+          <a href="/seo-pages/accounting-services-dharwad.html" style="text-decoration:none;">
+            <div class="city-card">Dharwad</div></a>
+          <a href="/seo-pages/accounting-services-davanagere.html" style="text-decoration:none;">
+            <div class="city-card">Davanagere</div></a>
+          <a href="/seo-pages/accounting-services-shivamogga.html" style="text-decoration:none;">
+            <div class="city-card">Shivamogga</div></a>
+          <a href="/seo-pages/accounting-services-belagavi.html" style="text-decoration:none;">
+            <div class="city-card">Belagavi</div></a>
+          <a href="/seo-pages/accounting-services-ballari.html" style="text-decoration:none;">
+            <div class="city-card">Ballari</div></a>
+          <a href="/seo-pages/accounting-services-tumkur.html" style="text-decoration:none;">
+            <div class="city-card">Tumakuru</div></a>
+          <a href="/seo-pages/accounting-services-udupi.html" style="text-decoration:none;">
+            <div class="city-card">Udupi</div></a>
+          <a href="/seo-pages/accounting-services-hassan.html" style="text-decoration:none;">
+            <div class="city-card">Hassan</div></a>
+          <a href="/seo-pages/accounting-services-mandya.html" style="text-decoration:none;">
+            <div class="city-card">Mandya</div></a>
+          <a href="/seo-pages/accounting-services-kolar.html" style="text-decoration:none;">
+            <div class="city-card">Kolar</div></a>
+          <a href="/seo-pages/accounting-services-chitradurga.html" style="text-decoration:none;">
+            <div class="city-card">Chitradurga</div></a>
+          <a href="/seo-pages/accounting-services-all-cities.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">Find all cities</div></a>
         </div>
       </div>
 
-      <div id="cityGrid_development" style="display:none;">
+      <div id="cityGrid_audit" style="display:none;">
         <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; margin-bottom:20px;">
-          <a href="/seo-pages/web-developer-bangalore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Bangalore</div></a>
-          <a href="/seo-pages/web-developer-mysore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Mysore</div></a>
-          <a href="/seo-pages/web-developer-mangalore.html" style="text-decoration:none;">
-            <div class="city-card">🏙️ Mangalore</div></a>
-          <a href="/seo-pages/web-developer-karnataka.html" style="text-decoration:none;">
-            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🗺️ All Karnataka</div></a>
-          <a href="/seo-pages/web-developer-india.html" style="text-decoration:none;">
-            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">🇮🇳 All India</div></a>
+          <a href="/seo-pages/audit-services-hubli.html" style="text-decoration:none;">
+            <div class="city-card">Hubballi</div></a>
+          <a href="/seo-pages/audit-services-dharwad.html" style="text-decoration:none;">
+            <div class="city-card">Dharwad</div></a>
+          <a href="/seo-pages/audit-services-davanagere.html" style="text-decoration:none;">
+            <div class="city-card">Davanagere</div></a>
+          <a href="/seo-pages/audit-services-shivamogga.html" style="text-decoration:none;">
+            <div class="city-card">Shivamogga</div></a>
+          <a href="/seo-pages/audit-services-belagavi.html" style="text-decoration:none;">
+            <div class="city-card">Belagavi</div></a>
+          <a href="/seo-pages/audit-services-ballari.html" style="text-decoration:none;">
+            <div class="city-card">Ballari</div></a>
+          <a href="/seo-pages/audit-services-tumkur.html" style="text-decoration:none;">
+            <div class="city-card">Tumakuru</div></a>
+          <a href="/seo-pages/audit-services-udupi.html" style="text-decoration:none;">
+            <div class="city-card">Udupi</div></a>
+          <a href="/seo-pages/audit-services-hassan.html" style="text-decoration:none;">
+            <div class="city-card">Hassan</div></a>
+          <a href="/seo-pages/audit-services-mandya.html" style="text-decoration:none;">
+            <div class="city-card">Mandya</div></a>
+          <a href="/seo-pages/audit-services-kolar.html" style="text-decoration:none;">
+            <div class="city-card">Kolar</div></a>
+          <a href="/seo-pages/audit-services-chitradurga.html" style="text-decoration:none;">
+            <div class="city-card">Chitradurga</div></a>
+          <a href="/seo-pages/audit-services-all-cities.html" style="text-decoration:none;">
+            <div class="city-card" style="background:rgba(252,128,25,0.08); border-color:rgba(252,128,25,0.3); color:var(--primary);">Find all cities</div></a>
         </div>
       </div>
 
-      <!-- Bottom CTA -->
       <div style="text-align:center; margin-top:10px;">
-        <p style="font-size:13px; color:var(--text-muted);">Don't see your city? <a onclick="showPage('auth')" style="color:var(--primary); font-weight:700; cursor:pointer; text-decoration:none;">Post a request</a> — we'll match you with professionals nearby.</p>
+        <p style="font-size:13px; color:var(--text-muted);">Don't see your city? <a onclick="showPage('auth'); setTimeout(function(){ if (typeof switchAuthMode === 'function') switchAuthMode('signup'); if (typeof selectRole === 'function') selectRole('client'); }, 0);" style="color:var(--primary); font-weight:700; cursor:pointer; text-decoration:none;">Post a request</a> and we'll match you with professionals nearby.</p>
       </div>
 
     </div>
   </div>
-  <!-- END FIND BY LOCATION SECTION -->
+
+
 
   
 

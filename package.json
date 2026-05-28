@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test:marketplace": "playwright test tests/marketplace-flow.spec.js --browser=chromium --reporter=line"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}
