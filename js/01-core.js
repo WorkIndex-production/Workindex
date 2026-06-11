@@ -5,7 +5,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 // ─── CONFIGURATION ─── 
-const API_URL = 'https://workindex-production.up.railway.app/api';
+const API_URL = 'https://workindex-backend.onrender.com/api';
 
 // ─── STATE MANAGEMENT ─── 
 const state = {

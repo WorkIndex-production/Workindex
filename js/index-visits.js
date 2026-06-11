@@ -1,6 +1,6 @@
 // Split from index.html inline script 4.
 (function() {
-  const visitsApiBase = 'https://workindex-production.up.railway.app/api';
+  const visitsApiBase = 'https://workindex-backend.onrender.com/api';
   let sessionId = sessionStorage.getItem('wi_session');
   if (!sessionId) {
     sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);

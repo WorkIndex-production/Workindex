@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 (function(){
-  var API_BASE = 'https://workindex-production.up.railway.app/api';
+  var API_BASE = 'https://workindex-backend.onrender.com/api';
   var API = API_BASE + '/admin';
   var tok = localStorage.getItem('admTok') || '';
   var adm = null;
