@@ -5,8 +5,8 @@
 
 (function(){
   var API_BASE = ['localhost', '127.0.0.1'].includes(window.location.hostname)
-    ? 'https://workindex-production.up.railway.app/api'
-    : 'https://workindex-production.up.railway.app/api';
+    ? 'https://workindex-backend.onrender.com/api'
+    : 'https://workindex-backend.onrender.com/api';
   var API = API_BASE + '/admin';
   var tok = localStorage.getItem('admTok') || '';
   var adm = null;

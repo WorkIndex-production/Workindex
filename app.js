@@ -5,8 +5,8 @@
 
 // ─── CONFIGURATION ─── 
 const API_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
-  ? 'https://workindex-production.up.railway.app/api'
-  : 'https://workindex-production.up.railway.app/api';
+  ? 'https://workindex-backend.onrender.com/api'
+  : 'https://workindex-backend.onrender.com/api';
 
 // ─── STATE MANAGEMENT ─── 
 const state = {
