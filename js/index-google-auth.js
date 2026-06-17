@@ -371,21 +371,26 @@ if (__origSelectRole) {
 }
  
 // ── Hook: render on auth page load ────────────────────────────────────────
-const __origShowPage = typeof showPage === 'function' ? showPage : null;
-if (__origShowPage) {
-  showPage = function(pageId) {
-    __origShowPage(pageId);
-    if (pageId === 'auth') {
-      setTimeout(() => {
-        const loginVisible =
-          document.getElementById('loginForm') &&
-          document.getElementById('loginForm').style.display !== 'none';
-        if (loginVisible) renderGoogleButton('googleLoginBtn',  'login');
-        else              renderGoogleButton('googleSignupBtn', 'signup');
-      }, 100);
-    }
-  };
+function hookShowPage() {
+  if (typeof showPage === 'function') {
+    const __origShowPage = showPage;
+    showPage = function(pageId, pushState = true) {
+      __origShowPage(pageId, pushState);
+      if (pageId === 'auth') {
+        setTimeout(() => {
+          const loginVisible =
+            document.getElementById('loginForm') &&
+            document.getElementById('loginForm').style.display !== 'none';
+          if (loginVisible) renderGoogleButton('googleLoginBtn',  'login');
+          else              renderGoogleButton('googleSignupBtn', 'signup');
+        }, 100);
+      }
+    };
+  } else {
+    setTimeout(hookShowPage, 50);
+  }
 }
+hookShowPage();
  
 // ── Initial render: wait for GSI script to load ───────────────────────────
 (function waitForGSI() {

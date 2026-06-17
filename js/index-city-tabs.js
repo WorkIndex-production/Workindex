@@ -1,6 +1,6 @@
 // Split from index.html inline script 1.
 function switchCityTab(service) {
-    ['itr','gst','accounting','development'].forEach(function(s) {
+    ['itr','gst','accounting','audit'].forEach(function(s) {
       var grid = document.getElementById('cityGrid_' + s);
       var tab  = document.getElementById('cityTab_' + s);
       if (!grid || !tab) return;
