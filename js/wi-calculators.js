@@ -244,7 +244,7 @@
       { id: 'wi-days', label: 'Days delayed', value: 20 }, { id: 'wi-tds-amount', label: 'TDS amount in statement', value: 50000 }
     ], { id: 'wi-calc-tds-late', label: 'Calculate 234E late fee', result: 'wi-simple-result' }, 'Section 234E late fee is Rs. 200 per day, capped at the TDS amount.');
     if (config.kind === 'tds') html = simpleForm(config, [
-      { id: 'wi-payment', label: 'Payment amount', value: 100000 }, { id: 'wi-section', label: 'Common TDS section', select: [['194J10', '194J professional fees - 10%'], ['194C1', '194C contractor individual/HUF - 1%'], ['194C2', '194C contractor others - 2%'], ['194H', '194H commission - 5%'], ['194I10', '194I rent land/building - 10%'], ['194A', '194A interest - 10%']] }, { id: 'wi-pan', label: 'PAN available?', select: [['yes', 'Yes'], ['no', 'No - apply 20% minimum']] }
+      { id: 'wi-payment', label: 'Payment amount', value: 100000 }, { id: 'wi-section', label: 'Common TDS section', select: [['194J10', '194J professional fees - 10%'], ['194C1', '194C contractor individual/HUF - 1%'], ['194C2', '194C contractor others - 2%'], ['194H', '194H commission - 2%'], ['194I10', '194I rent land/building - 10%'], ['194A', '194A interest - 10%']] }, { id: 'wi-pan', label: 'PAN available?', select: [['yes', 'Yes'], ['no', 'No - apply 20% minimum']] }
     ], { id: 'wi-calc-tds', label: 'Calculate TDS', result: 'wi-simple-result' }, 'This covers common resident-payment sections only. Thresholds, exemptions, lower deduction certificates and non-resident payments need separate review.');
     host.innerHTML = html;
     const richContent = document.querySelector('main .wi-rich-grid > div');
@@ -304,7 +304,7 @@
     bind('wi-calc-gst-late', () => { const fee = n('wi-days') * (v('wi-return-type') === 'nil' ? 20 : 50); simple.innerHTML = resultRows([['Estimated daily fee', v('wi-return-type') === 'nil' ? 'Rs. 20/day' : 'Rs. 50/day'], ['Estimated late fee', money(fee), true]]); });
     bind('wi-calc-gst-interest', () => { const interest = n('wi-tax') * n('wi-days') * (Number(v('wi-interest-type')) / 100) / 365; simple.innerHTML = resultRows([['Days of delay', INR.format(n('wi-days'))], ['Estimated interest', money(interest), true], ['Total with principal', money(n('wi-tax') + interest)]]); });
     bind('wi-calc-tds-late', () => { const fee = Math.min(n('wi-days') * 200, n('wi-tds-amount')); simple.innerHTML = resultRows([['Uncapped fee at Rs. 200/day', money(n('wi-days') * 200)], ['Cap based on TDS amount', money(n('wi-tds-amount'))], ['Estimated 234E late fee', money(fee), true]]); });
-    bind('wi-calc-tds', () => { const rates = { '194J10': 0.10, '194C1': 0.01, '194C2': 0.02, '194H': 0.05, '194I10': 0.10, '194A': 0.10 }; const rate = v('wi-pan') === 'no' ? Math.max(0.20, rates[v('wi-section')]) : rates[v('wi-section')]; simple.innerHTML = resultRows([['Rate used', (rate * 100).toFixed(0) + '%'], ['Estimated TDS', money(n('wi-payment') * rate), true], ['Net payable after TDS', money(n('wi-payment') * (1 - rate))]]); });
+    bind('wi-calc-tds', () => { const rates = { '194J10': 0.10, '194C1': 0.01, '194C2': 0.02, '194H': 0.02, '194I10': 0.10, '194A': 0.10 }; const rate = v('wi-pan') === 'no' ? Math.max(0.20, rates[v('wi-section')]) : rates[v('wi-section')]; simple.innerHTML = resultRows([['Rate used', (rate * 100).toFixed(0) + '%'], ['Estimated TDS', money(n('wi-payment') * rate), true], ['Net payable after TDS', money(n('wi-payment') * (1 - rate))]]); });
   }
 
   function addStyles() {
