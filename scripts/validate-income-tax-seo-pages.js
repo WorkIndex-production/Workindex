@@ -35,6 +35,11 @@ const slugPatterns = [
   "44ada",
   "44ae",
   "zero-tax",
+  "nri",
+  "dtaa",
+  "rnor",
+  "repatriation",
+  "remittance",
 ];
 
 const genericText = [
