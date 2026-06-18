@@ -283,3 +283,108 @@ h1, h2, h3, h4 { font-family: 'Sora', sans-serif; }
   .lp-stat:last-child, .lp-stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
   .lp-hero { padding: 60px 20px 80px; }
 }
+
+/* ─── RICH SECTION & WIDGET LAYOUTS ─── */
+.wi-rich {
+  padding: 56px 24px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.wi-rich-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+  gap: 28px;
+  align-items: start;
+}
+.wi-panel {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+.wi-panel + .wi-panel {
+  margin-top: 20px;
+}
+.wi-panel h2 {
+  font-size: 24px;
+  margin: 0 0 14px;
+}
+.wi-panel h3 {
+  font-size: 17px;
+  margin: 18px 0 8px;
+}
+.wi-panel p {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin: 0 0 12px;
+  line-height: 1.75;
+}
+.wi-detail-list {
+  margin: 10px 0 0 18px;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+.wi-detail-list li {
+  margin-bottom: 7px;
+}
+.wi-side {
+  position: sticky;
+  top: 82px;
+}
+.wi-ref a, .wi-related a {
+  display: block;
+  color: var(--primary);
+  font-weight: 800;
+  text-decoration: none;
+  margin: 8px 0;
+}
+.wi-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.wi-table th, .wi-table td {
+  border: 1px solid var(--border);
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+  vertical-align: top;
+}
+.wi-table th {
+  background: var(--bg-gray);
+  color: var(--text);
+}
+@media (max-width: 860px) {
+  .wi-rich-grid {
+    grid-template-columns: 1fr;
+  }
+  .wi-side {
+    position: static;
+  }
+}
+
+/* ─── COMPATIBILITY UTILITIES FOR LOCATION BLOCKS ─── */
+.wi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.wi-grid ul {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  line-height: 1.75;
+}
+.wi-box {
+  padding: 16px 18px;
+  border: 1px solid rgba(252, 128, 25, 0.25);
+  background: rgba(252, 128, 25, 0.08);
+  border-radius: 12px;
+  line-height: 1.75;
+}
+
