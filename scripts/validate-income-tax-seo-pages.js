@@ -31,6 +31,10 @@ const slugPatterns = [
   "mutual-fund-tax",
   "home-loan-tax",
   "education-loan",
+  "44ad",
+  "44ada",
+  "44ae",
+  "zero-tax",
 ];
 
 const genericText = [

@@ -422,6 +422,10 @@ const incomePatterns = [
   "mutual-fund-tax",
   "home-loan-tax",
   "education-loan",
+  "44ad",
+  "44ada",
+  "44ae",
+  "zero-tax",
 ];
 
 const genericPanelRe = /<section class="wi-panel"><div class="lp-section-eyebrow">(Expert Screening|Records Checklist|Posting Brief|Quality Check|WorkIndex Posting Tips)<\/div>[\s\S]*?<\/section>/g;

@@ -1,0 +1,83 @@
+td
+	{padding-bottom:8px;
+	padding-top:8px;}
+td:nth-child(1){width:55px;text-align:center}
+td:nth-child(2){width:260px;font-weight:600}
+td:nth-child(5){width:90px;text-align:center;font-weight:700;color:#15803d;background:#e8f5e9}
+tr
+	{mso-height-source:auto;}
+col
+	{mso-width-source:auto;}
+br
+	{mso-data-placement:same-cell;}
+.style0
+	{mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	mso-rotate:0;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	color:black;
+	font-size:11.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Calibri, sans-serif;
+	mso-font-charset:0;
+	border:none;
+	mso-protection:locked visible;
+	mso-style-name:Normal;
+	mso-style-id:0;}
+td
+	{mso-style-parent:style0;
+	padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	mso-ignore:padding;
+	color:black;
+	font-size:11.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Calibri, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.xl65
+	{mso-style-parent:style0;
+	color:#1F2937;}
+.xl66
+	{mso-style-parent:style0;
+	color:#1F2937;
+	font-size:14.0pt;
+	font-weight:700;}
+.xl67
+	{mso-style-parent:style0;
+	color:#6B7280;}
+.xl68
+	{mso-style-parent:style0;
+	color:#FF6B00;
+	font-size:12.0pt;
+	font-weight:700;}
+.xl69
+	{mso-style-parent:style0;
+	color:#1F2937;
+	font-weight:700;
+	text-align:center;
+	vertical-align:top;
+	border:1.0pt solid #D1D5DB;
+	white-space:normal;}
+.xl70
+	{mso-style-parent:style0;
+	color:#1F2937;
+	vertical-align:top;
+	border:1.0pt solid #D1D5DB;
+	white-space:normal;}

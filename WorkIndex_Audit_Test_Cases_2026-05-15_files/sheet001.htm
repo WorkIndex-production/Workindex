@@ -1,0 +1,2049 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 15">
+<link id=Main-File rel=Main-File
+href="../WorkIndex_Audit_Test_Cases_2026-05-15.xls">
+<link rel=File-List href=filelist.xml>
+<link rel=Stylesheet href=stylesheet.css>
+<style>
+<!--td
+	{padding-bottom:8px;
+	padding-top:8px;}
+td:nth-child(1){width:55px;text-align:center}
+td:nth-child(2){width:260px;font-weight:600}
+td:nth-child(5){width:90px;text-align:center;font-weight:700;color:#15803d;background:#e8f5e9}
+table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:1.0in .75in 1.0in .75in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;}
+-->
+</style>
+<![if !supportTabStrip]><script language="JavaScript">
+<!--
+function fnUpdateTabs()
+ {
+  if (parent.window.g_iIEVer>=4) {
+   if (parent.document.readyState=="complete"
+    && parent.frames['frTabs'].document.readyState=="complete")
+   parent.fnSetActiveSheet(0);
+  else
+   window.setTimeout("fnUpdateTabs();",150);
+ }
+}
+
+if (window.name!="frSheet")
+ window.location.replace("../WorkIndex_Audit_Test_Cases_2026-05-15.xls");
+else
+ fnUpdateTabs();
+//-->
+</script>
+<![endif]>
+</head>
+
+<body link="#0563C1" vlink="#954F72" class=xl65>
+
+<table border=0 cellpadding=0 cellspacing=0 width=866 style='border-collapse:
+ collapse;table-layout:fixed;width:650pt'>
+ <col class=xl65 width=28 style='mso-width-source:userset;mso-width-alt:995;
+ width:21pt'>
+ <col class=xl65 width=256 span=3 style='mso-width-source:userset;mso-width-alt:
+ 9102;width:192pt'>
+ <col class=xl65 width=70 style='mso-width-source:userset;mso-width-alt:2503;
+ width:53pt'>
+ <tr height=24 style='height:18.0pt'>
+  <td height=24 class=xl66 colspan=2 width=284 style='height:18.0pt;mso-ignore:
+  colspan;width:213pt'>WorkIndex Audit Test Cases</td>
+  <td class=xl65 width=256 style='width:192pt'></td>
+  <td class=xl65 width=256 style='width:192pt'></td>
+  <td class=xl65 width=70 style='width:53pt'></td>
+ </tr>
+ <tr height=19 style='height:14.4pt'>
+  <td height=19 class=xl67 colspan=5 style='height:14.4pt;mso-ignore:colspan'>Generated
+  on 15 May 2026. Covers customer, expert, admin, system, SEO, email, credits,
+  chat, invite, rating, and deep loophole audit scenarios.</td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl68 colspan=2 style='height:16.2pt;mso-ignore:colspan'>Customer</td>
+  <td class=xl65></td>
+  <td class=xl65></td>
+  <td class=xl65></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl69 width=28 style='height:15.0pt;width:21pt'>S.N</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Test name</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Expected
+  behaviour</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Actual
+  behaviour</td>
+  <td class=xl69 width=70 style='border-left:none;width:53pt'>PASS/FAIL</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>1</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  OTP signup</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can register with OTP using email/phone and receive a valid login account.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>OTP
+  registration path was covered in full-flow testing and login succeeds.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>2</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  Google signup with invite parameter</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Google
+  signup preserves invite code and continues onboarding correctly.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Google
+  init/verify flow was updated to carry invite code and profile continuation.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>3</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  login</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Valid
+  customer credentials open customer dashboard.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Login
+  works and token-based /users/me check succeeds.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>4</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Banned
+  customer old token</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Banned
+  customer cannot continue using an old token.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Old
+  token access is rejected for banned account.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>5</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Banned
+  customer new login</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Banned
+  customer cannot login again.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Login
+  is rejected for banned account.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>6</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  customer create post</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  customer cannot create a new service request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>POST
+  /requests is blocked with ACCOUNT_RESTRICTED.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>7</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  customer shortlist expert</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  customer cannot shortlist/interest an expert.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Interest
+  endpoint is blocked with ACCOUNT_RESTRICTED.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>8</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  customer direct invite</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  customer cannot send direct expert invite.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  invite creation is blocked with ACCOUNT_RESTRICTED.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>9</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>New
+  request budget minimum</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cannot create request with budget below Rs. 1,000 or invalid step.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Backend
+  rejects invalid budget with MIN_BUDGET_REQUIRED.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>10</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Edit
+  request budget restriction</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cannot edit existing post budget to 0 or arbitrary invalid amount.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>PUT
+  /requests/:id validates the same budget rule.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>11</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  request questionnaire service options</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Service
+  options must be visible and selectable in new request questionnaire.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Frontend
+  questionnaire options were corrected and linked to service config.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>12</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  request duplicate service title</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>What
+  service do you need should appear once, not duplicated.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Duplicate
+  service heading was removed in questionnaire flow.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>13</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  create request with answers</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Post
+  stores questionnaire answers, location, timeline, budget, and service.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Request
+  creation stores sanitized answers and visible request details.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>14</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  request location</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  address/pincode/city/state should save for request and heatmap usage.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Location
+  fields are saved and geo heatmap source reads location fields.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>15</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  request list filters</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  dashboard shows all/pending/active/completed/cancelled filters.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Request
+  dashboard filters were exercised in full flow.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>16</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  edit open request</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can edit own open request details.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>PUT
+  /requests/:id works for owner when request is open.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>17</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cannot edit closed request</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cannot edit completed or cancelled request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Backend
+  rejects edit for completed/cancelled requests.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>18</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cancel request</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can cancel/delete own request when allowed.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Delete/cancel
+  path is covered and owner check applies.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>19</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Other
+  customer view protection</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  B cannot view Customer A request detail.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>GET
+  /requests/:id returns not authorized for other client.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>20</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  compare expert approaches</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>When
+  multiple proposals exist, customer can review approaches for own request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>GET
+  /requests/:id/approaches returns only owner request approaches.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>21</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  accept/reject approach</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can update approach status with valid status only.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Valid
+  status updates work; invalid status is rejected.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>22</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invalid
+  request status</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cannot submit arbitrary request status.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>PUT
+  /requests/:id/status rejects invalid status.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>23</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Complete
+  request requires expert</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  must select completing expert before marking complete.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Completion
+  without valid expert is rejected.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>24</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Complete
+  only approached expert</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can mark completed only for expert who approached that request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Completion
+  with unrelated expert is rejected.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>25</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Mandatory
+  rating after completion</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>If
+  customer completes service and skips rating, next login should require rating
+  first.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Pending
+  rating endpoint returns completed unrated approach and UI blocks dashboard
+  until rating.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>26</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Create
+  rating for completed approach</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can rate an expert only after completed work.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Rating
+  with completed approach/request succeeds.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>27</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Block
+  fake rating</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cannot rate arbitrary expert without completed approach/invite.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Fake
+  rating attempt is rejected.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>28</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Block
+  duplicate rating</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cannot rate the same completed approach twice.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Duplicate
+  approach rating is rejected.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>29</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  direct expert hire questionnaire</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Hire
+  from Explore must open questionnaire before notifying expert.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Direct
+  expert invite creation uses questionnaire data and stores answers.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>30</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  direct invite edit</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can edit direct invite before it is closed.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>PUT
+  /users/expert-invites/:id updates open invite data.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>31</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  direct invite cancel</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can cancel invite before completion.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Cancel
+  endpoint marks invite cancelled and blocks expert unlock.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>32</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  direct invite complete</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can complete direct invite only after expert unlocks.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  complete endpoint requires unlocked invite.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>33</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Rate
+  completed direct invite</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can rate expert for completed direct invite without request/approach.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Completed
+  direct invite rating succeeds with invite-linked rating.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>34</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Block
+  duplicate direct invite rating</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cannot rate same direct invite twice.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Second
+  invite rating is rejected.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>35</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  chat start after valid approach</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can start chat only with valid approached expert/request relationship.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Chat
+  start validates participant and approach ownership.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>36</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  direct chat after valid invite</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can open direct chat after valid invite exists.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Direct
+  chat creation succeeds for invite participant.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>37</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  cannot read others chat</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  B cannot fetch or mark read Customer A chat.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Messages/read
+  endpoints reject non-participant.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>38</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  stale request renewal</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can renew open stale request and extend visibility.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Renew
+  endpoint resets stale reminder and logs post_renewed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>39</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  stale confirmation prompt</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  sees stale confirmation when reminder was sent.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>GET
+  /requests/stale-confirmations returns stale open posts for that customer.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>40</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  support ticket</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  can raise and follow up support ticket.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Ticket
+  create/followup endpoints respond and admin can see them.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>41</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  report expert</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  reports should count against expert and trigger warning/restriction after
+  threshold.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Three
+  client reports restricted expert in audit.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>42</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Explore
+  board after posting</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  dashboard should show professional Explore suggestion board after post.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Frontend
+  board added to guide customer to Explore for faster service.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl68 colspan=2 style='height:16.2pt;mso-ignore:colspan'>Expert</td>
+  <td class=xl65></td>
+  <td class=xl65></td>
+  <td class=xl65></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl69 width=28 style='height:15.0pt;width:21pt'>S.N</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Test name</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Expected
+  behaviour</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Actual
+  behaviour</td>
+  <td class=xl69 width=70 style='border-left:none;width:53pt'>PASS/FAIL</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>1</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  OTP signup</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  can register and must finish questionnaire before dashboard.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Signup
+  path forces questionnaire completion before dashboard access.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>2</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  Google signup</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Google
+  expert signup also respects invite and questionnaire requirement.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Google
+  flow was updated to continue questionnaire before dashboard.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>3</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  exit questionnaire guard</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  cannot skip questionnaire by clicking exit and land in dashboard.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Exit
+  redirects back to mandatory questionnaire until complete.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>4</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  questionnaire save once</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>After
+  submitting questionnaire, expert goes to dashboard and does not loop back.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Questionnaire
+  completed flag is saved and dashboard opens.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>5</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  business type question</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Business
+  type question appears in expert questionnaire.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Seed
+  expert steps include business type.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>6</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  team size question</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Team
+  size question appears in expert questionnaire.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Seed
+  expert steps include team size.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>7</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  profile save</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Profile
+  fields save without wiping previous nested fields.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Partial
+  profile save preserved GST number, address, business/team data, and why
+  choose me.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>8</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Profile
+  strength calculation</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Profile
+  strength reflects saved expert details.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Profile
+  completeness utility uses bio, specialization, location, credentials,
+  education, portfolio, experience, address.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>9</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Low
+  profile approach block</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  below 50 percent profile strength cannot approach.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Approach
+  endpoint rejects low profile with PROFILE_STRENGTH_REQUIRED.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>10</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Go
+  to profile from strength card</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Clicking
+  profile-strength card should stay on Profile tab.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Frontend
+  navigation updated to remain on profile tab.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>11</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  browse filters by service</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  can filter available posts by selected service.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>GST-only
+  and ITR-only filters returned correct request sets.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>12</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  browse search</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  can search posts by text.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Available
+  request search found matching audit post.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>13</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Excel-like
+  floating filter</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Service
+  filter should open as floating overlay above content.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Frontend
+  filter UI was improved to float above cards.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>14</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  cannot see closed request</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  without prior approach cannot view non-open request detail.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>GET
+  /requests/:id blocks expert for closed/completed unavailable request.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>15</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  cannot approach completed request</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Closed/completed
+  request should reject new approach and not spend credits.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Approach
+  blocked and expert credits unchanged.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>16</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  approach open request</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Eligible
+  expert can approach active/pending request and credits are deducted.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Valid
+  approach was created in deep audit.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>17</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Duplicate
+  approach prevention</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  cannot approach same request twice.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Existing
+  approach check prevents duplicate.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>18</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Max
+  approach limit</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Request
+  should not accept more than five approaches.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Approach
+  count guard enforces max 5.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>19</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invalid
+  approach status</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invalid
+  approach status should be rejected.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>PUT
+  /approaches/:id/status rejects invalid status.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>20</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  expert approach</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  expert cannot approach request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Approach
+  endpoint blocked with ACCOUNT_RESTRICTED.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>21</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  expert unlock invite</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  expert cannot unlock direct invite.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Unlock
+  endpoint blocked with ACCOUNT_RESTRICTED.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>22</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  expert chat</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  expert cannot start chat.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Chat
+  start blocked with ACCOUNT_RESTRICTED.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>23</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  expert credits mutation</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restricted
+  expert cannot mutate credits through add/deduct endpoints.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Credits
+  add path blocked with ACCOUNT_RESTRICTED.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>24</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  Approaches status filter</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Approaches
+  tab status filter includes normal approaches and customer interests.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Pending/completed
+  states include customer interests before/after unlock.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>25</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Direct
+  invite summary card</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  sees client wants to hire you but details are collapsed behind View Details.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  invite UI shows View Details and expands questionnaire data.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>26</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Direct
+  invite questionnaire detail</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Before
+  unlock, expert can see questionnaire details but not full contact.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  data stores service, answers, timeline, budget, location, masked contact.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>27</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Unlock
+  direct invite credits</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  spends configured invite credits to unlock contact.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Unlock
+  deducts invite credit amount and reveals phone/email.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>28</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Cancelled
+  direct invite unlock block</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  cannot unlock customer-cancelled invite.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Unlock
+  cancelled invite is rejected.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>29</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Direct
+  chat authorization</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  can direct chat only after valid invite unlock.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  direct chat requires participant and unlocked invite.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>30</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Chat
+  read receipt</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Message
+  initially shows sent; after receiver reads, it changes to seen.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Backend
+  read endpoint and message readAt support are available.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>31</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Chat
+  color sender/receiver</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Sender
+  and receiver bubbles should look visually distinct.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Frontend
+  chat styling improved with different message colors.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>32</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  profile view count</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  profile tab shows customer profile views.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Profile
+  view tracking endpoint and display were added.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>33</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  report customer post</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  can report problematic customer post.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Request
+  report endpoint tracks expert report and suspension threshold.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>34</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Duplicate
+  post report prevention</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Same
+  expert cannot report same post multiple times.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Already
+  reported response prevents duplicate report.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>35</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Suspended
+  request after reports</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Post
+  with enough expert reports becomes suspended/hidden.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Report
+  flow updates request report count and status.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>36</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  document access request</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  can request document access only as expert.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Access
+  request route is expert-only and restricted users are blocked.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>37</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  cannot request access as customer</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Customer
+  role cannot request document access.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Role
+  guard added to /access-requests.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>38</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  KYC submit</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  can submit KYC unless blocked.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>KYC
+  endpoint exists and admin approval flow was covered.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>39</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  support ticket</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  can raise ticket and follow up.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Ticket
+  create/followup path responds and admin can process.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>40</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  invite tab placement</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  tab should be after Profile with icon and clean label.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  tab label/icon/alignment updated.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>41</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  link and share message</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  tab should include copy link and share WorkIndex link with rules.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  message includes URL, code, and 10-credit rule.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>42</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  history table</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  history columns should align within borders.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  table layout adjusted with bordered columns.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>43</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  reward criteria</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Inviter
+  gets 10 credits only after invited expert signs up and approaches once.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Invite
+  reward is awarded on first approach and logged as bonus.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=78 style='height:58.2pt'>
+  <td height=78 class=xl70 align=right width=28 style='height:58.2pt;
+  border-top:none;width:21pt'>44</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Credit
+  ledger</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  credit history should show ledger with
+  opening/purchase/spent/refund/bonus/invite bonus/closing.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Credits
+  ledger endpoint and frontend table added.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>45</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Reviews
+  Google-style summary</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Reviews
+  tab should show rating distribution bars and average like Google style.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Reviews
+  UI was improved with bar distribution and summary.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>46</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Privacy
+  policy button</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Settings
+  privacy policy button should open policy page.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Privacy
+  policy route/file linked from settings.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl68 colspan=2 style='height:16.2pt;mso-ignore:colspan'>Admin</td>
+  <td class=xl65></td>
+  <td class=xl65></td>
+  <td class=xl65></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl69 width=28 style='height:15.0pt;width:21pt'>S.N</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Test name</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Expected
+  behaviour</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Actual
+  behaviour</td>
+  <td class=xl69 width=70 style='border-left:none;width:53pt'>PASS/FAIL</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>1</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  login</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Valid
+  admin credentials open admin dashboard.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  login works.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>2</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  stats</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Stats
+  endpoint returns dashboard counts.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  stats endpoint responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>3</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  users list</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can list users with filters.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Users
+  list endpoint responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>4</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  user detail</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  expert detail should show saved profile fields.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>User
+  detail endpoint responded; profile save link audited.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>5</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  expert boost list</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can see expert boost/ranking list.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  boosts endpoint responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>6</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  boost update</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can change boost and ranking.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Boost/rank
+  update route exists and safe write controls passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>7</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  read surfaces</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Main
+  admin read endpoints should respond without crashing.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>29
+  admin read endpoints responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>8</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  revenue KPIs</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Revenue
+  tab shows gross/net/refund/spend/credit KPIs.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Revenue
+  endpoint returned KPI data.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>9</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  revenue charts</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Revenue
+  tab includes charts/pie data.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Revenue
+  endpoint returned chart and service economics data.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>10</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  top spenders</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Revenue
+  tab should include top spender/transaction data.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Revenue
+  endpoint returned spenders and transactions.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>11</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  safe write controls</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  write endpoints should update without corrupting data.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Safe
+  write controls responded and preserved values.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>12</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  adjust credits add</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can add credits with reason.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Credit
+  add adjusted balance.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>13</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  adjust credits deduct</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can deduct credits with reason.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Credit
+  deduct adjusted balance.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>14</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  reset password</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can reset user password.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Reset
+  password endpoint passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>15</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  send DM</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can send direct message to user.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>DM
+  endpoint passed and notification is created.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>16</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  create ticket on behalf</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can create ticket for user.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Create-for-user
+  ticket path passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>17</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  ticket approve</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can approve ticket request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Ticket
+  approve path responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>18</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  ticket reject</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can reject ticket request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Ticket
+  reject path responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>19</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  ticket resolve</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can resolve ticket.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Ticket
+  resolve path responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>20</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  user warn</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can warn user.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>User
+  action route handled warning.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>21</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  user flag</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can flag user.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>User
+  action route handled flag.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>22</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  user restrict</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can restrict user.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>User
+  action route restricted user.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>23</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  user unrestrict/restore</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can restore restricted user.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Restore
+  path worked in reporting audit.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>24</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  user ban</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can ban user.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Ban
+  path exists and banned login behavior passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>25</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  reported expert restriction</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Three
+  reports should restrict reported expert and admin can restore.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Client
+  reporting test restricted and restored expert.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>26</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  reported customer post</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Reported
+  post should appear in reports/suspended flow.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Request
+  report/suspended endpoints responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>27</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  suspended request reinstate</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can reinstate suspended request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Suspended
+  request action route exists.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>28</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  suspended request delete</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can delete suspended request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Suspended
+  request delete action exists.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>29</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  edit request</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can edit request details/status.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  request update passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>30</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  delete request</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can delete request.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  request delete passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>31</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  update approach</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can update approach status.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  approach update passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>32</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  delete approach refund</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Deleting
+  approach should refund spent credits.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  approach delete refunded credits.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>33</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  delete review</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can delete a review.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  review delete passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>34</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  chats list</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can list chats.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  chats endpoint responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>35</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  chat messages</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can inspect chat messages.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  chat message endpoint responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>36</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  KYC approve</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can approve expert KYC.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>KYC
+  approve route exists and read surface passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>37</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  KYC reject</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can reject expert KYC.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>KYC
+  reject route exists and read surface passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>38</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  email settings load</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  notification tab loads settings.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  settings endpoint responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>39</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  email settings save</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can enable/disable notification toggles.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  settings update route exists and is used by notification service.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>40</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  email logs</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  log tab should show sent emails with category/type/status/time.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  logs endpoint responded and logs are created by notification service.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>41</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  test daily digest</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can trigger test digest.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  test digest endpoint responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>42</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  audit list</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Audit
+  log tab lists activities.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Audit
+  endpoint responded.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>43</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Audit
+  rating completed</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Rating
+  completion should be captured in audit log.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>rating_completed
+  audit is logged.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>44</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Audit
+  post renewed</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Renewed
+  stale post should be captured in audit log.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>post_renewed
+  audit is logged.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>45</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Audit
+  purge lifecycle</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Purge
+  mail/renew/purge events should be auditable.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Request
+  lifecycle utility logs stale/purge actions.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>46</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  service category create/update/delete</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  can manage service categories and sync frontend config.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Service
+  category create/update/delete and preview tests passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>47</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  seed expert steps</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  seed should include 8 questions with business type and team size.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Seed
+  expert route was updated and audited.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>48</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  SEO preview</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>SEO
+  page preview should render generated HTML without publishing.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>SEO
+  preview passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>49</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  SEO GitHub publish config</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Live
+  GitHub publish should create SEO page and update sitemap only when enabled.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Skipped
+  by config because RUN_SEO_GITHUB_AUDIT was not 1; preview passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>50</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  SEO sitemap update</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Generated
+  SEO page should add URL to sitemap.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Sitemap
+  generation path exists; local sitemap has new SEO entries.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl68 colspan=2 style='height:16.2pt;mso-ignore:colspan'>System
+  / SEO / Email</td>
+  <td class=xl65></td>
+  <td class=xl65></td>
+  <td class=xl65></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl69 width=28 style='height:15.0pt;width:21pt'>S.N</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Test name</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Expected
+  behaviour</td>
+  <td class=xl69 width=256 style='border-left:none;width:192pt'>Actual
+  behaviour</td>
+  <td class=xl69 width=70 style='border-left:none;width:53pt'>PASS/FAIL</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>1</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Backend
+  health</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Health
+  endpoint reports API and MongoDB connected.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Health
+  returned status ok and mongodb connected.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>2</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Local
+  server restart</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Local
+  backend restarts cleanly after patches.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Server
+  restarted on port 5000 and health passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>3</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Syntax
+  check requests route</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Changed
+  request route should parse.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>node
+  --check passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>4</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Syntax
+  check approaches route</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Changed
+  approaches route should parse.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>node
+  --check passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>5</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Syntax
+  check chats route</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Changed
+  chats route should parse.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>node
+  --check passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl70 align=right width=28 style='height:15.0pt;
+  border-top:none;width:21pt'>6</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Syntax
+  check ratings route</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Changed
+  ratings route should parse.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>node
+  --check passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>7</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Syntax
+  check access route</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Changed
+  access request route should parse.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>node
+  --check passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>8</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Syntax
+  check server</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Server
+  should parse after route mounts/index hook.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>node
+  --check passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>9</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Rating
+  index migration</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Old
+  unique approach index should be converted to partial unique index.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>ensureRatingIndexes
+  drops wrong index and creates partial approach/invite indexes.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>10</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Rating
+  null approach collision</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Multiple
+  invite/admin ratings with approach null should not collide.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Partial
+  indexes allow null approach while enforcing real approach uniqueness.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>11</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Payment
+  route mount</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Payment
+  success page should find /api/payment/status/:id.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Server
+  now mounts /api/payment and /api/payments.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>12</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Credits
+  purchase initiate</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  credit purchase initiation should be available and restricted users blocked
+  where applicable.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Credits
+  initiate endpoint remains active with blockRestrictedUser.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>13</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Credits
+  purchase verify</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Razorpay
+  verify should be idempotent.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Verify
+  endpoint contains idempotency guard.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>14</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Credit
+  ledger endpoint</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Ledger
+  should return datewise opening/closing and transaction types.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>GET
+  /credits/ledger exists and frontend reads it.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>15</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  new request posted to experts</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Matching
+  experts receive email when new request is posted if enabled.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Notification
+  email service integrated and logs email.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>16</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  direct expert invite received</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Expert
+  receives invite email when customer sends Explore invite if enabled.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>sendExpertInviteReceived
+  is called and email log captures it.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>17</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  stale request reminder</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Stale
+  open request sends reminder after 7 days if enabled.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Request
+  lifecycle has stale reminder path and email log integration.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>18</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  settings default enabled</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>New
+  email notification controls default enabled.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  settings model includes defaults and admin toggles.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>19</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  log capture</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Every
+  sent notification email should be captured in Email Log.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Email
+  log entries are created for covered email types.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>20</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>SEO
+  files under seo-pages</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>New
+  SEO pages should live under seo-pages folder.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>New
+  generated pages are in seo-pages and sitemap references /seo-pages/ URLs.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>21</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>SEO
+  sitemap local update</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Sitemap
+  should include newly generated pages.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>sitemap.xml
+  was updated with SEO page entries.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>22</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>SEO
+  content quality</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>SEO
+  pages should contain useful service/location/problem-specific content.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Karnataka
+  city and topic pages were enriched with relevant ITR/GST/accounting/audit
+  details.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=58 style='height:43.8pt'>
+  <td height=58 class=xl70 align=right width=28 style='height:43.8pt;
+  border-top:none;width:21pt'>23</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Google
+  Search Console decision</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>No
+  API push needed if sitemap update is enough.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Confirmed
+  sitemap update is sufficient for now; GSC URL inspection automation not
+  implemented.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>24</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>One-click
+  local connectedness</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Local
+  WorkIndex desktop run should use connected frontend/backend URLs.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Local
+  backend healthy and frontend API paths aligned with backend mounts.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>25</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Full
+  flow test file updated</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Full-flow
+  batch should include newly added scenarios.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>scripts/full-flow-test.js
+  updated with expanded scenarios.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>26</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Uncovered
+  audit script</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Dedicated
+  uncovered audit should cover non-happy-path gaps.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>scripts/uncovered-audit-test.js
+  added and passed.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>27</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>No
+  client contact leak to expert</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>API
+  should not expose client contact before paid unlock/valid relationship.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Deep
+  audit passed contact leak guard.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>28</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>No
+  arbitrary chat access</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Non-participants
+  cannot create/read/mark chat messages.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Deep
+  audit passed chat authorization guards.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>29</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>No
+  arbitrary rating creation</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Ratings
+  require completed work relationship.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Deep
+  audit passed fake rating guard.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>30</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>No
+  credit spend on blocked approach</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Blocked
+  approach attempts must not deduct credits.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Closed-request
+  approach attempt left credits unchanged.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>31</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Geo
+  heatmap data source</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  heatmap should use saved customer/expert location/address.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Heatmap
+  endpoint and frontend read user location fields; save path audited.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>32</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Public
+  profile view count</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Profile
+  view tracking should count customer/public profile opens.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Profile
+  view endpoint exists and expert profile display added.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>33</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Admin
+  revenue UI assets</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Revenue
+  tab should render pie/chart data from backend.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>Revenue
+  backend returns chart datasets used by admin UI.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <tr height=39 style='height:29.4pt'>
+  <td height=39 class=xl70 align=right width=28 style='height:29.4pt;
+  border-top:none;width:21pt'>34</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>SEO
+  service pricing reuse</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>SEO
+  pricing sections should reuse pricing/question data where possible.</td>
+  <td class=xl70 width=256 style='border-top:none;border-left:none;width:192pt'>SEO
+  templates were tied to existing service/pricing content patterns.</td>
+  <td class=xl70 width=70 style='border-top:none;border-left:none;width:53pt'>PASS</td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=28 style='width:21pt'></td>
+  <td width=256 style='width:192pt'></td>
+  <td width=256 style='width:192pt'></td>
+  <td width=256 style='width:192pt'></td>
+  <td width=70 style='width:53pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>

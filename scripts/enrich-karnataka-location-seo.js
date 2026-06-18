@@ -341,16 +341,59 @@ function titleCase(slug) {
   return slug.split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
 }
 
+const mappings = [
+  { match: /mumbai|pune|nagpur|thane|navi-mumbai|kalyan|dombivli|nashik|kolhapur|aurangabad|bhiwandi|solapur|sangli|satara|chandrapur|bhandara|gondia|wardha|yavatmal|ratnagiri|malad|borivali|dadar|worli|powai|lower-parel|hadapsar|kharadi|kothrud|hinjewadi|magarpatta|viman-nagar|pimpri-chinchwad|andheri|bandra|ghatkopar|goregaon|mira-road|panvel|vasai-virar-city|aundh|baner|akola-city|amravati-city|dhule-city|gadchiroli|jalgaon-city|latur-city|nanded-city|washim|koregaon-park|buldhana/, state: 'Maharashtra' },
+  { match: /chennai|coimbatore|madurai|salem|karur|erode|hosur|velachery|tambaram|chromepet|nungambakkam|omr-road|t-nagar|thanjavur|trichy|dindigul|cuddalore|nagapattinam|nagercoil|pollachi|ramanathapuram|sivaganga|thoothukudi|tirunelveli|tiruppur|vellore|villupuram|virudhunagar|adyar|anna-nagar|ambattur|sholinganallur|porur|dharmapuri-city|krishnagiri-city|kumbakonam|namakkal-city|ooty-city/, state: 'Tamil Nadu' },
+  { match: /hyderabad|gachibowli|hitech-city|madhapur|kukatpally|miyapur|secunderabad|warangal|nizamabad|karimnagar|khammam|suryapet|mahbubnagar|alwal|attapur|kompally|kondapur|mehdipatnam|moosapet|nanakramguda|tellapur|lb-nagar|banjara-hills|jubilee-hills|financial-district|ameerpet/, state: 'Telangana' },
+  { match: /kolkata|howrah|salt-lake|rajarhat|new-town|ballygunge|park-street|durgapur|siliguri|bardhaman|asansol|haldia|barasat|barrackpore|bankura|berhampore|bishnupur|contai|cooch-behar|jalpaiguri|malda|midnapore|murshidabad|nadia|tamluk|arambag|kharagpur-city|krishnanagar-city/, state: 'West Bengal' },
+  { match: /ahmedabad|surat|vadodara|rajkot|jamnagar|bhavnagar|gandhinagar|bhuj|kutch|gandhidham|mehsana|morbi|navsari|porbandar|valsad|vapi|sg-highway|adajan|attwalines|citylight|katargam|parle-point|piplod|udhna|varachha|vesu|akota|alkapuri|fatehgunj|gorwa|harni|karelibaug|manjalpur|sayajigunj|waghodia-road|amreli|anand-city/, state: 'Gujarat' },
+  { match: /jaipur|jodhpur|udaipur|kota|bikaner|ajmer|churu|barmer|chittorgarh|jhunjhunu|nagaur|pali|sawai-madhopur|sikar|sri-ganganagar|tonk|alwar-city|bharatpur-city|bundi|bundi-city|dungarpur|hanumangarh/, state: 'Rajasthan' },
+  { match: /indore|bhopal|jabalpur|gwalior|ujjain|ratlam|rewa|sagar|satna|dewas|katni|singrauli|khandwa|morena|bhind|shivpuri|guna|mandsaur|neemuch|palasia|rau|ring-road|sapna-sangeeta|vijay-nagar|arera-colony|hoshangabad-road|kolar-road|mp-nagar|new-market/, state: 'Madhya Pradesh' },
+  { match: /kochi|thiruvananthapuram|calicut|thrissur|kannur|kollam|aluva|edappally|ernakulam|fort-kochi|kakkanad|kalamassery|maradu|palarivattom|tripunithura|vytilla/, state: 'Kerala' },
+  { match: /patna|gaya|muzaffarpur|bhagalpur/, state: 'Bihar' },
+  { match: /lucknow|kanpur|agra|varanasi|allahabad|prayagraj|meerut|bareilly|firozabad|gorakhpur|jhansi|aligarh|moradabad|saharanpur|hapur|mathura|rampur|shahjahanpur|muzaffarnagar|budaun|gomti-nagar|hazratganj|civil-lines|kidwai-nagar|swaroop-nagar|lanka|nadesar|sigra|ghaziabad/, state: 'Uttar Pradesh' },
+  { match: /chandigarh/, state: 'Chandigarh' },
+  { match: /ludhiana|amritsar|jalandhar|patiala|bathinda|phagwara|kapurthala|moga|sangrur|pathankot|gurdaspur|hoshiarpur/, state: 'Punjab' },
+  { match: /gurgaon|faridabad|panipat|rohtak|hisar|karnal|yamunanagar|sirsa|bhiwani|rewari|panchkula|ambala-city/, state: 'Haryana' },
+  { match: /bhubaneswar|cuttack|balasore|sambalpur|rourkela/, state: 'Odisha' },
+  { match: /raipur|bilaspur|durg|bhilai/, state: 'Chhattisgarh' },
+  { match: /ranchi|jamshedpur|dhanbad|bokaro/, state: 'Jharkhand' },
+  { match: /guwahati|silchar|dibrugarh|jorhat|tezpur/, state: 'Assam' },
+  { match: /dehradun|rishikesh|roorkee|haridwar|haldwani|rudrapur/, state: 'Uttarakhand' },
+  { match: /jammu|srinagar/, state: 'Jammu & Kashmir' },
+  { match: /panaji|goa/, state: 'Goa' },
+  { match: /visakhapatnam|vijayawada|guntur|nellore|kurnool|rajahmundry|tirupati|kakinada|gajuwaka|vizianagaram|vizag|bheemunipatnam|madhurawada|mvp-colony|pm-palem|rushikonda|seethammadhara|steel-city|anantapur/, state: 'Andhra Pradesh' },
+  { match: /shimla|baddi|solan|una|dharamshala|parwanoo|dharamsala-city/, state: 'Himachal Pradesh' },
+  { match: /dimapur|kohima/, state: 'Nagaland' },
+  { match: /gangtok/, state: 'Sikkim' },
+  { match: /imphal/, state: 'Manipur' },
+  { match: /shillong/, state: 'Meghalaya' },
+  { match: /noida|greater-noida/, state: 'Uttar Pradesh' },
+  { match: /mohali|derabassi|zirakpur/, state: 'Punjab' },
+  { match: /delhi|karol-bagh|lajpat-nagar|rohini|saket|dwarka|connaught-place|nehru-place/, state: 'Delhi' },
+  { match: /agartala-city/, state: 'Tripura' },
+  { match: /aizawl-city/, state: 'Mizoram' },
+  { match: /pondicherry/, state: 'Puducherry' },
+];
+
 function locationFor(slug) {
   if (locations[slug]) return locations[slug];
+  let state = 'Karnataka';
+  for (const m of mappings) {
+    if (m.match.test(slug)) {
+      state = m.state;
+      break;
+    }
+  }
   return {
     name: titleCase(slug),
     display: titleCase(slug),
-    region: 'Karnataka',
+    region: state,
     context: `${titleCase(slug)} customers include salaried taxpayers, traders, small businesses, contractors, professionals and property owners who need practical finance, tax, GST, accounting and compliance support.`,
     sectors: ['salaried and professional taxpayers', 'retail and trading businesses', 'contractors and service providers', 'clinics, schools and restaurants', 'property owners and freelancers']
   };
 }
+
 
 function schema(prefix, service, loc, slug) {
   const url = `${site}/seo-pages/${prefix}-${slug}.html`;
