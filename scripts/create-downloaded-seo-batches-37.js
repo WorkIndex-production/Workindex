@@ -328,7 +328,7 @@ function pageHtml(page, allSlugs) {
 <script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'Organization', '@id': 'https://workindex.co.in/#organization', name: 'WorkIndex', url: 'https://workindex.co.in' },
+      { '@type': 'Organization', '@id': 'https://workindex.co.in/#organization', name: 'WorkIndex', alternateName: 'Work Index', url: 'https://workindex.co.in' },
       { '@type': 'WebPage', '@id': `https://workindex.co.in/seo-pages/${page.slug}.html#webpage`, url: `https://workindex.co.in/seo-pages/${page.slug}.html`, name: `${title} | WorkIndex`, description: meta },
       { '@type': 'BreadcrumbList', itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'WorkIndex', item: 'https://workindex.co.in' },
