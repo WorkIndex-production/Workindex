@@ -38,6 +38,20 @@ To save time, **always do it in a single pass**. Do not generate generic files f
   1. **JSON-LD Schema**: The `@type: "FAQPage"` entity under `@graph`'s `mainEntity`.
   2. **HTML Body**: Rendered within the `<section class="wi-panel"><div class="lp-section-eyebrow">Questions People Ask</div>...` block.
 
+### E. Blog Pages (For Slugs starting with `blog-`)
+- Blog pages must represent in-depth, topic-specific guides and avoid generic placeholders.
+- Classify blog pages into 6 thematic categories: **GST**, **TDS/TCS**, **ITR & Income Tax**, **MCA & Corporate Law**, **Salary & EPF Compliance**, and **General Finance/Investments**.
+- For each category, replace the generic checklists with 4 custom panels (What this page helps you decide, Accuracy notes before you act, Documents and facts to keep ready, and Common mistakes to avoid) and 15 custom FAQs.
+- Update both the **JSON-LD Schema** and the **HTML body FAQ container** with the 15 category FAQs.
+- **Dynamic Country-Specific DTAA/NRI rates**: If a country (e.g. USA, UK, Singapore, UAE, Germany, Canada, Australia) is mentioned in the file context, dynamically inject their specific treaty withholding tax rates (e.g., 15% or 25% for US, 10% or 15% for Singapore, 10% for UAE/Germany, 15% for UK/Australia) and double-taxation relief details (TRC, Form 10F, Form 1116) into the NRI FAQs. Keep the total FAQ list to exactly 15 questions to prevent layout/validator breakage.
+- **Competitor Topic Overrides**: Implement long-form, custom-rendered overrides for the following topics:
+  1. **Share Buyback Taxation (`blog-buyback-proceeds-deemed-dividend.html`)**: Detail the pre-Oct 2024, Oct 2024 - Mar 2026, and April 2026 onwards tax regimes (Section 115QA, Section 2(22)(f), Section 46A). Highlight the double-taxation "phantom loss" trap, promoter differential tax rates, worked math examples, and the legal/constitutional entry 82 competence debate u/s 2(22)(f).
+  2. **Section 43B(h) MSME Payment Rule (`blog-section-43b-msme-payment-rule.html`)**: Detail the 15/45-day payment deadline, micro vs small vs medium size/turnover criteria, year-end add-back disallowance, the exclusion of retail/wholesale traders, and compound interest penalties at three times the RBI bank rate.
+  3. **New Income Tax Act Transition (`blog-new-income-tax-act-2025.html`, `blog-income-tax-act-2025-section-mapping.html`)**: Explain the draft review, default New Tax Regime default mapping, and transition mapping of old section numbers.
+  4. **Equalization Levy Abolition (`blog-what-replaced-equalization-levy.html`, `blog-why-india-scrapped-the-google-tax.html`)**: Explain the abolition of the 2% e-commerce levy, Significant Economic Presence (SEP) rules (₹2 cr / 3 lakh user thresholds), and OECD Pillar Two global minimum tax.
+  5. **Unlisted Shares Capital Gains Trap (`blog-unlisted-shares-24-month-ltcg-trap.html`, etc.)**: Detail the 24-month LTCG holding period, 12.5% rate without indexation, and Section 50CA / Rule 11UA FMV tax trap.
+
+
 ---
 
 ## 3. Sitemap & Indexer Sorting
