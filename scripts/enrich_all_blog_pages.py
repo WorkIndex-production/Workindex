@@ -125,6 +125,15 @@ def get_premium_metadata(filename, category, subtopic):
             'hero_desc': 'Failure to pay registered MSEs within the MSMED Act deadlines leads to year-end tax disallowance and interest at three times the bank rate.',
             'eyebrow': 'Income Tax'
         }
+    elif filename == 'blog-pf-withdrawal-taxability-complete-guide.html':
+        return {
+            'title': 'Provident Fund (PF) Taxability on Withdrawal: Complete Guide',
+            'h1': 'PF Withdrawal Taxability & Exemption Rules',
+            'subtitle': 'Tax rules for RPF, SPF, URPF, PPF and Section 192A TDS explained',
+            'meta_desc': 'Detailed guide on Provident Fund (PF) taxability on withdrawal: RPF 5-year continuous service rule, Section 192A TDS, and the annual 2.5L/5L interest limits.',
+            'hero_desc': 'A comprehensive legal analysis of provident fund withdrawals, interest taxation limits, unrecognised fund tax traps, and Form 15G/15H exemptions.',
+            'eyebrow': 'Salary & EPF'
+        }
     
     words = slug.split('-')
     title_words = []
@@ -904,6 +913,139 @@ def get_buyback_guide_content():
 </section>
 """
     return content
+
+def get_pf_withdrawal_guide_content():
+    content = """
+<section class="wi-panel">
+  <div class="lp-section-eyebrow">PF Taxability Chart</div>
+  <h2>Statutory Comparison: SPF vs RPF vs URPF vs PPF</h2>
+  <div style="margin-bottom: 12px; font-size: 13px; color: var(--text-muted);">
+    <span><strong>Official fact-check status:</strong> Last fact-checked against the Income-tax Act, 1961 and standard ICAI CA Intermediate study material.</span>
+  </div>
+  <p>The taxability of Provident Fund (PF) contributions, interest, and ultimate withdrawals depends on the classification of the fund. Below is the detailed statutory comparison chart mapping these rules during employment and at withdrawal:</p>
+  <div style="overflow-x: auto; margin: 16px 0;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; line-height: 1.5;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border-color); background: var(--bg-muted);">
+          <th style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold;">Particulars</th>
+          <th style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold;">Statutory PF (SPF)</th>
+          <th style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold;">Recognized PF (RPF)</th>
+          <th style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold;">Unrecognized PF (URPF)</th>
+          <th style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold;">Public PF (PPF)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid var(--border-color);">
+          <td style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold; background: var(--bg-muted);">Employer's Contribution</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Fully exempt from income tax.</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Exempt up to 12% of salary. Excess u/s 17(1) is taxable as "salary".</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Not taxable at the time of contribution.</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Not Applicable (no employer contribution).</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-muted);">
+          <td style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold; background: var(--bg-muted);">Employee's Contribution</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Eligible for Sec 80C deduction (if under Old Regime u/s 115BAC(1A)).</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Eligible for Sec 80C deduction (if under Old Regime u/s 115BAC(1A)).</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Not eligible for any tax deduction.</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Eligible for Sec 80C deduction (if under Old Regime u/s 115BAC(1A)).</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-color);">
+          <td style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold; background: var(--bg-muted);">Interest on Employer's Share</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Fully exempt from income tax.</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Exempt up to 9.5% p.a. Excess u/s 17(1) is taxable as "salary".</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Not taxable at the time of credit.</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Not Applicable.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-muted);">
+          <td style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold; background: var(--bg-muted);">Interest on Employee's Share</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Exempt up to annual limit of ₹5,00,000 (if no employer share u/s 10(11)).</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Exempt up to 9.5% p.a. AND u/s 10(12), exempt up to ₹2,50,000 (with employer share) / ₹5,00,000 (no employer share).</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Not taxable at the time of credit.</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Exempt up to annual limit of ₹5,00,000 (if no employer share u/s 10(11)).</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-color);">
+          <td style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold; background: var(--bg-muted);">Lump Sum Withdrawal</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold; color: #10b981;">Fully exempt u/s 10(11).</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">Exempt u/s 10(12) if continuous service >= 5 years (or due to ill health, business closure, transfer to new employer RPF/NPS). Else retroactively taxed as URPF.</td>
+          <td style="padding: 10px; border: 1px solid var(--border-color);">
+            • Employee contribution: Exempt.<br>
+            • Employee interest: Taxed u/h "Other Sources".<br>
+            • Employer contribution &amp; interest: Taxed as "Salaries".
+          </td>
+          <td style="padding: 10px; border: 1px solid var(--border-color); font-weight: bold; color: #10b981;">Fully exempt u/s 10(11).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p><em>*Note: "Salary" for the purpose of the 12% contribution limit refers to Basic Salary + Dearness Allowance (if forming part of retirement benefits) + Commission as a fixed percentage of turnover.</em></p>
+</section>
+
+<section class="wi-panel">
+  <div class="lp-section-eyebrow">Exemption &amp; Withdrawal</div>
+  <h2>What This Provident Fund Guide Helps You Decide</h2>
+  <ul class="wi-detail-list">
+    <li><strong>Withdrawal vs. Transfer</strong>: Whether you should withdraw your EPF balance when changing jobs, or transfer it to your new employer's Recognized Provident Fund (RPF) to maintain your service tenure.</li>
+    <li><strong>NPS Route</strong>: Deciding whether to transfer your accumulated RPF balance to your National Pension System (NPS) Tier-1 account under Section 10(12) for long-term retirement planning.</li>
+    <li><strong>Tax Regime Selection</strong>: Evaluating if it is beneficial to stick to the Old Tax Regime to claim Section 80C deductions for self-contributions to EPF/PPF, or shift to the default New Regime.</li>
+  </ul>
+</section>
+
+<section class="wi-panel">
+  <div class="lp-section-eyebrow">Accuracy &amp; Limits</div>
+  <h2>Accuracy Notes Before You Withdraw</h2>
+  <ul class="wi-detail-list">
+    <li><strong>The 5-Year Continuous Service Rule</strong>: Withdrawal of accumulated balance from a Recognized Provident Fund (RPF) is exempt under Section 10(12) only if the employee has rendered a continuous service period of at least 5 years. Service with a former employer counts if the PF balance was successfully transferred to the new employer.</li>
+    <li><strong>Section 192A TDS Threshold</strong>: Tax Deducted at Source (TDS) at 10% is applicable on taxable PF withdrawals (under 5 years of service) if the amount is ₹50,000 or more. If PAN is not furnished, TDS is deducted at the Maximum Marginal Rate (over 30%).</li>
+    <li><strong>Form 15G/15H for Nil TDS</strong>: You can submit Form 15G (or Form 15H for senior citizens) to the EPFO if your total income (including the taxable withdrawal) is below the basic exemption threshold, to prevent TDS.</li>
+    <li><strong>Interest Accrual Limits (Post-2021)</strong>: Interest on annual employee contributions exceeding ₹2,50,000 (where the employer also contributes) or ₹5,00,000 (where there is no employer contribution) is taxable under Section 10(11) and 10(12).</li>
+    <li><strong>Rule 9D Separate Ledger Accounts</strong>: Rule 9D requires the maintainance of two separate accounts within the PF ledger: a Non-Taxable Contribution Account (pre-2021 balance + subsequent below-threshold contributions + interest) and a Taxable Contribution Account (contributions in excess of limits + interest). Only the interest in the taxable account is subject to annual tax.</li>
+  </ul>
+</section>
+
+<section class="wi-panel">
+  <div class="lp-section-eyebrow">Required Documents</div>
+  <h2>Documents and Facts to Keep Ready</h2>
+  <ul class="wi-detail-list">
+    <li><strong>Universal Account Number (UAN)</strong>: Must be active and seeded with your Aadhaar, PAN, and bank account details on the EPFO Unified Portal.</li>
+    <li><strong>EPF Member Passbook</strong>: Download the latest passbook to check the bifurcation of employer and employee contributions and interest credits.</li>
+    <li><strong>Form 15G / Form 15H</strong>: Two signed copies if your withdrawal is taxable (under 5 years) but your total income falls below the taxable limit.</li>
+    <li><strong>Form 19 and Form 10C/10D</strong>: Form 19 is used for final EPF settlement; Form 10C is for pension withdrawal benefit (or scheme certificate if service is over 10 years).</li>
+    <li><strong>Bank Account Verification</strong>: A cancelled cheque with your name printed, or an attested copy of your bank passbook first page, to ensure direct deposit of funds.</li>
+  </ul>
+</section>
+
+<section class="wi-panel">
+  <div class="lp-section-eyebrow">Mistakes to Avoid</div>
+  <h2>Common Mistakes to Avoid</h2>
+  <ul class="wi-detail-list">
+    <li><strong>Premature Withdrawal (Under 5 Years)</strong>: Withdrawing PF before completing 5 years of continuous service triggers retrospective tax liability, where the entire amount is taxed as if the fund were an Unrecognized Provident Fund (URPF).</li>
+    <li><strong>Failing to File Form 15G/15H</strong>: Forgetting to submit Form 15G/15H when eligible results in mandatory 10% TDS, requiring you to file ITR and claim a refund.</li>
+    <li><strong>Ignoring the Pension Component</strong>: Withdrawing the pension scheme contribution (Form 10C) instead of taking a Scheme Certificate when your service exceeds 10 years. After 10 years, pension withdrawal is blocked and you are only eligible for a monthly pension upon retirement.</li>
+    <li><strong>Conflating EPF u/s 10(12) with PPF u/s 10(11)</strong>: Assuming PPF carries a 5-year service limit. PPF withdrawals are fully exempt u/s 10(11) (governed by the PPF scheme maturity rules), and are not subject to the 5-year employer service rule.</li>
+    <li><strong>Miscalculating Cost in URPF Withdrawals</strong>: Under URPF, employee's own contribution is not taxed, but interest on it is taxable under "Income from Other Sources". Employer's share and its interest are taxed u/h "Salaries". Misreporting this leads to mismatch notices.</li>
+  </ul>
+</section>
+"""
+    return content
+
+def get_pf_withdrawal_faqs():
+    return [
+        ("What are the four main types of Provident Funds in India?", "Statutory Provident Fund (SPF), Recognized Provident Fund (RPF), Unrecognized Provident Fund (URPF), and Public Provident Fund (PPF). They serve different sectors and carry distinct tax rules."),
+        ("What is the tax treatment of employer's contribution to RPF?", "Contributions up to 12% of the employee's salary are exempt. Any amount in excess of 12% is taxable as salary under Section 17(1)."),
+        ("Is the employee's contribution to PF eligible for tax deduction?", "Yes, contributions to SPF, RPF, and PPF are eligible for deduction under Section 80C (up to ₹1,50,000) under the Old Tax Regime (if the employee opts out of the default New Regime u/s 115BAC(1A)). Contributions to URPF do not qualify for Section 80C."),
+        ("At what rate is interest credited on PF contributions taxable during employment?", "For RPF, interest credited in excess of 9.5% p.a. is taxable as salary u/s 17(1). For URPF, interest is not taxed at the time of credit. For SPF and PPF, interest is fully exempt during employment (subject to Section 10(11) annual limits)."),
+        ("What is the ₹2,50,000 annual limit for PF interest taxability?", "Effective from April 1, 2021, if an employee's annual contribution to RPF or SPF exceeds ₹2,50,000, interest on the excess contribution is taxable. This limit applies to funds where the employer also contributes."),
+        ("Under what conditions is the ₹5,00,000 higher threshold applicable for PF interest taxability?", "If there is no employer contribution to the fund (e.g., PPF or government GPF), the threshold for interest exemption is raised to ₹5,00,000 per year. Interest on employee contributions above this limit is taxable."),
+        ("How is taxable interest calculated under Rule 9D?", "The CBDT mandates maintaining separate accounts within the PF account from FY 2021-22 onwards: a Non-Taxable Contribution Account (closing balance as on 31.03.2021 + contributions within limits + interest) and a Taxable Contribution Account (contributions exceeding limits + interest). Interest on the taxable account is taxed annually."),
+        ("Under what conditions is a lump-sum withdrawal from RPF fully exempt from income tax?", "Under Section 10(12), RPF withdrawal is exempt if the employee has rendered continuous service of 5 years or more, or if service is terminated due to ill-health, discontinuance of the employer's business, or other reasons beyond the employee's control."),
+        ("What happens if an employee withdraws from RPF before completing 5 years of continuous service?", "If withdrawn before 5 years (and not due to ill-health/discontinuance), the accumulated balance becomes taxable. It is taxed retroactively as if the fund had been an Unrecognized Provident Fund (URPF) from the beginning, and the taxpayer must pay the tax difference."),
+        ("How is the 5-year continuous service rule calculated when changing employers?", "If the accumulated balance in the old employer's RPF is transferred to the new employer's RPF, the service period with the former employer is added to the service with the new employer to calculate the 5-year continuous service period."),
+        ("Can RPF accumulated balance be transferred to the National Pension System (NPS) tax-free?", "Yes, under Section 10(12), if the entire accumulated balance in RPF is transferred directly to the employee's Tier-1 NPS account u/s 80CCD, the transfer is fully exempt from tax."),
+        ("How is a lump-sum withdrawal from an Unrecognized Provident Fund (URPF) taxed?", "URPF withdrawals are taxed as follows: employee's contribution is exempt; interest on the employee's contribution is taxable under 'Income from Other Sources'; employer's contribution and interest thereon are taxable under the head 'Salaries' u/s 17(1)."),
+        ("Is a lump-sum withdrawal from Statutory Provident Fund (SPF) or Public Provident Fund (PPF) taxable?", "No. Lumpsum withdrawals from SPF and PPF are fully exempt from income tax under Section 10(11), irrespective of the number of years of contribution, subject only to the post-2021 interest taxability thresholds on high contributions."),
+        ("What are the TDS rules for PF withdrawals under Section 192A?", "Under Section 192A, TDS is deducted at 10% on RPF withdrawals if the withdrawal is taxable (i.e. before 5 years) and the amount is ₹50,000 or more. If the employee does not furnish a PAN, TDS is deducted at the maximum marginal rate (30% + surcharge & cess)."),
+        ("How can an employee avoid TDS under Section 192A on taxable PF withdrawals?", "If the employee's total income (including the taxable PF withdrawal) is below the basic exemption limit, they can submit Form 15G (or Form 15H for senior citizens) to the PF authorities to claim payment without TDS.")
+    ]
 
 def get_buyback_faqs():
     return [
@@ -2912,6 +3054,9 @@ def process_file(file_path):
     if filename == 'blog-buyback-proceeds-deemed-dividend.html':
         faqs = get_buyback_faqs()
         panels_html = get_buyback_guide_content()
+    elif filename == 'blog-pf-withdrawal-taxability-complete-guide.html':
+        faqs = get_pf_withdrawal_faqs()
+        panels_html = get_pf_withdrawal_guide_content()
     elif filename == 'blog-section-43b-msme-payment-rule.html':
         faqs = get_msme_faqs()
         panels_html = get_msme_guide_content()
