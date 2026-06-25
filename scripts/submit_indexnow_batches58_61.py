@@ -1,6 +1,8 @@
 import json
 import requests
 from pathlib import Path
+import time
+import urllib.parse
 
 manifest_path = Path("C:/Ravish/workindex-frontend/batches58-61-downloaded-indexnow-urls.json")
 
@@ -11,25 +13,34 @@ if not manifest_path.exists():
 urls = json.loads(manifest_path.read_text(encoding="utf-8"))
 print(f"Loaded {len(urls)} URLs to submit.")
 
-# Payload
 key = "2659be1032064f3daa05616e03df4296"
-payload = {
-    "host": "workindex.co.in",
-    "key": key,
-    "keyLocation": f"https://workindex.co.in/{key}.txt",
-    "urlList": urls
-}
+key_loc = f"https://workindex.co.in/{key}.txt"
 
-print("Submitting to IndexNow API...")
-response = requests.post(
-    "https://api.indexnow.org/indexnow",
-    headers={"Content-Type": "application/json"},
-    json=payload,
-    timeout=30
-)
+print("Submitting to IndexNow API in streaming mode...")
+session = requests.Session()
+success_count = 0
+fail_count = 0
 
-print(f"Status Code: {response.status_code}")
-try:
-    print(f"Response: {response.json()}")
-except Exception:
-    print(f"Response (text): {response.text}")
+for i, url in enumerate(urls):
+    try:
+        encoded_url = urllib.parse.quote(url, safe='')
+        encoded_key_loc = urllib.parse.quote(key_loc, safe='')
+        endpoint = f"https://api.indexnow.org/indexnow?url={encoded_url}&key={key}&keyLocation={encoded_key_loc}"
+        
+        response = session.get(endpoint, timeout=15)
+        if response.status_code == 200:
+            success_count += 1
+            print(f"[{i+1}/{len(urls)}] OK   {url}")
+        else:
+            fail_count += 1
+            print(f"[{i+1}/{len(urls)}] FAIL {response.status_code} {url}")
+    except Exception as e:
+        fail_count += 1
+        print(f"[{i+1}/{len(urls)}] ERROR {str(e)} {url}")
+        
+    if i < len(urls) - 1:
+        time.sleep(0.2)
+
+print("\nStreaming Submission Completed:")
+print(f"  Successfully submitted: {success_count}")
+print(f"  Failed submissions:     {fail_count}")
