@@ -1623,7 +1623,7 @@ def get_subtopic_for_file(filename):
     words = set(re.split(r'[^a-zA-Z0-9]+', fn))
     
     # 1. AIS / TIS / 26AS
-    if any(k in fn for k in ['ais', 'tis', '26as', 'taxpayer-information', 'annual-information']):
+    if ('ais' in words or 'tis' in words or '26as' in words) or any(k in fn for k in ['taxpayer-information', 'annual-information']):
         return 'ais_tis_26as'
         
     # 2. Salary & Allowances
@@ -2797,11 +2797,335 @@ case_study_panels = {
             "Verify Against Official Portals: Regularly check the GST portal and e-filing portal for any mismatch notifications or outstanding demands.",
             "Obtain Professional Guidance: Consult qualified tax professionals before taking aggressive positions on exemptions or deductions."
         ]
+    },
+    'pride_foramer': {
+        'dispute_details': [
+            "Facts: French company Pride Foramer S.A. engaged in offshore oil drilling had ONGC contracts from 1983-1993. Following contract expiry, a 5-year gap (1993-1998) occurred without active Indian operations, leading to deductions being disallowed.",
+            "Lower Court History: ITAT allowed deductions during the inactive lull, but the Uttarakhand High Court reversed it, declaring that no active contract and no permanent office meant cessation of business.",
+            "Key Issues: Whether a permanent office or active contract (PE) is a prerequisite under domestic law for business connection taxability, and whether a temporary contract gap represents business cessation."
+        ],
+        'court_ratio': [
+            "PE vs Domestic Law: The Supreme Court ruled that a Permanent Establishment (PE) is a treaty-level allocation concept (DTAA) and has no role in determining domestic business connection taxability under Section 9(1)(i).",
+            "Lull in Business: A temporary lull or project gap between contracts does not equal business cessation. The key test is whether conduct shows a continuing intent to carry on business.",
+            "Deductions & Depreciation: Section 37(1) business expenditure and Section 32(2) carry-forward of unabsorbed depreciation are fully allowable during contractless inactive phases if business intent is shown."
+        ],
+        'key_evidence': [
+            "ONGC Correspondence: Extensive records of bids submitted, negotiations, and tender correspondence during the 1993-1998 gap period.",
+            "Tender Documents: Copy of the bid submitted in 1996 for new ONGC projects, proving active pursuit of business contracts.",
+            "Administrative Expenses: General ledger entries for legal, professional, and administrative costs incurred during the inactive years."
+        ],
+        'action_points': [
+            "Claim Inactive Deductions: Non-resident oil/gas, EPC, and project contractors can claim Section 37 deductions and carry forward unabsorbed depreciation during inactive contract gaps.",
+            "Document Bid Activity: Maintain comprehensive records of local correspondence, bidding, and tender submissions to prove continuous business intent during gaps.",
+            "Analyze Treaty PE Rules: Assess if tax exposure is created under domestic law even without a DTAA PE, as PE is not a prerequisite for domestic taxability."
+        ]
+    },
+    'sharp_business': {
+        'dispute_details': [
+            "Facts: Sharp Business System (joint venture of Sharp Corporation Japan and L&T India) paid L&T ₹3 Crores in AY 2001-02 as a non-compete fee for L&T agreeing not to compete in electronic office products for 7 years.",
+            "Lower Court History: The Assessing Officer, CIT(A), ITAT, and Delhi High Court all disallowed the deduction, treating it as capital expenditure that yields an enduring benefit.",
+            "Key Issues: Whether a non-compete fee paid to exclude competition is revenue expenditure u/s 37(1) or capital expenditure creating a depreciable intangible asset u/s 32(1)(ii)."
+        ],
+        'court_ratio': [
+            "Revenue Character: The Supreme Court ruled that a non-compete fee is revenue expenditure under Section 37(1) because it does not create any new capital asset or alter the profit-making apparatus.",
+            "Negative Covenant: A non-compete right is a negative covenant (right not to do something) that cannot be 'used' in business operations. Thus, it is not an intangible asset eligible for depreciation u/s 32.",
+            "Circulating Capital: Payments made to carry on business more efficiently and profitably represent circulating/working capital, even if they yield an enduring business benefit."
+        ],
+        'key_evidence': [
+            "Non-Compete Agreement: Written JV agreement specifying a 7-year restriction period and the ₹3 Crore payout terms.",
+            "Business Operations Log: Evidence of L&T's exit from the office products market and Sharp's subsequent market share records.",
+            "Financial Statements: P&L entries showing the ₹3 Crore written off in the year of payment rather than being capitalized."
+        ],
+        'action_points': [
+            "Deduct Fees In Full: Claim 100% tax deduction for non-compete fees in the year of payment under Section 37(1) instead of amortizing them.",
+            "Avoid Amortization: Do not capitalize non-compete payments as intangible assets or attempt to claim depreciation under Section 32.",
+            "Ensure Commercial Context: Structure agreements with clear documentation showing the payout is to improve profitability and protect existing business."
+        ]
+    },
+    'american_express': {
+        'dispute_details': [
+            "Facts: Non-resident banks American Express Bank Ltd. and Oman International Bank claimed full deduction u/s 37(1) for head office administrative expenses incurred abroad exclusively for their Indian branches.",
+            "Lower Court History: The Bombay High Court (relying on Emirates Commercial Bank) allowed full deduction, ruling that the Section 44C ceiling applies only to common shared expenses, not exclusive ones.",
+            "Key Issues: Whether the Section 44C ceiling of 5% of adjusted total income applies to all head office expenditure of non-residents, including expenses incurred exclusively for Indian branches."
+        ],
+        'court_ratio': [
+            "Non-Obstante Supremacy: The Supreme Court held that Section 44C is a non-obstante provision overriding Sections 28 to 43A (including Section 37(1)). Once triggered, the 5% ceiling is absolute.",
+            "No Common/Exclusive Split: The statutory text of Section 44C makes no distinction between common and exclusive head office expenses. 'Attributable to' includes exclusive India-specific costs.",
+            "Tripartite Test: Case remanded to verify if expenditures satisfy the tripartite test: (a) incurred outside India, (b) executive/general admin in nature, (c) falls within Section 44C explanation categories."
+        ],
+        'key_evidence': [
+            "Head Office Accounts: Invoices, salary records, and office rent vouchers showing expenses incurred outside India for Indian branch oversight.",
+            "Branch Profit & Loss: Financial statements of the Indian branch showing the debit of head office expenses.",
+            "Adjusted Total Income (ATI): The tax computation sheets showing business profits before the head office deduction."
+        ],
+        'action_points': [
+            "Apply 5% Cap Mandatorily: Limit all head office expense deductions—both common and exclusive—to 5% of Adjusted Total Income under Section 44C.",
+            "Perform Tripartite Audit: Audit HO expenses to ensure they meet the criteria: incurred abroad, executive/admin in nature, and fall in defined categories.",
+            "Evaluate Subsidiaries: Assess converting branches into Indian subsidiaries, as subsidiaries are not subject to Section 44C caps (though normal tax rates apply)."
+        ]
+    },
+    'prosecution_evasion': {
+        'dispute_details': [
+            "Facts: The Income Tax Department launched prosecution under Section 276C(1) for tax evasion against taxpayers before the ITAT had decided their penalty appeals.",
+            "Lower Court History: Various High Courts gave conflicting orders on prosecution timing. The Supreme Court in K. Krishnamurthy resolved the timing and Section 271AAA search penalty conditions.",
+            "Key Issues: Whether the Revenue can launch criminal prosecution u/s 276C before penalty appeals are confirmed, and whether Section 271AAA penalty applies if search income is admitted and paid."
+        ],
+        'court_ratio': [
+            "Prosecution Timing Rule: The Supreme Court held that prosecution under Section 276C(1) can be launched only after the concealment penalty is confirmed by the ITAT, in line with CBDT circulars.",
+            "No Penalty u/s 271AAA: Taxpayers are exempt from Section 271AAA penalties (for search-disclosed income) if they admit the income, explain its source, and pay tax during proceedings, even with delay.",
+            "Cooperation Protection: Active cooperation and tax payment before assessment completion protects the taxpayer from prosecution and maximum penalties."
+        ],
+        'key_evidence': [
+            "ITAT Penalty Appeal Order: Verified records showing whether the ITAT has confirmed, reduced, or deleted the concealment penalty.",
+            "Search Seizure Statement: Statement recorded under Section 132(4) admitting undisclosed income and source details.",
+            "Challans & Tax Payment: Proof of deposit of tax and interest on the undisclosed search income."
+        ],
+        'action_points': [
+            "Challenge Early Prosecution: Seek a stay or quashing of Section 276C prosecution if the underlying penalty appeal is still pending before the ITAT.",
+            "Disclose and Pay During Search: Cooperate during search operations u/s 132(4) by admitting income and paying taxes immediately to claim immunity.",
+            "Verify Penalty Status: Monitor the status of CIT(A) and ITAT penalty appeals to ensure they are resolved before dealing with prosecution notices."
+        ]
+    },
+    'ca_negligence_condonation': {
+        'dispute_details': [
+            "Facts: A partnership firm filed its income tax return late, resulting in disallowance of losses. The delay was caused by the Chartered Accountant's tardy advice on a complex tax issue.",
+            "Lower Court History: The CBDT rejected the condonation of delay. The taxpayer filed a Writ Petition (Balaji Landmarks LLP v. CBDT) in the Bombay High Court.",
+            "Key Issues: Whether a taxpayer can be denied condonation of delay u/s 119(2)(b) when the delay in filing returns is due to their professional advisor's belated advice."
+        ],
+        'court_ratio': [
+            "No Penalty for CA Fault: The Bombay High Court ruled that a taxpayer should not suffer severe legal disadvantage or penalties due to a bona fide mistake or delay by their CA.",
+            "Condonation u/s 119(2)(b): Genuine hardship caused by professional negligence is a valid ground for the CBDT to condone delay in filing returns or forms.",
+            "Bona Fide Reliance: Relying on a professional's advice does not represent negligence on the taxpayer's part, especially in complex tax domains."
+        ],
+        'key_evidence': [
+            "CA Affidavit: An official affidavit signed by the CA admitting that the delay was due to their own belated advice and oversight.",
+            "Complex Tax Records: Documents showing the complexity of the tax issues under calculation that caused the delay.",
+            "Condonation Application: The formal request and tracking number submitted to the CBDT under Section 119(2)(b)."
+        ],
+        'action_points': [
+            "File Condonation u/s 119(2)(b): Submit a formal delay condonation request to the CBDT if return filing was missed due to professional error.",
+            "Obtain CA Affidavit: Secure a signed affidavit from the CA explaining the oversight to support the condonation application.",
+            "Verify Deadlines Internally: Maintain a calendar of key tax deadlines independent of the CA to avoid interest or loss disallowances."
+        ]
+    },
+    'search_153a_incriminating': {
+        'dispute_details': [
+            "Facts: Following a search under Section 132, the Assessing Officer reopened past completed assessments under Section 153A and made tax additions based on post-search foreign intelligence reports.",
+            "Lower Court History: The ITAT deleted the additions, and the Bombay High Court in PCIT v. Milan Kavin Parikh evaluated the Revenue's appeal.",
+            "Key Issues: Whether tax additions can be made in completed assessments under Section 153A without any incriminating material found during the physical search itself."
+        ],
+        'court_ratio': [
+            "Incriminating Material Requirement: The Bombay High Court held that no addition u/s 153A can be made for completed assessments unless incriminating material is found during the search.",
+            "Post-Search Intel Excluded: Information received from foreign authorities or third-party statements obtained after the search cannot justify Section 153A additions.",
+            "Assessment Scope: In search cases, completed assessments cannot be disturbed unless linked directly to seized physical documents or digital evidence."
+        ],
+        'key_evidence': [
+            "Search Panchnama: The official list of assets, books, and digital media seized during the physical search operations.",
+            "AO Assessment Order: Order detailing the additions made u/s 153A and their sources of information.",
+            "Post-Search Reports: Correspondence with foreign tax authorities showing information was received after the search date."
+        ],
+        'action_points': [
+            "Review Panchnama Details: Check if the additions made under Section 153A are linked to items listed in the search Panchnama.",
+            "Challenge Post-Search Additions: Dispute tax additions based on subsequent third-party statements or post-search investigations.",
+            "Track Assessment Status: Verify if the assessment year was completed or pending on the date of search to apply correct legal standards."
+        ]
+    },
+    'trust_form_9a_condonation': {
+        'dispute_details': [
+            "Facts: A charitable trust failed to file Form 9A (for accumulation of income u/s 11(2)) on time because the bare Act misprint used by the trust showed an incorrect filing deadline.",
+            "Lower Court History: The CIT(A) refused to condone the delay and withdrew the trust's tax exemptions. The trust filed a Writ Petition in the Bombay High Court.",
+            "Key Issues: Whether a bona fide mistake by a trust caused by a misprint in a commercial bare Act is a valid ground for condoning delay in filing Form 9A."
+        ],
+        'court_ratio': [
+            "Bona Fide Mistake Condoned: The Bombay High Court condoned the delay, ruling that a charitable trust should not lose its tax exemptions due to a printing error in a bare Act.",
+            "Exemption Protection: Technical delays in filing Form 9A or Form 10 should be condoned if the trust's activities are genuinely charitable and there was no deliberate omission.",
+            "Substantial Justice: Condonation procedures must be applied liberally to ensure substantial justice rather than penalizing taxpayers for minor procedural defaults."
+        ],
+        'key_evidence': [
+            "Misprinted Bare Act Copy: The pages of the commercial publication showing the incorrect deadline for Form 9A.",
+            "Form 9A Filing Date: The electronic receipt showing the actual date Form 9A was filed on the e-filing portal.",
+            "Trust Audit Report: Form 10B/10BB showing that the trust's income was accumulated for charitable purposes."
+        ],
+        'action_points': [
+            "Condonate Form 9A Delays: Apply for condonation of delay under Section 119(2)(b) if Form 9A/10 was filed late due to bona fide error.",
+            "Verify Portal Dates: Re-check filing deadlines directly on the official e-filing portal rather than relying solely on commercial books.",
+            "Submit Complete Audit: Ensure Form 10B/10BB is uploaded on time alongside Form 9A to maintain tax-exempt status."
+        ]
+    },
+    'wise_investment_sec68': {
+        'dispute_details': [
+            "Facts: The Assessing Officer made tax additions u/s 68 on share premium received by a company, relying on the Delhi High Court's NR Portfolio judgment to demand source-of-source verification.",
+            "Lower Court History: The ITAT deleted the addition. The Revenue appealed to the Calcutta High Court in PCIT v. Wise Investment Pvt. Ltd.",
+            "Key Issues: Whether the strict source-of-source verification required under Section 68 applies universally, even when the taxpayer has proved the identity and genuineness of the investor."
+        ],
+        'court_ratio': [
+            "Onus Discharged: The Calcutta High Court ruled that the NR Portfolio precedent is not applicable where the assessee has successfully proved the investor's identity and creditworthiness.",
+            "Section 68 Limits: The taxpayer is not required to prove the source of the source of funds under Section 68 if the primary transaction is verified and shown to be genuine.",
+            "Genuineness Test: Share premium additions are invalid if the company provides bank statements, PANs, and tax filings of the investing entities."
+        ],
+        'key_evidence': [
+            "Investor PAN & ITR: Income tax returns and PAN details of the shareholders investing the share premium.",
+            "Bank Statement Ledger: Bank records showing the movement of funds through regular banking channels.",
+            "Share Allocation Log: Board resolutions and Form PAS-3 showing the allotment of shares."
+        ],
+        'action_points': [
+            "Collect Shareholder KYC: Obtain ITRs, bank statements, and PANs of all shareholders investing in share premium.",
+            "Discharge Section 68 Onus: Provide investor tax filings and banking channel proof to prove identity and creditworthiness.",
+            "Challenge Unreasonable Onus: Object to additions u/s 68 if the AO demands source-of-source verification despite primary proof being submitted."
+        ]
+    },
+    'maruti_suzuki_non_existent': {
+        'dispute_details': [
+            "Facts: The Income Tax Department issued a reassessment notice under Section 148 to a company that had already been amalgamated and ceased to exist, or a dissolved HUF.",
+            "Lower Court History: The High Courts quashed the notices. The Supreme Court consolidated the principle in CIT v. Maruti Suzuki India Ltd.",
+            "Key Issues: Whether a tax notice issued under Section 148 or Section 153A in the name of a non-existent, dissolved, or amalgamated entity is valid under tax laws."
+        ],
+        'court_ratio': [
+            "Void Ab Initio: The Supreme Court held that issuing a notice to a non-existent entity is a jurisdictional defect that makes the notice void ab initio.",
+            "Not a Curable Defect: A notice to a dead company or dissolved HUF is not a curable defect under Section 292B of the Income Tax Act.",
+            "Jurisdiction Limits: Reassessment proceedings launched without a valid notice to the existing legal entity are null and void."
+        ],
+        'key_evidence': [
+            "ROC Dissolution Order: Certificate of amalgamation or dissolution from the Registrar of Companies showing the date of cessation.",
+            "Section 148 Notice: The official notice showing it was addressed to the defunct or amalgamated company.",
+            "Intimation Letter: Prior correspondence notifying the Assessing Officer of the amalgamation/dissolution."
+        ],
+        'action_points': [
+            "Notify AO of Amalgamation: Submit the ROC amalgamation or dissolution order to the Assessing Officer immediately upon merger or dissolution.",
+            "Challenge Defunct Notices: File writ petitions to challenge Section 148 notices issued to non-existent HUFs or merged companies.",
+            "Object u/s 292B: Plead that notices to defunct entities represent a jurisdictional nullity that cannot be cured by Section 292B."
+        ]
+    },
+    'section_50c_circle_rate': {
+        'dispute_details': [
+            "Facts: A taxpayer sold a commercial land parcel below the circle rate/stamp duty value. The Assessing Officer substituted the stamp duty value for capital gains calculation u/s 50C.",
+            "Lower Court History: The CIT(A) upheld the AO's addition. The taxpayer appealed to the ITAT, disputing the valuation and safe harbour margins.",
+            "Key Issues: How Section 50C applies when property is sold below circle rate, and whether the 10% safe harbour margin and Valuation Officer reference are mandatory."
+        ],
+        'court_ratio': [
+            "Safe Harbour Margin: ITAT rulings confirmed that if the actual sale price is within 10% of the circle rate, the actual consideration must be accepted u/s 50C.",
+            "DVO Reference: The Assessing Officer must refer the property valuation to the District Valuation Officer (DVO) if the taxpayer disputes the circle rate u/s 50C(2).",
+            "Valuation Binding: If the DVO determines the fair market value is lower than the circle rate, the DVO's valuation must be substituted for capital gains."
+        ],
+        'key_evidence': [
+            "Sale Deed: Registered transfer deed showing the actual sale price and the stamp duty value assessed by authorities.",
+            "DVO Valuation Report: The official valuation report issued by the District Valuation Officer determining the fair market value.",
+            "Circle Rate Notification: The circle rate guidelines active in the locality on the date of sale agreement."
+        ],
+        'action_points': [
+            "Apply 10% Safe Harbour: Ensure property sales are within the 10% circle rate margin to avoid automatic Section 50C additions.",
+            "Request DVO Reference: Ask the Assessing Officer in writing to refer the property to a Valuation Officer if circle rates exceed actual market value.",
+            "Check Grandfathering Rules: For properties bought before July 23, 2024, evaluate grandfathering options under current Finance Act rules."
+        ]
+    },
+    'deemed_dividend_sec2_22_e': {
+        'dispute_details': [
+            "Facts: A closely-held company advanced loans to a major shareholder (holding >= 10% voting power). The Assessing Officer treated the loan as a deemed dividend u/s 2(22)(e).",
+            "Lower Court History: The ITAT deleted the addition because the loan was a temporary trade advance. The Revenue appealed.",
+            "Key Issues: What constitutes a loan/advance under Section 2(22)(e) for deemed dividend taxation, and whether temporary or trade credits are exempt."
+        ],
+        'court_ratio': [
+            "Accumulated Profits Limit: Deemed dividend under Section 2(22)(e) is strictly capped to the extent of the company's accumulated profits on the date of loan.",
+            "Trade Advances Exempt: Legitimate business transactions, commercial trade advances, or running business accounts are not deemed dividends.",
+            "Year-End Repayment: Loans repaid or squared off before the close of the financial year do not trigger deemed dividend taxation (Bombay HC principle)."
+        ],
+        'key_evidence': [
+            "Shareholding Pattern: Official records showing the exact shareholding percentage of the borrower on the loan date.",
+            "Ledger Statements: Company ledger accounts showing the transaction flows and trade advance classifications.",
+            "Accumulated Profits Ledger: Balance sheets showing the company's reserves and accumulated profits."
+        ],
+        'action_points': [
+            "Square Off Loans: Repay or square off all shareholder loans before March 31st to avoid Section 2(22)(e) deemed dividend tax.",
+            "Document Commercial Intent: Maintain commercial agreements for all advances to prove they are genuine trade transactions.",
+            "Limit Voting Power: Structure holdings to keep individual shareholding in closely-held companies below 10% to prevent applicability."
+        ]
+    },
+    'bcci_itat_jurisdiction': {
+        'dispute_details': [
+            "Facts: The ITAT dismissed the Board of Control for Cricket in India's (BCCI) appeal as not maintainable, but then proceeded to pass orders on the merits of the tax disputes.",
+            "Lower Court History: The BCCI challenged the ITAT's overstepping of jurisdiction in the Bombay High Court.",
+            "Key Issues: Whether the ITAT can decide tax disputes on merits after already ruling that the appeal was not maintainable."
+        ],
+        'court_ratio': [
+            "Jurisdictional Limits: The Bombay High Court held that the ITAT cannot decide appeals on merits once it has concluded that the appeal is not maintainable.",
+            "Procedural Validity: Deciding merits after dismissing maintainability is a grave procedural error and exceeds the statutory powers of the ITAT.",
+            "Remand for Rehearing: Aggrieved parties are entitled to have their cases remanded for a fresh hearing before a proper bench if jurisdictional boundaries are crossed."
+        ],
+        'key_evidence': [
+            "ITAT Appeal Order: The official order showing both the dismissal on maintainability and the findings on merits.",
+            "Bombay HC Writ Appeal: Writ petition filings challenging the ITAT's procedural overstep.",
+            "BCCI Registration Records: Trust and registration documents disputing the tax department's jurisdiction."
+        ],
+        'action_points': [
+            "Challenge Maintainability Dismissals: Object if any tribunal attempts to pass rulings on merits after declaring an appeal non-maintainable.",
+            "Apply for Fresh Hearing: Request a remand of the appeal to a new bench of the ITAT if the previous order exceeded jurisdictional bounds.",
+            "Document Procedural Defaults: Record all procedural oversteps during tribunal hearings to support subsequent High Court writ petitions."
+        ]
     }
 }
 
 def get_case_study_type(slug):
     slug_lower = slug.lower()
+    
+    # 1. FAQ pages are never court case studies (they always have 15 FAQs)
+    if slug_lower.startswith('faq-'):
+        return None
+        
+    # 2. Check for strong case indicators or specific case names
+    strong_case_markers = [
+        'judgment', 'ruling', 'case-law', 'court', 'supreme-court', 'landmark', 
+        'itat', 'hc-ruling', 'sc-order', 'sc-judgment', 'hc-judgment', 
+        'appeal-ruling', 'tribunal-ruling', 'case-study'
+    ]
+    specific_case_names = [
+        'hyatt', 'safari-retreats', 'yasho-industries', 'aberdare', 'brij-systems', 
+        'suncraft', 'vidya-drolia', 'mrityunjay', 'singh-construction', 'b-braun', 
+        'gameskraft', 'junglee-games', 'rajeev-bansal', 'tola-vs', 'ashish-agarwal', 
+        'vkc-footsteps', 'blackstone', 'essar-steel', 'jsw-steel', 'ghanashyam-mishra',
+        'pride-foramer', 'sharp-business', 'american-express', 'k-krishnamurthy',
+        'balaji-landmarks', 'milan-kavin-parikh', 'milan-parikh', 'form-9a-misprint',
+        'wise-investment', 'maruti-suzuki', 'circle-rate', 'deemed-dividend-section-2-22-e',
+        'bcci-bombay-hc'
+    ]
+    
+    has_strong_marker = any(m in slug_lower for m in strong_case_markers)
+    has_specific_name = any(n in slug_lower for n in specific_case_names)
+    
+    # Check for versus patterns (e.g. x-vs-y) accompanied by a general case keyword
+    has_vs = 'vs-' in slug_lower
+    case_keywords = ['case', 'judgment', 'ruling', 'order', 'versus', 'sc-', 'hc-', 'itat', 'appeal', 'dispute', 'litigation', 'decision']
+    is_vs_case = has_vs and any(ck in slug_lower for ck in case_keywords)
+    
+    # Must have at least one of these to be classified as a case study
+    if not (has_strong_marker or has_specific_name or is_vs_case):
+        return None
+
+    # Now assign the specific case type (new cases checked first)
+    if 'pride-foramer' in slug_lower:
+        return 'pride_foramer'
+    if 'sharp-business' in slug_lower:
+        return 'sharp_business'
+    if 'american-express' in slug_lower:
+        return 'american_express'
+    if any(k in slug_lower for k in ['prosecution', '276c', '271aaa', 'krishnamurthy']):
+        return 'prosecution_evasion'
+    if any(k in slug_lower for k in ['balaji-landmarks', 'ca-negligence', 'ca-fault', 'ca-mistake', 'ca-advice']):
+        return 'ca_negligence_condonation'
+    if any(k in slug_lower for k in ['milan-kavin-parikh', 'milan-parikh', '153a']):
+        return 'search_153a_incriminating'
+    if any(k in slug_lower for k in ['form-9a', 'form9a', 'form-9a-misprint']):
+        return 'trust_form_9a_condonation'
+    if any(k in slug_lower for k in ['wise-investment', 'nr-portfolio']):
+        return 'wise_investment_sec68'
+    if any(k in slug_lower for k in ['maruti-suzuki', 'non-existent-entity', 'non-existent-company']):
+        return 'maruti_suzuki_non_existent'
+    if any(k in slug_lower for k in ['50c', 'circle-rate', 'stamp-duty-value']):
+        return 'section_50c_circle_rate'
+    if any(k in slug_lower for k in ['deemed-dividend-section-2-22-e', '2-22-e', '222e']):
+        return 'deemed_dividend_sec2_22_e'
+    if any(k in slug_lower for k in ['bcci', 'itat-jurisdiction']):
+        return 'bcci_itat_jurisdiction'
+
     if 'hyatt' in slug_lower or 'pe-ruling-india' in slug_lower or 'pe-india-ruling' in slug_lower:
         return 'hyatt_pe'
     if any(k in slug_lower for k in ['safari-retreats', 'yasho-industries', 'aberdare', 'brij-systems', 'itc-denied', 'bonafide-error', 'suncraft', 'vidya-drolia', 'mrityunjay', 'singh-construction', 'b-braun', 'substance-over-form', '16-4', '16-5']):
@@ -2824,9 +3148,7 @@ def get_case_study_type(slug):
         return 'ibc_priority'
     if any(k in slug_lower for k in ['engineering-analysis', 'software-royalty', 'apple-india', 'oracle-india', 'sap-india', 'cloud-computing', 'secondment-pe', 'samsung-heavy']):
         return 'software_royalty'
-    if any(k in slug_lower for k in ['court', 'judgment', 'ruling', 'order', 'sc-', 'hc-', 'vs-']) and not ('how-to-find-ca' in slug_lower or 'how-to-classify' in slug_lower):
-        return 'general_tax_litigation'
-    return None
+    return 'general_tax_litigation'
 
 def map_file_to_sub_template(filename):
     fn = filename.lower()

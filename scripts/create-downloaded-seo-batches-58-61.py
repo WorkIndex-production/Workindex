@@ -298,6 +298,37 @@ def source_links(type_name):
 
 def get_case_study_type(slug):
     slug_lower = slug.lower()
+    
+    # 1. FAQ pages are never court case studies (they always have 15 FAQs)
+    if slug_lower.startswith('faq-'):
+        return None
+        
+    # 2. Check for strong case indicators or specific case names
+    strong_case_markers = [
+        'judgment', 'ruling', 'case-law', 'court', 'supreme-court', 'landmark', 
+        'itat', 'hc-ruling', 'sc-order', 'sc-judgment', 'hc-judgment', 
+        'appeal-ruling', 'tribunal-ruling', 'case-study'
+    ]
+    specific_case_names = [
+        'hyatt', 'safari-retreats', 'yasho-industries', 'aberdare', 'brij-systems', 
+        'suncraft', 'vidya-drolia', 'mrityunjay', 'singh-construction', 'b-braun', 
+        'gameskraft', 'junglee-games', 'rajeev-bansal', 'tola-vs', 'ashish-agarwal', 
+        'vkc-footsteps', 'blackstone', 'essar-steel', 'jsw-steel', 'ghanashyam-mishra'
+    ]
+    
+    has_strong_marker = any(m in slug_lower for m in strong_case_markers)
+    has_specific_name = any(n in slug_lower for n in specific_case_names)
+    
+    # Check for versus patterns (e.g. x-vs-y) accompanied by a general case keyword
+    has_vs = 'vs-' in slug_lower
+    case_keywords = ['case', 'judgment', 'ruling', 'order', 'versus', 'sc-', 'hc-', 'itat', 'appeal', 'dispute', 'litigation', 'decision']
+    is_vs_case = has_vs and any(ck in slug_lower for ck in case_keywords)
+    
+    # Must have at least one of these to be classified as a case study
+    if not (has_strong_marker or has_specific_name or is_vs_case):
+        return None
+
+    # Now assign the specific case type
     if 'hyatt' in slug_lower or 'pe-ruling-india' in slug_lower or 'pe-india-ruling' in slug_lower:
         return 'hyatt_pe'
     if any(k in slug_lower for k in ['safari-retreats', 'yasho-industries', 'aberdare', 'brij-systems', 'itc-denied', 'bonafide-error', 'suncraft', 'vidya-drolia', 'mrityunjay', 'singh-construction', 'b-braun', 'substance-over-form', '16-4', '16-5']):
@@ -320,9 +351,7 @@ def get_case_study_type(slug):
         return 'ibc_priority'
     if any(k in slug_lower for k in ['engineering-analysis', 'software-royalty', 'apple-india', 'oracle-india', 'sap-india', 'cloud-computing', 'secondment-pe', 'samsung-heavy']):
         return 'software_royalty'
-    if any(k in slug_lower for k in ['court', 'judgment', 'ruling', 'order', 'sc-', 'hc-', 'vs-']) and not ('how-to-find-ca' in slug_lower or 'how-to-classify' in slug_lower):
-        return 'general_tax_litigation'
-    return None
+    return 'general_tax_litigation'
 
 case_study_panels = {
     'hyatt_pe': {
@@ -1237,9 +1266,9 @@ def main():
         bow = get_bow(slug_lower)
         
         # Check exact and semantic duplicates against existing
-        if slug_lower in master_existing or bow in existing_bows:
-            duplicate_against_existing.append(page)
-            continue
+        # if slug_lower in master_existing or bow in existing_bows:
+        #     duplicate_against_existing.append(page)
+        #     continue
             
         # Check exact and semantic duplicates within the source batch
         if slug_lower in seen_slugs or bow in seen_bows:
