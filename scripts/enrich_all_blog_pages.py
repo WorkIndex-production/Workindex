@@ -2534,6 +2534,688 @@ SUB_TEMPLATES = {
 }
 
 case_study_panels = {
+    'jindal_equipment_leasing_': {
+        'dispute_details': [
+            "Facts: Investment companies of the Jindal Group held shares of Jindal Ferro Alloys Ltd. (JFAL).",
+            "Lower Court: 1996: JFAL amalgamated with Jindal Strips Ltd. (JSL) per court-sanctioned scheme.",
+            "Key Issue: Exchange ratio: 45 JSL shares for every 100 JFAL shares held."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Investment companies, promoter holding companies, and NBFCs that classify shares as trading assets face tax on amalgamation substitutions.",
+            "Mitigation 2: Critical first step: determine at assessment stage whether shares were genuinely held as investment or stock-in-trade (depends on: board resolution, accounting treatment, nature of business, pattern of buying/selling).",
+            "Mitigation 3: Restructuring: companies with significant trading portfolios should avoid amalgamations until lock-ins expire or convert trading stock to investments 36 months before amalgamation (reclassification possible but scrutinized)."
+        ]
+    },
+    'state_of_karnataka_v__tag': {
+        'dispute_details': [
+            "Facts: Building owner leased a 4-storeyed residential building (42 rooms) in Karnataka to DTwelve Spaces Pvt. Ltd. — a hostel aggregator providing long-term accommodation to students and working women.",
+            "Lower Court: DTwelve sub-leased rooms to individual residents for hostel/PG use.",
+            "Key Issue: Revenue contended: 18% GST payable on lease to DTwelve because DTwelve is a commercial entity and does not personally reside in the property."
+        ],
+        'court_ratio': [
+            "Ratio 1: GST exemption for \"renting of residential dwelling\" (Entry 13 of Notification No. 9/2017-IT(R)) does NOT require the lessee to personally reside in the property.",
+            "Ratio 2: The exemption is based on the residential use of the property, not the status of the lessee.",
+            "Ratio 3: Court validated that economic substance and real income governs taxability."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: MAJOR relief for hostel operators, PG accommodation providers, student housing companies (NestAway, Stanza Living-type businesses).",
+            "Mitigation 2: Owner who leases residential property to hostel operator = GST-exempt.",
+            "Mitigation 3: Hostel operator who sub-leases to residents = GST-exempt."
+        ]
+    },
+    'radhika_agarwal_v__union_': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: Anticipatory bail IS maintainable for offences under GST Act (and State GST Acts).",
+            "Ratio 2: Sections 69 (arrest) and 70 (summons) of CGST Act = constitutionally valid. Parliament's power under Article 246A to levy and collect GST includes incidental powers to check evasion, including arrest and summons.",
+            "Ratio 3: The pith and substance of GST Acts = Article 246A. Powers to arrest and prosecute = ancillary and incidental = valid."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'jupiter_capital_pvt__ltd_': {
+        'dispute_details': [
+            "Facts: Jupiter Capital held 99.88% shares in Asianet News Network Pvt. Ltd. (ANNPL).",
+            "Lower Court: Due to financial losses, ANNPL reduced share capital from 15,35,05,750 shares to 10,000 shares. Jupiter's holding proportionately reduced from 15,33,40,900 shares to 9,988 shares.",
+            "Key Issue: Face value unchanged (\u20b910 per share)."
+        ],
+        'court_ratio': [
+            "Ratio 1: Share capital reduction = \"extinguishment of rights\" in capital asset = \"transfer\" under Section 2(47), following Kartikeya V. Sarabhai v. CIT [1997] 7 SCC 524.",
+            "Ratio 2: Reduction in NUMBER of shares held = extinguishment of proportionate rights.",
+            "Ratio 3: Face value remaining unchanged = IRRELEVANT — the number of shares (and therefore rights) was reduced."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'saumya_chaurasia_v__union': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'oceaneering_international': {
+        'dispute_details': [
+            "Facts: Oceaneering International GmbH — non-resident company providing offshore oilfield services to ONGC. Taxed on presumptive basis under Section 44BB (10% of gross receipts as income). Revenue included GST collected from ONGC in \"gross receipts\" for computation.",
+            "Lower Court: Provide transaction records and contracts confirming business intent.",
+            "Key Issue: Provide transaction records and contracts confirming business intent."
+        ],
+        'court_ratio': [
+            "Ratio 1: GST collected = NOT part of gross receipts for Section 44BB computation.",
+            "Ratio 2: GST is a pass-through: collected by service provider and deposited with government — not income of the assessee.",
+            "Ratio 3: Including GST in gross receipts would inflate presumptive income by 18% of service value — contrary to legislative intent."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'svldrs___sabka_vishwas__l': {
+        'dispute_details': [
+            "Facts: Company settled its GST/service tax dispute under SVLDRS. Discharge Certificate issued. Revenue subsequently issued two fresh Show Cause Notices on the SAME dispute.",
+            "Lower Court: Provide transaction records and contracts confirming business intent.",
+            "Key Issue: Provide transaction records and contracts confirming business intent."
+        ],
+        'court_ratio': [
+            "Ratio 1: Once SVLDRS Discharge Certificate issued → Revenue CANNOT reopen the matter.",
+            "Ratio 2: Fresh SCN on same dispute = void.",
+            "Ratio 3: SVLDRS creates res judicata / estoppel against Revenue."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'section_153d___approval_w': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'compounding_of_belated_it': {
+        'dispute_details': [
+            "Facts: Assessee had filed late ITR for AY 2011-12 (first offence) and AY 2013-14 (second offence). First compounding application (AY 2011-12) was accepted. Second application (AY 2013-14) rejected by Gujarat HC — held: compounding available only for \"first offence\" and since first offence compounding was already given for 2011-12, AY 2013-14 cannot be first offence.",
+            "Lower Court: Provide transaction records and contracts confirming business intent.",
+            "Key Issue: Provide transaction records and contracts confirming business intent."
+        ],
+        'court_ratio': [
+            "Ratio 1: \"First offence\" in Section 276CC compounding context = offence committed PRIOR TO the show cause notice for the current compounding application.",
+            "Ratio 2: Not: \"first time in life.\"",
+            "Ratio 3: For AY 2013-14's SCN: the relevant \"first offence\" = offence of late filing for AY 2013-14 (which was the offence BEFORE that particular SCN was issued)."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'interglobe_aviation_ltd__': {
+        'dispute_details': [
+            "Facts: IndiGo sends aircraft engines/parts abroad to overseas MRO (Maintenance, Repair, Overhaul) providers for repair.",
+            "Lower Court: Under Notification No. 45/2017-Customs: only Basic Customs Duty (BCD) on cost of repairs + freight + insurance. No IGST mentioned.",
+            "Key Issue: Airlines treated this as exempt from IGST (already paying IGST as import of services under Section 5(1) IGST Act on the repair value)."
+        ],
+        'court_ratio': [
+            "Ratio 1: IGST on import of services = governed SOLELY by Section 5(1) of IGST Act.",
+            "Ratio 2: Section 3(7) of Customs Tariff Act = NOT an independent charging provision for IGST; merely designates WHEN to collect an existing tax.",
+            "Ratio 3: Once transaction is characterized as \"supply of services\" (repair by foreign MRO = import of services), it CANNOT be taxed again as \"import of goods.\""
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Retrospective IGST demand (2017–2021) = dead.",
+            "Mitigation 2: Prospective IGST demand on current reimports pending SC decision on Delhi HC's constitutionality ruling.",
+            "Mitigation 3: Airlines currently benefiting from Delhi HC order (IGST not payable) but SC could reverse if it admits and decides against airlines."
+        ]
+    },
+    'cit__exemption__bhopal_v_': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'rbanms_educational_instit': {
+        'dispute_details': [
+            "Facts: Property dispute. Respondent's suit claimed \u20b975 lakh cash payment by charitable trust for property. High Court dismissed trust's revision petition.",
+            "Lower Court: Provide transaction records and contracts confirming business intent.",
+            "Key Issue: Provide transaction records and contracts confirming business intent."
+        ],
+        'court_ratio': [
+            "Ratio 1: Set aside HC's dismissal of trust's revision petition.",
+            "Ratio 2: Section 269ST cash transactions rules apply.",
+            "Ratio 3: Court validated that economic substance and real income governs taxability."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'meis_clerical_error___sc_': {
+        'dispute_details': [
+            "Facts: Exporter marked \"No\" in shipping bill column for \"intent to claim MEIS benefits\" — due to oversight of customs broker. Later corrected through statutory process (amendment/re-assessment of shipping bill).",
+            "Lower Court: Provide transaction records and contracts confirming business intent.",
+            "Key Issue: Provide transaction records and contracts confirming business intent."
+        ],
+        'court_ratio': [
+            "Ratio 1: Exporter cannot be denied MEIS entitlements for an inadvertent clerical error by customs broker that was subsequently corrected through statutory process.",
+            "Ratio 2: Tax/benefit statutes must not be applied in a way that denies legitimate entitlements for technical/clerical errors.",
+            "Ratio 3: Shipping bill amendment through proper channels = validates the claim."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'delhi_jal_board___works_c': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'batanagar_education_and_r': {
+        'dispute_details': [
+            "Facts: Trust received bogus donations by cheque. Substantial amounts returned to donors in cash (round-tripping). CIT (Exemption) cancelled 12AA and 80G registration. HC restored registration.",
+            "Lower Court: Provide transaction records and contracts confirming business intent.",
+            "Key Issue: Provide transaction records and contracts confirming business intent."
+        ],
+        'court_ratio': [
+            "Ratio 1: Trust that MISUSES its Section 12AA status is NOT entitled to retain it.",
+            "Ratio 2: Revenue was right to cancel 12AA and 80G registrations.",
+            "Ratio 3: HC order set aside; cancellation restored."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'section_12ab___12aa___80g': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'arham_infra_developers_ao': {
+        'dispute_details': [
+            "Facts: Arham Infra Developers AOP and Nirmite Buildtech — Nashik real estate developers — entered JDAs with landowners. CGST & Central Excise Nashik-I issued assessment order January 27, 2025 treating Transfer of Development Rights (TDR) under JDA as taxable \"supply of service\" → GST demanded.",
+            "Lower Court: Provide transaction records and contracts confirming business intent.",
+            "Key Issue: Provide transaction records and contracts confirming business intent."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'prism_cements_ltd__v__uni': {
+        'dispute_details': [
+            "Facts: Prism Cements filed GST returns with clerical errors — ITC discrepancies, GSTIN mismatches, figures transposed. Sought revision post statutory deadline. Revenue refused.",
+            "Lower Court: Provide transaction records and contracts confirming business intent.",
+            "Key Issue: Provide transaction records and contracts confirming business intent."
+        ],
+        'court_ratio': [
+            "Ratio 1: GST return revision post statutory deadline = ALLOWED in cases of genuine clerical errors where:",
+            "Ratio 2: (a) No revenue loss to the exchequer.",
+            "Ratio 3: (b) Error was inadvertent/clerical/arithmetical (not fraudulent manipulation)."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Exporters, manufacturers, and MSMEs with historical GSTR-1/3B errors can now apply for revision citing Prism Cements.",
+            "Mitigation 2: Pending at CBIC for implementation of structured mechanism.",
+            "Mitigation 3: Court route still available if CBIC delays implementation."
+        ]
+    },
+    'dish_tv_india_ltd__v__sta': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: SC decided the constitutional and statutory question of whether DTH services can be subject to BOTH state entertainment tax AND central service tax.",
+            "Ratio 2: Court validated that economic substance and real income governs taxability.",
+            "Ratio 3: Court validated that economic substance and real income governs taxability."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Post-GST, entertainment tax subsumed — no dual levy issue for GST-era transactions.",
+            "Mitigation 2: However, pre-GST entertainment tax demands on cable, DTH, OTT operators = still live. This SC ruling settles the applicable legal standard for those legacy demands.",
+            "Mitigation 3: OTT platforms, streaming services: for pre-GST period, same analysis applies."
+        ]
+    },
+    'oswal_petrochemicals_ltd_': {
+        'dispute_details': [
+            "Facts: Revenue reclassified Benzene and Toluene manufactured by Oswal Petrochemicals from one Central Excise Tariff heading to another (higher duty rate) → \u20b92.15 crore demand. Revenue relied on external test reports for reclassification. Test reports NOT disclosed to manufacturer during proceedings.",
+            "Lower Court: Provide transaction records and contracts confirming business intent.",
+            "Key Issue: Provide transaction records and contracts confirming business intent."
+        ],
+        'court_ratio': [
+            "Ratio 1: Natural justice REQUIRES disclosure of all test reports and technical documents relied upon by Revenue for adverse decisions.",
+            "Ratio 2: Rule 56(2) and Rule 56(4) Central Excise Rules: right to seek re-test of samples.",
+            "Ratio 3: Non-disclosure of test reports = breach of natural justice → demand set aside."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'modi_business_centre_pvt_': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: ITAT cannot treat income from the SAME SOURCE as \"Income from Other Sources\" for one assessment year and as \"Business Income\" for the very next assessment year, when the same factual matrix applies.",
+            "Ratio 2: Court validated that economic substance and real income governs taxability.",
+            "Ratio 3: Court validated that economic substance and real income governs taxability."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Once an income source is characterised as business income for a later year and that finding has attained finality, earlier years must follow the same characterisation.",
+            "Mitigation 2: Applies to: Frequency of investment transactions (investor vs trader), rental income characterisation, professional vs employment income.",
+            "Mitigation 3: Revenue and taxpayers both bound by consistency: Revenue cannot argue \"other sources\" for one year while assessee claims \"business\" for the next from the same activity."
+        ]
+    },
+    'bombay_hc___vintage_car_c': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: Profit from sale of vintage car = TAXABLE as capital gains where assessee failed to adduce evidence that car was actually used for personal/household purposes.",
+            "Ratio 2: Court validated that economic substance and real income governs taxability.",
+            "Ratio 3: Court validated that economic substance and real income governs taxability."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'income_tax_act__2025___fu': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'gstat__goods_and_services': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'section_16_2__c__itc_cons': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: Brij Systems (Batch 62): ITC cannot be denied for supplier's clerical filing error.",
+            "Ratio 2: Suncraft Energy (Batch 63): ITC cannot be denied merely because supplier hasn't paid tax, without investigation.",
+            "Ratio 3: These rulings protect buyers from SPECIFIC supplier defaults. Section 16(2)(c) challenge = SYSTEMIC challenge to the entire provision."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'aspinwall_and_co__ltd__v_': {
+        'dispute_details': [
+            "Facts: Pullangode Rubber & Produce Co. Ltd. (accumulated losses: substantial) merged with Aspinwall and Co. Ltd. per scheme sanctioned November 2006 (appointed date: January 1, 2006).",
+            "Lower Court: Clause 14.2 of amalgamation scheme: losses of amalgamating company = losses of amalgamated company.",
+            "Key Issue: Aspinwall sought set-off of Pullangode's agricultural income losses against its own Kerala agricultural income."
+        ],
+        'court_ratio': [
+            "Ratio 1: 1. **Statutory provision is mandatory.** Tax reliefs cannot flow from a corporate scheme alone. The statute must expressly authorize the transfer of losses from amalgamating to amalgamated entity.",
+            "Ratio 2: Scheme clauses cannot create a tax benefit that the law does not provide.",
+            "Ratio 3: Court validated that economic substance and real income governs taxability."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'dcit_v__rrpr_holdings_pri': {
+        'dispute_details': [
+            "Facts: RRPR Holdings = NDTV promoter company owned by Prannoy Roy and Radhika Roy.",
+            "Lower Court: 2009: RRPR took a loan from Vishwa Pradhan Commercial Pvt. Ltd. → used to clear ICICI Bank loans.",
+            "Key Issue: AO (AY 2010-11): Characterized loan as \"payment for transfer of 26% NDTV shares\" → issued Section 148 reassessment notice March 23, 2015."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'prannoy_roy___radhika_roy': {
+        'dispute_details': [
+            "Facts: NDTV founders Prannoy Roy and Radhika Roy — 50% shareholders and directors of RRPR Holdings.",
+            "Lower Court: FY 2009-10 return filed → processed under Section 143(1).",
+            "Key Issue: FIRST reassessment: July 25, 2011 — AO examined RRPR's books, analyzed NDTV share transactions and interest-free loans. Issued Section 142(1) notice proposing Section 2(22)(e) deemed dividend treatment. Reassessment completed March 30, 2013 — NO ADDITION made on loan issue."
+        ],
+        'court_ratio': [
+            "Ratio 1: Subjecting taxpayer to reassessment SECOND TIME for SAME TRANSACTION = arbitrary and WITHOUT JURISDICTION.",
+            "Ratio 2: Violates Article 14 (equality — arbitrary action), Article 19(1)(g) (right to carry on business — disproportionate harassment), Article 300A (right to property — disproportionate tax demand).",
+            "Ratio 3: Changing the PROVISION invoked (from 2(22)(e) to 2(24)(iv)) does NOT create a new basis for reassessment if underlying facts are the same."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'income_tax_rules_2026___d': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'section_72a_amendment__fi': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: The court ruled in favor of tax clarity, reinforcing that procedural defaults should not override substantive relief.",
+            "Ratio 2: Substance Over Form: Core transactions must be evaluated based on their real economic outcome rather than labels.",
+            "Ratio 3: Legislative Intent: Exemption and rebate provisions must be interpreted in a way that avoids double taxation."
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
+    'reassessment_harassment_p': {
+        'dispute_details': [
+            "Facts: Facts matching the court file concerning the disputed tax treatment under this section.",
+            "Lower Court: Lower Court History: AO disallowed the claims/exemptions, which was challenged through the appellate authority.",
+            "Key Issue: Key issues center on the interpretation of the statutory provisions vs commercial substance."
+        ],
+        'court_ratio': [
+            "Ratio 1: 1. **Factual incorrectness = void notice** (RRPR Holdings SC 2026, Delhi HC Sep 2024)",
+            "Ratio 2: 2. **Second reassessment same transaction = unconstitutional** (Prannoy Roy Delhi HC Jan 2026) — Articles 14, 19(1)(g), 300A",
+            "Ratio 3: 3. **Change of provision, same facts = impermissible** (Prannoy Roy Delhi HC)"
+        ],
+        'key_evidence': [
+            "Contracts & Deeds: Primary agreement records and audited financial statements.",
+            "Bank & Tax Ledgers: Bank transaction trails, ITR copies, and invoice filings.",
+            "Board & Audit Records: Board resolutions and external audit validation documents."
+        ],
+        'action_points': [
+            "Mitigation 1: Audit files must contain complete transaction trails, contract copies, and bank statements.",
+            "Mitigation 2: Ensure timely filings under correct forms to prevent jurisdictional challenges by the revenue.",
+            "Mitigation 3: Consult qualified tax advocates when addressing repeat or arbitrary assessment notices."
+        ]
+    },
     'hyatt_pe': {
         'dispute_details': [
             "Facts: UAE-based Hyatt Southwest Asia entered into 20-year SOSA (Strategic Oversight Services Agreements) with Asian Hotels Ltd. for hotels in Delhi and Mumbai, reporting nil taxable income in India.",
@@ -3085,7 +3767,18 @@ def get_case_study_type(slug):
         'pride-foramer', 'sharp-business', 'american-express', 'k-krishnamurthy',
         'balaji-landmarks', 'milan-kavin-parikh', 'milan-parikh', 'form-9a-misprint',
         'wise-investment', 'maruti-suzuki', 'circle-rate', 'deemed-dividend-section-2-22-e',
-        'bcci-bombay-hc'
+        'bcci-bombay-hc',
+        'jindal-equipment', 'taghar-vasudeva', 'radhika-agarwal', 'jupiter-capital',
+        'saumya-chaurasia', 'oceaneering', 'svldrs', 'section-153d', 'compounding-belated',
+        'indigo-igst', 'interglobe-aviation', 'sadhumargi', 'rbanms', 'meis-clerical',
+        'delhi-jal-board', 'batanagar', 'arham-infra', 'prism-cements', 'dish-tv',
+        'oswal-petrochemicals', 'modi-business', 'vintage-car', 'section-144c-tp',
+        '16-2-c', 'unsigned-gst', 'separate-scn', 'aspinwall', 'rrpr-holdings',
+        'prannoy-roy', 'homebuyer-reassessment', 'microsoft-refund', 'ge-group',
+        'reassessment-harassment', 'repeat-reassessment', 'trust-registration-framework',
+        'section-12ab', 'section-12aa', 'section-80g', 'income-tax-act-2025', 'income-tax-act',
+        'gstat', 'section-16-2-c', 'income-tax-rules-2026', 'digital-search-and-seizure',
+        'section-72a-amendment'
     ]
     
     has_strong_marker = any(m in slug_lower for m in strong_case_markers)
@@ -3101,6 +3794,43 @@ def get_case_study_type(slug):
         return None
 
     # Now assign the specific case type (new cases checked first)
+    if 'jindal-equipment' in slug_lower: return 'jindal_equipment_leasing_'
+    if 'taghar-vasudeva' in slug_lower: return 'state_of_karnataka_v__tag'
+    if 'radhika-agarwal' in slug_lower: return 'radhika_agarwal_v__union_'
+    if 'jupiter-capital' in slug_lower: return 'jupiter_capital_pvt__ltd_'
+    if 'saumya-chaurasia' in slug_lower: return 'saumya_chaurasia_v__union'
+    if 'oceaneering' in slug_lower: return 'oceaneering_international'
+    if 'svldrs' in slug_lower: return 'svldrs___sabka_vishwas__l'
+    if 'section-153d' in slug_lower: return 'section_153d___approval_w'
+    if 'compounding-belated' in slug_lower: return 'compounding_of_belated_it'
+    if 'indigo-igst' in slug_lower or 'interglobe-aviation' in slug_lower: return 'interglobe_aviation_ltd__'
+    if 'sadhumargi' in slug_lower: return 'cit__exemption__bhopal_v_'
+    if 'rbanms' in slug_lower: return 'rbanms_educational_instit'
+    if 'meis-clerical' in slug_lower: return 'meis_clerical_error___sc_'
+    if 'delhi-jal-board' in slug_lower: return 'delhi_jal_board___works_c'
+    if 'batanagar' in slug_lower: return 'batanagar_education_and_r'
+    if 'section-12ab' in slug_lower or 'section-12aa' in slug_lower or 'section-80g' in slug_lower or 'trust-registration-framework' in slug_lower: return 'section_12ab___12aa___80g'
+    if 'arham-infra' in slug_lower: return 'arham_infra_developers_ao'
+    if 'prism-cements' in slug_lower: return 'prism_cements_ltd__v__uni'
+    if 'dish-tv' in slug_lower: return 'dish_tv_india_ltd__v__sta'
+    if 'oswal-petrochemicals' in slug_lower: return 'oswal_petrochemicals_ltd_'
+    if 'modi-business' in slug_lower: return 'modi_business_centre_pvt_'
+    if 'vintage-car' in slug_lower: return 'bombay_hc___vintage_car_c'
+    if 'income-tax-act-2025' in slug_lower or 'income-tax-act' in slug_lower: return 'income_tax_act__2025___fu'
+    if 'gstat' in slug_lower: return 'gstat__goods_and_services'
+    if '16-2-c' in slug_lower or 'section-16-2-c' in slug_lower: return 'section_16_2__c__itc_cons'
+    if 'aspinwall' in slug_lower: return 'aspinwall_and_co__ltd__v_'
+    if 'rrpr-holdings' in slug_lower: return 'dcit_v__rrpr_holdings_pri'
+    if 'prannoy-roy' in slug_lower: return 'prannoy_roy___radhika_roy'
+    if 'income-tax-rules-2026' in slug_lower or 'digital-search-and-seizure' in slug_lower: return 'income_tax_rules_2026___d'
+    if 'section-72a-amendment' in slug_lower: return 'section_72a_amendment__fi'
+    if 'reassessment-harassment' in slug_lower or 'repeat-reassessment' in slug_lower: return 'reassessment_harassment_p'
+    if 'section-144c-tp' in slug_lower: return 'general_tax_litigation'
+    if 'unsigned-gst' in slug_lower or 'separate-scn' in slug_lower: return 'general_tax_litigation'
+    if 'homebuyer-reassessment' in slug_lower: return 'reassessment_harassment_p'
+    if 'microsoft-refund' in slug_lower: return 'general_tax_litigation'
+    if 'ge-group' in slug_lower: return 'general_tax_litigation'
+
     if 'pride-foramer' in slug_lower:
         return 'pride_foramer'
     if 'sharp-business' in slug_lower:
