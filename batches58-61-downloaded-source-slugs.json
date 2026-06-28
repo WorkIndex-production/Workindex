@@ -6,7 +6,7 @@
     61
   ],
   "extracted": 1536,
-  "unique": 1436,
+  "unique": 1533,
   "duplicateInSource": [
     {
       "slug": "samsung-heavy-industries-pe-sc-india",
@@ -21,396 +21,7 @@
       "file": "workindex-seo-batch61.md"
     }
   ],
-  "duplicateAgainstExisting": [
-    {
-      "slug": "pms-itr-filing-india-guide",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "international-mutual-fund-tax-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "fund-of-funds-tax-india-guide",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "liquid-fund-tax-india-guide",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "arbitrage-fund-tax-india-guide",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "gilt-fund-tax-india-guide",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "balanced-advantage-fund-tax-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "gold-etf-vs-sgb-tax-comparison-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "section-54-cgas-account-guide-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "section-80gga-scientific-research",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "car-perquisite-tax-calculation-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "form-10e-filing-guide-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "gstr-10-final-return-services-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "gstr-6-input-service-distributor",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "ibc-resolution-professional-services",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "forensic-audit-services-india-complete",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "financial-fraud-detection-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "professional-tax-karnataka-slab-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "professional-tax-telangana-guide",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "professional-tax-andhra-pradesh-guide",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "income-tax-compliance-portal-guide-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "faceless-assessment-response-services",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "rule-11ua-valuation-services-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "registered-valuer-ibbi-services-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "dcf-valuation-services-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "blog-pms-vs-mutual-fund-tax-comparison",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "blog-dcf-valuation-startup-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "faq-pms-taxation-india-2026",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "faq-elss-vs-ppf-comparison",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "faq-gstr-9c-reconciliation",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "faq-forensic-audit-india",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "how-to-claim-section-54-exemption",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "how-to-claim-section-54f-exemption",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "how-to-claim-section-80eeb-ev-loan",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "how-to-claim-section-80g-donation",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "how-to-file-gstr-9-annual-return",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "how-to-file-gstr-9c-reconciliation",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "how-to-find-ca-for-forensic-audit",
-      "file": "workindex-seo-batch58.md"
-    },
-    {
-      "slug": "transfer-pricing-resale-price-method-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "transfer-pricing-cost-plus-method-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "transfer-pricing-profit-split-method-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "transfer-pricing-documentation-india-complete",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "transfer-pricing-master-file-india-services",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "transfer-pricing-local-file-india-services",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "safe-harbour-it-ites-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "bilateral-apa-india-guide",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "transfer-pricing-dispute-resolution-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "income-tax-act-2025-section-numbers-guide",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "income-tax-act-2025-compliance-services-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "section-234a-interest-late-filing-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "real-estate-investor-tax-planning",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "partnership-firm-tax-planning-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "self-employed-tax-planning-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "huf-deed-drafting-services-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "huf-bank-account-opening-guide",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "huf-tax-planning-guide-india-2026",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "huf-itr-filing-services-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "huf-business-income-india-guide",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "gst-refund-rfd-06-rejection-response",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "virtual-cfo-for-startups-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "virtual-cfo-for-ecommerce-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "virtual-cfo-for-manufacturing-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "mis-reporting-services-india-complete",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "management-reporting-services-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "accounts-payable-outsourcing-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "accounts-receivable-outsourcing-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "gst-for-textiles-india-guide",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "gst-on-joint-development-agreement",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "gst-input-service-distributor-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "shops-establishment-registration-bangalore",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "shops-establishment-registration-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "maternity-benefit-act-compliance-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "factories-act-compliance-services-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "contract-labour-act-compliance-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "gratuity-calculation-formula-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "esic-registration-services-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "hra-exemption-calculator-guide-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "gratuity-calculation-guide-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "blog-doctor-tax-planning-2026-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "blog-virtual-cfo-vs-full-time-cfo",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "blog-gratuity-calculation-formula-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "faq-transfer-pricing-safe-harbour",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "faq-gst-refund-inverted-duty",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "faq-gratuity-calculation-formula",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "faq-esic-registration-india",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "how-to-prepare-transfer-pricing-documentation",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "how-to-form-huf-india-step-by-step",
-      "file": "workindex-seo-batch59.md"
-    },
-    {
-      "slug": "non-compete-fee-capital-vs-revenue-india",
-      "file": "workindex-seo-batch60.md"
-    },
-    {
-      "slug": "section-149-time-limit-reassessment-india",
-      "file": "workindex-seo-batch60.md"
-    },
-    {
-      "slug": "faq-section-87a-rebate-stcg-india",
-      "file": "workindex-seo-batch60.md"
-    },
-    {
-      "slug": "section-14a-rule-8d-calculation-india",
-      "file": "workindex-seo-batch61.md"
-    },
-    {
-      "slug": "trust-exemption-advisory-services-india",
-      "file": "workindex-seo-batch61.md"
-    },
-    {
-      "slug": "blog-b-braun-wrong-gstin-itc-allowed",
-      "file": "workindex-seo-batch61.md"
-    },
-    {
-      "slug": "blog-section-14a-rule-8d-calculation",
-      "file": "workindex-seo-batch61.md"
-    },
-    {
-      "slug": "faq-shree-sai-baba-trust-ruling",
-      "file": "workindex-seo-batch61.md"
-    },
-    {
-      "slug": "faq-freelancer-home-office-deduction",
-      "file": "workindex-seo-batch61.md"
-    },
-    {
-      "slug": "how-to-claim-inverted-duty-refund-india",
-      "file": "workindex-seo-batch61.md"
-    }
-  ],
+  "duplicateAgainstExisting": [],
   "created": [
     "portfolio-management-services-tax-india",
     "pms-taxation-india-complete-guide-2026",
@@ -418,6 +29,7 @@
     "pms-vs-mutual-fund-tax-comparison",
     "pms-management-fee-deductible-india",
     "pms-fo-derivatives-business-income",
+    "pms-itr-filing-india-guide",
     "pms-annual-statement-itr-india",
     "pms-direct-plan-india-guide",
     "alternative-investment-fund-tax-india",
@@ -470,18 +82,26 @@
     "elss-vs-nps-tax-comparison-india",
     "index-fund-tax-india-guide",
     "index-fund-ltcg-stcg-india",
+    "international-mutual-fund-tax-india",
     "international-fund-slab-rate-post-2023",
+    "fund-of-funds-tax-india-guide",
     "fund-of-funds-slab-rate-india",
+    "liquid-fund-tax-india-guide",
     "liquid-fund-slab-rate-india",
     "overnight-fund-tax-india-guide",
+    "arbitrage-fund-tax-india-guide",
     "arbitrage-fund-equity-treatment-india",
+    "gilt-fund-tax-india-guide",
     "hybrid-fund-tax-india-guide",
+    "balanced-advantage-fund-tax-india",
     "etf-vs-index-fund-tax-comparison",
+    "gold-etf-vs-sgb-tax-comparison-india",
     "nfo-new-fund-offer-tax-india",
     "stp-swp-tax-treatment-india",
     "section-54-exemption-complete-guide-india",
     "section-54-one-new-residential-house",
     "section-54-10-crore-cap-india",
+    "section-54-cgas-account-guide-india",
     "section-54-nri-property-sale-guide",
     "section-54-purchase-before-sale-india",
     "section-54-construction-3-years-india",
@@ -522,17 +142,20 @@
     "section-80g-pm-cares-deduction",
     "section-80g-50-percent-100-percent",
     "section-80g-cash-limit-2000-india",
+    "section-80gga-scientific-research",
     "section-10-23-ngo-exemption-india",
     "section-80p-cooperative-deduction-india",
     "section-35e-mining-deduction-india",
     "section-35ad-capital-expenditure-india",
     "deductions-available-new-regime-india",
+    "car-perquisite-tax-calculation-india",
     "rent-free-accommodation-perquisite-india",
     "interest-free-loan-perquisite-india",
     "concessional-loan-perquisite-tax-india",
     "gift-voucher-perquisite-tax-india",
     "gift-5000-exempt-perquisite-india",
     "section-89-1-salary-arrears-relief",
+    "form-10e-filing-guide-india",
     "joining-bonus-tds-india-guide",
     "joining-bonus-repayment-tax-india",
     "signing-bonus-tds-india",
@@ -564,7 +187,9 @@
     "gstr-9-nil-return-filing-india",
     "gstr-9-itc-reversal-guide-india",
     "gstr-9-amendment-guide-india",
+    "gstr-10-final-return-services-india",
     "gstr-10-cancellation-return-guide",
+    "gstr-6-input-service-distributor",
     "gstr-7-tds-return-filing-india",
     "gstr-8-ecommerce-tcs-return",
     "gstr-filing-services-india-complete",
@@ -580,6 +205,7 @@
     "ibc-pre-packaged-insolvency-india",
     "ibc-admission-of-petition-india",
     "ibc-committee-of-creditors-india",
+    "ibc-resolution-professional-services",
     "ibc-financial-creditor-rights-india",
     "ibc-operational-creditor-rights-india",
     "ibc-related-party-transactions-india",
@@ -587,11 +213,13 @@
     "ibc-avoidance-transactions-india",
     "ibc-and-gst-interplay-india",
     "ibc-tax-implications-india-guide",
+    "forensic-audit-services-india-complete",
     "fraud-investigation-accounting-india",
     "forensic-accounting-litigation-india",
     "forensic-audit-for-banks-india",
     "forensic-audit-corporate-fraud-india",
     "embezzlement-investigation-india",
+    "financial-fraud-detection-india",
     "accounting-investigation-disputes-india",
     "forensic-audit-insurance-claim-india",
     "forensic-audit-real-estate-india",
@@ -622,6 +250,10 @@
     "pf-uan-activation-services-india",
     "esic-ip-number-services-india",
     "professional-tax-registration-karnataka-guide",
+    "professional-tax-karnataka-slab-india",
+    "professional-tax-telangana-guide",
+    "professional-tax-andhra-pradesh-guide",
+    "income-tax-compliance-portal-guide-india",
     "e-campaign-high-value-transaction-response",
     "e-campaign-notice-response-services-india",
     "non-filer-monitoring-system-notice-india",
@@ -630,6 +262,7 @@
     "outstanding-demand-it-portal-india",
     "income-tax-e-proceedings-guide",
     "faceless-assessment-complete-guide-india",
+    "faceless-assessment-response-services",
     "it-portal-response-services-india",
     "sft-statement-financial-transaction-guide",
     "sft-mismatch-notice-response-india",
@@ -653,11 +286,15 @@
     "valuation-for-customs-india",
     "valuation-for-gift-tax-india",
     "valuation-for-succession-india",
+    "rule-11ua-valuation-services-india",
     "rule-11uaa-valuation-services-india",
+    "registered-valuer-ibbi-services-india",
     "sebi-registered-merchant-banker-valuation",
+    "dcf-valuation-services-india",
     "nav-valuation-services-india",
     "valuation-report-services-india-complete",
     "blog-pms-taxation-india-2026-guide",
+    "blog-pms-vs-mutual-fund-tax-comparison",
     "blog-pms-management-fee-deductible",
     "blog-aif-category-1-2-3-tax-comparison",
     "blog-aif-pass-through-status-india",
@@ -730,6 +367,8 @@
     "blog-faceless-assessment-guide-2026",
     "blog-startup-ibbi-valuation-india",
     "blog-rule-11ua-valuation-fema-india",
+    "blog-dcf-valuation-startup-india",
+    "faq-pms-taxation-india-2026",
     "faq-pms-vs-mutual-fund-tax",
     "faq-aif-category-1-2-3-tax",
     "faq-aif-pass-through-status",
@@ -744,6 +383,7 @@
     "faq-index-fund-ltcg-stcg",
     "faq-liquid-fund-vs-fd-tax",
     "faq-elss-ltcg-12-5-percent",
+    "faq-elss-vs-ppf-comparison",
     "faq-hni-surcharge-2-crore",
     "faq-hni-surcharge-5-crore",
     "faq-hni-ltcg-surcharge-cap",
@@ -767,12 +407,14 @@
     "faq-joining-bonus-tax-india",
     "faq-form-12bb-declaration",
     "faq-gstr-9-late-fee-waiver",
+    "faq-gstr-9c-reconciliation",
     "faq-gstr-2b-itc-claim",
     "faq-ibc-section-7-financial-creditor",
     "faq-ibc-section-9-operational",
     "faq-ibc-liquidation-waterfall",
     "faq-ibc-personal-insolvency",
     "faq-ibc-pre-packaged-insolvency",
+    "faq-forensic-audit-india",
     "faq-new-wages-code-india",
     "faq-wages-50-percent-ctc",
     "faq-pf-new-wages-code-impact",
@@ -787,17 +429,23 @@
     "how-to-report-aif-income-itr-india",
     "how-to-compute-hni-surcharge-india",
     "how-to-reduce-surcharge-hni-india",
+    "how-to-claim-section-54-exemption",
+    "how-to-claim-section-54f-exemption",
     "how-to-claim-section-54ec-exemption",
     "how-to-open-cgas-account-india",
     "how-to-claim-section-54b-agricultural",
     "how-to-claim-section-80gg-no-hra",
+    "how-to-claim-section-80eeb-ev-loan",
     "how-to-claim-section-80ccd-2-employer-nps",
+    "how-to-claim-section-80g-donation",
     "how-to-compute-car-perquisite-india",
     "how-to-compute-rfa-perquisite-india",
     "how-to-claim-section-89-1-relief",
     "how-to-file-form-10e-india",
     "how-to-fill-form-12bb-india",
     "how-to-file-gstr-1-qrmp-scheme",
+    "how-to-file-gstr-9-annual-return",
+    "how-to-file-gstr-9c-reconciliation",
     "how-to-file-gstr-4-composition",
     "how-to-respond-e-campaign-notice",
     "how-to-respond-nms-notice-india",
@@ -813,6 +461,7 @@
     "how-to-find-ca-for-reit-taxation",
     "how-to-find-ca-for-hni-surcharge",
     "how-to-find-cs-for-ibc-india",
+    "how-to-find-ca-for-forensic-audit",
     "how-to-find-ca-new-wages-code-india",
     "jda-tax-india-complete-guide",
     "jda-tax-landowner-india-guide",
@@ -846,20 +495,30 @@
     "jda-advisory-services-bangalore",
     "transfer-pricing-benchmarking-india-guide",
     "transfer-pricing-cup-method-india",
+    "transfer-pricing-resale-price-method-india",
+    "transfer-pricing-cost-plus-method-india",
+    "transfer-pricing-profit-split-method-india",
     "transfer-pricing-tnmm-india-guide",
     "transfer-pricing-arm-length-range-india",
     "transfer-pricing-adjustment-india-guide",
     "transfer-pricing-penalty-271aa-india",
     "transfer-pricing-penalty-271g-india",
+    "transfer-pricing-documentation-india-complete",
+    "transfer-pricing-master-file-india-services",
+    "transfer-pricing-local-file-india-services",
     "transfer-pricing-form-3ceb-filing-india",
     "transfer-pricing-form-3ceb-penalty-india",
     "safe-harbour-rules-india-guide",
+    "safe-harbour-it-ites-india",
     "safe-harbour-intra-group-loans-india",
     "safe-harbour-low-value-services",
     "apa-advance-pricing-arrangement-india",
     "unilateral-apa-india-guide",
+    "bilateral-apa-india-guide",
     "multilateral-apa-india-guide",
+    "transfer-pricing-dispute-resolution-india",
     "transfer-pricing-advisory-india-complete",
+    "income-tax-act-2025-section-numbers-guide",
     "income-tax-act-2025-old-to-new-section-map",
     "income-tax-act-2025-section-15-salary-guide",
     "income-tax-act-2025-section-22-house-property",
@@ -888,6 +547,8 @@
     "income-tax-act-2025-schedule-al-assets",
     "income-tax-act-2025-schedule-vda-crypto",
     "income-tax-act-2025-schedule-fa-foreign",
+    "income-tax-act-2025-compliance-services-india",
+    "section-234a-interest-late-filing-india",
     "section-234a-waiver-services-india",
     "section-234b-interest-advance-tax-india",
     "section-234b-waiver-services-india",
@@ -934,13 +595,19 @@
     "salaried-tech-employee-tax-planning",
     "salaried-rsu-holder-tax-planning",
     "salaried-nps-hra-restructuring-india",
+    "real-estate-investor-tax-planning",
     "hni-tax-planning-complete-guide-2026",
     "retired-person-tax-planning-india",
     "nri-tax-planning-india-complete-2026",
     "small-business-owner-tax-planning",
+    "partnership-firm-tax-planning-india",
     "company-director-tax-planning-india",
+    "self-employed-tax-planning-india",
     "huf-formation-services-india-complete",
+    "huf-deed-drafting-services-india",
     "huf-pan-card-application-services",
+    "huf-bank-account-opening-guide",
+    "huf-tax-planning-guide-india-2026",
     "huf-capital-contribution-guide-india",
     "huf-gift-to-huf-tax-india",
     "huf-gift-income-clubbing-india",
@@ -950,6 +617,8 @@
     "huf-karta-rights-india-guide",
     "huf-nri-member-india-guide",
     "huf-foreign-assets-india-guide",
+    "huf-itr-filing-services-india",
+    "huf-business-income-india-guide",
     "huf-capital-gains-india-guide",
     "huf-rental-income-india-guide",
     "huf-salary-cannot-be-paid-india",
@@ -969,6 +638,7 @@
     "gst-refund-excess-balance-ecrl",
     "gst-refund-rfd-01-filing-services",
     "gst-refund-rfd-04-acknowledgement",
+    "gst-refund-rfd-06-rejection-response",
     "gst-refund-rfd-09-appeal-services",
     "gst-refund-delay-response-india",
     "gst-refund-stuck-india-services",
@@ -987,7 +657,10 @@
     "virtual-cfo-services-india-complete",
     "fractional-cfo-services-india-guide",
     "outsourced-cfo-services-startup-india",
+    "virtual-cfo-for-startups-india",
     "virtual-cfo-for-smes-india",
+    "virtual-cfo-for-ecommerce-india",
+    "virtual-cfo-for-manufacturing-india",
     "cloud-accounting-services-india-complete",
     "zoho-books-implementation-india",
     "zoho-books-gst-india-guide",
@@ -995,9 +668,14 @@
     "tally-prime-services-india",
     "tally-prime-gst-india-guide",
     "xero-accounting-india-guide",
+    "mis-reporting-services-india-complete",
+    "management-reporting-services-india",
     "budget-forecasting-services-india",
+    "accounts-payable-outsourcing-india",
+    "accounts-receivable-outsourcing-india",
     "gst-for-jewellery-india-guide",
     "gst-for-jewellery-3-percent-rate",
+    "gst-for-textiles-india-guide",
     "gst-for-textiles-rate-changes-india",
     "gst-for-agriculture-sector-india",
     "gst-for-dairy-products-india",
@@ -1008,9 +686,11 @@
     "gst-for-tour-operators-india-guide",
     "gst-for-travel-agents-india-guide",
     "gst-for-foreign-tourists-india",
+    "gst-on-joint-development-agreement",
     "gst-tdr-transfer-development-rights",
     "gst-on-affordable-housing-construction",
     "gst-on-commercial-construction-india",
+    "gst-input-service-distributor-india",
     "gst-for-co-operative-societies-india",
     "gst-for-residential-welfare-associations",
     "payment-aggregator-rbi-authorisation-india",
@@ -1053,15 +733,22 @@
     "overseas-direct-investment-odi-guide",
     "odi-automatic-route-india-guide",
     "fema-advisory-services-india-complete",
+    "shops-establishment-registration-bangalore",
+    "shops-establishment-registration-india",
     "shops-establishment-karnataka-guide",
+    "maternity-benefit-act-compliance-india",
     "posh-act-icc-formation-india",
     "sexual-harassment-workplace-policy-india",
+    "factories-act-compliance-services-india",
+    "contract-labour-act-compliance-india",
     "minimum-wages-karnataka-2026-guide",
     "minimum-wages-india-2026-guide",
     "payment-wages-act-compliance-india",
     "payment-bonus-act-compliance-india",
     "gratuity-act-nomination-india",
+    "gratuity-calculation-formula-india",
     "employee-state-insurance-act-india",
+    "esic-registration-services-india",
     "lwf-labour-welfare-fund-india",
     "lwf-karnataka-compliance-india",
     "equal-remuneration-act-india",
@@ -1086,6 +773,7 @@
     "bookkeeping-services-delhi-complete",
     "bookkeeping-services-pune-complete",
     "bookkeeping-services-chennai-complete",
+    "hra-exemption-calculator-guide-india",
     "ltcg-tax-calculator-guide-india",
     "stcg-tax-calculator-guide-india",
     "capital-gains-calculator-property-india",
@@ -1097,6 +785,7 @@
     "surcharge-calculation-guide-india",
     "advance-tax-calculation-complete-guide",
     "leave-encashment-calculation-india",
+    "gratuity-calculation-guide-india",
     "hra-vs-rent-calculator-guide-india",
     "new-vs-old-regime-breakeven-india",
     "blog-jda-tax-landowner-india-guide",
@@ -1126,6 +815,7 @@
     "blog-penalty-271b-audit-not-done",
     "blog-penalty-271aab-search-india",
     "blog-penalty-waiver-how-to-apply",
+    "blog-doctor-tax-planning-2026-india",
     "blog-doctor-44ada-new-regime-choice",
     "blog-lawyer-tax-planning-india-2026",
     "blog-youtuber-tax-planning-india-2026",
@@ -1143,6 +833,7 @@
     "blog-gst-refund-delay-response",
     "blog-gst-refund-deemed-export-india",
     "blog-virtual-cfo-bangalore-startups",
+    "blog-virtual-cfo-vs-full-time-cfo",
     "blog-zoho-books-gst-india-guide",
     "blog-tally-prime-gst-india-guide",
     "blog-gst-for-jewellery-3-percent",
@@ -1159,6 +850,7 @@
     "blog-shops-establishment-bangalore",
     "blog-minimum-wages-karnataka-2026",
     "blog-posh-act-icc-formation-india",
+    "blog-gratuity-calculation-formula-india",
     "blog-esic-registration-services-india",
     "blog-hra-exemption-calculator-guide",
     "blog-ltcg-tax-calculator-india-2026",
@@ -1171,6 +863,7 @@
     "faq-jda-completion-certificate-tax",
     "faq-jda-area-sharing-revenue-sharing",
     "faq-transfer-pricing-tnmm-india",
+    "faq-transfer-pricing-safe-harbour",
     "faq-apa-advance-pricing-india",
     "faq-tp-form-3ceb-penalty",
     "faq-income-tax-act-2025-section-numbers",
@@ -1195,6 +888,7 @@
     "faq-huf-gift-clubbing-india",
     "faq-huf-partition-india",
     "faq-huf-nri-member-india",
+    "faq-gst-refund-inverted-duty",
     "faq-gst-refund-rfd-06-rejection",
     "faq-gst-refund-delay-india",
     "faq-virtual-cfo-vs-full-time-cfo",
@@ -1210,10 +904,13 @@
     "faq-fema-foreign-property-india",
     "faq-minimum-wages-karnataka-2026",
     "faq-posh-act-icc-formation",
+    "faq-gratuity-calculation-formula",
+    "faq-esic-registration-india",
     "faq-hra-exemption-calculator",
     "how-to-compute-jda-capital-gains-landowner",
     "how-to-report-jda-income-itr-india",
     "how-to-pay-advance-tax-jda-india",
+    "how-to-prepare-transfer-pricing-documentation",
     "how-to-file-form-3ceb-india",
     "how-to-apply-apa-advance-pricing-india",
     "how-to-find-section-in-new-income-tax-act-2025",
@@ -1226,6 +923,7 @@
     "how-to-plan-tax-as-a-youtuber-india",
     "how-to-plan-tax-salaried-50-lakh",
     "how-to-plan-tax-salaried-1-crore",
+    "how-to-form-huf-india-step-by-step",
     "how-to-get-huf-pan-india",
     "how-to-dissolve-huf-india",
     "how-to-claim-gst-refund-inverted-duty",
@@ -1303,6 +1001,7 @@
     "tiger-global-hareon-solar-pe-implication",
     "non-compete-fee-revenue-expenditure-sc-2025",
     "section-37-1-non-compete-fee-india",
+    "non-compete-fee-capital-vs-revenue-india",
     "non-compete-fee-tax-deductibility-india",
     "non-compete-fee-itr-reporting-india",
     "non-compete-fee-gst-india-guide",
@@ -1365,6 +1064,7 @@
     "section-148-change-of-opinion-invalid-india",
     "reassessment-post-2021-amendment-guide",
     "reassessment-notice-after-3-years-india",
+    "section-149-time-limit-reassessment-india",
     "faceless-reassessment-validity-hc-ruling",
     "sc-271-1c-concealment-penalty-bona-fide",
     "penalty-271-reasonable-cause-sc-india",
@@ -1507,6 +1207,7 @@
     "faq-mli-not-automatic-itat-2025",
     "faq-telangana-hc-gaar-market-trades",
     "faq-gaar-stock-exchange-india",
+    "faq-section-87a-rebate-stcg-india",
     "faq-kartikeya-sarabhai-share-reduction",
     "faq-goodwill-depreciation-sc-india",
     "faq-capital-gains-vs-business-income",
@@ -1651,6 +1352,7 @@
     "section-14a-disallowance-exempt-income-cap",
     "section-14a-disallowance-cannot-exceed-income",
     "section-14a-disallowance-itat-ruling-2025",
+    "section-14a-rule-8d-calculation-india",
     "section-14a-nil-exempt-income-india",
     "section-14a-disallowance-response-india",
     "section-14a-disallowance-advisory-india",
@@ -1672,6 +1374,7 @@
     "trust-foreign-contribution-fcra-tax",
     "trust-commercial-activity-exemption-india",
     "ngo-tax-exemption-landmark-cases-india",
+    "trust-exemption-advisory-services-india",
     "freelancer-home-office-deduction-itat-deep",
     "section-37-1-home-office-deduction-india",
     "professional-home-workspace-deduction-india",
@@ -1734,6 +1437,7 @@
     "blog-section-16-5-itc-amnesty-guide-2024",
     "blog-itc-claim-fy-2017-18-amnesty-india",
     "blog-section-16-4-vs-16-5-comparison",
+    "blog-b-braun-wrong-gstin-itc-allowed",
     "blog-gst-wrong-gstin-substance-over-form",
     "blog-gst-invoice-minor-error-itc-india",
     "blog-blackstone-capital-trc-dtaa-india",
@@ -1743,6 +1447,7 @@
     "blog-section-87a-portal-denial-2024",
     "blog-section-87a-itat-vs-department",
     "blog-section-14a-exempt-income-cap-itat",
+    "blog-section-14a-rule-8d-calculation",
     "blog-step-siblings-gift-exempt-itat",
     "blog-gift-relative-definition-india",
     "blog-shree-sai-baba-trust-hc-ruling",
@@ -1802,8 +1507,10 @@
     "faq-section-14a-rule-8d",
     "faq-step-siblings-gift-exempt",
     "faq-gift-relative-definition-india",
+    "faq-shree-sai-baba-trust-ruling",
     "faq-trust-12a-80g-landmark",
     "faq-trust-corpus-donation",
+    "faq-freelancer-home-office-deduction",
     "faq-work-from-home-deduction-india",
     "faq-rsu-itat-ruling-india",
     "faq-esop-dpiit-tds-deferral",
@@ -1830,6 +1537,7 @@
     "how-to-report-online-gaming-winnings-itr",
     "how-to-respond-tola-reassessment-notice",
     "how-to-challenge-tola-notice-substantive",
+    "how-to-claim-inverted-duty-refund-india",
     "how-to-claim-section-16-5-itc-amnesty",
     "how-to-respond-wrong-gstin-itc-denial",
     "how-to-claim-dtaa-benefit-with-trc-india",
