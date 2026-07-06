@@ -2534,6 +2534,28 @@ SUB_TEMPLATES = {
 }
 
 case_study_panels = {
+    'university_fees_goa_hc': {
+        'dispute_details': [
+            "Facts: Goa University collected affiliation fees from colleges and exam fees from students under its statutory mandate.",
+            "Lower Court: The GST department issued show-cause notices demanding 18% GST on these fees, claiming they represent commercial services.",
+            "Key Issue: Whether university affiliation and examination fees are taxable supplies under GST, or exempt educational/statutory services."
+        ],
+        'court_ratio': [
+            "Ratio 1: Conducting examinations and granting affiliations are statutory duties under the University Act, not commercial services.",
+            "Ratio 2: Services provided by an educational institution by way of conduct of examinations or administrative services are exempt from GST.",
+            "Ratio 3: Affiliation fees are collected to maintain standards and do not constitute consideration for a taxable commercial supply."
+        ],
+        'key_evidence': [
+            "Goa University Act: Provisions defining the mandatory statutory functions and duties of the university.",
+            "CBIC Notification 12/2017-CTR: Exemption entry 66 relating to services provided by or to educational institutions.",
+            "High Court Order: Writ petition judgment of the Goa Bench of the Bombay High Court quashing the GST demand notices."
+        ],
+        'action_points': [
+            "Exempt Affiliation Billings: Educational institutions/universities should not levy GST on affiliation or examination fees.",
+            "File Refund Claims: If GST was deposited on such services under protest, file a refund application citing the Goa HC precedent.",
+            "Configure Accounting: Ensure statutory and university affiliation fees are marked as exempt/non-taxable in your accounting software."
+        ]
+    },
     'jindal_equipment_leasing_': {
         'dispute_details': [
             "Facts: Investment companies of the Jindal Group held shares of Jindal Ferro Alloys Ltd. (JFAL).",
@@ -3778,7 +3800,7 @@ def get_case_study_type(slug):
         'reassessment-harassment', 'repeat-reassessment', 'trust-registration-framework',
         'section-12ab', 'section-12aa', 'section-80g', 'income-tax-act-2025', 'income-tax-act',
         'gstat', 'section-16-2-c', 'income-tax-rules-2026', 'digital-search-and-seizure',
-        'section-72a-amendment'
+        'section-72a-amendment', 'university-fees-not-gst-supply-goa-hc'
     ]
     
     has_strong_marker = any(m in slug_lower for m in strong_case_markers)
@@ -3794,6 +3816,7 @@ def get_case_study_type(slug):
         return None
 
     # Now assign the specific case type (new cases checked first)
+    if 'university-fees-not-gst-supply-goa-hc' in slug_lower: return 'university_fees_goa_hc'
     if 'jindal-equipment' in slug_lower: return 'jindal_equipment_leasing_'
     if 'taghar-vasudeva' in slug_lower: return 'state_of_karnataka_v__tag'
     if 'radhika-agarwal' in slug_lower: return 'radhika_agarwal_v__union_'
