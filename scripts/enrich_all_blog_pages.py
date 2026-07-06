@@ -2534,6 +2534,28 @@ SUB_TEMPLATES = {
 }
 
 case_study_panels = {
+    'gst_ocean_freight_sc': {
+        'dispute_details': [
+            "Facts: Indian importers (like Mohit Minerals) imported goods on CIF (Cost, Insurance, and Freight) basis. The GST department demanded 5% IGST on ocean freight under reverse charge (RCM) via Notification 10/2017-ITR.",
+            "Lower Court History: The Gujarat High Court struck down the notifications as ultra vires. The Union of India appealed to the Supreme Court.",
+            "Key Issues: Whether an Indian importer can be liable to pay IGST on reverse charge basis for ocean freight services provided by a foreign shipping line to a foreign exporter in CIF contracts."
+        ],
+        'court_ratio': [
+            "No Double Taxation: Importers pay GST on the transaction value of imported goods (CIF value), which already includes ocean freight. Levying GST on the service component separately leads to double taxation.",
+            "Composite Supply: Under Section 2(30) of the CGST Act, a CIF import is a composite supply of goods, and the tax rate of the principal supply (goods) applies to the entire bundle.",
+            "Advisory Recommendations: Recommendations of the GST Council are not binding on the Union and States; they have only persuasive value, and the Parliament and State Legislatures have co-equal powers to legislate."
+        ],
+        'key_evidence': [
+            "CBIC Notification 10/2017-IT(R): The notification prescribing RCM taxability on ocean freight.",
+            "Customs Valuation Rules: Rules showing that ocean freight charges are already included in the assessable value for customs and IGST calculation.",
+            "Supreme Court Judgment: The signed judgment in Union of India v. Mohit Minerals Pvt. Ltd. (Civil Appeal 1390 of 2022) dated May 19, 2022."
+        ],
+        'action_points': [
+            "Stop RCM Payments: Importers operating under CIF contracts do not need to pay 5% IGST on ocean freight under reverse charge.",
+            "File Refund Claims: For RCM paid on ocean freight post-July 2017 under CIF contracts, file refund claims under the 'Excess Payment of Tax' category citing the Mohit Minerals judgment.",
+            "FOB Contracts Distinguish: Note that if the contract is on FOB (Free on Board) basis, the Indian importer is responsible for freight and must pay GST under forward charge or RCM as applicable."
+        ]
+    },
     'university_fees_goa_hc': {
         'dispute_details': [
             "Facts: Goa University collected affiliation fees from colleges and exam fees from students under its statutory mandate.",
@@ -3777,8 +3799,8 @@ def get_case_study_type(slug):
         
     # 2. Check for strong case indicators or specific case names
     strong_case_markers = [
-        'judgment', 'ruling', 'case-law', 'court', 'supreme-court', 'landmark', 
-        'itat', 'hc-ruling', 'sc-order', 'sc-judgment', 'hc-judgment', 
+        'judgment', 'ruling', 'case-law', 'supreme-court', 'landmark', 
+        'hc-ruling', 'sc-order', 'sc-judgment', 'hc-judgment', 
         'appeal-ruling', 'tribunal-ruling', 'case-study'
     ]
     specific_case_names = [
@@ -3788,8 +3810,8 @@ def get_case_study_type(slug):
         'vkc-footsteps', 'blackstone', 'essar-steel', 'jsw-steel', 'ghanashyam-mishra',
         'pride-foramer', 'sharp-business', 'american-express', 'k-krishnamurthy',
         'balaji-landmarks', 'milan-kavin-parikh', 'milan-parikh', 'form-9a-misprint',
-        'wise-investment', 'maruti-suzuki', 'circle-rate', 'deemed-dividend-section-2-22-e',
-        'bcci-bombay-hc',
+        'wise-investment', 'maruti-suzuki', 'non-existent-entity', 'non-existent-company',
+        'bcci-bombay-hc', 'university-fees-not-gst-supply-goa-hc', 'gst-on-ocean-freight-supreme-court-judgment',
         'jindal-equipment', 'taghar-vasudeva', 'radhika-agarwal', 'jupiter-capital',
         'saumya-chaurasia', 'oceaneering', 'svldrs', 'section-153d', 'compounding-belated',
         'indigo-igst', 'interglobe-aviation', 'sadhumargi', 'rbanms', 'meis-clerical',
@@ -3798,9 +3820,8 @@ def get_case_study_type(slug):
         '16-2-c', 'unsigned-gst', 'separate-scn', 'aspinwall', 'rrpr-holdings',
         'prannoy-roy', 'homebuyer-reassessment', 'microsoft-refund', 'ge-group',
         'reassessment-harassment', 'repeat-reassessment', 'trust-registration-framework',
-        'section-12ab', 'section-12aa', 'section-80g', 'income-tax-act-2025', 'income-tax-act',
         'gstat', 'section-16-2-c', 'income-tax-rules-2026', 'digital-search-and-seizure',
-        'section-72a-amendment', 'university-fees-not-gst-supply-goa-hc'
+        'section-72a-amendment'
     ]
     
     has_strong_marker = any(m in slug_lower for m in strong_case_markers)
@@ -3816,6 +3837,7 @@ def get_case_study_type(slug):
         return None
 
     # Now assign the specific case type (new cases checked first)
+    if 'gst-on-ocean-freight-supreme-court-judgment' in slug_lower: return 'gst_ocean_freight_sc'
     if 'university-fees-not-gst-supply-goa-hc' in slug_lower: return 'university_fees_goa_hc'
     if 'jindal-equipment' in slug_lower: return 'jindal_equipment_leasing_'
     if 'taghar-vasudeva' in slug_lower: return 'state_of_karnataka_v__tag'
