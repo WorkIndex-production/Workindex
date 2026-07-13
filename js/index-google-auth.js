@@ -65,7 +65,7 @@ async function handleGoogleCredential(response, context) {
     const res = await fetch(`${API_URL}/auth/google-init`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ credential, role, inviteCode }),
+      body:    JSON.stringify({ credential, role, inviteCode, context }),
     });
  
     const data = await res.json();

@@ -7731,7 +7731,7 @@ async function handleGuestGoogleCredential(response) {
     const res = await fetch(`${API_URL}/auth/google-init`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ credential, role: 'client' })
+      body: JSON.stringify({ credential, role: 'client', context: 'signup' })
     });
     const data = await res.json();
     if (!data.success) { showToast(data.message || 'Google sign-in failed', 'error'); return; }
