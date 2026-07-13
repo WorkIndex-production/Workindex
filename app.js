@@ -4,9 +4,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 // ─── CONFIGURATION ─── 
-const API_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
-  ? 'https://workindex-backend.onrender.com/api'
-  : 'https://workindex-backend.onrender.com/api';
+const API_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname) ? 'http://localhost:5000/api' : 'https://workindex-backend.onrender.com/api';
 
 // ─── STATE MANAGEMENT ─── 
 const state = {

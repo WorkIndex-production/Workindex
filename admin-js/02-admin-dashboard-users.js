@@ -325,7 +325,8 @@ var teamSize = pr.teamSize || pr.expert_team_size || '';
   var licenseNumber = pr.licenseNumber || pr.expert_license_number || pr.license_number || pr.professionalLicense || '';
   var certNum = pr.certificationNumber || pr.expert_certification_number || pr.certification_number || '';
   var profAddress = pr.professionalAddress || pr.expert_professional_address || pr.professional_address || pr.address || '';
-  if (spec||comp||exp||avail||website||businessType||teamSize||gstNumber||licenseNumber||certNum||profAddress) {
+  var linkedinUrl = pr.linkedinUrl || '';
+  if (spec||comp||exp||avail||website||businessType||teamSize||gstNumber||licenseNumber||certNum||profAddress||linkedinUrl) {
     p0 += '<div style="background:#18181d;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:0">';
     p0 += '<div style="font-size:10px;color:#606078;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:10px">Professional</div>';
     var proRows = [];
@@ -339,6 +340,7 @@ var teamSize = pr.teamSize || pr.expert_team_size || '';
     if (licenseNumber) proRows.push(['Professional License', esc(licenseNumber), '#f0f0f4']);
     if (certNum)      proRows.push(['Certification No.', esc(certNum), '#f0f0f4']);
     if (profAddress)  proRows.push(['Professional Address', esc(profAddress), '#f0f0f4']);
+    if (linkedinUrl)  proRows.push(['LinkedIn Profile', '<a href="' + esc(linkedinUrl) + '" target="_blank" style="color:#FC8019;text-decoration:none;font-weight:600">View Profile ↗</a>', '#f0f0f4']);
      proRows.forEach(function(row, i) {
       p0 += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;' + (i<proRows.length-1||website?'border-bottom:1px solid #222230':'') + '"><span style="font-size:12px;color:#606078">' + row[0] + '</span><span style="font-size:13px;color:' + row[2] + ';font-weight:600">' + row[1] + '</span></div>';
     });

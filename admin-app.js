@@ -4,9 +4,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 (function(){
-  var API_BASE = ['localhost', '127.0.0.1'].includes(window.location.hostname)
-    ? 'https://workindex-backend.onrender.com/api'
-    : 'https://workindex-backend.onrender.com/api';
+  var API_BASE = ['localhost', '127.0.0.1'].includes(window.location.hostname) ? 'http://localhost:5000/api' : 'https://workindex-backend.onrender.com/api';
   var API = API_BASE + '/admin';
   var tok = localStorage.getItem('admTok') || '';
   var adm = null;

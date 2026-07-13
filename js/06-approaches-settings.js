@@ -1323,6 +1323,7 @@ if (locDetails && typeof locDetails === 'object') {
         ${renderInlineField('certificationNumber', 'Certification Number', profile.certificationNumber, 'text', 'e.g. ICAI-MRN-123456')}
         ${renderInlineField('gstNumber', 'GST Number', profile.gstNumber, 'text', 'e.g. 29ABCDE1234F1Z5')}
         ${renderInlineField('licenseNumber', 'Professional License No.', profile.licenseNumber, 'text', 'e.g. LIC/2023/00123')}
+        ${renderInlineField('linkedinUrl', 'LinkedIn Profile URL', profile.linkedinUrl, 'text', 'e.g. https://www.linkedin.com/in/username')}
         ${renderInlineField('education', 'Education', profile.education, 'text', 'e.g. B.Com, CA Final')}
         ${renderInlineField('professionalAddress', 'Professional Address', profile.professionalAddress, 'text', 'Office address')}
         ${renderInlineField('bio', 'About / Bio', profile.bio, 'textarea', 'Tell clients about your expertise...')}
@@ -1493,7 +1494,7 @@ function toggleEditMode() {
 
 // ─── SAVE PROFILE EDITS ───
 async function saveProfileEdits() {
-  const fields = ['specialization','experience','certificationNumber','gstNumber','licenseNumber','education','professionalAddress','bio','portfolio','businessType','teamSize'];
+  const fields = ['specialization','experience','certificationNumber','gstNumber','licenseNumber','education','professionalAddress','bio','portfolio','businessType','teamSize','linkedinUrl'];
   const updatedProfile = { ...(state.user.profile || {}) };
 
   fields.forEach(key => {
